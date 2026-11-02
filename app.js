@@ -784,15 +784,20 @@ function chart(f, x) {
   const bw = [7, 14, 28, 56, 91, 182, 365].find(w => Math.floor(span / w) + 1 <= 16) || 365;
   const cols = Math.floor(span / bw) + 1, stack = {};
   days.forEach(d => { const c = Math.floor(d / bw); stack[c] = (stack[c] || 0) + 1; });
-  const R = 6, STEP = 2 * R + 2, L = 4, LANE = never ? 64 : 0, W = 320;
-  const colW = Math.min(STEP + 6, (W - L - LANE - (never ? 12 : 0)) / Math.max(cols, 1));
-  const maxS = Math.max(1, ...Object.values(stack), never), B = 24, T = 8, H = T + maxS * STEP + B;
+  // whether and when are drawn apart: a never-open column stacked beside the spread-out timing
+  // towered over it and read as more likely than it is. One row of 20 answers "does it open",
+  // the stacked dots below show only the opening films' timing
+  const R = 6, STEP = 2 * R + 2, L = 4, W = 320;
+  const colW = Math.min(STEP + 6, (W - L) / Math.max(cols, 1));
+  const maxS = Math.max(1, ...Object.values(stack)), B = 24, T = 8, H = T + maxS * STEP + B;
   const base = H - B, cx = c => L + c * colW + colW / 2, cy = k => base - R - 2 - k * STEP;
   const seen = {}, dots = days.map(d => { const c = Math.floor(d / bw), k = (seen[c] = (seen[c] || 0) + 1) - 1;
     return `<circle class="o" cx="${cx(c).toFixed(1)}" cy="${cy(k)}" r="${R}"/>`; }).join("");
-  const lx = W - LANE / 2;
-  const nev = never ? `<line class="ax" x1="${W - LANE}" x2="${W}" y1="${base}" y2="${base}"/>` + Array.from({ length: never }, (_, k) => `<circle class="n" cx="${lx}" cy="${cy(k)}" r="${R - 0.75}"/>`).join("")
-    + `<text x="${lx}" y="${H - 6}" text-anchor="middle">개봉 안 함</text>` : "";
+  const RS = (W - L) / N, row = Array.from({ length: N }, (_, k) => k < nOpen
+    ? `<circle class="o" cx="${(L + RS * (k + 0.5)).toFixed(1)}" cy="${R + 1}" r="${R}"/>`
+    : `<circle class="n" cx="${(L + RS * (k + 0.5)).toFixed(1)}" cy="${R + 1}" r="${R - 0.75}"/>`).join("");
+  const whether = `<p class="dq">개봉할까 <b class="tn">20편 중 ${nOpen}편 개봉</b>${never ? `<span class="t3"> · </span><span class="t2">${never}편 개봉 안 함</span>` : ""}</p>
+    <svg viewBox="0 0 ${W} ${2 * R + 2}" role="img" aria-label="비슷한 영화 20편 중 ${nOpen}편 개봉, ${never}편 개봉 안 함">${row}</svg>`;
   // month ticks: the first day of each month inside the axis
   const xOf = s => L + diffDays(t0, s) / bw * colW;
   const ticks = [];
@@ -810,11 +815,10 @@ function chart(f, x) {
   const parts = []; let prev = 0;
   for (const k of dl) { const n = dates.filter(s => s <= k).length - prev; if (n) parts.push(`${deadline(k)} <b class="tn">${n}편</b>`); prev += n; }
   if (nOpen - prev) parts.push(`그 뒤 <b class="tn">${nOpen - prev}편</b>`);
-  if (never) parts.push(`끝내 개봉 안 함 <b class="tn">${never}편</b>`);
-  const label = `비슷한 영화 20편이라면: ${parts.join(", ").replace(/<[^>]+>/g, "")}`;
-  return `<div class="chart dotplot"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">
-    <line class="ax" x1="${L}" x2="${L + cols * colW}" y1="${base}" y2="${base}"/>${tk}${dots}${nev}</svg>
-    <p class="dcap">비슷한 영화 20편이라면 ${parts.join('<span class="t3"> · </span>')}</p>
+  const label = `개봉하는 ${nOpen}편의 시기: ${parts.join(", ").replace(/<[^>]+>/g, "")}`;
+  return `<div class="chart dotplot">${whether}${nOpen ? `<p class="dq dw">개봉한다면 언제</p><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">
+    <line class="ax" x1="${L}" x2="${L + cols * colW}" y1="${base}" y2="${base}"/>${tk}${dots}</svg>
+    <p class="dcap">개봉하는 ${nOpen}편 중 ${parts.join('<span class="t3"> · </span>')}</p>` : ""}
     ${nOpen ? "" : '<p class="small">점 하나가 이 영화와 같은 단계에 있던 영화 1편(5%)이에요.</p>'}${nOpen ? `<p class="small">점 하나가 이 영화와 같은 단계에 있던 영화 1편(5%)이에요. ${bw === 7 ? "한 칸은 1주" : bw < 30 ? `한 칸은 ${bw / 7}주` : bw < 100 ? `한 칸은 약 ${Math.round(bw / 30.4)}개월` : `한 칸은 약 ${Math.round(bw / 30.4)}개월`}.</p>` : ""}</div>`;
 }
 function vDetail(mode) {
@@ -882,7 +886,7 @@ function vDetail(mode) {
   return `<article class="dt${full ? " full" : ""}">${close}
     ${head}
     <div class="dbody">${x.nxt ? `<section class="dsec"><h2>다음에 나올 신호</h2><p class="nextsig">${esc(x.nxt)}<br><span>나오면 레이더와 RSS에 올라옵니다.</span></p></section>` : ""}
-    ${d.p === "est" && x.q20 ? `<section class="dsec"><h2>${d.w === "rare" ? "개봉 가능성" : "언제 개봉할까"}</h2>${d.w === "rare" ? "" : chart(f, x)}<p class="dbasis">근거 <span class="t2">${d.seg === "short" ? "40분 미만 단편 전체의 과거 기록 (회사 기록과 따로 계산)" : d.seg === "format_of_open" ? "이미 개봉한 영화의 다른 상영 포맷 기록" : x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.opened}편 개봉` : "같은 단계에 있던 영화 전체의 기록"}</span>${d.sm ? " · " : ""}${d.sm ? "<b>자료 적음</b> <span class=\"t3\">이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</span>" : ""}</p></section>` : ""}
+    ${d.p === "est" && x.q20 ? `<section class="dsec"><h2>${d.w === "rare" ? "개봉 가능성" : "개봉 전망"}</h2>${d.w === "rare" ? "" : chart(f, x)}<p class="dbasis">근거 <span class="t2">${d.seg === "short" ? "40분 미만 단편 전체의 과거 기록 (회사 기록과 따로 계산)" : d.seg === "format_of_open" ? "이미 개봉한 영화의 다른 상영 포맷 기록" : x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.opened}편 개봉` : "같은 단계에 있던 영화 전체의 기록"}</span>${d.sm ? " · " : ""}${d.sm ? "<b>자료 적음</b> <span class=\"t3\">이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</span>" : ""}</p></section>` : ""}
     <section class="dsec"><h2>기록 <small>최신순</small></h2>${tlHTML}</section>
     <section class="dsec"><h2>극장</h2>${chains}</section>
     ${x.syn || comps || facts ? `<section class="dsec"><h2>작품 정보</h2>${facts ? `<p class="note" style="margin-bottom:8px">${esc(facts)}</p>` : ""}${x.syn ? `<p class="syn">${esc(x.syn)}</p>` : ""}${comps ? `<dl class="kv" style="margin-top:12px">${comps}</dl>` : ""}</section>` : ""}</div>
