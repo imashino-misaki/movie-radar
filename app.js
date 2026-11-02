@@ -210,15 +210,22 @@ const FGROUPS = [
   ["cat", "종류", [["rr", "재개봉"], ["ev", "콘서트·라이브"], ["ani", "애니메이션"]]],
   ["fmt", "특별관", [["imax", "IMAX"], ["4d", "4D"], ["sx", "ScreenX"], ["dolby", "Dolby"]]],
   ["grade", "관람 등급", [["g0", "전체 관람가"], ["g12", "12세"], ["g15", "15세"], ["g19", "청소년 관람불가"]]],
-  ["ox", "범위", [["ox", "개봉 불확실작 포함"]]],
+  ["ox", "범위", [["ox", "개봉 불확실작 포함"], ["evin", "콘서트·라이브 포함"]]],
 ];
+// hidden unless asked for: unlikely releases ("ox") and concert / live captures
+// ("evin", or picking 콘서트·라이브 as the kind)
+const RANGE = new Set(["ox", "evin"]);
+const isEv = f => f.cats.includes("ev");
+const evHidden = (f, F) => isEv(f) && !F.has("evin") && !F.has("ev");
+const homeOk = f => !f.ox && !isEv(f);
 const GOF = Object.fromEntries(FGROUPS.flatMap(([g, , cs]) => cs.map(([k]) => [k, g])));
 const LABEL = Object.fromEntries(FGROUPS.flatMap(([, , cs]) => cs));
 const GRADEK = { g0: "전체", g12: "12세", g15: "15세", g19: "청불" };
 function passFilters(f, F) {
   if (!F.has("ox") && f.ox) return false;
+  if (evHidden(f, F)) return false;
   const by = {};
-  for (const k of F) if (k !== "ox") (by[GOF[k]] = by[GOF[k]] || []).push(k);
+  for (const k of F) if (!RANGE.has(k)) (by[GOF[k]] = by[GOF[k]] || []).push(k);
   for (const [g, ks] of Object.entries(by)) {
     if (!ks.some(k => g === "chain" ? f.ch.includes(k) : g === "ex" ? f.ex.length > 0 : g === "fmt" ? f.fmts.includes(k)
       : g === "cat" ? f.cats.includes(k) : g === "grade" ? f.g === GRADEK[k] : true)) return false;
@@ -395,6 +402,7 @@ function vUpcoming() {
     body = list.length ? `<div class="list">${r.html}${r.cut ? `<button class="more tn" data-more="${key}">더 보기 · ${r.remaining}편 더</button>` : ""}</div>`
       : `<div class="list"><p class="empty">조건에 맞는 영화가 없어요. <button class="linkbtn" data-reset>필터 해제</button></p></div>`;
     if (!S.F.has("ox")) { const nox = base.filter(f => f.ox).length; body += `<p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">극장 개봉 가능성이 낮은 ${nox}편은 숨겼어요. <button class="linkbtn" style="font-size:12px;min-height:0" data-chip="ox">포함하기</button></p>`; }
+    body += evNote(base);
   }
   return head + tools + appliedChips() + cg + body;
 }
@@ -440,6 +448,10 @@ function tableView(list) {
 }
 
 /* ---------------------------------------------------------------- 상영 중 */
+function evNote(base) {
+  const n = base.filter(f => evHidden(f, S.F) && (S.F.has("ox") || !f.ox)).length;
+  return n ? `<p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">콘서트·라이브 ${n}편은 숨겼어요. <button class="linkbtn" style="font-size:12px;min-height:0" data-chip="evin">포함하기</button></p>` : "";
+}
 function vNow() {
   const base = baseFor("now");
   const list = base.filter(f => passFilters(f, S.F));
@@ -469,7 +481,7 @@ function vNow() {
     const byOpen = list.slice().sort((a, b) => (a.d.date < b.d.date ? 1 : a.d.date > b.d.date ? -1 : 0) || a.t.localeCompare(b.t, "ko"));
     body = `<div class="list">${capRows("now", byOpen.map(f => nrow(f, '<div class="rk"></div>', f.bk && f.bk.ta ? `<b class="tn">${man(f.bk.ta)}</b><small>누적 관객</small>` : "")))}</div>`;
   }
-  return head + tools + appliedChips() + body;
+  return head + tools + appliedChips() + body + evNote(base);
 }
 function capRows(key, rows) {
   const n = S.more[key] ? rows.length : Math.min(rows.length, rowLimit());
@@ -542,19 +554,19 @@ const stripItem = (f, sub, badge) => `<li data-id="${f.id}">${f.pst ? `<span cla
 const stripCap = () => (wide() ? 12 : 16);
 function stripSection() {
   const end = add(TODAY, 14);
-  const items = MR.films.filter(f => f.d.p === "day" && f.d.date > TODAY && f.d.date <= end && !f.ox).sort(bySortDate);
+  const items = MR.films.filter(f => f.d.p === "day" && f.d.date > TODAY && f.d.date <= end && homeOk(f)).sort(bySortDate);
   if (!items.length) return "";
   return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편</span><a class="end" href="#/upcoming">전체 일정</a></div>
     <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
 }
 // 상영 중 on the home screen: yesterday's box-office order first, then the rest by booking rank
 function nowSection() {
-  const now = MR.films.filter(f => isNow(f) && !f.ox);
+  const now = MR.films.filter(f => isNow(f) && homeOk(f));
   if (!now.length) return "";
   const seen = new Set(), items = [];
   for (const r of MR.bo.rows) {
     const f = r.id && BYID[r.id];
-    if (f && !f.ox && !seen.has(f.id)) { seen.add(f.id); items.push(stripItem(f, `어제 ${man(r.a)}명`, `<i class="rkb tn">${r.r}</i>`)); }
+    if (f && homeOk(f) && !seen.has(f.id)) { seen.add(f.id); items.push(stripItem(f, `어제 ${man(r.a)}명`, `<i class="rkb tn">${r.r}</i>`)); }
   }
   now.filter(f => !seen.has(f.id)).sort((x, y) => (x.bk ? x.bk.r : 999) - (y.bk ? y.bk.r : 999) || (x.d.date < y.d.date ? 1 : -1))
     .forEach(f => items.push(stripItem(f, f.bk ? `예매율 ${f.bk.rate}%` : `${md(f.d.date)} 개봉`)));
@@ -566,8 +578,8 @@ function boxMini(n) {
     ${MR.bo.rows.slice(0, n).map(r => `<div class="mini"${r.id ? ` data-id="${r.id}"` : ""}><b class="tn">${r.r}</b><span>${esc(r.id ? BYID[r.id].t : r.t)}</span><em class="tn">${man(r.a)}</em></div>`).join("")}<div style="height:8px"></div>`;
 }
 function countsSection() {
-  const up = MR.films.filter(f => isUp(f) && !f.ox), c = upcomingCounts(up);
-  const now = MR.films.filter(f => isNow(f) && !f.ox).length;
+  const up = MR.films.filter(f => isUp(f) && homeOk(f)), c = upcomingCounts(up);
+  const now = MR.films.filter(f => isNow(f) && homeOk(f)).length;
   return `<div class="counts"><a class="card" href="#/upcoming"><b>개봉 예정 전체</b><span class="tn">확정 ${c.day} · 월 공개 ${c.month} · 추정 ${c.est}</span></a>
     <a class="card" href="#/now"><b>상영 중</b><span class="tn">${now}편 · 관객순·예매율순</span></a></div>`;
 }
@@ -627,7 +639,7 @@ function importLink(s) {
 function vWatch() {
   const ids = Object.keys(WATCH);
   const all = ids.map(id => BYID[id] || BYID[MR.alias[id]]).filter(Boolean);
-  const list = all.filter(f => passFilters(f, new Set([...S.F, "ox"])));
+  const list = all.filter(f => passFilters(f, new Set([...S.F, "ox", "evin"])));
   const missing = ids.filter(id => !BYID[id] && !BYID[MR.alias[id]]).length;
   const up = list.filter(isUp).sort((a, b) => sortKey(a) < sortKey(b) ? -1 : 1), nw = list.filter(isNow), past = list.filter(f => opened(f) && !f.now);
   const sec = (t, arr, fn) => arr.length ? `<section class="grp"><div class="wk"><h2>${t}</h2><span class="n tn">${arr.length}편</span></div>${arr.map(fn).join("")}</section>` : "";
@@ -654,7 +666,7 @@ function vSearch() {
         <p class="empty">영화 제목, 원제, 배급사로 찾을 수 있어요. 초성(예: ㅊㄴ)도 돼요.</p></div>`;
   }
   const all = baseFor("search");
-  const hits = all.filter(f => passFilters(f, S.F));
+  const hits = all.filter(f => passFilters(f, new Set([...S.F, "evin"])));
   const up = hits.filter(isUp).sort((a, b) => sortKey(a) < sortKey(b) ? -1 : 1), nw = hits.filter(isNow), past = hits.filter(f => opened(f) && !f.now);
   const cho = CHO_ONLY.test(S.q.replace(/\s+/g, ""));
   const hiddenOx = S.F.has("ox") ? 0 : all.filter(f => f.ox).length;
