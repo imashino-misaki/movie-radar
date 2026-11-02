@@ -43,7 +43,7 @@ ANIME_FRANCHISES = (
 )
 CONCERT_KEYWORDS = (
     "콘서트", "투어", "라이브", "인 시네마", "인시네마", "공연실황", "실황", "팬미팅",
-    "concert", "tour", "live", "in cinema",
+    "concert", "tour", "live", "in cinema", "in cinemas",
 )
 RERELEASE_KEYWORDS = (
     "4k", "리마스터", "재개봉", "앙코르", "remaster", "re-release", "encore",
@@ -54,6 +54,9 @@ FORMAT_KEYWORDS = (
 )
 
 SUBCULTURE_TAGS = ("anime", "concert", "rerelease")
+
+# franchise names that contain a concert keyword but are films
+NOT_CONCERT = ("러브 라이브", "러브라이브", "love live", "lovelive")
 
 _KANA = re.compile(r"[぀-ヿ]")
 
@@ -85,7 +88,10 @@ def tag_film(title: str, original_title: str = "", applicant: str = "", country:
             or _KANA.search(original_title or "")
             or _has_any(text, ANIME_FRANCHISES)):
         tags.append("anime")
-    if _has_any(text, CONCERT_KEYWORDS):
+    concert_text = text
+    for name in NOT_CONCERT:
+        concert_text = concert_text.replace(name, " ")
+    if _has_any(concert_text, CONCERT_KEYWORDS):
         tags.append("concert")
     if _has_any(text, RERELEASE_KEYWORDS):
         tags.append("rerelease")

@@ -162,7 +162,7 @@ function radRow(g, compact) {
 
 /* ---------------------------------------------------------------- meta line pieces */
 const EXN = { mb: "메가박스 단독", lt: "롯데시네마 단독", cgv: "CGV 단독" };
-const CATN = { ani: "애니메이션", rr: "재개봉", ev: "콘서트·라이브" };
+const CATN = { ani: "애니메이션", rr: "재개봉", ev: "콘서트·라이브", fest: "영화제·특별 상영" };
 // 재개봉 and 콘서트·라이브 read as labels; the genre stays plain text
 const catText = f => f.cats.map(c => (c === "ani" ? CATN[c] : `<span class="xb">${CATN[c]}</span>`)).join(" ");
 const FMTN = { imax: "IMAX", "4d": "4D", sx: "ScreenX", dolby: "Dolby", sub: "자막", dub: "더빙" };
@@ -207,7 +207,7 @@ function estRow(f) {
 const FGROUPS = [
   ["chain", "극장", [["mb", "메가박스"], ["lt", "롯데시네마"], ["cgv", "CGV 계열 배급"]]],
   ["ex", "상영 방식", [["ex", "체인 단독 상영"]]],
-  ["cat", "종류", [["rr", "재개봉"], ["ev", "콘서트·라이브"], ["ani", "애니메이션"]]],
+  ["cat", "종류", [["rr", "재개봉"], ["ani", "애니메이션"], ["fest", "영화제·특별 상영"], ["ev", "콘서트·라이브"]]],
   ["fmt", "특별관", [["imax", "IMAX"], ["4d", "4D"], ["sx", "ScreenX"], ["dolby", "Dolby"]]],
   ["grade", "관람 등급", [["g0", "전체 관람가"], ["g12", "12세"], ["g15", "15세"], ["g19", "청소년 관람불가"]]],
   ["ox", "범위", [["ox", "개봉 불확실작 포함"], ["evin", "콘서트·라이브 포함"]]],

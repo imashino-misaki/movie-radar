@@ -80,6 +80,11 @@ GRADE_LONG = {"전체": "전체 관람가", "12세": "12세 관람가", "15세":
 KIND = {"poster": "포스터", "trailer": "예고편"}
 
 
+# the bracket of a "[...] title" chain listing that marks a staged performance
+# broadcast (hidden with concerts) rather than a festival / special screening
+_PERFORMANCE = re.compile(r"오페라|발레|뮤지컬|연극|콘서트|라이브|실황|nt\s*live|\bmet\b|\brbo\b|opera|ballet|bolshoi",
+                          re.I)
+
 def tnorm(s: str | None) -> str:
     return re.sub(r"[^0-9a-z가-힣]", "", (s or "").lower())
 
@@ -885,8 +890,11 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             cats.append("ani")
         if "rerelease" in tags or (st.get("release_history") or {}).get("rereleases"):
             cats.append("rr")
-        if "concert" in tags or re.match(r"^\s*\[", title):
+        bracket = re.match(r"^\s*\[([^\]]*)\]", title)
+        if "concert" in tags or (bracket and _PERFORMANCE.search(bracket.group(1))):
             cats.append("ev")
+        elif bracket:
+            cats.append("fest")
         chains = []
         if mb:
             chains.append("mb")
