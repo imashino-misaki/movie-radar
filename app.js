@@ -107,7 +107,10 @@ const LONG_AWAY = !!baseDay && diffDays(baseDay, TODAY) > LOOKBACK; // a last vi
 const NEW_EV = MR.ev.filter(e => BYID[e.id] && (BASESET ? !BASESET.has(evKey(e)) && (!LONG_AWAY || e.d >= LOOK_FROM) : e.d >= WEEK_FROM));
 const WEEK_EV = MR.ev.filter(e => BYID[e.id] && e.d >= WEEK_FROM);
 // first sightings: films whose earliest trace in any source is within LOOKBACK days, newest first
-const FS = MR.fs.filter(s => BYID[s.id] && s.d >= LOOK_FROM);
+const HIDE = [["fest", "festin", "영화제·특별 상영"], ["ev", "evin", "콘서트·라이브"]];
+const isEv = f => HIDE.some(([c]) => f.cats.includes(c));
+// festival / concert listings are not new films
+const FS = MR.fs.filter(s => BYID[s.id] && s.d >= LOOK_FROM && !isEv(BYID[s.id]));
 const isNewFs = s => !!BASESET && !BASESET.has(fsKey(s));
 const NEWIDS = new Set(NEW_EV.map(e => e.id).concat(FS.filter(isNewFs).map(s => s.id)));
 
@@ -210,13 +213,15 @@ const FGROUPS = [
   ["cat", "종류", [["rr", "재개봉"], ["ani", "애니메이션"], ["fest", "영화제·특별 상영"], ["ev", "콘서트·라이브"]]],
   ["fmt", "특별관", [["imax", "IMAX"], ["4d", "4D"], ["sx", "ScreenX"], ["dolby", "Dolby"]]],
   ["grade", "관람 등급", [["g0", "전체 관람가"], ["g12", "12세"], ["g15", "15세"], ["g19", "청소년 관람불가"]]],
-  ["ox", "범위", [["ox", "개봉 불확실작 포함"], ["evin", "콘서트·라이브 포함"]]],
+  ["ox", "범위", [["ox", "개봉 불확실작 포함"], ["festin", "영화제·특별 상영 포함"], ["evin", "콘서트·라이브 포함"]]],
 ];
-// hidden unless asked for: unlikely releases ("ox") and concert / live captures
-// ("evin", or picking 콘서트·라이브 as the kind)
-const RANGE = new Set(["ox", "evin"]);
-const isEv = f => f.cats.includes("ev");
-const evHidden = (f, F) => isEv(f) && !F.has("evin") && !F.has("ev");
+// hidden unless asked for: unlikely releases ("ox"), and kinds that are not a regular
+// theatrical run (one-off festival / special screenings, concert / live captures). A kind
+// shows when its "...in" range is on or when it is picked as the kind itself.
+const RANGE = new Set(["ox", ...HIDE.map(h => h[1])]);
+const INC_ALL = HIDE.map(h => h[1]);
+const kindHidden = (f, F, c, inc) => f.cats.includes(c) && !F.has(inc) && !F.has(c);
+const evHidden = (f, F) => HIDE.some(([c, inc]) => kindHidden(f, F, c, inc));
 const homeOk = f => !f.ox && !isEv(f);
 const GOF = Object.fromEntries(FGROUPS.flatMap(([g, , cs]) => cs.map(([k]) => [k, g])));
 const LABEL = Object.fromEntries(FGROUPS.flatMap(([, , cs]) => cs));
@@ -467,8 +472,11 @@ function tableView(list) {
 
 /* ---------------------------------------------------------------- 상영 중 */
 function evNote(base) {
-  const n = base.filter(f => evHidden(f, S.F) && (S.F.has("ox") || !f.ox)).length;
-  return n ? `<p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">콘서트·라이브 ${n}편은 숨겼어요. <button class="linkbtn" style="font-size:12px;min-height:0" data-chip="evin">포함하기</button></p>` : "";
+  const vis = base.filter(f => S.F.has("ox") || !f.ox);
+  return HIDE.map(([c, inc, name]) => {
+    const n = vis.filter(f => kindHidden(f, S.F, c, inc)).length;
+    return n ? `<p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${name} ${n}편은 숨겼어요. <button class="linkbtn" style="font-size:12px;min-height:0" data-chip="${inc}">포함하기</button></p>` : "";
+  }).join("");
 }
 function vNow() {
   const base = baseFor("now");
@@ -510,7 +518,7 @@ function capRows(key, rows) {
 function changesSection(compact, noWatched, skip) {
   const showAll = S.all7 || FIRST_VISIT;
   const evs = showAll ? WEEK_EV : NEW_EV;
-  const groups = groupEvents(evs).filter(g => !(noWatched && g.w) && !(skip && skip.has(g.f.id)));
+  const groups = groupEvents(evs).filter(g => !(noWatched && g.w) && !(skip && skip.has(g.f.id)) && (g.w || !isEv(g.f)));
   const strong = groups.filter(g => g.str >= 2 || g.w), weak = groups.filter(g => g.str < 2 && !g.w);
   const lastAt = BASE.at ? new Date(BASE.at) : null;
   const title = showAll ? "최근 7일 업데이트" : "업데이트";
@@ -657,7 +665,7 @@ function importLink(s) {
 function vWatch() {
   const ids = Object.keys(WATCH);
   const all = ids.map(id => BYID[id] || BYID[MR.alias[id]]).filter(Boolean);
-  const list = all.filter(f => passFilters(f, new Set([...S.F, "ox", "evin"])));
+  const list = all.filter(f => passFilters(f, new Set([...S.F, "ox", ...INC_ALL])));
   const missing = ids.filter(id => !BYID[id] && !BYID[MR.alias[id]]).length;
   const up = list.filter(isUp).sort((a, b) => sortKey(a) < sortKey(b) ? -1 : 1), nw = list.filter(isNow), past = list.filter(f => opened(f) && !f.now);
   const sec = (t, arr, fn) => arr.length ? `<section class="grp"><div class="wk"><h2>${t}</h2><span class="n tn">${arr.length}편</span></div>${arr.map(fn).join("")}</section>` : "";
@@ -684,7 +692,7 @@ function vSearch() {
         <p class="empty">영화 제목, 원제, 배급사로 찾을 수 있어요. 초성(예: ㅊㄴ)도 돼요.</p></div>`;
   }
   const all = baseFor("search");
-  const hits = all.filter(f => passFilters(f, new Set([...S.F, "evin"])));
+  const hits = all.filter(f => passFilters(f, new Set([...S.F, ...INC_ALL])));
   const up = hits.filter(isUp).sort((a, b) => sortKey(a) < sortKey(b) ? -1 : 1), nw = hits.filter(isNow), past = hits.filter(f => opened(f) && !f.now);
   const cho = CHO_ONLY.test(S.q.replace(/\s+/g, ""));
   const hiddenOx = S.F.has("ox") ? 0 : all.filter(f => f.ox).length;
