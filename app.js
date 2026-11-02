@@ -67,14 +67,18 @@ function cert(f) {
     : { g: "day", cls: "c-day", when: `${kd(d.date)}<b class="dday tn">${ddText(d.date)}</b>`, sentence: `${kd(d.date)} 개봉 확정`, dday: diffDays(TODAY, d.date) };
   if (d.p === "month") return { g: "month", cls: "c-month", when: `${mon(d.m)} 중 개봉`, sentence: `${mon(d.m)} 중 개봉`, why: "개봉 월만 발표됐어요. 날짜가 나오면 업데이트에 올라옵니다." };
   if (d.p === "est" && d.w === "rare") {
-    const why = SEGWHY[d.seg] || "같은 단계에 있던 영화가 극장에 거의 걸리지 않았어요";
+    // no segment: a film whose any-opening chance would show dots but its real one does not
+    // is on the token path (a few screenings ahead of VOD)
+    const why = SEGWHY[d.seg] || (d.pa != null && Math.round(20 * d.pa) > 0
+      ? `극장에 걸린다면 대부분 형식 개봉(상영 40회 미만, VOD 앞 형식 상영)이에요 · 형식 개봉 포함 ${pctE(d.pa)}`
+      : "같은 단계에 있던 영화가 극장에 거의 걸리지 않았어요");
     return { g: "rare", cls: "c-none", word: WORD.rare, when: "개봉 가능성 낮음", wp: "개봉 가능성 낮음", sentence: "개봉 가능성 낮음",
       why: `개봉 확률 <b class="tn">${pctLow(d.po)}</b><span class="t3"> · </span>${why}` };
   }
   if (d.p === "est" && d.md) {
     const word = WORD[d.w];
     return { g: "est", cls: "c-est", word, when: `<span class="etag">예상</span>${md(d.md)}경`, wp: `예상 ${md(d.md)}경`, sentence: `<span class="etag">예상</span>${kd(d.md)}경`,
-      why: [d.po != null && `개봉 확률 <b class="tn">${pctE(d.po)}</b>`, `<span class="wtag">${word}</span>`, d.sm && '<span class="wtag">자료 적음</span>',
+      why: [d.po != null && `개봉 확률 <b class="tn">${pctE(d.po)}</b>`, d.pa != null && pctE(d.pa) !== pctE(d.po) && `형식 개봉 포함 <span class="tn">${pctE(d.pa)}</span>`, `<span class="wtag">${word}</span>`, d.sm && '<span class="wtag">자료 적음</span>',
         d.lo && d.hi && `범위 <span class="tn">${md(d.lo)} ~ ${md(d.hi)}</span>`].filter(Boolean).join('<span class="t3"> · </span>') };
   }
   return { g: "none", cls: "c-none", when: "시기 미정", wp: "시기 미정", sentence: "개봉 시기 미정", why: "아직 시기를 추정할 근거가 부족해요 (등급 심의 단계)." };
@@ -245,7 +249,7 @@ function estRow(f) {
   const who = f.dist || f.app;
   return `<div class="row np est${S.id === f.id ? " sel" : ""}" data-id="${f.id}" tabindex="0">
     <div class="rm">${titleHTML(f)}<div class="rs">${[who && esc(who), catText(f), f.ex.length ? exBadges(f) : ""].filter(Boolean).join('<span class="sep">·</span>') || '<span class="t3">정보 없음</span>'}</div></div>
-    <div class="rr ${c.cls}"><b class="tn">${c.wp}</b>${c.word ? `<small class="tn">${f.d.w === "rare" ? [SEGSHORT[f.d.seg], pctLow(f.d.po)].filter(Boolean).join(" · ")
+    <div class="rr ${c.cls}"><b class="tn">${c.wp}</b>${c.word ? `<small class="tn">${f.d.w === "rare" ? [SEGSHORT[f.d.seg] || (f.d.pa != null && Math.round(20 * f.d.pa) > 0 ? "형식 개봉 위주" : ""), pctLow(f.d.po)].filter(Boolean).join(" · ")
       : `${c.word} · 개봉 ${pctE(f.d.po)}`}${f.d.sm ? " · 자료 적음" : ""}</small>` : ""}</div>${starBtn(f)}</div>`;
 }
 
@@ -434,7 +438,7 @@ function renderBlocks(blocks, limitRows) {
       const id = b.type === "est" ? "e" + b.m : b.type;
       FOLD_INNER[id] = () => b.items.map(estRow).join("");
       const sum = b.type === "est" ? `<span><b>${mon(b.m)} 예상</b> <span class="tn">${b.items.length}편</span></span>`
-        : b.type === "rare" ? `<span><b>개봉 가능성 낮음</b> <span class="tn">${b.items.length}편</span> · 단편이거나 주로 VOD로 내는 회사의 작품</span>`
+        : b.type === "rare" ? `<span><b>개봉 가능성 낮음</b> <span class="tn">${b.items.length}편</span> · 단편, VOD 위주 회사, 형식 개봉 위주 작품</span>`
         : b.type === "unknown" ? `<span><b>예상일 없음</b> <span class="tn">${b.items.length}편</span> · 모델이 날짜를 내지 못한 작품</span>`
         : `<span><b>시기 미정</b> <span class="tn">${b.items.length}편</span> · 등급 심의 단계라 아직 추정하지 않아요</span>`;
       out += fold(id, sum, FOLD_INNER[id], b.type === "est" ? "" : "tail");
@@ -775,7 +779,9 @@ const retryDetails = () => { detailsFailed = false; return loadDetails(); };
 function chart(f, x) {
   const q = x.q20, po = f.d.po != null ? f.d.po : f.d.pp;
   if (!q || q.length !== 20 || po == null) return "";
-  const N = 20, nOpen = Math.max(0, Math.min(N, Math.round(N * po))), never = N - nOpen;
+  // nOpen real openings; tok token releases (a few screenings ahead of VOD: any opening minus real)
+  const N = 20, nOpen = Math.max(0, Math.min(N, Math.round(N * po)));
+  const tok = f.d.pa != null ? Math.max(0, Math.min(N, Math.round(N * f.d.pa)) - nOpen) : 0, never = N - nOpen - tok;
   // the j-th opening dot sits at level (j + 0.5) / nOpen of the timing given an opening
   const dates = Array.from({ length: nOpen }, (_, j) => q[Math.min(N - 1, Math.floor((j + 0.5) / nOpen * N))]);
   const t0 = TODAY, days = dates.map(s => Math.max(0, diffDays(t0, s)));
@@ -793,11 +799,15 @@ function chart(f, x) {
   const base = H - B, cx = c => L + c * colW + colW / 2, cy = k => base - R - 2 - k * STEP;
   const seen = {}, dots = days.map(d => { const c = Math.floor(d / bw), k = (seen[c] = (seen[c] || 0) + 1) - 1;
     return `<circle class="o" cx="${cx(c).toFixed(1)}" cy="${cy(k)}" r="${R}"/>`; }).join("");
-  const RS = (W - L) / N, row = Array.from({ length: N }, (_, k) => k < nOpen
-    ? `<circle class="o" cx="${(L + RS * (k + 0.5)).toFixed(1)}" cy="${R + 1}" r="${R}"/>`
-    : `<circle class="n" cx="${(L + RS * (k + 0.5)).toFixed(1)}" cy="${R + 1}" r="${R - 0.75}"/>`).join("");
-  const whether = `<p class="dq">개봉할까 <b class="tn">20편 중 ${nOpen}편 개봉</b>${never ? `<span class="t3"> · </span><span class="t2">${never}편 개봉 안 함</span>` : ""}</p>
-    <svg viewBox="0 0 ${W} ${2 * R + 2}" role="img" aria-label="비슷한 영화 20편 중 ${nOpen}편 개봉, ${never}편 개봉 안 함">${row}</svg>`;
+  const RS = (W - L) / N, row = Array.from({ length: N }, (_, k) => {
+    const x0 = (L + RS * (k + 0.5)).toFixed(1);
+    return k < nOpen ? `<circle class="o" cx="${x0}" cy="${R + 1}" r="${R}"/>`
+      : k < nOpen + tok ? `<circle class="t" cx="${x0}" cy="${R + 1}" r="${R}"/>`
+      : `<circle class="n" cx="${x0}" cy="${R + 1}" r="${R - 0.75}"/>`; }).join("");
+  const sep = '<span class="t3"> · </span>';
+  const whether = `<p class="dq">개봉할까 <b class="tn">20편 중 ${nOpen}편 개봉</b>${tok ? `${sep}<span class="t2">${tok}편 형식 개봉</span>` : ""}${never ? `${sep}<span class="t2">${never}편 개봉 안 함</span>` : ""}</p>
+    <svg viewBox="0 0 ${W} ${2 * R + 2}" role="img" aria-label="비슷한 영화 20편 중 ${nOpen}편 개봉, ${tok}편 형식 개봉, ${never}편 개봉 안 함">${row}</svg>
+    ${tok ? '<p class="small">옅은 점: 형식 개봉 (연 상영 40회 미만, VOD 앞 형식 상영). 개봉으로 치지 않아요.</p>' : ""}`;
   // month ticks: the first day of each month inside the axis
   const xOf = s => L + diffDays(t0, s) / bw * colW;
   const ticks = [];
@@ -886,7 +896,7 @@ function vDetail(mode) {
   return `<article class="dt${full ? " full" : ""}">${close}
     ${head}
     <div class="dbody">${x.nxt ? `<section class="dsec"><h2>다음에 나올 신호</h2><p class="nextsig">${esc(x.nxt)}<br><span>나오면 레이더와 RSS에 올라옵니다.</span></p></section>` : ""}
-    ${d.p === "est" && x.q20 ? `<section class="dsec"><h2>${d.w === "rare" ? "개봉 가능성" : "개봉 전망"}</h2>${d.w === "rare" ? "" : chart(f, x)}<p class="dbasis">근거 <span class="t2">${d.seg === "short" ? "40분 미만 단편 전체의 과거 기록 (회사 기록과 따로 계산)" : d.seg === "format_of_open" ? "이미 개봉한 영화의 다른 상영 포맷 기록" : x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.opened}편 개봉` : "같은 단계에 있던 영화 전체의 기록"}</span>${d.sm ? " · " : ""}${d.sm ? "<b>자료 적음</b> <span class=\"t3\">이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</span>" : ""}</p></section>` : ""}
+    ${d.p === "est" && x.q20 ? `<section class="dsec"><h2>${d.w === "rare" ? "개봉 가능성" : "개봉 전망"}</h2>${d.w === "rare" ? "" : chart(f, x)}<p class="dbasis">근거 <span class="t2">${d.seg === "short" ? "40분 미만 단편 전체의 과거 기록 (회사 기록과 따로 계산)" : d.seg === "format_of_open" ? "이미 개봉한 영화의 다른 상영 포맷 기록" : x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.real != null ? `${x.hist.real}편 개봉${x.hist.opened > x.hist.real ? ` (형식 개봉 포함 ${x.hist.opened}편)` : ""}` : `${x.hist.opened}편 개봉`}` : "같은 단계에 있던 영화 전체의 기록"}</span>${d.sm ? " · " : ""}${d.sm ? "<b>자료 적음</b> <span class=\"t3\">이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</span>" : ""}</p></section>` : ""}
     <section class="dsec"><h2>기록 <small>최신순</small></h2>${tlHTML}</section>
     <section class="dsec"><h2>극장</h2>${chains}</section>
     ${x.syn || comps || facts ? `<section class="dsec"><h2>작품 정보</h2>${facts ? `<p class="note" style="margin-bottom:8px">${esc(facts)}</p>` : ""}${x.syn ? `<p class="syn">${esc(x.syn)}</p>` : ""}${comps ? `<dl class="kv" style="margin-top:12px">${comps}</dl>` : ""}</section>` : ""}</div>
@@ -909,9 +919,9 @@ function legend() {
     <dt>11월 중 개봉</dt><dd>개봉 월만 발표됨.</dd>
     <dt><span class="etag">예상</span>12월 2일경</dt><dd>개봉한다면의 중앙값: 절반은 이보다 일찍, 절반은 늦게 개봉. 범위는 10–90% 구간.</dd>
     <dt>자료 적음</dt><dd>이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</dd>
-    <dt>개봉 확률</dt><dd>앞으로 극장에서 개봉할 확률 (사실상 1년 안). 상세 화면과 표에 표시.</dd>
+    <dt>개봉 확률</dt><dd>앞으로 극장에서 제대로 개봉할 확률 (사실상 1년 안). 연 상영 40회 미만의 형식 개봉(VOD 앞 형식 상영)은 개봉으로 치지 않아요.</dd>
     <dt>유력·가능·불확실</dt><dd>개봉 확률 ${Math.round(th.likely * 100)}% 이상 · ${Math.round(th.possible * 100)}–${Math.round(th.likely * 100) - 1}% · ${Math.round(th.possible * 100)}% 미만</dd>
-    <dt>개봉 가능성 낮음</dt><dd>비슷한 영화 20편 중 1편도 개봉하지 않을 정도 (2.5% 미만). 단편이나 주로 VOD로 내는 회사 작품이라 예상일을 내지 않아요.</dd>
+    <dt>개봉 가능성 낮음</dt><dd>비슷한 영화 20편 중 1편도 개봉하지 않을 정도 (2.5% 미만). 단편, 주로 VOD로 내는 회사, 형식 개봉(연 상영 40회 미만) 위주 작품이라 예상일을 내지 않아요.</dd>
     <dt>시기 미정</dt><dd>등급 심의 단계라 아직 추정하지 않음</dd></dl>
     <p class="small">같은 수입·배급사, 같은 단계에 있던 과거 영화들의 실제 개봉 기록으로 계산해요.</p></div>`;
 }

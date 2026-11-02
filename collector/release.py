@@ -2521,14 +2521,15 @@ def _p_given(m: float, s: float, pi: float, elapsed: int) -> float:
 
 def real_ratio(rec: dict, model: Fit | None, real: Fit | None, today: dt.date) -> float | None:
     """P(real opening) / P(any opening) of the two rating-anchored applicant
-    models for this film (None without both or without a rating): the share
-    of its theatrical chance that is a real release."""
+    models for this film (None without both): the share of its theatrical
+    chance that is a real release, given no opening since the rating (a film
+    not rated yet: as on its rating day)."""
     rd = _valid_day(rec["stages"].get("rating", {}).get("date"))
-    if not model or not real or not rd:
+    if not model or not real:
         return None
     x = rec_features(rec)
     g = group_key("", rec.get("applicant", ""))
-    el = max(0, (today - _d(rd)).days)
+    el = max(0, (today - _d(rd)).days) if rd else 0
     m1, s1, p1, _ = model.dist(g, x)
     m2, s2, p2, _ = real.dist(g, x)
     pa, pr = _p_given(m1, s1, p1, el), _p_given(m2, s2, p2, el)

@@ -264,7 +264,9 @@ def classify(rec: dict, history: dict[str, dict], today: dt.date,
     else:
         h = history.get(applicant_key(rec.get("applicant", "")))
         if h:
-            out["applicant_history"] = dict(h)
+            # real: the applicant's openings with 40+ screenings (real_history), for the page
+            out["applicant_history"] = {**h, **({"real": real[k]["real"]} if real and (k := applicant_key(
+                rec.get("applicant", ""))) in real else {})}
             if unlikely(h):
                 out["class"] = "unlikely"
         if ad_only(rec):

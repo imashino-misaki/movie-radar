@@ -57,7 +57,8 @@ SOURCE_LABELS = (
     ("cgv", "CGV"),
 )
 
-# Word scale for model estimates, applied to ``release.p_open`` (the probability of ever opening;
+# Word scale for model estimates, applied to ``release.p_open_real`` (the probability of ever
+# opening for real, else ``release.p_open``;
 # the last ``release.by`` value when it is missing). Thresholds of the approved
 # viewer design, stated to users in the page's "확률 읽는 법" note: 유력 >= 80 %, 가능 50-79 %,
 # 불확실 < 50 %.
@@ -253,7 +254,11 @@ def certainty(rel: dict) -> dict:
     if prec == "estimate":
         by = sorted((rel.get("by") or {}).items())
         q = rel.get("quantiles") or {}
-        po = rel.get("p_open")
+        # the shown probability is a real opening (KOFIC: 40+ screenings in the year,
+        # lags_build.real_open); a token release (few screenings ahead of VOD) counts as
+        # none. pa: any opening, token included (the detail page names it when it differs)
+        pa = rel.get("p_open")
+        po = rel.get("p_open_real") if rel.get("p_open_real") is not None else pa
         pp = by[-1][1] if by else None
         # the word grades the probability shown next to it: p_open (the last deadline's p without it)
         p = po if po is not None else pp
@@ -263,6 +268,7 @@ def certainty(rel: dict) -> dict:
         md = q.get("p50") or None
         return {"p": "est", "w": w, "md": md, "lo": q.get("p10") or None, "hi": q.get("p90") or None,
                 "mm": md[:7] if md else None, "po": round(po, 3) if po is not None else None,
+                "pa": round(pa, 3) if pa is not None else None,
                 "by": [[k, round(v, 3)] for k, v in by], "pp": round(pp, 3) if pp is not None else None,
                 "dl": by[-1][0] if by else None,
                 # sm: the model has no record of the company and uses the overall fit only
