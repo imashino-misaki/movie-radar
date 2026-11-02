@@ -257,7 +257,11 @@ def certainty(rel: dict) -> dict:
         return {"p": "est", "w": w, "md": md, "lo": q.get("p10") or None, "hi": q.get("p90") or None,
                 "mm": md[:7] if md else None, "po": round(po, 3) if po is not None else None,
                 "by": [[k, round(v, 3)] for k, v in by], "pp": round(pp, 3) if pp is not None else None,
-                "dl": by[-1][0] if by else None}
+                "dl": by[-1][0] if by else None,
+                # sm: the model has no record of the company and uses the overall fit only
+                # ("자료 적음"). Not `established`: the any-opening model's companies differ so
+                # little that no company outweighs the prior (k_rows 283.6, 0 companies, 2026-11-02)
+                "sm": rel.get("model") == "overall"}
     return {"p": "none", "w": "none"}
 
 
@@ -1042,7 +1046,7 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             hist=(f.get("theatrical") or {}).get("applicant_history"),
             nxt=NEXT.get(rel.get("signal_state") or "") if c["p"] != "day" or c["date"] > last_date else None,
             mbd=(mb or {}).get("release_date"), ltd=(lt or {}).get("release_date"),
-            cgd=(cg or {}).get("release_date") or None, bkas=(bk or {}).get("as_of"),
+            cgd=(cg or {}).get("release_date") or None, q20=rel.get("q20") if c["p"] == "est" else None, bkas=(bk or {}).get("as_of"),
             ltpick=(lt or {}).get("badge") == "pick", prog=pg.get("program") if pg else None,
             mbno=((mb or {}).get("movie_nos") or [None])[0], ltno=(lt or {}).get("movie_code") or None,
             cgno=(cg or {}).get("movie_no") or None,

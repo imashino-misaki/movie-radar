@@ -45,7 +45,10 @@ const pctE = p => Math.min(99, Math.round(p * 100)) + "%"; // never 100% for any
 
 /* ---------------------------------------------------------------- certainty: the ONE place wording is decided.
    Mirrors collector/site.py cert_text(); thresholds come from the data (MR.th). */
-const WORD = { day: "확정", month: "월 공개", likely: "유력", possible: "가능", unknown: "미지수", none: "근거 부족" };
+const WORD = { day: "확정", month: "월 공개", likely: "유력", possible: "가능", unknown: "불확실", none: "근거 부족" };
+// the band each tier word stands for (thresholds from the data, MR.th)
+const band = w => { const l = Math.round(MR.th.likely * 100), p = Math.round(MR.th.possible * 100);
+  return w === "likely" ? `${l}% 이상` : w === "possible" ? `${p}–${l - 1}%` : w === "unknown" ? `${p}% 미만` : ""; };
 // the model's cumulative deadlines (detail chart)
 const deadline = s => { const last = +monthEnd(s.slice(0, 7)).slice(8); return +s.slice(8) >= last - 3 ? `${+s.slice(5, 7)}월 말까지` : `${md(s)}까지`; };
 const opened = f => f.d.p === "day" && f.d.date <= TODAY;
@@ -61,7 +64,7 @@ function cert(f) {
   if (d.p === "est" && d.md) {
     const word = WORD[d.w];
     return { g: "est", cls: "c-est", word, when: `<span class="etag">예상</span>${md(d.md)}경`, wp: `예상 ${md(d.md)}경`, sentence: `<span class="etag">예상</span>${kd(d.md)}경`,
-      why: [d.po != null && `개봉 확률 <b class="tn">${pctE(d.po)}</b>`, `<span class="wtag">${word}</span>`,
+      why: [d.po != null && `개봉 확률 <b class="tn">${pctE(d.po)}</b>`, `<span class="wtag">${word}</span>`, d.sm && '<span class="wtag">자료 적음</span>',
         d.lo && d.hi && `범위 <span class="tn">${md(d.lo)} ~ ${md(d.hi)}</span>`].filter(Boolean).join('<span class="t3"> · </span>') };
   }
   return { g: "none", cls: "c-none", when: "시기 미정", wp: "시기 미정", sentence: "개봉 시기 미정", why: "아직 시기를 추정할 근거가 부족해요 (등급 심의 단계)." };
@@ -232,7 +235,7 @@ function estRow(f) {
   const who = f.dist || f.app;
   return `<div class="row np est${S.id === f.id ? " sel" : ""}" data-id="${f.id}" tabindex="0">
     <div class="rm">${titleHTML(f)}<div class="rs">${[who && esc(who), catText(f), f.ex.length ? exBadges(f) : ""].filter(Boolean).join('<span class="sep">·</span>') || '<span class="t3">정보 없음</span>'}</div></div>
-    <div class="rr ${c.cls}"><b class="tn">${c.wp}</b>${c.word ? `<small>${c.word}</small>` : ""}</div>${starBtn(f)}</div>`;
+    <div class="rr ${c.cls}"><b class="tn">${c.wp}</b>${c.word ? `<small class="tn">${c.word} · ${band(f.d.w)}${f.d.sm ? " · 자료 적음" : ""}</small>` : ""}</div>${starBtn(f)}</div>`;
 }
 
 /* ---------------------------------------------------------------- filters */
@@ -755,33 +758,50 @@ function loadDetails() {
   return detailsLoading;
 }
 const retryDetails = () => { detailsFailed = false; return loadDetails(); };
-function chart(f) {
-  const by = f.d.by; if (!by || !by.length) return "";
-  const W = 320, H = 162, L = 34, R = 4, T = 34, B = 26, n = by.length, gw = (W - L - R) / n, bw = Math.min(56, gw - 24);
-  const y = v => T + (1 - v) * (H - T - B);
-  const bars = by.map(([k, v], i) => {
-    const x = L + gw * i + (gw - bw) / 2, h = H - B - y(v);
-    return `<g><title>${deadline(k)} 개봉할 확률 ${pctE(v)}</title><path class="bar" d="M${x},${H - B} v${-(h - 4)} q0,-4 4,-4 h${bw - 8} q4,0 4,4 v${h - 4} z"/>
-      <text class="v" x="${x + bw / 2}" y="${y(v) - 6}" text-anchor="middle">${pctE(v)}</text>
-      <text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${deadline(k).replace("까지", "")}</text></g>`;
+function chart(f, x) {
+  const q = x.q20, po = f.d.po != null ? f.d.po : f.d.pp;
+  if (!q || q.length !== 20 || po == null) return "";
+  const N = 20, nOpen = Math.max(0, Math.min(N, Math.round(N * po))), never = N - nOpen;
+  // the j-th opening dot sits at level (j + 0.5) / nOpen of the timing given an opening
+  const dates = Array.from({ length: nOpen }, (_, j) => q[Math.min(N - 1, Math.floor((j + 0.5) / nOpen * N))]);
+  const t0 = TODAY, days = dates.map(s => Math.max(0, diffDays(t0, s)));
+  const span = days.length ? Math.max(...days) : 0;
+  // bin width: the smallest of week / 2 weeks / 4 weeks / 8 weeks / quarter that keeps the axis to 16 columns
+  const bw = [7, 14, 28, 56, 91, 182, 365].find(w => Math.floor(span / w) + 1 <= 16) || 365;
+  const cols = Math.floor(span / bw) + 1, stack = {};
+  days.forEach(d => { const c = Math.floor(d / bw); stack[c] = (stack[c] || 0) + 1; });
+  const R = 6, STEP = 2 * R + 2, L = 4, LANE = never ? 64 : 0, W = 320;
+  const colW = Math.min(STEP + 6, (W - L - LANE - (never ? 12 : 0)) / Math.max(cols, 1));
+  const maxS = Math.max(1, ...Object.values(stack), never), B = 24, T = 8, H = T + maxS * STEP + B;
+  const base = H - B, cx = c => L + c * colW + colW / 2, cy = k => base - R - 2 - k * STEP;
+  const seen = {}, dots = days.map(d => { const c = Math.floor(d / bw), k = (seen[c] = (seen[c] || 0) + 1) - 1;
+    return `<circle class="o" cx="${cx(c).toFixed(1)}" cy="${cy(k)}" r="${R}"/>`; }).join("");
+  const lx = W - LANE / 2;
+  const nev = never ? `<line class="ax" x1="${W - LANE}" x2="${W}" y1="${base}" y2="${base}"/>` + Array.from({ length: never }, (_, k) => `<circle class="n" cx="${lx}" cy="${cy(k)}" r="${R - 0.75}"/>`).join("")
+    + `<text x="${lx}" y="${H - 6}" text-anchor="middle">개봉 안 함</text>` : "";
+  // month ticks: the first day of each month inside the axis
+  const xOf = s => L + diffDays(t0, s) / bw * colW;
+  const ticks = [];
+  for (let m = add(monthEnd(t0.slice(0, 7)), 1); diffDays(t0, m) <= cols * bw; m = add(monthEnd(m.slice(0, 7)), 1)) ticks.push(m);
+  // a label needs room for "27년 1월" (~52px at 12px) before the next one
+  let lastX = -1e9;
+  const tk = ticks.map(m => {
+    const tx = xOf(m), yr = m.slice(0, 4) !== TODAY.slice(0, 4) && +m.slice(5, 7) === 1, room = tx - lastX >= (yr ? 56 : 36);
+    if (room) lastX = tx + (yr ? 20 : 0);
+    return `<line class="tk" x1="${tx.toFixed(1)}" x2="${tx.toFixed(1)}" y1="${base}" y2="${base + 4}"/>`
+      + (room ? `<text x="${tx.toFixed(1)}" y="${H - 6}" text-anchor="start">${yr ? `${m.slice(2, 4)}년 ` : ""}${+m.slice(5, 7)}월</text>` : "");
   }).join("");
-  // median marker: inside the column of the period (previous deadline, this deadline] it falls in
-  let med = "", key = "";
-  if (f.d.md) {
-    const i = by.findIndex(([k]) => f.d.md <= k), j = i < 0 ? n - 1 : i;
-    const from = j ? by[j - 1][0] : TODAY, to = by[j][0];
-    const frac = i < 0 ? 1 : Math.max(0, Math.min(1, diffDays(from, f.d.md) / Math.max(1, diffDays(from, to))));
-    const mx = L + gw * j + gw * frac;
-    med = `<line class="med" x1="${mx}" x2="${mx}" y1="${T - 12}" y2="${H - B}"/><text class="mt" x="${mx}" y="${T - 14}" text-anchor="${frac > 0.7 ? "end" : frac < 0.3 ? "start" : "middle"}">예상 ${dot(f.d.md)}${i < 0 ? " →" : ""}</text>`;
-    // probability of opening by the median date: the cumulative curve read linearly between deadlines
-    const pv = j ? by[j - 1][1] : 0, p = i < 0 ? null : pv + (by[j][1] - pv) * frac;
-    key = `<p class="medkey"><i aria-hidden="true"></i><span>예상일 <b>${kd(f.d.md)}</b>${p == null ? "" : ` · 이날까지 개봉할 확률 약 <b class="tn">${Math.round(p * 100)}%</b>`}</span></p>`;
-  }
-  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${by.map(([k, v]) => `${deadline(k)} ${pctE(v)}`).join(", ")}${f.d.md ? `, 예상일 ${md(f.d.md)}` : ""}">
-    <line class="ax" x1="${L}" x2="${W - R}" y1="${H - B}" y2="${H - B}"/>
-    <line class="ref" x1="${L}" x2="${W - R}" y1="${y(0.5)}" y2="${y(0.5)}"/><text class="r" x="${L - 6}" y="${y(0.5) + 4}" text-anchor="end">50%</text>
-    ${bars}${med}</svg>${key}
-    <p class="small">각 막대는 그 날까지 개봉할 누적 확률입니다. ${deadline(by[by.length - 1][0]).replace("까지", "")} 이후에 개봉하거나 극장 개봉을 하지 않을 가능성은 ${100 - Math.min(99, Math.round(by[by.length - 1][1] * 100))}%예요.</p></div>`;
+  // the same dots in words, by the forecast's deadlines
+  const dl = (f.d.by || []).map(b => b[0]).slice(0, 2);
+  const parts = []; let prev = 0;
+  for (const k of dl) { const n = dates.filter(s => s <= k).length - prev; if (n) parts.push(`${deadline(k)} <b class="tn">${n}편</b>`); prev += n; }
+  if (nOpen - prev) parts.push(`그 뒤 <b class="tn">${nOpen - prev}편</b>`);
+  if (never) parts.push(`끝내 개봉 안 함 <b class="tn">${never}편</b>`);
+  const label = `비슷한 영화 20편이라면: ${parts.join(", ").replace(/<[^>]+>/g, "")}`;
+  return `<div class="chart dotplot"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">
+    <line class="ax" x1="${L}" x2="${L + cols * colW}" y1="${base}" y2="${base}"/>${tk}${dots}${nev}</svg>
+    <p class="dcap">비슷한 영화 20편이라면 ${parts.join('<span class="t3"> · </span>')}</p>
+    <p class="small">점 하나가 이 영화와 같은 단계에 있던 영화 1편(5%)이에요. ${bw === 7 ? "한 칸은 1주" : bw < 30 ? `한 칸은 ${bw / 7}주` : bw < 100 ? `한 칸은 약 ${Math.round(bw / 30.4)}개월` : `한 칸은 약 ${Math.round(bw / 30.4)}개월`}.</p></div>`;
 }
 function vDetail(mode) {
   const f = BYID[S.id];
@@ -848,7 +868,7 @@ function vDetail(mode) {
   return `<article class="dt${full ? " full" : ""}">${close}
     ${head}
     <div class="dbody">${x.nxt ? `<section class="dsec"><h2>다음에 나올 신호</h2><p class="nextsig">${esc(x.nxt)}<br><span>나오면 레이더와 RSS에 올라옵니다.</span></p></section>` : ""}
-    ${d.p === "est" && d.by && d.by.length ? `<section class="dsec"><h2>개봉 확률 <small>${x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.opened}편 개봉` : "과거 개봉 기록으로 계산"}</small></h2>${chart(f)}</section>` : ""}
+    ${d.p === "est" && x.q20 ? `<section class="dsec"><h2>언제 개봉할까</h2>${chart(f, x)}<p class="dbasis">근거 <span class="t2">${x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.opened}편 개봉` : "같은 단계에 있던 영화 전체의 기록"}</span>${d.sm ? " · " : ""}${d.sm ? "<b>자료 적음</b> <span class=\"t3\">이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</span>" : ""}</p></section>` : ""}
     <section class="dsec"><h2>기록 <small>최신순</small></h2>${tlHTML}</section>
     <section class="dsec"><h2>극장</h2>${chains}</section>
     ${x.syn || comps || facts ? `<section class="dsec"><h2>작품 정보</h2>${facts ? `<p class="note" style="margin-bottom:8px">${esc(facts)}</p>` : ""}${x.syn ? `<p class="syn">${esc(x.syn)}</p>` : ""}${comps ? `<dl class="kv" style="margin-top:12px">${comps}</dl>` : ""}</section>` : ""}</div>
@@ -870,8 +890,9 @@ function legend() {
     <dt>11월 4일 <b class="dday">D-2</b></dt><dd>개봉일이 발표됨. 확률은 표시하지 않아요.</dd>
     <dt>11월 중 개봉</dt><dd>개봉 월만 발표됨.</dd>
     <dt><span class="etag">예상</span>12월 2일경</dt><dd>개봉한다면의 중앙값: 절반은 이보다 일찍, 절반은 늦게 개봉. 범위는 10–90% 구간.</dd>
+    <dt>자료 적음</dt><dd>이 회사의 기록이 없어 전체 영화 기록으로 계산했어요. 실제는 더 넓게 흩어질 수 있어요.</dd>
     <dt>개봉 확률</dt><dd>앞으로 극장에서 개봉할 확률 (사실상 1년 안). 상세 화면과 표에 표시.</dd>
-    <dt>유력·가능·미지수</dt><dd>개봉 확률 ${Math.round(th.likely * 100)}% 이상 · ${Math.round(th.possible * 100)}–${Math.round(th.likely * 100) - 1}% · ${Math.round(th.possible * 100)}% 미만</dd>
+    <dt>유력·가능·불확실</dt><dd>개봉 확률 ${Math.round(th.likely * 100)}% 이상 · ${Math.round(th.possible * 100)}–${Math.round(th.likely * 100) - 1}% · ${Math.round(th.possible * 100)}% 미만</dd>
     <dt>시기 미정</dt><dd>등급 심의 단계라 아직 추정하지 않음</dd></dl>
     <p class="small">같은 수입·배급사, 같은 단계에 있던 과거 영화들의 실제 개봉 기록으로 계산해요.</p></div>`;
 }

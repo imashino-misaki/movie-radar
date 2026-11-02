@@ -1278,7 +1278,10 @@ def describe(lag: Lag, anchor: dt.date, elapsed: int, today: dt.date,
         by[h.isoformat()] = round(p_open * g(t), 3) if t >= start else 0.0
     within = {str(d): round(p_open * g(elapsed + d - 1), 3) if elapsed + d - 1 >= start else 0.0
               for d in WITHIN_DAYS}
-    return {"p_open": round(p_open, 3), "within": within,
+    # the opening date at 20 evenly spaced levels of the timing given an opening (levels
+    # (i + 0.5) / 20): the detail page's quantile dotplot
+    q20 = [(anchor + dt.timedelta(days=_quantile(g, start, (i + 0.5) / 20))).isoformat() for i in range(20)]
+    return {"p_open": round(p_open, 3), "within": within, "q20": q20,
             "quantiles": {k: (anchor + dt.timedelta(days=v)).isoformat() for k, v in qs.items()},
             "by": by, "sd_days": round(math.sqrt(var), 1)}
 

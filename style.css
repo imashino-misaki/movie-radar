@@ -407,6 +407,11 @@ html.zooming{overflow:hidden}
 }
 @media (min-width:1200px){.dt h1{font-size:32px}.pane .dt h1{font-size:28px}}
 .chart .med{stroke:var(--text-1);stroke-width:2;stroke-dasharray:6 3}
+.dotplot circle.o{fill:var(--accent)}
+.dotplot circle.n{fill:none;stroke:var(--text-3);stroke-width:1.5}
+.dotplot .tk{stroke:var(--text-3);stroke-width:1}
+.dcap{margin-top:8px;font-size:15px;line-height:1.5}
+.dbasis{margin-top:10px;font-size:14px;line-height:1.5}
 .chart .mt{fill:var(--text-1);font-size:12px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
 .chart .medkey{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:14px;color:var(--text-2)}
 .chart .medkey i{flex:none;width:0;height:16px;border-left:2px dashed var(--text-1)}
