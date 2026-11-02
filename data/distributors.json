@@ -16,11 +16,12 @@
    "spellings": [],
    "kobis_codes": [],
    "counts": {
-    "active": 50,
-    "total": 50,
+    "active": 54,
+    "total": 54,
     "distributor": 0,
-    "applicant": 50,
-    "rated": 50
+    "applicant": 54,
+    "rated": 50,
+    "intake": 4
    },
    "films": [
     {
@@ -369,6 +370,34 @@
     {
      "id": "r2601861",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605019",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605023",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605029",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605032",
+     "status": "intake",
      "roles": [
       "applicant"
      ]
@@ -1606,11 +1635,18 @@
     "total": 6,
     "distributor": 6,
     "applicant": 2,
-    "showing": 2,
-    "scheduled": 2,
+    "showing": 3,
+    "scheduled": 1,
     "announced": 2
    },
    "films": [
+    {
+     "id": "maaf2e559e9ad",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2596213",
      "status": "showing",
@@ -1629,13 +1665,6 @@
     },
     {
      "id": "k20266847",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "maaf2e559e9ad",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -2789,6 +2818,56 @@
    ]
   },
   {
+   "id": "c20142968",
+   "name": "(주)콘텐츠판다",
+   "spellings": [
+    "(주)콘텐츠판다 CONTENTS PANDA"
+   ],
+   "kobis_codes": [
+    "20142968"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 4,
+    "distributor": 2,
+    "applicant": 2,
+    "showing": 1,
+    "intake": 1,
+    "announced": 1,
+    "dormant": 1
+   },
+   "films": [
+    {
+     "id": "r2588994",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602226",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "a9d8df7335c05",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "k20200343",
+     "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20189621",
    "name": "(주)라온컴퍼니플러스",
    "spellings": [
@@ -3350,48 +3429,6 @@
    ]
   },
   {
-   "id": "c20142968",
-   "name": "(주)콘텐츠판다",
-   "spellings": [
-    "(주)콘텐츠판다 CONTENTS PANDA"
-   ],
-   "kobis_codes": [
-    "20142968"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "intake": 1,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "r2588994",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602226",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "k20200343",
-     "status": "dormant",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20191941",
    "name": "워터홀컴퍼니(주) WATERHOLE COMPANY",
    "spellings": [
@@ -3405,8 +3442,7 @@
     "total": 3,
     "distributor": 3,
     "applicant": 0,
-    "showing": 1,
-    "scheduled": 1,
+    "showing": 2,
     "released": 1
    },
    "films": [
@@ -3419,7 +3455,7 @@
     },
     {
      "id": "r2596408",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
@@ -3843,8 +3879,7 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "showing": 1,
-    "scheduled": 1
+    "showing": 2
    },
    "films": [
     {
@@ -3856,7 +3891,7 @@
     },
     {
      "id": "r2596408",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
