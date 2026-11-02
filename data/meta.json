@@ -1,0 +1,7606 @@
+{
+ "schema": 1,
+ "last_run_utc": "2026-11-02T03:59:12+00:00",
+ "manual_lists": {
+  "active": false,
+  "blocked_names": 0,
+  "allowed_names": 0,
+  "ratings_withheld": 0,
+  "intake_withheld": 0,
+  "records_removed": 0
+ },
+ "counts": {
+  "films": 568,
+  "with_intake": 29,
+  "with_rating": 308,
+  "with_kobis": 172,
+  "with_megabox": 134,
+  "with_lotte": 100,
+  "with_cgv": 154,
+  "with_promo": 226,
+  "with_ors_ad": 31,
+  "with_program": 45,
+  "with_past_rating": 86,
+  "rerelease_candidates": 12,
+  "chain_rereleases": 30,
+  "seen_this_run": 552,
+  "format_groups": 6,
+  "format_variants": 9,
+  "format_ambiguous": 0,
+  "distributors": 204,
+  "tags": {
+   "anime": 27,
+   "chain_cgv": 20,
+   "chain_lotte": 13,
+   "chain_megabox": 5,
+   "concert": 18,
+   "dormant": 34,
+   "format": 15,
+   "rerelease": 45
+  },
+  "intake_rows": 114,
+  "intake_published": 27,
+  "intake_withheld": 87,
+  "rating_rows": 322,
+  "rating_published": 308,
+  "rating_withheld_restricted": 14,
+  "adult_rating_rows": 508,
+  "archive_removed": 0,
+  "join_by_rcv": 0,
+  "join_by_title": 0,
+  "intake_by_chain": 0,
+  "masked_applicants": 6,
+  "applicants_known": 319,
+  "applicants_trusted": 338,
+  "applicants_adult_only": 27,
+  "applicants_mixed": 8
+ },
+ "applicant_store": {
+  "backfill": {
+   "date": "2026-10-31",
+   "months": 12,
+   "start": "2025-10-31",
+   "general_pages": 65,
+   "general_declared": 1283,
+   "general_rows": 1283,
+   "all_pages": 189,
+   "all_declared": 3779,
+   "all_rows": 3779
+  },
+  "trust_window_months": 12
+ },
+ "sources": {
+  "ors_intake": {
+   "status": "ok",
+   "seconds": 4.0,
+   "requests": 2,
+   "tabs": {
+    "MV_DOM": {
+     "rows": 36
+    },
+    "MV_FOR": {
+     "rows": 78
+    }
+   },
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kmrb_rating": {
+   "status": "ok",
+   "seconds": 22.5,
+   "requests": 14,
+   "window": "3months",
+   "general_pages": 4,
+   "general_declared": 322,
+   "general_rows": 322,
+   "all_pages": 9,
+   "all_declared": 830,
+   "all_rows": 830,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kmrb_promo": {
+   "status": "ok",
+   "seconds": 10.6,
+   "requests": 7,
+   "window_days": 7,
+   "trailer_rows": 131,
+   "poster_rows": 384,
+   "withheld_untrusted": 299,
+   "groups": 70,
+   "history_searched": 0,
+   "history_errors": 0,
+   "promo_matched": 52,
+   "promo_only": 18,
+   "promo_rerelease": 12,
+   "promo_old_unmatched": 0,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "ors_ad": {
+   "status": "error",
+   "reason": "TypeError: expected string or bytes-like object, got 'int'",
+   "seconds": 1.5,
+   "requests": 1,
+   "tabs": {},
+   "ors_ad_folded": 0,
+   "ors_ad_removed": 0,
+   "last_ok_utc": "2026-11-02T01:28:24+00:00"
+  },
+  "megabox_program": {
+   "status": "ok",
+   "seconds": 2.1,
+   "requests": 3,
+   "megabox_tab_rows": 6,
+   "megabox_lineups": [
+    "2026-05",
+    "2026-06",
+    "2026-08",
+    "2026-09",
+    "2026-10",
+    "2026-11"
+   ],
+   "program_rows": 44,
+   "program_matched": 44,
+   "program_unmatched": 0,
+   "with_program": 45,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis": {
+   "status": "ok",
+   "seconds": 23.4,
+   "requests": 19,
+   "calls": 19,
+   "call_cap": 300,
+   "list_rows": 1866,
+   "adult_genre_dropped": 1097,
+   "kept": 100,
+   "info_fetched": 0,
+   "info_deferred": 0,
+   "extra_codes": 0,
+   "undated_codes": 182,
+   "kobis_matched": 77,
+   "kobis_only_published": 93,
+   "kobis_only_withheld": 112,
+   "kobis_pending_info": 0,
+   "kobis_adult_removed": 0,
+   "kobis_only_deferred": 0,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "megabox": {
+   "status": "ok",
+   "seconds": 1.9,
+   "requests": 1,
+   "rows": 110,
+   "total_reported": 110,
+   "now": 77,
+   "upcoming": 33,
+   "megabox_groups": 110,
+   "megabox_matched": 82,
+   "megabox_only": 28,
+   "megabox_ended": 0,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "lotte": {
+   "status": "ok",
+   "seconds": 2.5,
+   "requests": 2,
+   "rows": 84,
+   "now": 46,
+   "upcoming": 38,
+   "with_kobis_cd": 83,
+   "lotte_matched": 77,
+   "lotte_matched_kobis_cd": 52,
+   "lotte_only": 7,
+   "lotte_ended": 0,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "cgv": {
+   "status": "ok",
+   "seconds": 0.0,
+   "requests": 0,
+   "rows": 154,
+   "now": 47,
+   "upcoming": 107,
+   "fetched_at": "2026-11-02T03:58:32Z",
+   "age_minutes": 1,
+   "stale_after_minutes": 132,
+   "stale": false,
+   "cgv_matched": 86,
+   "cgv_only": 68,
+   "cgv_ended": 0,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kmrb_lookup": {
+   "status": "ok",
+   "seconds": 38.7,
+   "requests": 31,
+   "wanted": 229,
+   "searched": 30,
+   "reused_promo": 0,
+   "errors": 2,
+   "pending": 39,
+   "past_rating": 86,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis_web": {
+   "status": "ok",
+   "seconds": 0.0,
+   "requests": 0,
+   "codes": 264,
+   "fetched": 0,
+   "new": 0,
+   "refreshed": 0,
+   "errors": 0,
+   "unexplained": 4,
+   "with_history": 282,
+   "with_rereleases": 12,
+   "with_detail": 282,
+   "dormant": 34,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "posters": {
+   "status": "ok",
+   "seconds": 113.0,
+   "requests": 72,
+   "with_poster": 366,
+   "fetched": 72,
+   "errors": 0,
+   "removed": 0,
+   "files": 349,
+   "bytes": 17286452,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis_schedule": {
+   "status": "ok",
+   "seconds": 19.8,
+   "requests": 13,
+   "months": {
+    "2026-11": 52,
+    "2026-12": 20,
+    "2027-01": 2,
+    "2027-02": 1,
+    "2027-03": 1,
+    "2027-04": 0,
+    "2027-05": 1,
+    "2027-06": 0,
+    "2027-07": 1,
+    "2027-08": 0,
+    "2027-09": 0,
+    "2027-10": 0
+   },
+   "with_schedule": 83,
+   "schedule_unmatched": 2,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis_companies": {
+   "status": "ok",
+   "seconds": 0.0,
+   "requests": 0,
+   "names": 63,
+   "looked_up": 0,
+   "errors": 0,
+   "found": 56,
+   "verified": 54,
+   "trusted": 54,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kmrb_reps": {
+   "status": "ok",
+   "seconds": 2.8,
+   "requests": 1,
+   "applicants": 160,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis_booking": {
+   "status": "ok",
+   "seconds": 3.6,
+   "requests": 2,
+   "rows": 286,
+   "as_of": "2026-11-02 13:00",
+   "undated": 108,
+   "with_booking": 106,
+   "booking_unmatched": 187,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis_upcoming": {
+   "status": "ok",
+   "seconds": 35.1,
+   "requests": 27,
+   "개봉예정": 177,
+   "개봉준비": 87,
+   "not_adult_genre": 223,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  },
+  "kobis_boxoffice": {
+   "status": "ok",
+   "seconds": 0.0,
+   "requests": 0,
+   "calls": 0,
+   "window_days": 14,
+   "fetched": 0,
+   "deferred": 0,
+   "yesterday_pending": false,
+   "days_stored": 14,
+   "with_boxoffice": 24,
+   "latest_day": "2026-11-01",
+   "top10_unmatched": 1,
+   "last_ok_utc": "2026-11-02T03:59:12+00:00"
+  }
+ },
+ "requests": 195,
+ "release_model": {
+  "rows": 10324,
+  "rows_opened": 5699,
+  "rows_real": 5138,
+  "rows_token": 561,
+  "rows_segment": {
+   "short": 2352,
+   "format_of_open": 3,
+   "vod_applicant": 176
+  },
+  "rows_scheduled": 39,
+  "rows_added": 0,
+  "openings_added": 0,
+  "records": {
+   "chain": 107,
+   "kobis": 211,
+   "model": 154,
+   "schedule": 17
+  },
+  "records_by_state_tier": {
+   "ad_filing/estimate": 6,
+   "bookable/confirmed": 25,
+   "day_announced/likely": 119,
+   "filed/estimate": 7,
+   "month_announced/expected": 17,
+   "opened/confirmed": 174,
+   "promo_after_rating/estimate": 30,
+   "rating_only/estimate": 111
+  },
+  "half_life_days": 365,
+  "features": [
+   "format",
+   "promo",
+   "restricted",
+   "foreign"
+  ],
+  "maturity_days": 298,
+  "segment_rates": {
+   "any": {
+    "format_of_open": {
+     "n": 3,
+     "opened": 0,
+     "rate": 0.125
+    },
+    "short": {
+     "n": 2037,
+     "opened": 3,
+     "rate": 0.0017
+    },
+    "vod_applicant": {
+     "n": 165,
+     "opened": 0,
+     "rate": 0.003
+    }
+   },
+   "real": {
+    "format_of_open": {
+     "n": 3,
+     "opened": 0,
+     "rate": 0.125
+    },
+    "short": {
+     "n": 2036,
+     "opened": 3,
+     "rate": 0.0017
+    },
+    "vod_applicant": {
+     "n": 165,
+     "opened": 0,
+     "rate": 0.003
+    }
+   }
+  },
+  "commitments": {
+   "bookable": {
+    "n": 65,
+    "opened": 65,
+    "hits": {
+     "3": 65,
+     "week": 65,
+     "month": 65
+    },
+    "films": {
+     "n": 58,
+     "opened": 58.0,
+     "hits": {
+      "3": 58.0,
+      "week": 58.0,
+      "month": 58.0
+     }
+    },
+    "history_n": 0,
+    "snapshot_n": 65,
+    "q": 0.9924,
+    "r": {
+     "3": 0.9924,
+     "week": 0.9924,
+     "month": 0.9924
+    },
+    "provisional": true
+   },
+   "day_announced": {
+    "n": 74,
+    "opened": 70,
+    "hits": {
+     "3": 70,
+     "week": 70,
+     "month": 70
+    },
+    "films": {
+     "n": 50,
+     "opened": 46.0,
+     "hits": {
+      "3": 46.0,
+      "week": 46.0,
+      "month": 46.0
+     }
+    },
+    "history_n": 0,
+    "snapshot_n": 74,
+    "q": 0.94,
+    "r": {
+     "3": 0.993,
+     "week": 0.993,
+     "month": 0.993
+    },
+    "provisional": true
+   },
+   "month_announced": {
+    "n": 74,
+    "opened": 70,
+    "hits": {
+     "3": 0,
+     "week": 0,
+     "month": 70
+    },
+    "films": {
+     "n": 50,
+     "opened": 46.0,
+     "hits": {
+      "3": 0,
+      "week": 0,
+      "month": 46.0
+     }
+    },
+    "history_n": 0,
+    "snapshot_n": 0,
+    "borrowed_from": "day_announced",
+    "q": 0.94,
+    "r": {
+     "3": 0.007,
+     "week": 0.007,
+     "month": 0.993
+    },
+    "provisional": true
+   }
+  },
+  "tiers": {
+   "opened": {
+    "n": 5377,
+    "rate": {
+     "3": 1.0,
+     "week": 1.0,
+     "month": 1.0
+    },
+    "lower": {
+     "3": 0.999,
+     "week": 0.999,
+     "month": 0.999
+    },
+    "tier": "confirmed",
+    "basis": "release_lags openings with screenings",
+    "provisional": false,
+    "conditional": {
+     "n": 5377,
+     "rate": {
+      "3": 1.0,
+      "week": 1.0,
+      "month": 1.0
+     },
+     "lower": {
+      "3": 0.999,
+      "week": 0.999,
+      "month": 0.999
+     }
+    }
+   },
+   "bookable": {
+    "n": 58,
+    "rate": {
+     "3": 1.0,
+     "week": 1.0,
+     "month": 1.0
+    },
+    "lower": {
+     "3": 0.938,
+     "week": 0.938,
+     "month": 0.938
+    },
+    "tier": "confirmed",
+    "basis": "announced vs KOBIS opening",
+    "provisional": true,
+    "conditional": {
+     "n": 58.0,
+     "rate": {
+      "3": 1.0,
+      "week": 1.0,
+      "month": 1.0
+     },
+     "lower": {
+      "3": 0.938,
+      "week": 0.938,
+      "month": 0.938
+     }
+    },
+    "n_announcements": 65
+   },
+   "day_announced": {
+    "n": 50,
+    "rate": {
+     "3": 0.92,
+     "week": 0.92,
+     "month": 0.92
+    },
+    "lower": {
+     "3": 0.812,
+     "week": 0.812,
+     "month": 0.812
+    },
+    "tier": "likely",
+    "basis": "announced vs KOBIS opening",
+    "provisional": true,
+    "conditional": {
+     "n": 46.0,
+     "rate": {
+      "3": 1.0,
+      "week": 1.0,
+      "month": 1.0
+     },
+     "lower": {
+      "3": 0.923,
+      "week": 0.923,
+      "month": 0.923
+     }
+    },
+    "n_announcements": 74
+   },
+   "month_announced": {
+    "n": 50,
+    "rate": {
+     "3": 0.0,
+     "week": 0.0,
+     "month": 0.92
+    },
+    "lower": {
+     "3": 0.0,
+     "week": 0.0,
+     "month": 0.812
+    },
+    "tier": "expected",
+    "basis": "announced vs KOBIS opening (borrowed from day_announced)",
+    "provisional": true,
+    "conditional": {
+     "n": 46.0,
+     "rate": {
+      "3": 0.0,
+      "week": 0.0,
+      "month": 1.0
+     },
+     "lower": {
+      "3": 0.0,
+      "week": 0.0,
+      "month": 0.923
+     }
+    },
+    "n_announcements": 74
+   },
+   "rating_only": {
+    "n": 1660.0,
+    "rate": {
+     "3": 0.107,
+     "week": 0.108,
+     "month": 0.351
+    },
+    "lower": {
+     "3": 0.093,
+     "week": 0.094,
+     "month": 0.328
+    },
+    "tier": "estimate",
+    "basis": "backtest: rating model p50",
+    "provisional": false,
+    "conditional": {
+     "n": 1325.5,
+     "rate": {
+      "3": 0.134,
+      "week": 0.135,
+      "month": 0.439
+     },
+     "lower": {
+      "3": 0.116,
+      "week": 0.118,
+      "month": 0.413
+     }
+    }
+   },
+   "promo_after_rating": {
+    "n": 1295.0,
+    "rate": {
+     "3": 0.18,
+     "week": 0.176,
+     "month": 0.478
+    },
+    "lower": {
+     "3": 0.16,
+     "week": 0.157,
+     "month": 0.451
+    },
+    "tier": "estimate",
+    "basis": "backtest: milestone p50",
+    "provisional": false,
+    "conditional": {
+     "n": 1095.0,
+     "rate": {
+      "3": 0.213,
+      "week": 0.209,
+      "month": 0.565
+     },
+     "lower": {
+      "3": 0.19,
+      "week": 0.186,
+      "month": 0.536
+     }
+    }
+   },
+   "ad_filing": {
+    "n": 0,
+    "rate": {
+     "3": null,
+     "week": null,
+     "month": null
+    },
+    "lower": {
+     "3": 0.0,
+     "week": 0.0,
+     "month": 0.0
+    },
+    "tier": "estimate",
+    "basis": "no history yet",
+    "provisional": true
+   },
+   "filed": {
+    "n": 0,
+    "rate": {
+     "3": null,
+     "week": null,
+     "month": null
+    },
+    "lower": {
+     "3": 0.0,
+     "week": 0.0,
+     "month": 0.0
+    },
+    "tier": "estimate",
+    "basis": "no backtest",
+    "provisional": true
+   }
+  },
+  "tier_gates": {
+   "confirmed": {
+    "hit": "3",
+    "rule": "opening within +/-3 days of the displayed day",
+    "wilson_lower_at_least": 0.9
+   },
+   "likely": {
+    "hit": "week",
+    "rule": "opening in the displayed ISO week",
+    "wilson_lower_at_least": 0.8
+   },
+   "expected": {
+    "hit": "month",
+    "rule": "opening in the displayed calendar month",
+    "wilson_lower_at_least": 0.8
+   }
+  },
+  "pi_pooled": 0.633,
+  "lag_median_days": 54.9,
+  "lag_sd_days": 63.7,
+  "model": {
+   "features": [
+    "format",
+    "promo",
+    "restricted",
+    "foreign"
+   ],
+   "sigma_log": 0.622,
+   "beta": {
+    "format": -0.393,
+    "promo": -0.639,
+    "restricted": 0.039,
+    "foreign": -0.029
+   },
+   "gamma": {
+    "format": 1.352,
+    "promo": 1.086,
+    "restricted": -0.651,
+    "foreign": 0.87
+   },
+   "companies": 1037,
+   "em_iterations": 8,
+   "company_prior_location": {
+    "intercept": 4.408,
+    "ratings_per_year": -0.098,
+    "promo": -0.468,
+    "short": 0.0,
+    "restricted": 0.129,
+    "foreign": 0.112,
+    "format": -1.037
+   },
+   "company_prior_logit": {
+    "intercept": 0.208,
+    "ratings_per_year": 0.126,
+    "promo": 1.115,
+    "short": 0.0,
+    "restricted": -0.702,
+    "foreign": -0.597,
+    "format": 2.675
+   },
+   "tau2_location": 0.1846,
+   "tau2_logit": 0.015,
+   "icc": 0.323,
+   "k_rows": 283.6,
+   "companies_established": 0
+  },
+  "real_model": {
+   "features": [
+    "format",
+    "promo",
+    "restricted",
+    "foreign",
+    "rule_adult"
+   ],
+   "sigma_log": 0.663,
+   "beta": {
+    "format": -0.341,
+    "promo": -0.749,
+    "restricted": -0.009,
+    "foreign": 0.016,
+    "rule_adult": 0.093
+   },
+   "gamma": {
+    "format": 2.152,
+    "promo": 1.022,
+    "restricted": -0.832,
+    "foreign": 0.472,
+    "rule_adult": -0.808
+   },
+   "companies": 1037,
+   "em_iterations": 15,
+   "company_prior_location": {
+    "intercept": 4.396,
+    "ratings_per_year": -0.088,
+    "promo": -0.353,
+    "short": 0.0,
+    "restricted": 0.198,
+    "foreign": 0.072,
+    "format": -1.282
+   },
+   "company_prior_logit": {
+    "intercept": 0.434,
+    "ratings_per_year": -0.093,
+    "promo": 0.821,
+    "short": 0.0,
+    "restricted": -1.032,
+    "foreign": -0.16,
+    "format": 8.421
+   },
+   "tau2_location": 0.1401,
+   "tau2_logit": 0.6052,
+   "icc": 0.242,
+   "k_rows": 7.2,
+   "companies_established": 158
+  },
+  "weekday_shares": [
+   0.009,
+   0.015,
+   0.711,
+   0.148,
+   0.074,
+   0.041,
+   0.002
+  ],
+  "milestones": {
+   "promo": {
+    "rows": 5884,
+    "used": true,
+    "observed_open_rate": 0.851
+   },
+   "kobis": {
+    "rows": 7,
+    "used": false,
+    "observed_open_rate": null
+   },
+   "chain": {
+    "rows": 3,
+    "used": false,
+    "observed_open_rate": null
+   },
+   "booking": {
+    "rows": 3,
+    "used": false,
+    "observed_open_rate": null
+   }
+  },
+  "new_company_feature_film_p_open": 0.552,
+  "receipt_to_rating": {
+   "n": 0,
+   "median_days": null
+  },
+  "promo_to_rating": {
+   "n": 178,
+   "median_days": 2
+  },
+  "backtest": {
+   "n_test": 1764,
+   "n_test_opened": 1427,
+   "maturity_days": 298,
+   "maturity_quantile": 0.95,
+   "tune_from": "2022-01-03",
+   "test_from": "2023-12-06",
+   "test_to": "2026-01-07",
+   "refit_days": 91,
+   "test_refits": 9,
+   "half_life_days": 365,
+   "features": [
+    "format",
+    "promo",
+    "restricted",
+    "foreign"
+   ],
+   "company_location_from": "all rows (censored by EM)",
+   "tuning": {
+    "loglik_by_half_life": {
+     "None": -4.2562,
+     "730": -4.2348,
+     "365": -4.2303,
+     "180": -4.2553,
+     "90": -4.3013,
+     "60": -4.5132,
+     "30": -4.9504
+    },
+    "feature_gain": {
+     "short": 0.0,
+     "format": 0.0052,
+     "promo": 0.0847,
+     "restricted": 0.0019,
+     "foreign": 0.0032,
+     "rerelease": 0.0001,
+     "rule_adult": -0.0015
+    },
+    "loglik_calendar": -3.5826,
+    "loglik_company_location_opened_rows_only": -4.1386,
+    "loglik_no_calendar": -4.1353
+   },
+   "calendar": {
+    "weekday": true,
+    "half_life_days": 90
+   },
+   "test_loglik": {
+    "model": -3.5203,
+    "model_single_refit": -3.5765,
+    "overall": -3.5904,
+    "company_location_opened_rows_only": -3.5711,
+    "by_distributor_known_at_rating": -3.45
+   },
+   "model": {
+    "n": 1764,
+    "n_films": 1660,
+    "n_opened": 1427,
+    "mae_p50_days": 33.6,
+    "median_ae_p50_days": 14,
+    "coverage": {
+     "p50": 0.59,
+     "p80": 0.845,
+     "p90": 0.908
+    },
+    "day_log_score": 3.849,
+    "p50_on_opening_weekday": 0.493,
+    "hit_rate": {
+     "3": 0.134,
+     "week": 0.135,
+     "month": 0.439
+    },
+    "hit_n": 1427,
+    "hit_films": {
+     "n": 1325.5,
+     "hits": {
+      "3": 177.0,
+      "week": 179.0,
+      "month": 582.0
+     }
+    },
+    "interval_p10_p90": {
+     "median_width_days": 70,
+     "coverage": 0.836
+    },
+    "hit_rate_all": {
+     "3": 0.107,
+     "week": 0.108,
+     "month": 0.351
+    },
+    "hit_films_all": {
+     "n": 1660.0,
+     "hits": {
+      "3": 177.0,
+      "week": 179.0,
+      "month": 582.0
+     }
+    },
+    "band_0.9_1.0": {
+     "n": 343,
+     "mean_p": 0.926,
+     "observed": 0.943,
+     "brier": 0.0546,
+     "log_score": 0.2521
+    },
+    "censored_log_score": 3.5203,
+    "integrated_brier": 0.1513,
+    "p_open_298d": {
+     "all": {
+      "n": 1764,
+      "mean_p": 0.758,
+      "observed": 0.78,
+      "brier": 0.1464,
+      "log_score": 0.4603,
+      "deciles": [
+       {
+        "p": 0.473,
+        "observed": 0.472,
+        "n": 176
+       },
+       {
+        "p": 0.596,
+        "observed": 0.586,
+        "n": 176
+       },
+       {
+        "p": 0.655,
+        "observed": 0.622,
+        "n": 177
+       },
+       {
+        "p": 0.716,
+        "observed": 0.777,
+        "n": 176
+       },
+       {
+        "p": 0.772,
+        "observed": 0.797,
+        "n": 177
+       },
+       {
+        "p": 0.823,
+        "observed": 0.86,
+        "n": 176
+       },
+       {
+        "p": 0.859,
+        "observed": 0.911,
+        "n": 176
+       },
+       {
+        "p": 0.885,
+        "observed": 0.94,
+        "n": 177
+       },
+       {
+        "p": 0.91,
+        "observed": 0.967,
+        "n": 176
+       },
+       {
+        "p": 0.944,
+        "observed": 0.919,
+        "n": 177
+       }
+      ]
+     },
+     "new_or_small": {
+      "n": 665,
+      "mean_p": 0.732,
+      "observed": 0.721,
+      "brier": 0.1757,
+      "log_score": 0.5267,
+      "deciles": [
+       {
+        "p": 0.456,
+        "observed": 0.457,
+        "n": 66
+       },
+       {
+        "p": 0.563,
+        "observed": 0.537,
+        "n": 67
+       },
+       {
+        "p": 0.599,
+        "observed": 0.538,
+        "n": 66
+       },
+       {
+        "p": 0.64,
+        "observed": 0.553,
+        "n": 67
+       },
+       {
+        "p": 0.712,
+        "observed": 0.78,
+        "n": 66
+       },
+       {
+        "p": 0.794,
+        "observed": 0.778,
+        "n": 67
+       },
+       {
+        "p": 0.846,
+        "observed": 0.859,
+        "n": 66
+       },
+       {
+        "p": 0.879,
+        "observed": 0.924,
+        "n": 67
+       },
+       {
+        "p": 0.902,
+        "observed": 0.922,
+        "n": 66
+       },
+       {
+        "p": 0.928,
+        "observed": 0.868,
+        "n": 67
+       }
+      ]
+     },
+     "established": {
+      "n": 1099,
+      "mean_p": 0.775,
+      "observed": 0.817,
+      "brier": 0.1278,
+      "log_score": 0.4182,
+      "deciles": [
+       {
+        "p": 0.492,
+        "observed": 0.542,
+        "n": 109
+       },
+       {
+        "p": 0.641,
+        "observed": 0.577,
+        "n": 110
+       },
+       {
+        "p": 0.696,
+        "observed": 0.755,
+        "n": 110
+       },
+       {
+        "p": 0.745,
+        "observed": 0.778,
+        "n": 110
+       },
+       {
+        "p": 0.791,
+        "observed": 0.897,
+        "n": 110
+       },
+       {
+        "p": 0.833,
+        "observed": 0.839,
+        "n": 110
+       },
+       {
+        "p": 0.864,
+        "observed": 0.935,
+        "n": 110
+       },
+       {
+        "p": 0.89,
+        "observed": 0.98,
+        "n": 110
+       },
+       {
+        "p": 0.915,
+        "observed": 0.98,
+        "n": 110
+       },
+       {
+        "p": 0.953,
+        "observed": 0.959,
+        "n": 110
+       }
+      ]
+     }
+    },
+    "p_open_within": {
+     "7": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.016,
+       "observed": 0.012,
+       "brier": 0.0119,
+       "log_score": 0.0638,
+       "deciles": [
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.0,
+         "observed": 0.011,
+         "n": 177
+        },
+        {
+         "p": 0.0,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.002,
+         "observed": 0.006,
+         "n": 177
+        },
+        {
+         "p": 0.005,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.009,
+         "observed": 0.002,
+         "n": 176
+        },
+        {
+         "p": 0.016,
+         "observed": 0.018,
+         "n": 177
+        },
+        {
+         "p": 0.032,
+         "observed": 0.041,
+         "n": 176
+        },
+        {
+         "p": 0.104,
+         "observed": 0.043,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 492,
+       "mean_p": 0.001,
+       "observed": 0.004,
+       "brier": 0.0042,
+       "log_score": 0.0362
+      },
+      "established/signal": {
+       "n": 607,
+       "mean_p": 0.035,
+       "observed": 0.02,
+       "brier": 0.0192,
+       "log_score": 0.0918
+      },
+      "new_or_small/no_signal": {
+       "n": 358,
+       "mean_p": 0.001,
+       "observed": 0.003,
+       "brier": 0.0029,
+       "log_score": 0.0237
+      },
+      "new_or_small/signal": {
+       "n": 307,
+       "mean_p": 0.021,
+       "observed": 0.021,
+       "brier": 0.0214,
+       "log_score": 0.1051
+      }
+     },
+     "30": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.3,
+       "observed": 0.347,
+       "brier": 0.1582,
+       "log_score": 0.4811,
+       "deciles": [
+        {
+         "p": 0.022,
+         "observed": 0.017,
+         "n": 176
+        },
+        {
+         "p": 0.05,
+         "observed": 0.099,
+         "n": 176
+        },
+        {
+         "p": 0.072,
+         "observed": 0.092,
+         "n": 177
+        },
+        {
+         "p": 0.117,
+         "observed": 0.147,
+         "n": 176
+        },
+        {
+         "p": 0.206,
+         "observed": 0.212,
+         "n": 177
+        },
+        {
+         "p": 0.339,
+         "observed": 0.454,
+         "n": 176
+        },
+        {
+         "p": 0.44,
+         "observed": 0.499,
+         "n": 176
+        },
+        {
+         "p": 0.508,
+         "observed": 0.593,
+         "n": 177
+        },
+        {
+         "p": 0.599,
+         "observed": 0.638,
+         "n": 176
+        },
+        {
+         "p": 0.792,
+         "observed": 0.88,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 492,
+       "mean_p": 0.112,
+       "observed": 0.163,
+       "brier": 0.1133,
+       "log_score": 0.3703
+      },
+      "established/signal": {
+       "n": 607,
+       "mean_p": 0.519,
+       "observed": 0.574,
+       "brier": 0.1958,
+       "log_score": 0.575
+      },
+      "new_or_small/no_signal": {
+       "n": 358,
+       "mean_p": 0.085,
+       "observed": 0.102,
+       "brier": 0.0886,
+       "log_score": 0.3167
+      },
+      "new_or_small/signal": {
+       "n": 307,
+       "mean_p": 0.461,
+       "observed": 0.522,
+       "brier": 0.2448,
+       "log_score": 0.683
+      }
+     },
+     "90": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.625,
+       "observed": 0.675,
+       "brier": 0.1696,
+       "log_score": 0.5125,
+       "deciles": [
+        {
+         "p": 0.233,
+         "observed": 0.291,
+         "n": 176
+        },
+        {
+         "p": 0.331,
+         "observed": 0.386,
+         "n": 176
+        },
+        {
+         "p": 0.414,
+         "observed": 0.447,
+         "n": 177
+        },
+        {
+         "p": 0.526,
+         "observed": 0.625,
+         "n": 176
+        },
+        {
+         "p": 0.636,
+         "observed": 0.715,
+         "n": 177
+        },
+        {
+         "p": 0.744,
+         "observed": 0.66,
+         "n": 176
+        },
+        {
+         "p": 0.804,
+         "observed": 0.904,
+         "n": 176
+        },
+        {
+         "p": 0.848,
+         "observed": 0.915,
+         "n": 177
+        },
+        {
+         "p": 0.882,
+         "observed": 0.934,
+         "n": 176
+        },
+        {
+         "p": 0.93,
+         "observed": 0.969,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 492,
+       "mean_p": 0.462,
+       "observed": 0.564,
+       "brier": 0.2337,
+       "log_score": 0.659
+      },
+      "established/signal": {
+       "n": 607,
+       "mean_p": 0.823,
+       "observed": 0.859,
+       "brier": 0.106,
+       "log_score": 0.3612
+      },
+      "new_or_small/no_signal": {
+       "n": 358,
+       "mean_p": 0.381,
+       "observed": 0.383,
+       "brier": 0.2214,
+       "log_score": 0.6369
+      },
+      "new_or_small/signal": {
+       "n": 307,
+       "mean_p": 0.814,
+       "observed": 0.866,
+       "brier": 0.1207,
+       "log_score": 0.404
+      }
+     },
+     "180": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.731,
+       "observed": 0.756,
+       "brier": 0.153,
+       "log_score": 0.4753,
+       "deciles": [
+        {
+         "p": 0.411,
+         "observed": 0.433,
+         "n": 176
+        },
+        {
+         "p": 0.532,
+         "observed": 0.489,
+         "n": 176
+        },
+        {
+         "p": 0.604,
+         "observed": 0.645,
+         "n": 177
+        },
+        {
+         "p": 0.678,
+         "observed": 0.697,
+         "n": 176
+        },
+        {
+         "p": 0.753,
+         "observed": 0.81,
+         "n": 177
+        },
+        {
+         "p": 0.813,
+         "observed": 0.805,
+         "n": 176
+        },
+        {
+         "p": 0.853,
+         "observed": 0.928,
+         "n": 176
+        },
+        {
+         "p": 0.882,
+         "observed": 0.934,
+         "n": 177
+        },
+        {
+         "p": 0.908,
+         "observed": 0.954,
+         "n": 176
+        },
+        {
+         "p": 0.942,
+         "observed": 0.926,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 492,
+       "mean_p": 0.631,
+       "observed": 0.675,
+       "brier": 0.2023,
+       "log_score": 0.5914
+      },
+      "established/signal": {
+       "n": 607,
+       "mean_p": 0.859,
+       "observed": 0.92,
+       "brier": 0.0719,
+       "log_score": 0.2853
+      },
+      "new_or_small/no_signal": {
+       "n": 358,
+       "mean_p": 0.555,
+       "observed": 0.51,
+       "brier": 0.2485,
+       "log_score": 0.6929
+      },
+      "new_or_small/signal": {
+       "n": 307,
+       "mean_p": 0.866,
+       "observed": 0.88,
+       "brier": 0.1084,
+       "log_score": 0.3767
+      }
+     },
+     "365": {
+      "all": {
+       "n": 1585,
+       "mean_p": 0.759,
+       "observed": 0.79,
+       "brier": 0.1425,
+       "log_score": 0.4508,
+       "deciles": [
+        {
+         "p": 0.477,
+         "observed": 0.489,
+         "n": 158
+        },
+        {
+         "p": 0.603,
+         "observed": 0.606,
+         "n": 159
+        },
+        {
+         "p": 0.663,
+         "observed": 0.624,
+         "n": 158
+        },
+        {
+         "p": 0.719,
+         "observed": 0.808,
+         "n": 159
+        },
+        {
+         "p": 0.772,
+         "observed": 0.794,
+         "n": 158
+        },
+        {
+         "p": 0.821,
+         "observed": 0.851,
+         "n": 159
+        },
+        {
+         "p": 0.857,
+         "observed": 0.914,
+         "n": 158
+        },
+        {
+         "p": 0.883,
+         "observed": 0.96,
+         "n": 159
+        },
+        {
+         "p": 0.908,
+         "observed": 0.956,
+         "n": 158
+        },
+        {
+         "p": 0.942,
+         "observed": 0.95,
+         "n": 159
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 464,
+       "mean_p": 0.682,
+       "observed": 0.709,
+       "brier": 0.1895,
+       "log_score": 0.5639
+      },
+      "established/signal": {
+       "n": 577,
+       "mean_p": 0.862,
+       "observed": 0.922,
+       "brier": 0.0705,
+       "log_score": 0.2846
+      },
+      "new_or_small/no_signal": {
+       "n": 302,
+       "mean_p": 0.613,
+       "observed": 0.591,
+       "brier": 0.2405,
+       "log_score": 0.6742
+      },
+      "new_or_small/signal": {
+       "n": 242,
+       "mean_p": 0.868,
+       "observed": 0.908,
+       "brier": 0.0868,
+       "log_score": 0.317
+      }
+     }
+    }
+   },
+   "overall": {
+    "n": 1764,
+    "n_films": 1660,
+    "n_opened": 1427,
+    "mae_p50_days": 35.0,
+    "median_ae_p50_days": 14,
+    "coverage": {
+     "p50": 0.563,
+     "p80": 0.846,
+     "p90": 0.91
+    },
+    "day_log_score": 3.912,
+    "p50_on_opening_weekday": 0.456,
+    "hit_rate": {
+     "3": 0.13,
+     "week": 0.13,
+     "month": 0.437
+    },
+    "hit_n": 1427,
+    "hit_films": {
+     "n": 1325.5,
+     "hits": {
+      "3": 172.667,
+      "week": 171.667,
+      "month": 579.833
+     }
+    },
+    "interval_p10_p90": {
+     "median_width_days": 69,
+     "coverage": 0.857
+    },
+    "hit_rate_all": {
+     "3": 0.104,
+     "week": 0.103,
+     "month": 0.349
+    },
+    "hit_films_all": {
+     "n": 1660.0,
+     "hits": {
+      "3": 172.667,
+      "week": 171.667,
+      "month": 579.833
+     }
+    },
+    "band_0.9_1.0": {
+     "n": 181,
+     "mean_p": 0.924,
+     "observed": 0.939,
+     "brier": 0.0583,
+     "log_score": 0.2709
+    },
+    "censored_log_score": 3.5904,
+    "integrated_brier": 0.1621,
+    "p_open_298d": {
+     "all": {
+      "n": 1764,
+      "mean_p": 0.746,
+      "observed": 0.78,
+      "brier": 0.1541,
+      "log_score": 0.4789,
+      "deciles": [
+       {
+        "p": 0.516,
+        "observed": 0.56,
+        "n": 176
+       },
+       {
+        "p": 0.633,
+        "observed": 0.587,
+        "n": 176
+       },
+       {
+        "p": 0.646,
+        "observed": 0.643,
+        "n": 177
+       },
+       {
+        "p": 0.663,
+        "observed": 0.712,
+        "n": 176
+       },
+       {
+        "p": 0.696,
+        "observed": 0.779,
+        "n": 177
+       },
+       {
+        "p": 0.813,
+        "observed": 0.893,
+        "n": 176
+       },
+       {
+        "p": 0.848,
+        "observed": 0.884,
+        "n": 176
+       },
+       {
+        "p": 0.874,
+        "observed": 0.935,
+        "n": 177
+       },
+       {
+        "p": 0.892,
+        "observed": 0.892,
+        "n": 176
+       },
+       {
+        "p": 0.924,
+        "observed": 0.958,
+        "n": 177
+       }
+      ]
+     },
+     "established": {
+      "n": 1764,
+      "mean_p": 0.746,
+      "observed": 0.78,
+      "brier": 0.1541,
+      "log_score": 0.4789,
+      "deciles": [
+       {
+        "p": 0.516,
+        "observed": 0.56,
+        "n": 176
+       },
+       {
+        "p": 0.633,
+        "observed": 0.587,
+        "n": 176
+       },
+       {
+        "p": 0.646,
+        "observed": 0.643,
+        "n": 177
+       },
+       {
+        "p": 0.663,
+        "observed": 0.712,
+        "n": 176
+       },
+       {
+        "p": 0.696,
+        "observed": 0.779,
+        "n": 177
+       },
+       {
+        "p": 0.813,
+        "observed": 0.893,
+        "n": 176
+       },
+       {
+        "p": 0.848,
+        "observed": 0.884,
+        "n": 176
+       },
+       {
+        "p": 0.874,
+        "observed": 0.935,
+        "n": 177
+       },
+       {
+        "p": 0.892,
+        "observed": 0.892,
+        "n": 176
+       },
+       {
+        "p": 0.924,
+        "observed": 0.958,
+        "n": 177
+       }
+      ]
+     }
+    },
+    "p_open_within": {
+     "7": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.018,
+       "observed": 0.012,
+       "brier": 0.0119,
+       "log_score": 0.0641,
+       "deciles": [
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.006,
+         "n": 177
+        },
+        {
+         "p": 0.001,
+         "observed": 0.012,
+         "n": 176
+        },
+        {
+         "p": 0.004,
+         "observed": 0.006,
+         "n": 177
+        },
+        {
+         "p": 0.019,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.024,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.031,
+         "observed": 0.03,
+         "n": 177
+        },
+        {
+         "p": 0.039,
+         "observed": 0.031,
+         "n": 176
+        },
+        {
+         "p": 0.064,
+         "observed": 0.025,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 850,
+       "mean_p": 0.001,
+       "observed": 0.004,
+       "brier": 0.0036,
+       "log_score": 0.0264
+      },
+      "established/signal": {
+       "n": 914,
+       "mean_p": 0.034,
+       "observed": 0.02,
+       "brier": 0.0202,
+       "log_score": 0.1014
+      }
+     },
+     "30": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.308,
+       "observed": 0.347,
+       "brier": 0.18,
+       "log_score": 0.5378,
+       "deciles": [
+        {
+         "p": 0.068,
+         "observed": 0.07,
+         "n": 176
+        },
+        {
+         "p": 0.09,
+         "observed": 0.103,
+         "n": 176
+        },
+        {
+         "p": 0.103,
+         "observed": 0.162,
+         "n": 177
+        },
+        {
+         "p": 0.116,
+         "observed": 0.167,
+         "n": 176
+        },
+        {
+         "p": 0.176,
+         "observed": 0.229,
+         "n": 177
+        },
+        {
+         "p": 0.44,
+         "observed": 0.381,
+         "n": 176
+        },
+        {
+         "p": 0.49,
+         "observed": 0.616,
+         "n": 176
+        },
+        {
+         "p": 0.521,
+         "observed": 0.579,
+         "n": 177
+        },
+        {
+         "p": 0.548,
+         "observed": 0.621,
+         "n": 176
+        },
+        {
+         "p": 0.602,
+         "observed": 0.626,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 850,
+       "mean_p": 0.101,
+       "observed": 0.137,
+       "brier": 0.1184,
+       "log_score": 0.3998
+      },
+      "established/signal": {
+       "n": 914,
+       "mean_p": 0.513,
+       "observed": 0.556,
+       "brier": 0.2411,
+       "log_score": 0.6747
+      }
+     },
+     "90": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.618,
+       "observed": 0.675,
+       "brier": 0.1845,
+       "log_score": 0.5464,
+       "deciles": [
+        {
+         "p": 0.328,
+         "observed": 0.402,
+         "n": 176
+        },
+        {
+         "p": 0.398,
+         "observed": 0.424,
+         "n": 176
+        },
+        {
+         "p": 0.423,
+         "observed": 0.572,
+         "n": 177
+        },
+        {
+         "p": 0.455,
+         "observed": 0.497,
+         "n": 176
+        },
+        {
+         "p": 0.515,
+         "observed": 0.604,
+         "n": 177
+        },
+        {
+         "p": 0.761,
+         "observed": 0.712,
+         "n": 176
+        },
+        {
+         "p": 0.802,
+         "observed": 0.888,
+         "n": 176
+        },
+        {
+         "p": 0.831,
+         "observed": 0.913,
+         "n": 177
+        },
+        {
+         "p": 0.853,
+         "observed": 0.881,
+         "n": 176
+        },
+        {
+         "p": 0.886,
+         "observed": 0.93,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 850,
+       "mean_p": 0.415,
+       "observed": 0.488,
+       "brier": 0.2512,
+       "log_score": 0.6954
+      },
+      "established/signal": {
+       "n": 914,
+       "mean_p": 0.819,
+       "observed": 0.861,
+       "brier": 0.1183,
+       "log_score": 0.3985
+      }
+     },
+     "180": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.72,
+       "observed": 0.756,
+       "brier": 0.1616,
+       "log_score": 0.4942,
+       "deciles": [
+        {
+         "p": 0.473,
+         "observed": 0.525,
+         "n": 176
+        },
+        {
+         "p": 0.579,
+         "observed": 0.572,
+         "n": 176
+        },
+        {
+         "p": 0.594,
+         "observed": 0.589,
+         "n": 177
+        },
+        {
+         "p": 0.612,
+         "observed": 0.627,
+         "n": 176
+        },
+        {
+         "p": 0.658,
+         "observed": 0.756,
+         "n": 177
+        },
+        {
+         "p": 0.808,
+         "observed": 0.893,
+         "n": 176
+        },
+        {
+         "p": 0.843,
+         "observed": 0.887,
+         "n": 176
+        },
+        {
+         "p": 0.87,
+         "observed": 0.931,
+         "n": 177
+        },
+        {
+         "p": 0.888,
+         "observed": 0.88,
+         "n": 176
+        },
+        {
+         "p": 0.921,
+         "observed": 0.951,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 850,
+       "mean_p": 0.579,
+       "observed": 0.606,
+       "brier": 0.2352,
+       "log_score": 0.6631
+      },
+      "established/signal": {
+       "n": 914,
+       "mean_p": 0.859,
+       "observed": 0.906,
+       "brier": 0.0885,
+       "log_score": 0.3267
+      }
+     },
+     "365": {
+      "all": {
+       "n": 1585,
+       "mean_p": 0.747,
+       "observed": 0.79,
+       "brier": 0.1503,
+       "log_score": 0.4705,
+       "deciles": [
+        {
+         "p": 0.518,
+         "observed": 0.596,
+         "n": 158
+        },
+        {
+         "p": 0.637,
+         "observed": 0.554,
+         "n": 159
+        },
+        {
+         "p": 0.656,
+         "observed": 0.685,
+         "n": 158
+        },
+        {
+         "p": 0.67,
+         "observed": 0.728,
+         "n": 159
+        },
+        {
+         "p": 0.697,
+         "observed": 0.771,
+         "n": 158
+        },
+        {
+         "p": 0.81,
+         "observed": 0.907,
+         "n": 159
+        },
+        {
+         "p": 0.845,
+         "observed": 0.89,
+         "n": 158
+        },
+        {
+         "p": 0.871,
+         "observed": 0.915,
+         "n": 159
+        },
+        {
+         "p": 0.887,
+         "observed": 0.947,
+         "n": 158
+        },
+        {
+         "p": 0.923,
+         "observed": 0.946,
+         "n": 159
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 766,
+       "mean_p": 0.634,
+       "observed": 0.663,
+       "brier": 0.2212,
+       "log_score": 0.634
+      },
+      "established/signal": {
+       "n": 819,
+       "mean_p": 0.861,
+       "observed": 0.918,
+       "brier": 0.0795,
+       "log_score": 0.3075
+      }
+     }
+    }
+   },
+   "by_distributor_known_at_rating": {
+    "n": 1764,
+    "n_films": 1660,
+    "n_opened": 1427,
+    "mae_p50_days": 34.3,
+    "median_ae_p50_days": 14,
+    "coverage": {
+     "p50": 0.58,
+     "p80": 0.84,
+     "p90": 0.911
+    },
+    "day_log_score": 3.902,
+    "p50_on_opening_weekday": 0.487,
+    "hit_rate": {
+     "3": 0.137,
+     "week": 0.14,
+     "month": 0.438
+    },
+    "hit_n": 1427,
+    "hit_films": {
+     "n": 1325.5,
+     "hits": {
+      "3": 181.0,
+      "week": 186.0,
+      "month": 580.833
+     }
+    },
+    "interval_p10_p90": {
+     "median_width_days": 74,
+     "coverage": 0.838
+    },
+    "hit_rate_all": {
+     "3": 0.109,
+     "week": 0.112,
+     "month": 0.35
+    },
+    "hit_films_all": {
+     "n": 1660.0,
+     "hits": {
+      "3": 181.0,
+      "week": 186.0,
+      "month": 580.833
+     }
+    },
+    "band_0.9_1.0": {
+     "n": 575,
+     "mean_p": 0.941,
+     "observed": 0.982,
+     "brier": 0.0197,
+     "log_score": 0.1156
+    },
+    "censored_log_score": 3.45,
+    "integrated_brier": 0.1262,
+    "p_open_298d": {
+     "all": {
+      "n": 1764,
+      "mean_p": 0.719,
+      "observed": 0.78,
+      "brier": 0.1114,
+      "log_score": 0.3624,
+      "deciles": [
+       {
+        "p": 0.263,
+        "observed": 0.149,
+        "n": 176
+       },
+       {
+        "p": 0.383,
+        "observed": 0.449,
+        "n": 176
+       },
+       {
+        "p": 0.533,
+        "observed": 0.797,
+        "n": 177
+       },
+       {
+        "p": 0.712,
+        "observed": 0.767,
+        "n": 176
+       },
+       {
+        "p": 0.807,
+        "observed": 0.83,
+        "n": 177
+       },
+       {
+        "p": 0.86,
+        "observed": 0.979,
+        "n": 176
+       },
+       {
+        "p": 0.893,
+        "observed": 0.96,
+        "n": 176
+       },
+       {
+        "p": 0.921,
+        "observed": 0.976,
+        "n": 177
+       },
+       {
+        "p": 0.946,
+        "observed": 1.0,
+        "n": 176
+       },
+       {
+        "p": 0.975,
+        "observed": 0.985,
+        "n": 177
+       }
+      ]
+     },
+     "established": {
+      "n": 1429,
+      "mean_p": 0.781,
+      "observed": 0.842,
+      "brier": 0.0868,
+      "log_score": 0.3007,
+      "deciles": [
+       {
+        "p": 0.28,
+        "observed": 0.142,
+        "n": 142
+       },
+       {
+        "p": 0.525,
+        "observed": 0.81,
+        "n": 143
+       },
+       {
+        "p": 0.753,
+        "observed": 0.816,
+        "n": 143
+       },
+       {
+        "p": 0.818,
+        "observed": 0.851,
+        "n": 143
+       },
+       {
+        "p": 0.863,
+        "observed": 0.975,
+        "n": 143
+       },
+       {
+        "p": 0.889,
+        "observed": 0.972,
+        "n": 143
+       },
+       {
+        "p": 0.911,
+        "observed": 0.957,
+        "n": 143
+       },
+       {
+        "p": 0.934,
+        "observed": 0.992,
+        "n": 143
+       },
+       {
+        "p": 0.952,
+        "observed": 1.0,
+        "n": 143
+       },
+       {
+        "p": 0.98,
+        "observed": 0.979,
+        "n": 143
+       }
+      ]
+     },
+     "new_or_small": {
+      "n": 335,
+      "mean_p": 0.468,
+      "observed": 0.529,
+      "brier": 0.2118,
+      "log_score": 0.6143,
+      "deciles": [
+       {
+        "p": 0.205,
+        "observed": 0.212,
+        "n": 33
+       },
+       {
+        "p": 0.362,
+        "observed": 0.324,
+        "n": 34
+       },
+       {
+        "p": 0.379,
+        "observed": 0.306,
+        "n": 33
+       },
+       {
+        "p": 0.379,
+        "observed": 0.507,
+        "n": 34
+       },
+       {
+        "p": 0.381,
+        "observed": 0.354,
+        "n": 33
+       },
+       {
+        "p": 0.395,
+        "observed": 0.412,
+        "n": 34
+       },
+       {
+        "p": 0.518,
+        "observed": 0.833,
+        "n": 33
+       },
+       {
+        "p": 0.653,
+        "observed": 0.781,
+        "n": 34
+       },
+       {
+        "p": 0.682,
+        "observed": 0.697,
+        "n": 33
+       },
+       {
+        "p": 0.729,
+        "observed": 0.882,
+        "n": 34
+       }
+      ]
+     }
+    },
+    "p_open_within": {
+     "7": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.018,
+       "observed": 0.012,
+       "brier": 0.0124,
+       "log_score": 0.0686,
+       "deciles": [
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.0,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 177
+        },
+        {
+         "p": 0.001,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.002,
+         "observed": 0.012,
+         "n": 177
+        },
+        {
+         "p": 0.006,
+         "observed": 0.008,
+         "n": 176
+        },
+        {
+         "p": 0.012,
+         "observed": 0.024,
+         "n": 176
+        },
+        {
+         "p": 0.024,
+         "observed": 0.025,
+         "n": 177
+        },
+        {
+         "p": 0.045,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.111,
+         "observed": 0.038,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 628,
+       "mean_p": 0.001,
+       "observed": 0.003,
+       "brier": 0.0033,
+       "log_score": 0.0262
+      },
+      "established/signal": {
+       "n": 801,
+       "mean_p": 0.036,
+       "observed": 0.019,
+       "brier": 0.0201,
+       "log_score": 0.1028
+      },
+      "new_or_small/no_signal": {
+       "n": 222,
+       "mean_p": 0.001,
+       "observed": 0.005,
+       "brier": 0.0046,
+       "log_score": 0.034
+      },
+      "new_or_small/signal": {
+       "n": 113,
+       "mean_p": 0.033,
+       "observed": 0.027,
+       "brier": 0.0277,
+       "log_score": 0.1469
+      }
+     },
+     "30": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.291,
+       "observed": 0.347,
+       "brier": 0.1606,
+       "log_score": 0.4839,
+       "deciles": [
+        {
+         "p": 0.025,
+         "observed": 0.029,
+         "n": 176
+        },
+        {
+         "p": 0.057,
+         "observed": 0.058,
+         "n": 176
+        },
+        {
+         "p": 0.079,
+         "observed": 0.098,
+         "n": 177
+        },
+        {
+         "p": 0.102,
+         "observed": 0.135,
+         "n": 176
+        },
+        {
+         "p": 0.162,
+         "observed": 0.212,
+         "n": 177
+        },
+        {
+         "p": 0.316,
+         "observed": 0.535,
+         "n": 176
+        },
+        {
+         "p": 0.42,
+         "observed": 0.537,
+         "n": 176
+        },
+        {
+         "p": 0.5,
+         "observed": 0.531,
+         "n": 177
+        },
+        {
+         "p": 0.619,
+         "observed": 0.652,
+         "n": 176
+        },
+        {
+         "p": 0.793,
+         "observed": 0.856,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 628,
+       "mean_p": 0.105,
+       "observed": 0.159,
+       "brier": 0.1149,
+       "log_score": 0.3767
+      },
+      "established/signal": {
+       "n": 801,
+       "mean_p": 0.496,
+       "observed": 0.559,
+       "brier": 0.2097,
+       "log_score": 0.6031
+      },
+      "new_or_small/no_signal": {
+       "n": 222,
+       "mean_p": 0.075,
+       "observed": 0.076,
+       "brier": 0.0687,
+       "log_score": 0.256
+      },
+      "new_or_small/signal": {
+       "n": 113,
+       "mean_p": 0.406,
+       "observed": 0.534,
+       "brier": 0.2711,
+       "log_score": 0.7433
+      }
+     },
+     "90": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.586,
+       "observed": 0.675,
+       "brier": 0.1432,
+       "log_score": 0.4437,
+       "deciles": [
+        {
+         "p": 0.174,
+         "observed": 0.165,
+         "n": 176
+        },
+        {
+         "p": 0.263,
+         "observed": 0.288,
+         "n": 176
+        },
+        {
+         "p": 0.34,
+         "observed": 0.366,
+         "n": 177
+        },
+        {
+         "p": 0.475,
+         "observed": 0.652,
+         "n": 176
+        },
+        {
+         "p": 0.574,
+         "observed": 0.752,
+         "n": 177
+        },
+        {
+         "p": 0.671,
+         "observed": 0.791,
+         "n": 176
+        },
+        {
+         "p": 0.79,
+         "observed": 0.916,
+         "n": 176
+        },
+        {
+         "p": 0.857,
+         "observed": 0.977,
+         "n": 177
+        },
+        {
+         "p": 0.896,
+         "observed": 0.987,
+         "n": 176
+        },
+        {
+         "p": 0.962,
+         "observed": 0.992,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 628,
+       "mean_p": 0.461,
+       "observed": 0.565,
+       "brier": 0.2001,
+       "log_score": 0.5842
+      },
+      "established/signal": {
+       "n": 801,
+       "mean_p": 0.785,
+       "observed": 0.882,
+       "brier": 0.0699,
+       "log_score": 0.2607
+      },
+      "new_or_small/no_signal": {
+       "n": 222,
+       "mean_p": 0.268,
+       "observed": 0.27,
+       "brier": 0.187,
+       "log_score": 0.5609
+      },
+      "new_or_small/signal": {
+       "n": 113,
+       "mean_p": 0.599,
+       "observed": 0.729,
+       "brier": 0.2232,
+       "log_score": 0.6363
+      }
+     },
+     "180": {
+      "all": {
+       "n": 1764,
+       "mean_p": 0.691,
+       "observed": 0.756,
+       "brier": 0.1206,
+       "log_score": 0.3859,
+       "deciles": [
+        {
+         "p": 0.245,
+         "observed": 0.16,
+         "n": 176
+        },
+        {
+         "p": 0.358,
+         "observed": 0.353,
+         "n": 176
+        },
+        {
+         "p": 0.491,
+         "observed": 0.757,
+         "n": 177
+        },
+        {
+         "p": 0.669,
+         "observed": 0.692,
+         "n": 176
+        },
+        {
+         "p": 0.756,
+         "observed": 0.859,
+         "n": 177
+        },
+        {
+         "p": 0.824,
+         "observed": 0.925,
+         "n": 176
+        },
+        {
+         "p": 0.86,
+         "observed": 0.938,
+         "n": 176
+        },
+        {
+         "p": 0.905,
+         "observed": 0.994,
+         "n": 177
+        },
+        {
+         "p": 0.939,
+         "observed": 1.0,
+         "n": 176
+        },
+        {
+         "p": 0.974,
+         "observed": 0.985,
+         "n": 177
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 628,
+       "mean_p": 0.665,
+       "observed": 0.69,
+       "brier": 0.1396,
+       "log_score": 0.4469
+      },
+      "established/signal": {
+       "n": 801,
+       "mean_p": 0.821,
+       "observed": 0.932,
+       "brier": 0.0636,
+       "log_score": 0.2316
+      },
+      "new_or_small/no_signal": {
+       "n": 222,
+       "mean_p": 0.361,
+       "observed": 0.367,
+       "brier": 0.2091,
+       "log_score": 0.6107
+      },
+      "new_or_small/signal": {
+       "n": 113,
+       "mean_p": 0.622,
+       "observed": 0.738,
+       "brier": 0.2146,
+       "log_score": 0.6176
+      }
+     },
+     "365": {
+      "all": {
+       "n": 1585,
+       "mean_p": 0.726,
+       "observed": 0.79,
+       "brier": 0.1084,
+       "log_score": 0.3551,
+       "deciles": [
+        {
+         "p": 0.273,
+         "observed": 0.159,
+         "n": 158
+        },
+        {
+         "p": 0.388,
+         "observed": 0.481,
+         "n": 159
+        },
+        {
+         "p": 0.546,
+         "observed": 0.818,
+         "n": 158
+        },
+        {
+         "p": 0.727,
+         "observed": 0.787,
+         "n": 159
+        },
+        {
+         "p": 0.814,
+         "observed": 0.845,
+         "n": 158
+        },
+        {
+         "p": 0.861,
+         "observed": 0.964,
+         "n": 159
+        },
+        {
+         "p": 0.899,
+         "observed": 0.974,
+         "n": 158
+        },
+        {
+         "p": 0.926,
+         "observed": 0.987,
+         "n": 159
+        },
+        {
+         "p": 0.947,
+         "observed": 0.993,
+         "n": 158
+        },
+        {
+         "p": 0.976,
+         "observed": 0.983,
+         "n": 159
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 570,
+       "mean_p": 0.738,
+       "observed": 0.747,
+       "brier": 0.1117,
+       "log_score": 0.3733
+      },
+      "established/signal": {
+       "n": 720,
+       "mean_p": 0.827,
+       "observed": 0.935,
+       "brier": 0.0617,
+       "log_score": 0.2295
+      },
+      "new_or_small/no_signal": {
+       "n": 196,
+       "mean_p": 0.397,
+       "observed": 0.419,
+       "brier": 0.2088,
+       "log_score": 0.6079
+      },
+      "new_or_small/signal": {
+       "n": 99,
+       "mean_p": 0.626,
+       "observed": 0.804,
+       "brier": 0.2039,
+       "log_score": 0.5948
+      }
+     }
+    }
+   },
+   "milestones": {
+    "promo": {
+     "rows": 5884,
+     "used": true,
+     "n_tune": 1343,
+     "tune_loglik": {
+      "rating_model": -3.7767,
+      "milestone_model": -3.4303
+     },
+     "n_test": 1360,
+     "observed_open_rate": 0.851,
+     "milestone_model": {
+      "n": 1360,
+      "n_films": 1295,
+      "n_opened": 1158,
+      "mae_p50_days": 17.1,
+      "median_ae_p50_days": 8,
+      "coverage": {
+       "p50": 0.568,
+       "p80": 0.85,
+       "p90": 0.921
+      },
+      "day_log_score": 3.438,
+      "p50_on_opening_weekday": 0.446,
+      "hit_rate": {
+       "3": 0.213,
+       "week": 0.209,
+       "month": 0.565
+      },
+      "hit_n": 1158,
+      "hit_films": {
+       "n": 1095.0,
+       "hits": {
+        "3": 233.0,
+        "week": 228.5,
+        "month": 619.0
+       }
+      },
+      "interval_p10_p90": {
+       "median_width_days": 51,
+       "coverage": 0.867
+      },
+      "hit_rate_all": {
+       "3": 0.18,
+       "week": 0.176,
+       "month": 0.478
+      },
+      "hit_films_all": {
+       "n": 1295.0,
+       "hits": {
+        "3": 233.0,
+        "week": 228.5,
+        "month": 619.0
+       }
+      },
+      "band_0.9_1.0": {
+       "n": 470,
+       "mean_p": 0.947,
+       "observed": 0.94,
+       "brier": 0.0566,
+       "log_score": 0.2323
+      },
+      "censored_log_score": 3.2997,
+      "integrated_brier": 0.1359,
+      "p_open_298d": {
+       "all": {
+        "n": 1360,
+        "mean_p": 0.829,
+        "observed": 0.84,
+        "brier": 0.1226,
+        "log_score": 0.4013,
+        "deciles": [
+         {
+          "p": 0.556,
+          "observed": 0.616,
+          "n": 136
+         },
+         {
+          "p": 0.744,
+          "observed": 0.71,
+          "n": 136
+         },
+         {
+          "p": 0.771,
+          "observed": 0.789,
+          "n": 136
+         },
+         {
+          "p": 0.803,
+          "observed": 0.815,
+          "n": 136
+         },
+         {
+          "p": 0.837,
+          "observed": 0.871,
+          "n": 136
+         },
+         {
+          "p": 0.868,
+          "observed": 0.889,
+          "n": 136
+         },
+         {
+          "p": 0.898,
+          "observed": 0.907,
+          "n": 136
+         },
+         {
+          "p": 0.927,
+          "observed": 0.976,
+          "n": 136
+         },
+         {
+          "p": 0.953,
+          "observed": 0.91,
+          "n": 136
+         },
+         {
+          "p": 0.981,
+          "observed": 0.957,
+          "n": 136
+         }
+        ]
+       },
+       "new_or_small": {
+        "n": 973,
+        "mean_p": 0.833,
+        "observed": 0.853,
+        "brier": 0.1208,
+        "log_score": 0.4009,
+        "deciles": [
+         {
+          "p": 0.573,
+          "observed": 0.67,
+          "n": 97
+         },
+         {
+          "p": 0.747,
+          "observed": 0.782,
+          "n": 97
+         },
+         {
+          "p": 0.768,
+          "observed": 0.766,
+          "n": 97
+         },
+         {
+          "p": 0.803,
+          "observed": 0.876,
+          "n": 98
+         },
+         {
+          "p": 0.836,
+          "observed": 0.882,
+          "n": 97
+         },
+         {
+          "p": 0.87,
+          "observed": 0.865,
+          "n": 97
+         },
+         {
+          "p": 0.902,
+          "observed": 0.901,
+          "n": 98
+         },
+         {
+          "p": 0.932,
+          "observed": 0.944,
+          "n": 97
+         },
+         {
+          "p": 0.954,
+          "observed": 0.922,
+          "n": 97
+         },
+         {
+          "p": 0.979,
+          "observed": 0.944,
+          "n": 98
+         }
+        ]
+       },
+       "established": {
+        "n": 387,
+        "mean_p": 0.819,
+        "observed": 0.806,
+        "brier": 0.1271,
+        "log_score": 0.4024,
+        "deciles": [
+         {
+          "p": 0.512,
+          "observed": 0.493,
+          "n": 38
+         },
+         {
+          "p": 0.734,
+          "observed": 0.532,
+          "n": 39
+         },
+         {
+          "p": 0.777,
+          "observed": 0.795,
+          "n": 39
+         },
+         {
+          "p": 0.802,
+          "observed": 0.711,
+          "n": 38
+         },
+         {
+          "p": 0.836,
+          "observed": 0.816,
+          "n": 39
+         },
+         {
+          "p": 0.863,
+          "observed": 0.949,
+          "n": 39
+         },
+         {
+          "p": 0.889,
+          "observed": 0.947,
+          "n": 38
+         },
+         {
+          "p": 0.913,
+          "observed": 0.973,
+          "n": 39
+         },
+         {
+          "p": 0.95,
+          "observed": 0.934,
+          "n": 39
+         },
+         {
+          "p": 0.987,
+          "observed": 1.0,
+          "n": 39
+         }
+        ]
+       }
+      },
+      "p_open_within": {
+       "7": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.047,
+         "observed": 0.036,
+         "brier": 0.0347,
+         "log_score": 0.1485,
+         "deciles": [
+          {
+           "p": 0.001,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.004,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.007,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.012,
+           "observed": 0.022,
+           "n": 136
+          },
+          {
+           "p": 0.017,
+           "observed": 0.008,
+           "n": 136
+          },
+          {
+           "p": 0.026,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.041,
+           "observed": 0.038,
+           "n": 136
+          },
+          {
+           "p": 0.064,
+           "observed": 0.031,
+           "n": 136
+          },
+          {
+           "p": 0.096,
+           "observed": 0.097,
+           "n": 136
+          },
+          {
+           "p": 0.235,
+           "observed": 0.121,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 387,
+         "mean_p": 0.061,
+         "observed": 0.03,
+         "brier": 0.0285,
+         "log_score": 0.113
+        },
+        "new_or_small/signal": {
+         "n": 973,
+         "mean_p": 0.042,
+         "observed": 0.038,
+         "brier": 0.0371,
+         "log_score": 0.1622
+        }
+       },
+       "30": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.456,
+         "observed": 0.476,
+         "brier": 0.2088,
+         "log_score": 0.6035,
+         "deciles": [
+          {
+           "p": 0.155,
+           "observed": 0.119,
+           "n": 136
+          },
+          {
+           "p": 0.255,
+           "observed": 0.255,
+           "n": 136
+          },
+          {
+           "p": 0.308,
+           "observed": 0.391,
+           "n": 136
+          },
+          {
+           "p": 0.344,
+           "observed": 0.385,
+           "n": 136
+          },
+          {
+           "p": 0.411,
+           "observed": 0.405,
+           "n": 136
+          },
+          {
+           "p": 0.488,
+           "observed": 0.519,
+           "n": 136
+          },
+          {
+           "p": 0.544,
+           "observed": 0.574,
+           "n": 136
+          },
+          {
+           "p": 0.612,
+           "observed": 0.642,
+           "n": 136
+          },
+          {
+           "p": 0.697,
+           "observed": 0.691,
+           "n": 136
+          },
+          {
+           "p": 0.851,
+           "observed": 0.885,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 387,
+         "mean_p": 0.478,
+         "observed": 0.479,
+         "brier": 0.2031,
+         "log_score": 0.5876
+        },
+        "new_or_small/signal": {
+         "n": 973,
+         "mean_p": 0.448,
+         "observed": 0.475,
+         "brier": 0.211,
+         "log_score": 0.6096
+        }
+       },
+       "90": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.785,
+         "observed": 0.807,
+         "brier": 0.1427,
+         "log_score": 0.4469,
+         "deciles": [
+          {
+           "p": 0.485,
+           "observed": 0.587,
+           "n": 136
+          },
+          {
+           "p": 0.669,
+           "observed": 0.705,
+           "n": 136
+          },
+          {
+           "p": 0.707,
+           "observed": 0.729,
+           "n": 136
+          },
+          {
+           "p": 0.752,
+           "observed": 0.756,
+           "n": 136
+          },
+          {
+           "p": 0.792,
+           "observed": 0.782,
+           "n": 136
+          },
+          {
+           "p": 0.828,
+           "observed": 0.833,
+           "n": 136
+          },
+          {
+           "p": 0.868,
+           "observed": 0.884,
+           "n": 136
+          },
+          {
+           "p": 0.905,
+           "observed": 0.946,
+           "n": 136
+          },
+          {
+           "p": 0.932,
+           "observed": 0.947,
+           "n": 136
+          },
+          {
+           "p": 0.968,
+           "observed": 0.954,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 387,
+         "mean_p": 0.781,
+         "observed": 0.79,
+         "brier": 0.1343,
+         "log_score": 0.4203
+        },
+        "new_or_small/signal": {
+         "n": 973,
+         "mean_p": 0.786,
+         "observed": 0.814,
+         "brier": 0.146,
+         "log_score": 0.4573
+        }
+       },
+       "180": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.825,
+         "observed": 0.835,
+         "brier": 0.1262,
+         "log_score": 0.4111,
+         "deciles": [
+          {
+           "p": 0.549,
+           "observed": 0.631,
+           "n": 136
+          },
+          {
+           "p": 0.738,
+           "observed": 0.679,
+           "n": 136
+          },
+          {
+           "p": 0.765,
+           "observed": 0.798,
+           "n": 136
+          },
+          {
+           "p": 0.799,
+           "observed": 0.793,
+           "n": 136
+          },
+          {
+           "p": 0.833,
+           "observed": 0.879,
+           "n": 136
+          },
+          {
+           "p": 0.865,
+           "observed": 0.888,
+           "n": 136
+          },
+          {
+           "p": 0.896,
+           "observed": 0.9,
+           "n": 136
+          },
+          {
+           "p": 0.925,
+           "observed": 0.959,
+           "n": 136
+          },
+          {
+           "p": 0.951,
+           "observed": 0.914,
+           "n": 136
+          },
+          {
+           "p": 0.98,
+           "observed": 0.948,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 387,
+         "mean_p": 0.816,
+         "observed": 0.806,
+         "brier": 0.1267,
+         "log_score": 0.4014
+        },
+        "new_or_small/signal": {
+         "n": 973,
+         "mean_p": 0.829,
+         "observed": 0.846,
+         "brier": 0.1259,
+         "log_score": 0.4149
+        }
+       },
+       "365": {
+        "all": {
+         "n": 1220,
+         "mean_p": 0.829,
+         "observed": 0.844,
+         "brier": 0.1201,
+         "log_score": 0.393,
+         "deciles": [
+          {
+           "p": 0.56,
+           "observed": 0.621,
+           "n": 122
+          },
+          {
+           "p": 0.744,
+           "observed": 0.719,
+           "n": 122
+          },
+          {
+           "p": 0.77,
+           "observed": 0.797,
+           "n": 122
+          },
+          {
+           "p": 0.801,
+           "observed": 0.793,
+           "n": 122
+          },
+          {
+           "p": 0.835,
+           "observed": 0.872,
+           "n": 122
+          },
+          {
+           "p": 0.866,
+           "observed": 0.91,
+           "n": 122
+          },
+          {
+           "p": 0.896,
+           "observed": 0.915,
+           "n": 122
+          },
+          {
+           "p": 0.926,
+           "observed": 0.964,
+           "n": 122
+          },
+          {
+           "p": 0.952,
+           "observed": 0.918,
+           "n": 122
+          },
+          {
+           "p": 0.981,
+           "observed": 0.971,
+           "n": 122
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 387,
+         "mean_p": 0.819,
+         "observed": 0.806,
+         "brier": 0.1271,
+         "log_score": 0.4024
+        },
+        "new_or_small/signal": {
+         "n": 833,
+         "mean_p": 0.833,
+         "observed": 0.861,
+         "brier": 0.1169,
+         "log_score": 0.3887
+        }
+       }
+      }
+     },
+     "rating_model": {
+      "n": 1360,
+      "n_films": 1295,
+      "n_opened": 1158,
+      "mae_p50_days": 24.8,
+      "median_ae_p50_days": 14,
+      "coverage": {
+       "p50": 0.695,
+       "p80": 0.923,
+       "p90": 0.959
+      },
+      "day_log_score": 3.663,
+      "p50_on_opening_weekday": 0.495,
+      "hit_rate": {
+       "3": 0.127,
+       "week": 0.128,
+       "month": 0.421
+      },
+      "hit_n": 1158,
+      "hit_films": {
+       "n": 1095.0,
+       "hits": {
+        "3": 139.5,
+        "week": 140.5,
+        "month": 461.0
+       }
+      },
+      "interval_p10_p90": {
+       "median_width_days": 89,
+       "coverage": 0.886
+      },
+      "hit_rate_all": {
+       "3": 0.107,
+       "week": 0.108,
+       "month": 0.352
+      },
+      "hit_films_all": {
+       "n": 1295.0,
+       "hits": {
+        "3": 138.5,
+        "week": 139.5,
+        "month": 456.0
+       }
+      },
+      "band_0.9_1.0": {
+       "n": 190,
+       "mean_p": 0.928,
+       "observed": 0.969,
+       "brier": 0.0325,
+       "log_score": 0.1576
+      },
+      "censored_log_score": 3.6582,
+      "integrated_brier": 0.1849,
+      "p_open_298d": {
+       "all": {
+        "n": 1360,
+        "mean_p": 0.672,
+        "observed": 0.84,
+        "brier": 0.1631,
+        "log_score": 0.5721,
+        "deciles": [
+         {
+          "p": 0.116,
+          "observed": 0.608,
+          "n": 136
+         },
+         {
+          "p": 0.434,
+          "observed": 0.656,
+          "n": 136
+         },
+         {
+          "p": 0.577,
+          "observed": 0.798,
+          "n": 136
+         },
+         {
+          "p": 0.647,
+          "observed": 0.753,
+          "n": 136
+         },
+         {
+          "p": 0.713,
+          "observed": 0.926,
+          "n": 136
+         },
+         {
+          "p": 0.768,
+          "observed": 0.85,
+          "n": 136
+         },
+         {
+          "p": 0.821,
+          "observed": 0.921,
+          "n": 136
+         },
+         {
+          "p": 0.861,
+          "observed": 0.977,
+          "n": 136
+         },
+         {
+          "p": 0.896,
+          "observed": 0.976,
+          "n": 136
+         },
+         {
+          "p": 0.937,
+          "observed": 0.965,
+          "n": 136
+         }
+        ]
+       },
+       "established": {
+        "n": 889,
+        "mean_p": 0.69,
+        "observed": 0.844,
+        "brier": 0.1452,
+        "log_score": 0.5427,
+        "deciles": [
+         {
+          "p": 0.13,
+          "observed": 0.526,
+          "n": 88
+         },
+         {
+          "p": 0.481,
+          "observed": 0.713,
+          "n": 89
+         },
+         {
+          "p": 0.622,
+          "observed": 0.67,
+          "n": 89
+         },
+         {
+          "p": 0.687,
+          "observed": 0.897,
+          "n": 89
+         },
+         {
+          "p": 0.738,
+          "observed": 0.864,
+          "n": 89
+         },
+         {
+          "p": 0.783,
+          "observed": 0.93,
+          "n": 89
+         },
+         {
+          "p": 0.829,
+          "observed": 0.928,
+          "n": 89
+         },
+         {
+          "p": 0.864,
+          "observed": 0.988,
+          "n": 89
+         },
+         {
+          "p": 0.899,
+          "observed": 1.0,
+          "n": 89
+         },
+         {
+          "p": 0.945,
+          "observed": 0.971,
+          "n": 89
+         }
+        ]
+       },
+       "new_or_small": {
+        "n": 471,
+        "mean_p": 0.638,
+        "observed": 0.834,
+        "brier": 0.196,
+        "log_score": 0.6261,
+        "deciles": [
+         {
+          "p": 0.104,
+          "observed": 0.714,
+          "n": 47
+         },
+         {
+          "p": 0.355,
+          "observed": 0.733,
+          "n": 47
+         },
+         {
+          "p": 0.526,
+          "observed": 0.682,
+          "n": 47
+         },
+         {
+          "p": 0.577,
+          "observed": 0.783,
+          "n": 47
+         },
+         {
+          "p": 0.631,
+          "observed": 0.83,
+          "n": 47
+         },
+         {
+          "p": 0.714,
+          "observed": 0.89,
+          "n": 47
+         },
+         {
+          "p": 0.794,
+          "observed": 0.865,
+          "n": 47
+         },
+         {
+          "p": 0.851,
+          "observed": 0.936,
+          "n": 47
+         },
+         {
+          "p": 0.889,
+          "observed": 0.956,
+          "n": 47
+         },
+         {
+          "p": 0.923,
+          "observed": 0.935,
+          "n": 48
+         }
+        ]
+       }
+      },
+      "p_open_within": {
+       "7": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.065,
+         "observed": 0.036,
+         "brier": 0.036,
+         "log_score": 0.163,
+         "deciles": [
+          {
+           "p": 0.001,
+           "observed": 0.022,
+           "n": 136
+          },
+          {
+           "p": 0.006,
+           "observed": 0.007,
+           "n": 136
+          },
+          {
+           "p": 0.014,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.024,
+           "observed": 0.039,
+           "n": 136
+          },
+          {
+           "p": 0.036,
+           "observed": 0.008,
+           "n": 136
+          },
+          {
+           "p": 0.049,
+           "observed": 0.008,
+           "n": 136
+          },
+          {
+           "p": 0.069,
+           "observed": 0.046,
+           "n": 136
+          },
+          {
+           "p": 0.09,
+           "observed": 0.063,
+           "n": 136
+          },
+          {
+           "p": 0.129,
+           "observed": 0.047,
+           "n": 136
+          },
+          {
+           "p": 0.264,
+           "observed": 0.117,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 889,
+         "mean_p": 0.072,
+         "observed": 0.037,
+         "brier": 0.0367,
+         "log_score": 0.1637
+        },
+        "new_or_small/signal": {
+         "n": 471,
+         "mean_p": 0.053,
+         "observed": 0.034,
+         "brier": 0.0348,
+         "log_score": 0.1617
+        }
+       },
+       "30": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.318,
+         "observed": 0.476,
+         "brier": 0.2394,
+         "log_score": 0.7364,
+         "deciles": [
+          {
+           "p": 0.026,
+           "observed": 0.19,
+           "n": 136
+          },
+          {
+           "p": 0.078,
+           "observed": 0.3,
+           "n": 136
+          },
+          {
+           "p": 0.121,
+           "observed": 0.321,
+           "n": 136
+          },
+          {
+           "p": 0.163,
+           "observed": 0.378,
+           "n": 136
+          },
+          {
+           "p": 0.231,
+           "observed": 0.401,
+           "n": 136
+          },
+          {
+           "p": 0.332,
+           "observed": 0.52,
+           "n": 136
+          },
+          {
+           "p": 0.44,
+           "observed": 0.502,
+           "n": 136
+          },
+          {
+           "p": 0.52,
+           "observed": 0.665,
+           "n": 136
+          },
+          {
+           "p": 0.596,
+           "observed": 0.741,
+           "n": 136
+          },
+          {
+           "p": 0.777,
+           "observed": 0.825,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 889,
+         "mean_p": 0.34,
+         "observed": 0.502,
+         "brier": 0.2361,
+         "log_score": 0.7355
+        },
+        "new_or_small/signal": {
+         "n": 471,
+         "mean_p": 0.277,
+         "observed": 0.428,
+         "brier": 0.2455,
+         "log_score": 0.7381
+        }
+       },
+       "90": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.569,
+         "observed": 0.807,
+         "brier": 0.2116,
+         "log_score": 0.6884,
+         "deciles": [
+          {
+           "p": 0.079,
+           "observed": 0.568,
+           "n": 136
+          },
+          {
+           "p": 0.283,
+           "observed": 0.638,
+           "n": 136
+          },
+          {
+           "p": 0.371,
+           "observed": 0.728,
+           "n": 136
+          },
+          {
+           "p": 0.462,
+           "observed": 0.765,
+           "n": 136
+          },
+          {
+           "p": 0.558,
+           "observed": 0.805,
+           "n": 136
+          },
+          {
+           "p": 0.662,
+           "observed": 0.819,
+           "n": 136
+          },
+          {
+           "p": 0.761,
+           "observed": 0.871,
+           "n": 136
+          },
+          {
+           "p": 0.819,
+           "observed": 0.962,
+           "n": 136
+          },
+          {
+           "p": 0.864,
+           "observed": 0.992,
+           "n": 136
+          },
+          {
+           "p": 0.918,
+           "observed": 0.964,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 889,
+         "mean_p": 0.593,
+         "observed": 0.812,
+         "brier": 0.1916,
+         "log_score": 0.6508
+        },
+        "new_or_small/signal": {
+         "n": 471,
+         "mean_p": 0.526,
+         "observed": 0.8,
+         "brier": 0.2484,
+         "log_score": 0.7576
+        }
+       },
+       "180": {
+        "all": {
+         "n": 1360,
+         "mean_p": 0.65,
+         "observed": 0.835,
+         "brier": 0.1718,
+         "log_score": 0.5904,
+         "deciles": [
+          {
+           "p": 0.106,
+           "observed": 0.615,
+           "n": 136
+          },
+          {
+           "p": 0.397,
+           "observed": 0.654,
+           "n": 136
+          },
+          {
+           "p": 0.527,
+           "observed": 0.738,
+           "n": 136
+          },
+          {
+           "p": 0.607,
+           "observed": 0.771,
+           "n": 136
+          },
+          {
+           "p": 0.678,
+           "observed": 0.91,
+           "n": 136
+          },
+          {
+           "p": 0.752,
+           "observed": 0.865,
+           "n": 136
+          },
+          {
+           "p": 0.813,
+           "observed": 0.906,
+           "n": 136
+          },
+          {
+           "p": 0.857,
+           "observed": 0.977,
+           "n": 136
+          },
+          {
+           "p": 0.893,
+           "observed": 0.984,
+           "n": 136
+          },
+          {
+           "p": 0.935,
+           "observed": 0.964,
+           "n": 136
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 889,
+         "mean_p": 0.671,
+         "observed": 0.84,
+         "brier": 0.1504,
+         "log_score": 0.5498
+        },
+        "new_or_small/signal": {
+         "n": 471,
+         "mean_p": 0.612,
+         "observed": 0.826,
+         "brier": 0.2111,
+         "log_score": 0.665
+        }
+       },
+       "365": {
+        "all": {
+         "n": 1220,
+         "mean_p": 0.673,
+         "observed": 0.844,
+         "brier": 0.1633,
+         "log_score": 0.5777,
+         "deciles": [
+          {
+           "p": 0.114,
+           "observed": 0.634,
+           "n": 122
+          },
+          {
+           "p": 0.433,
+           "observed": 0.665,
+           "n": 122
+          },
+          {
+           "p": 0.582,
+           "observed": 0.782,
+           "n": 122
+          },
+          {
+           "p": 0.653,
+           "observed": 0.749,
+           "n": 122
+          },
+          {
+           "p": 0.718,
+           "observed": 0.934,
+           "n": 122
+          },
+          {
+           "p": 0.771,
+           "observed": 0.85,
+           "n": 122
+          },
+          {
+           "p": 0.822,
+           "observed": 0.921,
+           "n": 122
+          },
+          {
+           "p": 0.86,
+           "observed": 0.974,
+           "n": 122
+          },
+          {
+           "p": 0.894,
+           "observed": 0.982,
+           "n": 122
+          },
+          {
+           "p": 0.936,
+           "observed": 0.98,
+           "n": 122
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 846,
+         "mean_p": 0.692,
+         "observed": 0.846,
+         "brier": 0.147,
+         "log_score": 0.5512
+        },
+        "new_or_small/signal": {
+         "n": 374,
+         "mean_p": 0.63,
+         "observed": 0.84,
+         "brier": 0.199,
+         "log_score": 0.6358
+        }
+       }
+      }
+     }
+    },
+    "kobis": {
+     "rows": 7,
+     "used": false,
+     "n_tune": 0,
+     "n_test": 0
+    },
+    "chain": {
+     "rows": 3,
+     "used": false,
+     "n_tune": 0,
+     "n_test": 0
+    },
+    "booking": {
+     "rows": 3,
+     "used": false,
+     "n_tune": 0,
+     "n_test": 0
+    }
+   },
+   "segments": {
+    "format_of_open": {
+     "test": {
+      "n": 2,
+      "mean_p": 0.25,
+      "observed": 0.0,
+      "brier": 0.0625,
+      "log_score": 0.2877
+     }
+    },
+    "short": {
+     "n": 1062,
+     "opened": 3,
+     "rate": 0.0033,
+     "test": {
+      "n": 488,
+      "mean_p": 0.003,
+      "observed": 0.0,
+      "brier": 0.0,
+      "log_score": 0.0025
+     }
+    },
+    "vod_applicant": {
+     "n": 100,
+     "opened": 0,
+     "rate": 0.005,
+     "test": {
+      "n": 51,
+      "mean_p": 0.004,
+      "observed": 0.0,
+      "brier": 0.0,
+      "log_score": 0.0043
+     }
+    }
+   },
+   "population": {
+    "p_open_298d": {
+     "n": 2304,
+     "mean_p": 0.574,
+     "observed": 0.59,
+     "brier": 0.1107,
+     "log_score": 0.3487,
+     "deciles": [
+      {
+       "p": 0.002,
+       "observed": 0.0,
+       "n": 230
+      },
+      {
+       "p": 0.003,
+       "observed": 0.0,
+       "n": 230
+      },
+      {
+       "p": 0.299,
+       "observed": 0.297,
+       "n": 231
+      },
+      {
+       "p": 0.596,
+       "observed": 0.583,
+       "n": 230
+      },
+      {
+       "p": 0.675,
+       "observed": 0.661,
+       "n": 231
+      },
+      {
+       "p": 0.752,
+       "observed": 0.829,
+       "n": 230
+      },
+      {
+       "p": 0.819,
+       "observed": 0.831,
+       "n": 230
+      },
+      {
+       "p": 0.865,
+       "observed": 0.923,
+       "n": 231
+      },
+      {
+       "p": 0.899,
+       "observed": 0.958,
+       "n": 230
+      },
+      {
+       "p": 0.936,
+       "observed": 0.928,
+       "n": 231
+      }
+     ]
+    }
+   },
+   "by_state": {
+    "rating_only": {
+     "n": 1764,
+     "n_opened": 1427,
+     "brier": 0.1464,
+     "log_score": 0.4603,
+     "mean_p": 0.758,
+     "observed": 0.78,
+     "band_0.9_1.0": {
+      "n": 343,
+      "mean_p": 0.926,
+      "observed": 0.943,
+      "brier": 0.0546,
+      "log_score": 0.2521
+     },
+     "interval_p10_p90": {
+      "median_width_days": 70,
+      "coverage": 0.836
+     },
+     "hit_rate": {
+      "3": 0.134,
+      "week": 0.135,
+      "month": 0.439
+     },
+     "hit_rate_all": {
+      "3": 0.107,
+      "week": 0.108,
+      "month": 0.351
+     },
+     "tier": "estimate"
+    },
+    "promo_after_rating": {
+     "n": 1360,
+     "n_opened": 1158,
+     "brier": 0.1226,
+     "log_score": 0.4013,
+     "mean_p": 0.829,
+     "observed": 0.84,
+     "band_0.9_1.0": {
+      "n": 470,
+      "mean_p": 0.947,
+      "observed": 0.94,
+      "brier": 0.0566,
+      "log_score": 0.2323
+     },
+     "interval_p10_p90": {
+      "median_width_days": 51,
+      "coverage": 0.867
+     },
+     "hit_rate": {
+      "3": 0.213,
+      "week": 0.209,
+      "month": 0.565
+     },
+     "hit_rate_all": {
+      "3": 0.18,
+      "week": 0.176,
+      "month": 0.478
+     },
+     "tier": "estimate"
+    },
+    "bookable": {
+     "n": 65,
+     "opened": 65,
+     "brier": 0.0001,
+     "hit_rate": {
+      "3": 1.0,
+      "week": 1.0,
+      "month": 1.0
+     },
+     "tier": "confirmed",
+     "provisional": true
+    },
+    "day_announced": {
+     "n": 74,
+     "opened": 70,
+     "brier": 0.0512,
+     "hit_rate": {
+      "3": 0.946,
+      "week": 0.946,
+      "month": 0.946
+     },
+     "tier": "likely",
+     "provisional": true
+    },
+    "month_announced": {
+     "n": 74,
+     "opened": 70,
+     "brier": 0.0512,
+     "hit_rate": {
+      "3": 0.0,
+      "week": 0.0,
+      "month": 0.946
+     },
+     "tier": "expected",
+     "provisional": true,
+     "borrowed_from": "day_announced"
+    },
+    "ad_filing": {
+     "n": 0,
+     "tier": "estimate",
+     "note": "no history yet: estimated as its rating / milestone state"
+    }
+   }
+  },
+  "backtest_real": {
+   "n_test": 1758,
+   "n_test_opened": 1347,
+   "maturity_days": 303,
+   "maturity_quantile": 0.95,
+   "tune_from": "2021-12-29",
+   "test_from": "2023-12-04",
+   "test_to": "2025-12-30",
+   "refit_days": 91,
+   "test_refits": 9,
+   "half_life_days": 730,
+   "features": [
+    "format",
+    "promo",
+    "restricted",
+    "foreign",
+    "rule_adult"
+   ],
+   "company_location_from": "all rows (censored by EM)",
+   "tuning": {
+    "loglik_by_half_life": {
+     "None": -4.1603,
+     "730": -4.1317,
+     "365": -4.1297,
+     "180": -4.5668,
+     "90": -4.6251,
+     "60": -4.9134,
+     "30": -5.3842
+    },
+    "feature_gain": {
+     "short": 0.0,
+     "format": 0.0059,
+     "promo": 0.1084,
+     "restricted": 0.0042,
+     "foreign": 0.0004,
+     "rerelease": -0.001,
+     "rule_adult": 0.0028
+    },
+    "loglik_calendar": -3.4542,
+    "loglik_company_location_opened_rows_only": -4.0144,
+    "loglik_no_calendar": -4.01
+   },
+   "calendar": {
+    "weekday": true,
+    "half_life_days": 180
+   },
+   "test_loglik": {
+    "model": -3.2532,
+    "model_single_refit": -3.3231,
+    "overall": -3.3666,
+    "company_location_opened_rows_only": -3.319,
+    "by_distributor_known_at_rating": -3.1799
+   },
+   "model": {
+    "n": 1758,
+    "n_films": 1655,
+    "n_opened": 1347,
+    "mae_p50_days": 34.3,
+    "median_ae_p50_days": 14,
+    "coverage": {
+     "p50": 0.6,
+     "p80": 0.874,
+     "p90": 0.923
+    },
+    "day_log_score": 3.721,
+    "p50_on_opening_weekday": 0.524,
+    "hit_rate": {
+     "3": 0.136,
+     "week": 0.138,
+     "month": 0.45
+    },
+    "hit_n": 1347,
+    "hit_films": {
+     "n": 1247.5,
+     "hits": {
+      "3": 170.0,
+      "week": 172.0,
+      "month": 561.0
+     }
+    },
+    "interval_p10_p90": {
+     "median_width_days": 70,
+     "coverage": 0.854
+    },
+    "hit_rate_all": {
+     "3": 0.103,
+     "week": 0.104,
+     "month": 0.339
+    },
+    "hit_films_all": {
+     "n": 1655.0,
+     "hits": {
+      "3": 170.0,
+      "week": 172.0,
+      "month": 561.0
+     }
+    },
+    "band_0.9_1.0": {
+     "n": 358,
+     "mean_p": 0.934,
+     "observed": 0.957,
+     "brier": 0.0421,
+     "log_score": 0.2104
+    },
+    "censored_log_score": 3.2532,
+    "integrated_brier": 0.1473,
+    "p_open_303d": {
+     "all": {
+      "n": 1758,
+      "mean_p": 0.728,
+      "observed": 0.734,
+      "brier": 0.1484,
+      "log_score": 0.4626,
+      "deciles": [
+       {
+        "p": 0.345,
+        "observed": 0.303,
+        "n": 175
+       },
+       {
+        "p": 0.549,
+        "observed": 0.454,
+        "n": 176
+       },
+       {
+        "p": 0.607,
+        "observed": 0.586,
+        "n": 176
+       },
+       {
+        "p": 0.673,
+        "observed": 0.684,
+        "n": 176
+       },
+       {
+        "p": 0.737,
+        "observed": 0.79,
+        "n": 176
+       },
+       {
+        "p": 0.813,
+        "observed": 0.866,
+        "n": 175
+       },
+       {
+        "p": 0.86,
+        "observed": 0.887,
+        "n": 176
+       },
+       {
+        "p": 0.888,
+        "observed": 0.92,
+        "n": 176
+       },
+       {
+        "p": 0.916,
+        "observed": 0.958,
+        "n": 176
+       },
+       {
+        "p": 0.958,
+        "observed": 0.962,
+        "n": 176
+       }
+      ]
+     },
+     "established": {
+      "n": 1267,
+      "mean_p": 0.733,
+      "observed": 0.74,
+      "brier": 0.1363,
+      "log_score": 0.435,
+      "deciles": [
+       {
+        "p": 0.326,
+        "observed": 0.216,
+        "n": 126
+       },
+       {
+        "p": 0.531,
+        "observed": 0.446,
+        "n": 127
+       },
+       {
+        "p": 0.627,
+        "observed": 0.598,
+        "n": 127
+       },
+       {
+        "p": 0.695,
+        "observed": 0.783,
+        "n": 126
+       },
+       {
+        "p": 0.759,
+        "observed": 0.782,
+        "n": 127
+       },
+       {
+        "p": 0.828,
+        "observed": 0.853,
+        "n": 127
+       },
+       {
+        "p": 0.867,
+        "observed": 0.95,
+        "n": 126
+       },
+       {
+        "p": 0.899,
+        "observed": 0.949,
+        "n": 127
+       },
+       {
+        "p": 0.93,
+        "observed": 0.956,
+        "n": 127
+       },
+       {
+        "p": 0.967,
+        "observed": 0.967,
+        "n": 127
+       }
+      ]
+     },
+     "new_or_small": {
+      "n": 491,
+      "mean_p": 0.713,
+      "observed": 0.718,
+      "brier": 0.1782,
+      "log_score": 0.5308,
+      "deciles": [
+       {
+        "p": 0.41,
+        "observed": 0.482,
+        "n": 49
+       },
+       {
+        "p": 0.574,
+        "observed": 0.521,
+        "n": 49
+       },
+       {
+        "p": 0.591,
+        "observed": 0.604,
+        "n": 49
+       },
+       {
+        "p": 0.62,
+        "observed": 0.556,
+        "n": 49
+       },
+       {
+        "p": 0.665,
+        "observed": 0.656,
+        "n": 49
+       },
+       {
+        "p": 0.759,
+        "observed": 0.766,
+        "n": 49
+       },
+       {
+        "p": 0.834,
+        "observed": 0.872,
+        "n": 49
+       },
+       {
+        "p": 0.876,
+        "observed": 0.937,
+        "n": 49
+       },
+       {
+        "p": 0.893,
+        "observed": 0.904,
+        "n": 49
+       },
+       {
+        "p": 0.909,
+        "observed": 0.879,
+        "n": 50
+       }
+      ]
+     }
+    },
+    "p_open_within": {
+     "7": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.017,
+       "observed": 0.011,
+       "brier": 0.0114,
+       "log_score": 0.0594,
+       "deciles": [
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 175
+        },
+        {
+         "p": 0.0,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.0,
+         "observed": 0.012,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.006,
+         "observed": 0.0,
+         "n": 175
+        },
+        {
+         "p": 0.012,
+         "observed": 0.002,
+         "n": 176
+        },
+        {
+         "p": 0.02,
+         "observed": 0.012,
+         "n": 176
+        },
+        {
+         "p": 0.037,
+         "observed": 0.04,
+         "n": 176
+        },
+        {
+         "p": 0.112,
+         "observed": 0.051,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 572,
+       "mean_p": 0.001,
+       "observed": 0.004,
+       "brier": 0.0036,
+       "log_score": 0.0303
+      },
+      "established/signal": {
+       "n": 695,
+       "mean_p": 0.036,
+       "observed": 0.017,
+       "brier": 0.0169,
+       "log_score": 0.0777
+      },
+      "new_or_small/no_signal": {
+       "n": 277,
+       "mean_p": 0.001,
+       "observed": 0.004,
+       "brier": 0.0037,
+       "log_score": 0.0291
+      },
+      "new_or_small/signal": {
+       "n": 214,
+       "mean_p": 0.025,
+       "observed": 0.026,
+       "brier": 0.0256,
+       "log_score": 0.1222
+      }
+     },
+     "30": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.289,
+       "observed": 0.341,
+       "brier": 0.1524,
+       "log_score": 0.4637,
+       "deciles": [
+        {
+         "p": 0.017,
+         "observed": 0.029,
+         "n": 175
+        },
+        {
+         "p": 0.044,
+         "observed": 0.046,
+         "n": 176
+        },
+        {
+         "p": 0.07,
+         "observed": 0.093,
+         "n": 176
+        },
+        {
+         "p": 0.098,
+         "observed": 0.121,
+         "n": 176
+        },
+        {
+         "p": 0.169,
+         "observed": 0.207,
+         "n": 176
+        },
+        {
+         "p": 0.314,
+         "observed": 0.396,
+         "n": 175
+        },
+        {
+         "p": 0.436,
+         "observed": 0.557,
+         "n": 176
+        },
+        {
+         "p": 0.504,
+         "observed": 0.6,
+         "n": 176
+        },
+        {
+         "p": 0.59,
+         "observed": 0.654,
+         "n": 176
+        },
+        {
+         "p": 0.787,
+         "observed": 0.852,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 572,
+       "mean_p": 0.103,
+       "observed": 0.144,
+       "brier": 0.1011,
+       "log_score": 0.3344
+      },
+      "established/signal": {
+       "n": 695,
+       "mean_p": 0.487,
+       "observed": 0.554,
+       "brier": 0.194,
+       "log_score": 0.5656
+      },
+      "new_or_small/no_signal": {
+       "n": 277,
+       "mean_p": 0.076,
+       "observed": 0.106,
+       "brier": 0.093,
+       "log_score": 0.3306
+      },
+      "new_or_small/signal": {
+       "n": 214,
+       "mean_p": 0.471,
+       "observed": 0.533,
+       "brier": 0.2423,
+       "log_score": 0.6779
+      }
+     },
+     "90": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.589,
+       "observed": 0.644,
+       "brier": 0.1562,
+       "log_score": 0.4813,
+       "deciles": [
+        {
+         "p": 0.174,
+         "observed": 0.139,
+         "n": 175
+        },
+        {
+         "p": 0.295,
+         "observed": 0.34,
+         "n": 176
+        },
+        {
+         "p": 0.356,
+         "observed": 0.397,
+         "n": 176
+        },
+        {
+         "p": 0.457,
+         "observed": 0.501,
+         "n": 176
+        },
+        {
+         "p": 0.57,
+         "observed": 0.671,
+         "n": 176
+        },
+        {
+         "p": 0.698,
+         "observed": 0.803,
+         "n": 175
+        },
+        {
+         "p": 0.791,
+         "observed": 0.861,
+         "n": 176
+        },
+        {
+         "p": 0.835,
+         "observed": 0.909,
+         "n": 176
+        },
+        {
+         "p": 0.884,
+         "observed": 0.965,
+         "n": 176
+        },
+        {
+         "p": 0.943,
+         "observed": 0.961,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 572,
+       "mean_p": 0.415,
+       "observed": 0.485,
+       "brier": 0.2083,
+       "log_score": 0.601
+      },
+      "established/signal": {
+       "n": 695,
+       "mean_p": 0.774,
+       "observed": 0.822,
+       "brier": 0.0921,
+       "log_score": 0.3295
+      },
+      "new_or_small/no_signal": {
+       "n": 277,
+       "mean_p": 0.356,
+       "observed": 0.385,
+       "brier": 0.2246,
+       "log_score": 0.6442
+      },
+      "new_or_small/signal": {
+       "n": 214,
+       "mean_p": 0.804,
+       "observed": 0.872,
+       "brier": 0.1197,
+       "log_score": 0.4037
+      }
+     },
+     "180": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.697,
+       "observed": 0.709,
+       "brier": 0.1537,
+       "log_score": 0.4742,
+       "deciles": [
+        {
+         "p": 0.303,
+         "observed": 0.239,
+         "n": 175
+        },
+        {
+         "p": 0.485,
+         "observed": 0.439,
+         "n": 176
+        },
+        {
+         "p": 0.544,
+         "observed": 0.554,
+         "n": 176
+        },
+        {
+         "p": 0.617,
+         "observed": 0.635,
+         "n": 176
+        },
+        {
+         "p": 0.705,
+         "observed": 0.748,
+         "n": 176
+        },
+        {
+         "p": 0.793,
+         "observed": 0.826,
+         "n": 175
+        },
+        {
+         "p": 0.851,
+         "observed": 0.881,
+         "n": 176
+        },
+        {
+         "p": 0.881,
+         "observed": 0.932,
+         "n": 176
+        },
+        {
+         "p": 0.912,
+         "observed": 0.958,
+         "n": 176
+        },
+        {
+         "p": 0.957,
+         "observed": 0.962,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 572,
+       "mean_p": 0.585,
+       "observed": 0.596,
+       "brier": 0.1974,
+       "log_score": 0.5794
+      },
+      "established/signal": {
+       "n": 695,
+       "mean_p": 0.814,
+       "observed": 0.836,
+       "brier": 0.0902,
+       "log_score": 0.3231
+      },
+      "new_or_small/no_signal": {
+       "n": 277,
+       "mean_p": 0.534,
+       "observed": 0.509,
+       "brier": 0.2498,
+       "log_score": 0.695
+      },
+      "new_or_small/signal": {
+       "n": 214,
+       "mean_p": 0.857,
+       "observed": 0.891,
+       "brier": 0.1017,
+       "log_score": 0.3584
+      }
+     },
+     "365": {
+      "all": {
+       "n": 1596,
+       "mean_p": 0.732,
+       "observed": 0.741,
+       "brier": 0.1476,
+       "log_score": 0.4606,
+       "deciles": [
+        {
+         "p": 0.354,
+         "observed": 0.34,
+         "n": 159
+        },
+        {
+         "p": 0.557,
+         "observed": 0.445,
+         "n": 160
+        },
+        {
+         "p": 0.614,
+         "observed": 0.58,
+         "n": 159
+        },
+        {
+         "p": 0.681,
+         "observed": 0.688,
+         "n": 160
+        },
+        {
+         "p": 0.742,
+         "observed": 0.792,
+         "n": 160
+        },
+        {
+         "p": 0.816,
+         "observed": 0.896,
+         "n": 159
+        },
+        {
+         "p": 0.861,
+         "observed": 0.882,
+         "n": 160
+        },
+        {
+         "p": 0.888,
+         "observed": 0.925,
+         "n": 159
+        },
+        {
+         "p": 0.917,
+         "observed": 0.973,
+         "n": 160
+        },
+        {
+         "p": 0.959,
+         "observed": 0.958,
+         "n": 160
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 521,
+       "mean_p": 0.649,
+       "observed": 0.644,
+       "brier": 0.1907,
+       "log_score": 0.564
+      },
+      "established/signal": {
+       "n": 633,
+       "mean_p": 0.819,
+       "observed": 0.841,
+       "brier": 0.0873,
+       "log_score": 0.3199
+      },
+      "new_or_small/no_signal": {
+       "n": 254,
+       "mean_p": 0.605,
+       "observed": 0.579,
+       "brier": 0.245,
+       "log_score": 0.6838
+      },
+      "new_or_small/signal": {
+       "n": 188,
+       "mean_p": 0.861,
+       "observed": 0.915,
+       "brier": 0.0831,
+       "log_score": 0.3079
+      }
+     }
+    }
+   },
+   "overall": {
+    "n": 1758,
+    "n_films": 1655,
+    "n_opened": 1347,
+    "mae_p50_days": 35.8,
+    "median_ae_p50_days": 14,
+    "coverage": {
+     "p50": 0.583,
+     "p80": 0.876,
+     "p90": 0.931
+    },
+    "day_log_score": 3.785,
+    "p50_on_opening_weekday": 0.478,
+    "hit_rate": {
+     "3": 0.134,
+     "week": 0.133,
+     "month": 0.43
+    },
+    "hit_n": 1347,
+    "hit_films": {
+     "n": 1247.5,
+     "hits": {
+      "3": 167.667,
+      "week": 165.667,
+      "month": 536.667
+     }
+    },
+    "interval_p10_p90": {
+     "median_width_days": 69,
+     "coverage": 0.873
+    },
+    "hit_rate_all": {
+     "3": 0.101,
+     "week": 0.1,
+     "month": 0.324
+    },
+    "hit_films_all": {
+     "n": 1655.0,
+     "hits": {
+      "3": 167.667,
+      "week": 165.667,
+      "month": 536.667
+     }
+    },
+    "band_0.9_1.0": {
+     "n": 42,
+     "mean_p": 0.999,
+     "observed": 0.951,
+     "brier": 0.0486,
+     "log_score": 0.4343
+    },
+    "censored_log_score": 3.3666,
+    "integrated_brier": 0.1737,
+    "p_open_303d": {
+     "all": {
+      "n": 1758,
+      "mean_p": 0.704,
+      "observed": 0.734,
+      "brier": 0.174,
+      "log_score": 0.5241,
+      "deciles": [
+       {
+        "p": 0.447,
+        "observed": 0.571,
+        "n": 175
+       },
+       {
+        "p": 0.597,
+        "observed": 0.646,
+        "n": 176
+       },
+       {
+        "p": 0.615,
+        "observed": 0.627,
+        "n": 176
+       },
+       {
+        "p": 0.623,
+        "observed": 0.64,
+        "n": 176
+       },
+       {
+        "p": 0.638,
+        "observed": 0.626,
+        "n": 176
+       },
+       {
+        "p": 0.728,
+        "observed": 0.6,
+        "n": 175
+       },
+       {
+        "p": 0.84,
+        "observed": 0.915,
+        "n": 176
+       },
+       {
+        "p": 0.851,
+        "observed": 0.916,
+        "n": 176
+       },
+       {
+        "p": 0.863,
+        "observed": 0.932,
+        "n": 176
+       },
+       {
+        "p": 0.889,
+        "observed": 0.906,
+        "n": 176
+       }
+      ]
+     },
+     "established": {
+      "n": 1758,
+      "mean_p": 0.704,
+      "observed": 0.734,
+      "brier": 0.174,
+      "log_score": 0.5241,
+      "deciles": [
+       {
+        "p": 0.447,
+        "observed": 0.571,
+        "n": 175
+       },
+       {
+        "p": 0.597,
+        "observed": 0.646,
+        "n": 176
+       },
+       {
+        "p": 0.615,
+        "observed": 0.627,
+        "n": 176
+       },
+       {
+        "p": 0.623,
+        "observed": 0.64,
+        "n": 176
+       },
+       {
+        "p": 0.638,
+        "observed": 0.626,
+        "n": 176
+       },
+       {
+        "p": 0.728,
+        "observed": 0.6,
+        "n": 175
+       },
+       {
+        "p": 0.84,
+        "observed": 0.915,
+        "n": 176
+       },
+       {
+        "p": 0.851,
+        "observed": 0.916,
+        "n": 176
+       },
+       {
+        "p": 0.863,
+        "observed": 0.932,
+        "n": 176
+       },
+       {
+        "p": 0.889,
+        "observed": 0.906,
+        "n": 176
+       }
+      ]
+     }
+    },
+    "p_open_within": {
+     "7": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.019,
+       "observed": 0.011,
+       "brier": 0.0114,
+       "log_score": 0.062,
+       "deciles": [
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 175
+        },
+        {
+         "p": 0.001,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.012,
+         "n": 176
+        },
+        {
+         "p": 0.004,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.021,
+         "observed": 0.0,
+         "n": 175
+        },
+        {
+         "p": 0.026,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.033,
+         "observed": 0.024,
+         "n": 176
+        },
+        {
+         "p": 0.043,
+         "observed": 0.037,
+         "n": 176
+        },
+        {
+         "p": 0.07,
+         "observed": 0.026,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 849,
+       "mean_p": 0.001,
+       "observed": 0.004,
+       "brier": 0.0036,
+       "log_score": 0.026
+      },
+      "established/signal": {
+       "n": 909,
+       "mean_p": 0.037,
+       "observed": 0.019,
+       "brier": 0.0192,
+       "log_score": 0.0978
+      }
+     },
+     "30": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.29,
+       "observed": 0.341,
+       "brier": 0.1776,
+       "log_score": 0.5328,
+       "deciles": [
+        {
+         "p": 0.059,
+         "observed": 0.064,
+         "n": 175
+        },
+        {
+         "p": 0.082,
+         "observed": 0.11,
+         "n": 176
+        },
+        {
+         "p": 0.093,
+         "observed": 0.133,
+         "n": 176
+        },
+        {
+         "p": 0.103,
+         "observed": 0.176,
+         "n": 176
+        },
+        {
+         "p": 0.153,
+         "observed": 0.206,
+         "n": 176
+        },
+        {
+         "p": 0.403,
+         "observed": 0.366,
+         "n": 175
+        },
+        {
+         "p": 0.471,
+         "observed": 0.618,
+         "n": 176
+        },
+        {
+         "p": 0.501,
+         "observed": 0.558,
+         "n": 176
+        },
+        {
+         "p": 0.524,
+         "observed": 0.604,
+         "n": 176
+        },
+        {
+         "p": 0.582,
+         "observed": 0.653,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 849,
+       "mean_p": 0.09,
+       "observed": 0.131,
+       "brier": 0.1148,
+       "log_score": 0.3926
+      },
+      "established/signal": {
+       "n": 909,
+       "mean_p": 0.488,
+       "observed": 0.549,
+       "brier": 0.2401,
+       "log_score": 0.6724
+      }
+     },
+     "90": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.574,
+       "observed": 0.644,
+       "brier": 0.1889,
+       "log_score": 0.5577,
+       "deciles": [
+        {
+         "p": 0.271,
+         "observed": 0.334,
+         "n": 175
+        },
+        {
+         "p": 0.366,
+         "observed": 0.503,
+         "n": 176
+        },
+        {
+         "p": 0.388,
+         "observed": 0.423,
+         "n": 176
+        },
+        {
+         "p": 0.405,
+         "observed": 0.537,
+         "n": 176
+        },
+        {
+         "p": 0.456,
+         "observed": 0.5,
+         "n": 176
+        },
+        {
+         "p": 0.676,
+         "observed": 0.609,
+         "n": 175
+        },
+        {
+         "p": 0.788,
+         "observed": 0.891,
+         "n": 176
+        },
+        {
+         "p": 0.802,
+         "observed": 0.908,
+         "n": 176
+        },
+        {
+         "p": 0.815,
+         "observed": 0.91,
+         "n": 176
+        },
+        {
+         "p": 0.85,
+         "observed": 0.891,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 849,
+       "mean_p": 0.37,
+       "observed": 0.452,
+       "brier": 0.2512,
+       "log_score": 0.6962
+      },
+      "established/signal": {
+       "n": 909,
+       "mean_p": 0.778,
+       "observed": 0.834,
+       "brier": 0.1268,
+       "log_score": 0.4199
+      }
+     },
+     "180": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.675,
+       "observed": 0.709,
+       "brier": 0.1796,
+       "log_score": 0.5352,
+       "deciles": [
+        {
+         "p": 0.401,
+         "observed": 0.495,
+         "n": 175
+        },
+        {
+         "p": 0.537,
+         "observed": 0.603,
+         "n": 176
+        },
+        {
+         "p": 0.558,
+         "observed": 0.526,
+         "n": 176
+        },
+        {
+         "p": 0.57,
+         "observed": 0.666,
+         "n": 176
+        },
+        {
+         "p": 0.596,
+         "observed": 0.574,
+         "n": 176
+        },
+        {
+         "p": 0.719,
+         "observed": 0.626,
+         "n": 175
+        },
+        {
+         "p": 0.834,
+         "observed": 0.909,
+         "n": 176
+        },
+        {
+         "p": 0.846,
+         "observed": 0.916,
+         "n": 176
+        },
+        {
+         "p": 0.858,
+         "observed": 0.927,
+         "n": 176
+        },
+        {
+         "p": 0.885,
+         "observed": 0.898,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 849,
+       "mean_p": 0.529,
+       "observed": 0.568,
+       "brier": 0.2447,
+       "log_score": 0.6829
+      },
+      "established/signal": {
+       "n": 909,
+       "mean_p": 0.82,
+       "observed": 0.85,
+       "brier": 0.1148,
+       "log_score": 0.3882
+      }
+     },
+     "365": {
+      "all": {
+       "n": 1596,
+       "mean_p": 0.706,
+       "observed": 0.741,
+       "brier": 0.1718,
+       "log_score": 0.5197,
+       "deciles": [
+        {
+         "p": 0.449,
+         "observed": 0.565,
+         "n": 159
+        },
+        {
+         "p": 0.606,
+         "observed": 0.669,
+         "n": 160
+        },
+        {
+         "p": 0.622,
+         "observed": 0.641,
+         "n": 159
+        },
+        {
+         "p": 0.631,
+         "observed": 0.619,
+         "n": 160
+        },
+        {
+         "p": 0.641,
+         "observed": 0.59,
+         "n": 160
+        },
+        {
+         "p": 0.722,
+         "observed": 0.663,
+         "n": 159
+        },
+        {
+         "p": 0.838,
+         "observed": 0.912,
+         "n": 160
+        },
+        {
+         "p": 0.849,
+         "observed": 0.922,
+         "n": 159
+        },
+        {
+         "p": 0.861,
+         "observed": 0.927,
+         "n": 160
+        },
+        {
+         "p": 0.889,
+         "observed": 0.947,
+         "n": 160
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 775,
+       "mean_p": 0.589,
+       "observed": 0.623,
+       "brier": 0.2349,
+       "log_score": 0.6629
+      },
+      "established/signal": {
+       "n": 821,
+       "mean_p": 0.824,
+       "observed": 0.859,
+       "brier": 0.1084,
+       "log_score": 0.3757
+      }
+     }
+    }
+   },
+   "by_distributor_known_at_rating": {
+    "n": 1758,
+    "n_films": 1655,
+    "n_opened": 1347,
+    "mae_p50_days": 35.2,
+    "median_ae_p50_days": 14,
+    "coverage": {
+     "p50": 0.582,
+     "p80": 0.863,
+     "p90": 0.927
+    },
+    "day_log_score": 3.805,
+    "p50_on_opening_weekday": 0.473,
+    "hit_rate": {
+     "3": 0.149,
+     "week": 0.147,
+     "month": 0.439
+    },
+    "hit_n": 1347,
+    "hit_films": {
+     "n": 1247.5,
+     "hits": {
+      "3": 185.833,
+      "week": 183.833,
+      "month": 548.167
+     }
+    },
+    "interval_p10_p90": {
+     "median_width_days": 72,
+     "coverage": 0.851
+    },
+    "hit_rate_all": {
+     "3": 0.112,
+     "week": 0.111,
+     "month": 0.331
+    },
+    "hit_films_all": {
+     "n": 1655.0,
+     "hits": {
+      "3": 185.833,
+      "week": 183.833,
+      "month": 548.167
+     }
+    },
+    "band_0.9_1.0": {
+     "n": 706,
+     "mean_p": 0.948,
+     "observed": 0.978,
+     "brier": 0.0221,
+     "log_score": 0.116
+    },
+    "censored_log_score": 3.1799,
+    "integrated_brier": 0.1187,
+    "p_open_303d": {
+     "all": {
+      "n": 1758,
+      "mean_p": 0.712,
+      "observed": 0.734,
+      "brier": 0.1055,
+      "log_score": 0.3449,
+      "deciles": [
+       {
+        "p": 0.163,
+        "observed": 0.069,
+        "n": 175
+       },
+       {
+        "p": 0.341,
+        "observed": 0.308,
+        "n": 176
+       },
+       {
+        "p": 0.516,
+        "observed": 0.673,
+        "n": 176
+       },
+       {
+        "p": 0.71,
+        "observed": 0.803,
+        "n": 176
+       },
+       {
+        "p": 0.817,
+        "observed": 0.731,
+        "n": 176
+       },
+       {
+        "p": 0.883,
+        "observed": 0.947,
+        "n": 175
+       },
+       {
+        "p": 0.915,
+        "observed": 0.95,
+        "n": 176
+       },
+       {
+        "p": 0.942,
+        "observed": 0.988,
+        "n": 176
+       },
+       {
+        "p": 0.962,
+        "observed": 0.994,
+        "n": 176
+       },
+       {
+        "p": 0.981,
+        "observed": 0.984,
+        "n": 176
+       }
+      ]
+     },
+     "established": {
+      "n": 1491,
+      "mean_p": 0.762,
+      "observed": 0.782,
+      "brier": 0.0847,
+      "log_score": 0.2923,
+      "deciles": [
+       {
+        "p": 0.168,
+        "observed": 0.061,
+        "n": 149
+       },
+       {
+        "p": 0.427,
+        "observed": 0.503,
+        "n": 149
+       },
+       {
+        "p": 0.707,
+        "observed": 0.849,
+        "n": 149
+       },
+       {
+        "p": 0.818,
+        "observed": 0.688,
+        "n": 149
+       },
+       {
+        "p": 0.876,
+        "observed": 0.952,
+        "n": 149
+       },
+       {
+        "p": 0.907,
+        "observed": 0.937,
+        "n": 149
+       },
+       {
+        "p": 0.928,
+        "observed": 0.967,
+        "n": 149
+       },
+       {
+        "p": 0.951,
+        "observed": 0.993,
+        "n": 149
+       },
+       {
+        "p": 0.966,
+        "observed": 1.0,
+        "n": 149
+       },
+       {
+        "p": 0.983,
+        "observed": 0.981,
+        "n": 150
+       }
+      ]
+     },
+     "new_or_small": {
+      "n": 267,
+      "mean_p": 0.444,
+      "observed": 0.473,
+      "brier": 0.2163,
+      "log_score": 0.6247,
+      "deciles": [
+       {
+        "p": 0.159,
+        "observed": 0.154,
+        "n": 26
+       },
+       {
+        "p": 0.35,
+        "observed": 0.333,
+        "n": 27
+       },
+       {
+        "p": 0.374,
+        "observed": 0.264,
+        "n": 27
+       },
+       {
+        "p": 0.381,
+        "observed": 0.38,
+        "n": 26
+       },
+       {
+        "p": 0.381,
+        "observed": 0.333,
+        "n": 27
+       },
+       {
+        "p": 0.381,
+        "observed": 0.444,
+        "n": 27
+       },
+       {
+        "p": 0.41,
+        "observed": 0.592,
+        "n": 26
+       },
+       {
+        "p": 0.611,
+        "observed": 0.692,
+        "n": 27
+       },
+       {
+        "p": 0.683,
+        "observed": 0.741,
+        "n": 27
+       },
+       {
+        "p": 0.707,
+        "observed": 0.808,
+        "n": 27
+       }
+      ]
+     }
+    },
+    "p_open_within": {
+     "7": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.021,
+       "observed": 0.011,
+       "brier": 0.012,
+       "log_score": 0.0649,
+       "deciles": [
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 175
+        },
+        {
+         "p": 0.0,
+         "observed": 0.0,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.001,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.002,
+         "observed": 0.006,
+         "n": 176
+        },
+        {
+         "p": 0.007,
+         "observed": 0.008,
+         "n": 175
+        },
+        {
+         "p": 0.016,
+         "observed": 0.024,
+         "n": 176
+        },
+        {
+         "p": 0.028,
+         "observed": 0.025,
+         "n": 176
+        },
+        {
+         "p": 0.05,
+         "observed": 0.013,
+         "n": 176
+        },
+        {
+         "p": 0.12,
+         "observed": 0.031,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 670,
+       "mean_p": 0.001,
+       "observed": 0.003,
+       "brier": 0.0031,
+       "log_score": 0.0229
+      },
+      "established/signal": {
+       "n": 821,
+       "mean_p": 0.04,
+       "observed": 0.017,
+       "brier": 0.0185,
+       "log_score": 0.0943
+      },
+      "new_or_small/no_signal": {
+       "n": 179,
+       "mean_p": 0.001,
+       "observed": 0.006,
+       "brier": 0.0057,
+       "log_score": 0.0412
+      },
+      "new_or_small/signal": {
+       "n": 88,
+       "mean_p": 0.039,
+       "observed": 0.035,
+       "brier": 0.0352,
+       "log_score": 0.1755
+      }
+     },
+     "30": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.292,
+       "observed": 0.341,
+       "brier": 0.156,
+       "log_score": 0.4694,
+       "deciles": [
+        {
+         "p": 0.017,
+         "observed": 0.023,
+         "n": 175
+        },
+        {
+         "p": 0.052,
+         "observed": 0.035,
+         "n": 176
+        },
+        {
+         "p": 0.074,
+         "observed": 0.092,
+         "n": 176
+        },
+        {
+         "p": 0.093,
+         "observed": 0.118,
+         "n": 176
+        },
+        {
+         "p": 0.149,
+         "observed": 0.188,
+         "n": 176
+        },
+        {
+         "p": 0.324,
+         "observed": 0.553,
+         "n": 175
+        },
+        {
+         "p": 0.437,
+         "observed": 0.539,
+         "n": 176
+        },
+        {
+         "p": 0.509,
+         "observed": 0.568,
+         "n": 176
+        },
+        {
+         "p": 0.623,
+         "observed": 0.604,
+         "n": 176
+        },
+        {
+         "p": 0.788,
+         "observed": 0.833,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 670,
+       "mean_p": 0.104,
+       "observed": 0.146,
+       "brier": 0.1068,
+       "log_score": 0.3526
+      },
+      "established/signal": {
+       "n": 821,
+       "mean_p": 0.495,
+       "observed": 0.558,
+       "brier": 0.2087,
+       "log_score": 0.5948
+      },
+      "new_or_small/no_signal": {
+       "n": 179,
+       "mean_p": 0.067,
+       "observed": 0.077,
+       "brier": 0.0686,
+       "log_score": 0.256
+      },
+      "new_or_small/signal": {
+       "n": 88,
+       "mean_p": 0.411,
+       "observed": 0.474,
+       "brier": 0.2517,
+       "log_score": 0.7037
+      }
+     },
+     "90": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.577,
+       "observed": 0.644,
+       "brier": 0.1335,
+       "log_score": 0.4169,
+       "deciles": [
+        {
+         "p": 0.111,
+         "observed": 0.052,
+         "n": 175
+        },
+        {
+         "p": 0.219,
+         "observed": 0.251,
+         "n": 176
+        },
+        {
+         "p": 0.304,
+         "observed": 0.373,
+         "n": 176
+        },
+        {
+         "p": 0.481,
+         "observed": 0.603,
+         "n": 176
+        },
+        {
+         "p": 0.561,
+         "observed": 0.646,
+         "n": 176
+        },
+        {
+         "p": 0.673,
+         "observed": 0.774,
+         "n": 175
+        },
+        {
+         "p": 0.807,
+         "observed": 0.914,
+         "n": 176
+        },
+        {
+         "p": 0.875,
+         "observed": 0.971,
+         "n": 176
+        },
+        {
+         "p": 0.914,
+         "observed": 0.993,
+         "n": 176
+        },
+        {
+         "p": 0.965,
+         "observed": 1.0,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 670,
+       "mean_p": 0.435,
+       "observed": 0.506,
+       "brier": 0.1989,
+       "log_score": 0.5763
+      },
+      "established/signal": {
+       "n": 821,
+       "mean_p": 0.777,
+       "observed": 0.853,
+       "brier": 0.0532,
+       "log_score": 0.2165
+      },
+      "new_or_small/no_signal": {
+       "n": 179,
+       "mean_p": 0.241,
+       "observed": 0.254,
+       "brier": 0.1838,
+       "log_score": 0.559
+      },
+      "new_or_small/signal": {
+       "n": 88,
+       "mean_p": 0.597,
+       "observed": 0.676,
+       "brier": 0.2295,
+       "log_score": 0.6518
+      }
+     },
+     "180": {
+      "all": {
+       "n": 1758,
+       "mean_p": 0.681,
+       "observed": 0.709,
+       "brier": 0.1143,
+       "log_score": 0.3662,
+       "deciles": [
+        {
+         "p": 0.151,
+         "observed": 0.069,
+         "n": 175
+        },
+        {
+         "p": 0.315,
+         "observed": 0.234,
+         "n": 176
+        },
+        {
+         "p": 0.46,
+         "observed": 0.656,
+         "n": 176
+        },
+        {
+         "p": 0.665,
+         "observed": 0.746,
+         "n": 176
+        },
+        {
+         "p": 0.759,
+         "observed": 0.71,
+         "n": 176
+        },
+        {
+         "p": 0.832,
+         "observed": 0.878,
+         "n": 175
+        },
+        {
+         "p": 0.885,
+         "observed": 0.94,
+         "n": 176
+        },
+        {
+         "p": 0.93,
+         "observed": 0.997,
+         "n": 176
+        },
+        {
+         "p": 0.956,
+         "observed": 0.994,
+         "n": 176
+        },
+        {
+         "p": 0.979,
+         "observed": 0.992,
+         "n": 176
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 670,
+       "mean_p": 0.63,
+       "observed": 0.634,
+       "brier": 0.1562,
+       "log_score": 0.4804
+      },
+      "established/signal": {
+       "n": 821,
+       "mean_p": 0.816,
+       "observed": 0.869,
+       "brier": 0.0433,
+       "log_score": 0.1784
+      },
+      "new_or_small/no_signal": {
+       "n": 179,
+       "mean_p": 0.329,
+       "observed": 0.322,
+       "brier": 0.2059,
+       "log_score": 0.6042
+      },
+      "new_or_small/signal": {
+       "n": 88,
+       "mean_p": 0.62,
+       "observed": 0.688,
+       "brier": 0.2225,
+       "log_score": 0.6367
+      }
+     },
+     "365": {
+      "all": {
+       "n": 1596,
+       "mean_p": 0.718,
+       "observed": 0.741,
+       "brier": 0.1021,
+       "log_score": 0.3364,
+       "deciles": [
+        {
+         "p": 0.167,
+         "observed": 0.063,
+         "n": 159
+        },
+        {
+         "p": 0.348,
+         "observed": 0.333,
+         "n": 160
+        },
+        {
+         "p": 0.529,
+         "observed": 0.684,
+         "n": 159
+        },
+        {
+         "p": 0.719,
+         "observed": 0.835,
+         "n": 160
+        },
+        {
+         "p": 0.828,
+         "observed": 0.713,
+         "n": 160
+        },
+        {
+         "p": 0.89,
+         "observed": 0.961,
+         "n": 159
+        },
+        {
+         "p": 0.922,
+         "observed": 0.957,
+         "n": 160
+        },
+        {
+         "p": 0.946,
+         "observed": 0.993,
+         "n": 159
+        },
+        {
+         "p": 0.963,
+         "observed": 0.993,
+         "n": 160
+        },
+        {
+         "p": 0.981,
+         "observed": 0.983,
+         "n": 160
+        }
+       ]
+      },
+      "established/no_signal": {
+       "n": 615,
+       "mean_p": 0.706,
+       "observed": 0.695,
+       "brier": 0.1285,
+       "log_score": 0.4133
+      },
+      "established/signal": {
+       "n": 745,
+       "mean_p": 0.823,
+       "observed": 0.87,
+       "brier": 0.0414,
+       "log_score": 0.1744
+      },
+      "new_or_small/no_signal": {
+       "n": 160,
+       "mean_p": 0.362,
+       "observed": 0.35,
+       "brier": 0.2091,
+       "log_score": 0.6058
+      },
+      "new_or_small/signal": {
+       "n": 76,
+       "mean_p": 0.623,
+       "observed": 0.76,
+       "brier": 0.2127,
+       "log_score": 0.6162
+      }
+     }
+    }
+   },
+   "milestones": {
+    "promo": {
+     "rows": 5884,
+     "used": true,
+     "n_tune": 1342,
+     "tune_loglik": {
+      "rating_model": -3.6604,
+      "milestone_model": -3.2701
+     },
+     "n_test": 1362,
+     "observed_open_rate": 0.798,
+     "milestone_model": {
+      "n": 1362,
+      "n_films": 1296,
+      "n_opened": 1087,
+      "mae_p50_days": 16.6,
+      "median_ae_p50_days": 8,
+      "coverage": {
+       "p50": 0.575,
+       "p80": 0.88,
+       "p90": 0.945
+      },
+      "day_log_score": 3.268,
+      "p50_on_opening_weekday": 0.498,
+      "hit_rate": {
+       "3": 0.216,
+       "week": 0.217,
+       "month": 0.612
+      },
+      "hit_n": 1087,
+      "hit_films": {
+       "n": 1024.0,
+       "hits": {
+        "3": 221.5,
+        "week": 222.5,
+        "month": 626.5
+       }
+      },
+      "interval_p10_p90": {
+       "median_width_days": 55,
+       "coverage": 0.905
+      },
+      "hit_rate_all": {
+       "3": 0.171,
+       "week": 0.172,
+       "month": 0.483
+      },
+      "hit_films_all": {
+       "n": 1296.0,
+       "hits": {
+        "3": 221.5,
+        "week": 222.5,
+        "month": 626.5
+       }
+      },
+      "band_0.9_1.0": {
+       "n": 469,
+       "mean_p": 0.943,
+       "observed": 0.954,
+       "brier": 0.044,
+       "log_score": 0.1885
+      },
+      "censored_log_score": 2.9746,
+      "integrated_brier": 0.1332,
+      "p_open_303d": {
+       "all": {
+        "n": 1362,
+        "mean_p": 0.791,
+        "observed": 0.784,
+        "brier": 0.1255,
+        "log_score": 0.4011,
+        "deciles": [
+         {
+          "p": 0.364,
+          "observed": 0.301,
+          "n": 136
+         },
+         {
+          "p": 0.641,
+          "observed": 0.513,
+          "n": 136
+         },
+         {
+          "p": 0.745,
+          "observed": 0.758,
+          "n": 136
+         },
+         {
+          "p": 0.783,
+          "observed": 0.799,
+          "n": 136
+         },
+         {
+          "p": 0.828,
+          "observed": 0.828,
+          "n": 137
+         },
+         {
+          "p": 0.865,
+          "observed": 0.902,
+          "n": 136
+         },
+         {
+          "p": 0.897,
+          "observed": 0.932,
+          "n": 136
+         },
+         {
+          "p": 0.925,
+          "observed": 0.961,
+          "n": 136
+         },
+         {
+          "p": 0.949,
+          "observed": 0.952,
+          "n": 136
+         },
+         {
+          "p": 0.975,
+          "observed": 0.955,
+          "n": 137
+         }
+        ]
+       },
+       "new_or_small": {
+        "n": 454,
+        "mean_p": 0.807,
+        "observed": 0.823,
+        "brier": 0.1457,
+        "log_score": 0.462,
+        "deciles": [
+         {
+          "p": 0.458,
+          "observed": 0.644,
+          "n": 45
+         },
+         {
+          "p": 0.729,
+          "observed": 0.744,
+          "n": 45
+         },
+         {
+          "p": 0.763,
+          "observed": 0.802,
+          "n": 46
+         },
+         {
+          "p": 0.769,
+          "observed": 0.788,
+          "n": 45
+         },
+         {
+          "p": 0.788,
+          "observed": 0.826,
+          "n": 46
+         },
+         {
+          "p": 0.84,
+          "observed": 0.833,
+          "n": 45
+         },
+         {
+          "p": 0.882,
+          "observed": 0.864,
+          "n": 45
+         },
+         {
+          "p": 0.926,
+          "observed": 0.865,
+          "n": 46
+         },
+         {
+          "p": 0.956,
+          "observed": 0.954,
+          "n": 45
+         },
+         {
+          "p": 0.964,
+          "observed": 0.911,
+          "n": 46
+         }
+        ]
+       },
+       "established": {
+        "n": 908,
+        "mean_p": 0.783,
+        "observed": 0.764,
+        "brier": 0.1152,
+        "log_score": 0.3696,
+        "deciles": [
+         {
+          "p": 0.338,
+          "observed": 0.144,
+          "n": 90
+         },
+         {
+          "p": 0.604,
+          "observed": 0.419,
+          "n": 91
+         },
+         {
+          "p": 0.709,
+          "observed": 0.702,
+          "n": 91
+         },
+         {
+          "p": 0.801,
+          "observed": 0.736,
+          "n": 91
+         },
+         {
+          "p": 0.842,
+          "observed": 0.899,
+          "n": 91
+         },
+         {
+          "p": 0.875,
+          "observed": 0.943,
+          "n": 90
+         },
+         {
+          "p": 0.901,
+          "observed": 0.966,
+          "n": 91
+         },
+         {
+          "p": 0.925,
+          "observed": 0.976,
+          "n": 91
+         },
+         {
+          "p": 0.945,
+          "observed": 0.975,
+          "n": 91
+         },
+         {
+          "p": 0.982,
+          "observed": 0.985,
+          "n": 91
+         }
+        ]
+       }
+      },
+      "p_open_within": {
+       "7": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.049,
+         "observed": 0.034,
+         "brier": 0.0331,
+         "log_score": 0.1401,
+         "deciles": [
+          {
+           "p": 0.001,
+           "observed": 0.0,
+           "n": 136
+          },
+          {
+           "p": 0.004,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.007,
+           "observed": 0.023,
+           "n": 136
+          },
+          {
+           "p": 0.012,
+           "observed": 0.03,
+           "n": 136
+          },
+          {
+           "p": 0.02,
+           "observed": 0.007,
+           "n": 137
+          },
+          {
+           "p": 0.027,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.041,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.07,
+           "observed": 0.039,
+           "n": 136
+          },
+          {
+           "p": 0.102,
+           "observed": 0.087,
+           "n": 136
+          },
+          {
+           "p": 0.235,
+           "observed": 0.13,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 908,
+         "mean_p": 0.056,
+         "observed": 0.034,
+         "brier": 0.0326,
+         "log_score": 0.1301
+        },
+        "new_or_small/signal": {
+         "n": 454,
+         "mean_p": 0.035,
+         "observed": 0.035,
+         "brier": 0.034,
+         "log_score": 0.1594
+        }
+       },
+       "30": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.434,
+         "observed": 0.457,
+         "brier": 0.1947,
+         "log_score": 0.5684,
+         "deciles": [
+          {
+           "p": 0.111,
+           "observed": 0.052,
+           "n": 136
+          },
+          {
+           "p": 0.211,
+           "observed": 0.18,
+           "n": 136
+          },
+          {
+           "p": 0.289,
+           "observed": 0.307,
+           "n": 136
+          },
+          {
+           "p": 0.329,
+           "observed": 0.365,
+           "n": 136
+          },
+          {
+           "p": 0.377,
+           "observed": 0.428,
+           "n": 137
+          },
+          {
+           "p": 0.453,
+           "observed": 0.543,
+           "n": 136
+          },
+          {
+           "p": 0.543,
+           "observed": 0.584,
+           "n": 136
+          },
+          {
+           "p": 0.608,
+           "observed": 0.642,
+           "n": 136
+          },
+          {
+           "p": 0.682,
+           "observed": 0.72,
+           "n": 136
+          },
+          {
+           "p": 0.844,
+           "observed": 0.853,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 908,
+         "mean_p": 0.451,
+         "observed": 0.474,
+         "brier": 0.1823,
+         "log_score": 0.5393
+        },
+        "new_or_small/signal": {
+         "n": 454,
+         "mean_p": 0.401,
+         "observed": 0.423,
+         "brier": 0.2187,
+         "log_score": 0.6247
+        }
+       },
+       "90": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.745,
+         "observed": 0.761,
+         "brier": 0.1337,
+         "log_score": 0.4227,
+         "deciles": [
+          {
+           "p": 0.321,
+           "observed": 0.234,
+           "n": 136
+          },
+          {
+           "p": 0.573,
+           "observed": 0.529,
+           "n": 136
+          },
+          {
+           "p": 0.671,
+           "observed": 0.703,
+           "n": 136
+          },
+          {
+           "p": 0.717,
+           "observed": 0.727,
+           "n": 136
+          },
+          {
+           "p": 0.771,
+           "observed": 0.808,
+           "n": 137
+          },
+          {
+           "p": 0.817,
+           "observed": 0.906,
+           "n": 136
+          },
+          {
+           "p": 0.864,
+           "observed": 0.888,
+           "n": 136
+          },
+          {
+           "p": 0.901,
+           "observed": 0.977,
+           "n": 136
+          },
+          {
+           "p": 0.926,
+           "observed": 0.925,
+           "n": 136
+          },
+          {
+           "p": 0.962,
+           "observed": 0.99,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 908,
+         "mean_p": 0.745,
+         "observed": 0.747,
+         "brier": 0.1172,
+         "log_score": 0.3798
+        },
+        "new_or_small/signal": {
+         "n": 454,
+         "mean_p": 0.747,
+         "observed": 0.788,
+         "brier": 0.1657,
+         "log_score": 0.5059
+        }
+       },
+       "180": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.787,
+         "observed": 0.779,
+         "brier": 0.1287,
+         "log_score": 0.4096,
+         "deciles": [
+          {
+           "p": 0.36,
+           "observed": 0.309,
+           "n": 136
+          },
+          {
+           "p": 0.634,
+           "observed": 0.498,
+           "n": 136
+          },
+          {
+           "p": 0.737,
+           "observed": 0.758,
+           "n": 136
+          },
+          {
+           "p": 0.777,
+           "observed": 0.777,
+           "n": 136
+          },
+          {
+           "p": 0.823,
+           "observed": 0.828,
+           "n": 137
+          },
+          {
+           "p": 0.861,
+           "observed": 0.909,
+           "n": 136
+          },
+          {
+           "p": 0.895,
+           "observed": 0.916,
+           "n": 136
+          },
+          {
+           "p": 0.923,
+           "observed": 0.941,
+           "n": 136
+          },
+          {
+           "p": 0.948,
+           "observed": 0.96,
+           "n": 136
+          },
+          {
+           "p": 0.974,
+           "observed": 0.954,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 908,
+         "mean_p": 0.78,
+         "observed": 0.76,
+         "brier": 0.1169,
+         "log_score": 0.3743
+        },
+        "new_or_small/signal": {
+         "n": 454,
+         "mean_p": 0.801,
+         "observed": 0.815,
+         "brier": 0.1516,
+         "log_score": 0.4779
+        }
+       },
+       "365": {
+        "all": {
+         "n": 1227,
+         "mean_p": 0.791,
+         "observed": 0.787,
+         "brier": 0.1245,
+         "log_score": 0.3977,
+         "deciles": [
+          {
+           "p": 0.372,
+           "observed": 0.32,
+           "n": 122
+          },
+          {
+           "p": 0.639,
+           "observed": 0.502,
+           "n": 123
+          },
+          {
+           "p": 0.743,
+           "observed": 0.759,
+           "n": 123
+          },
+          {
+           "p": 0.78,
+           "observed": 0.816,
+           "n": 122
+          },
+          {
+           "p": 0.826,
+           "observed": 0.817,
+           "n": 123
+          },
+          {
+           "p": 0.863,
+           "observed": 0.909,
+           "n": 123
+          },
+          {
+           "p": 0.897,
+           "observed": 0.941,
+           "n": 122
+          },
+          {
+           "p": 0.925,
+           "observed": 0.957,
+           "n": 123
+          },
+          {
+           "p": 0.95,
+           "observed": 0.946,
+           "n": 123
+          },
+          {
+           "p": 0.975,
+           "observed": 0.97,
+           "n": 123
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 829,
+         "mean_p": 0.782,
+         "observed": 0.764,
+         "brier": 0.1158,
+         "log_score": 0.3709
+        },
+        "new_or_small/signal": {
+         "n": 398,
+         "mean_p": 0.809,
+         "observed": 0.835,
+         "brier": 0.142,
+         "log_score": 0.4517
+        }
+       }
+      }
+     },
+     "rating_model": {
+      "n": 1362,
+      "n_films": 1296,
+      "n_opened": 1087,
+      "mae_p50_days": 25.9,
+      "median_ae_p50_days": 14,
+      "coverage": {
+       "p50": 0.724,
+       "p80": 0.947,
+       "p90": 0.974
+      },
+      "day_log_score": 3.53,
+      "p50_on_opening_weekday": 0.514,
+      "hit_rate": {
+       "3": 0.12,
+       "week": 0.12,
+       "month": 0.417
+      },
+      "hit_n": 1087,
+      "hit_films": {
+       "n": 1024.0,
+       "hits": {
+        "3": 123.0,
+        "week": 122.5,
+        "month": 426.5
+       }
+      },
+      "interval_p10_p90": {
+       "median_width_days": 98,
+       "coverage": 0.898
+      },
+      "hit_rate_all": {
+       "3": 0.095,
+       "week": 0.095,
+       "month": 0.326
+      },
+      "hit_films_all": {
+       "n": 1296.0,
+       "hits": {
+        "3": 123.0,
+        "week": 122.5,
+        "month": 422.5
+       }
+      },
+      "band_0.9_1.0": {
+       "n": 212,
+       "mean_p": 0.936,
+       "observed": 0.972,
+       "brier": 0.0287,
+       "log_score": 0.1398
+      },
+      "censored_log_score": 3.3347,
+      "integrated_brier": 0.1818,
+      "p_open_303d": {
+       "all": {
+        "n": 1362,
+        "mean_p": 0.643,
+        "observed": 0.784,
+        "brier": 0.1648,
+        "log_score": 0.5579,
+        "deciles": [
+         {
+          "p": 0.1,
+          "observed": 0.509,
+          "n": 136
+         },
+         {
+          "p": 0.328,
+          "observed": 0.476,
+          "n": 136
+         },
+         {
+          "p": 0.517,
+          "observed": 0.673,
+          "n": 136
+         },
+         {
+          "p": 0.594,
+          "observed": 0.634,
+          "n": 136
+         },
+         {
+          "p": 0.673,
+          "observed": 0.844,
+          "n": 137
+         },
+         {
+          "p": 0.745,
+          "observed": 0.885,
+          "n": 136
+         },
+         {
+          "p": 0.822,
+          "observed": 0.933,
+          "n": 136
+         },
+         {
+          "p": 0.871,
+          "observed": 0.976,
+          "n": 136
+         },
+         {
+          "p": 0.903,
+          "observed": 0.977,
+          "n": 136
+         },
+         {
+          "p": 0.952,
+          "observed": 0.982,
+          "n": 137
+         }
+        ]
+       },
+       "established": {
+        "n": 1012,
+        "mean_p": 0.652,
+        "observed": 0.767,
+        "brier": 0.1518,
+        "log_score": 0.527,
+        "deciles": [
+         {
+          "p": 0.104,
+          "observed": 0.429,
+          "n": 101
+         },
+         {
+          "p": 0.334,
+          "observed": 0.41,
+          "n": 101
+         },
+         {
+          "p": 0.524,
+          "observed": 0.581,
+          "n": 101
+         },
+         {
+          "p": 0.615,
+          "observed": 0.655,
+          "n": 101
+         },
+         {
+          "p": 0.695,
+          "observed": 0.899,
+          "n": 102
+         },
+         {
+          "p": 0.767,
+          "observed": 0.867,
+          "n": 101
+         },
+         {
+          "p": 0.833,
+          "observed": 0.949,
+          "n": 101
+         },
+         {
+          "p": 0.876,
+          "observed": 0.989,
+          "n": 101
+         },
+         {
+          "p": 0.915,
+          "observed": 0.989,
+          "n": 101
+         },
+         {
+          "p": 0.96,
+          "observed": 0.975,
+          "n": 102
+         }
+        ]
+       },
+       "new_or_small": {
+        "n": 350,
+        "mean_p": 0.618,
+        "observed": 0.833,
+        "brier": 0.2013,
+        "log_score": 0.6444,
+        "deciles": [
+         {
+          "p": 0.094,
+          "observed": 0.691,
+          "n": 35
+         },
+         {
+          "p": 0.311,
+          "observed": 0.697,
+          "n": 35
+         },
+         {
+          "p": 0.501,
+          "observed": 0.742,
+          "n": 35
+         },
+         {
+          "p": 0.571,
+          "observed": 0.821,
+          "n": 35
+         },
+         {
+          "p": 0.602,
+          "observed": 0.743,
+          "n": 35
+         },
+         {
+          "p": 0.674,
+          "observed": 0.884,
+          "n": 35
+         },
+         {
+          "p": 0.768,
+          "observed": 0.912,
+          "n": 35
+         },
+         {
+          "p": 0.847,
+          "observed": 0.913,
+          "n": 35
+         },
+         {
+          "p": 0.885,
+          "observed": 0.971,
+          "n": 35
+         },
+         {
+          "p": 0.906,
+          "observed": 0.941,
+          "n": 35
+         }
+        ]
+       }
+      },
+      "p_open_within": {
+       "7": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.064,
+         "observed": 0.034,
+         "brier": 0.0341,
+         "log_score": 0.1507,
+         "deciles": [
+          {
+           "p": 0.001,
+           "observed": 0.007,
+           "n": 136
+          },
+          {
+           "p": 0.005,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.012,
+           "observed": 0.015,
+           "n": 136
+          },
+          {
+           "p": 0.022,
+           "observed": 0.023,
+           "n": 136
+          },
+          {
+           "p": 0.033,
+           "observed": 0.008,
+           "n": 137
+          },
+          {
+           "p": 0.045,
+           "observed": 0.008,
+           "n": 136
+          },
+          {
+           "p": 0.065,
+           "observed": 0.038,
+           "n": 136
+          },
+          {
+           "p": 0.091,
+           "observed": 0.055,
+           "n": 136
+          },
+          {
+           "p": 0.132,
+           "observed": 0.051,
+           "n": 136
+          },
+          {
+           "p": 0.261,
+           "observed": 0.138,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 1012,
+         "mean_p": 0.068,
+         "observed": 0.033,
+         "brier": 0.0333,
+         "log_score": 0.1454
+        },
+        "new_or_small/signal": {
+         "n": 350,
+         "mean_p": 0.052,
+         "observed": 0.037,
+         "brier": 0.0362,
+         "log_score": 0.1659
+        }
+       },
+       "30": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.298,
+         "observed": 0.457,
+         "brier": 0.2287,
+         "log_score": 0.7043,
+         "deciles": [
+          {
+           "p": 0.019,
+           "observed": 0.168,
+           "n": 136
+          },
+          {
+           "p": 0.066,
+           "observed": 0.193,
+           "n": 136
+          },
+          {
+           "p": 0.103,
+           "observed": 0.3,
+           "n": 136
+          },
+          {
+           "p": 0.142,
+           "observed": 0.333,
+           "n": 136
+          },
+          {
+           "p": 0.19,
+           "observed": 0.403,
+           "n": 137
+          },
+          {
+           "p": 0.282,
+           "observed": 0.5,
+           "n": 136
+          },
+          {
+           "p": 0.416,
+           "observed": 0.525,
+           "n": 136
+          },
+          {
+           "p": 0.51,
+           "observed": 0.669,
+           "n": 136
+          },
+          {
+           "p": 0.587,
+           "observed": 0.733,
+           "n": 136
+          },
+          {
+           "p": 0.774,
+           "observed": 0.832,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 1012,
+         "mean_p": 0.311,
+         "observed": 0.468,
+         "brier": 0.2213,
+         "log_score": 0.6852
+        },
+        "new_or_small/signal": {
+         "n": 350,
+         "mean_p": 0.263,
+         "observed": 0.426,
+         "brier": 0.2496,
+         "log_score": 0.7578
+        }
+       },
+       "90": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.534,
+         "observed": 0.761,
+         "brier": 0.2032,
+         "log_score": 0.6558,
+         "deciles": [
+          {
+           "p": 0.064,
+           "observed": 0.47,
+           "n": 136
+          },
+          {
+           "p": 0.215,
+           "observed": 0.419,
+           "n": 136
+          },
+          {
+           "p": 0.322,
+           "observed": 0.59,
+           "n": 136
+          },
+          {
+           "p": 0.396,
+           "observed": 0.742,
+           "n": 136
+          },
+          {
+           "p": 0.494,
+           "observed": 0.754,
+           "n": 137
+          },
+          {
+           "p": 0.607,
+           "observed": 0.857,
+           "n": 136
+          },
+          {
+           "p": 0.734,
+           "observed": 0.928,
+           "n": 136
+          },
+          {
+           "p": 0.812,
+           "observed": 0.93,
+           "n": 136
+          },
+          {
+           "p": 0.861,
+           "observed": 0.993,
+           "n": 136
+          },
+          {
+           "p": 0.934,
+           "observed": 0.991,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 1012,
+         "mean_p": 0.547,
+         "observed": 0.746,
+         "brier": 0.1817,
+         "log_score": 0.6038
+        },
+        "new_or_small/signal": {
+         "n": 350,
+         "mean_p": 0.497,
+         "observed": 0.805,
+         "brier": 0.2635,
+         "log_score": 0.8017
+        }
+       },
+       "180": {
+        "all": {
+         "n": 1362,
+         "mean_p": 0.618,
+         "observed": 0.779,
+         "brier": 0.1731,
+         "log_score": 0.5771,
+         "deciles": [
+          {
+           "p": 0.091,
+           "observed": 0.511,
+           "n": 136
+          },
+          {
+           "p": 0.297,
+           "observed": 0.451,
+           "n": 136
+          },
+          {
+           "p": 0.466,
+           "observed": 0.587,
+           "n": 136
+          },
+          {
+           "p": 0.546,
+           "observed": 0.761,
+           "n": 136
+          },
+          {
+           "p": 0.623,
+           "observed": 0.784,
+           "n": 137
+          },
+          {
+           "p": 0.715,
+           "observed": 0.885,
+           "n": 136
+          },
+          {
+           "p": 0.808,
+           "observed": 0.925,
+           "n": 136
+          },
+          {
+           "p": 0.863,
+           "observed": 0.969,
+           "n": 136
+          },
+          {
+           "p": 0.897,
+           "observed": 0.984,
+           "n": 136
+          },
+          {
+           "p": 0.95,
+           "observed": 0.982,
+           "n": 137
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 1012,
+         "mean_p": 0.628,
+         "observed": 0.763,
+         "brier": 0.1568,
+         "log_score": 0.5367
+        },
+        "new_or_small/signal": {
+         "n": 350,
+         "mean_p": 0.588,
+         "observed": 0.822,
+         "brier": 0.2191,
+         "log_score": 0.6906
+        }
+       },
+       "365": {
+        "all": {
+         "n": 1227,
+         "mean_p": 0.646,
+         "observed": 0.787,
+         "brier": 0.1665,
+         "log_score": 0.5665,
+         "deciles": [
+          {
+           "p": 0.101,
+           "observed": 0.525,
+           "n": 122
+          },
+          {
+           "p": 0.331,
+           "observed": 0.494,
+           "n": 123
+          },
+          {
+           "p": 0.518,
+           "observed": 0.658,
+           "n": 123
+          },
+          {
+           "p": 0.597,
+           "observed": 0.613,
+           "n": 122
+          },
+          {
+           "p": 0.677,
+           "observed": 0.852,
+           "n": 123
+          },
+          {
+           "p": 0.75,
+           "observed": 0.9,
+           "n": 123
+          },
+          {
+           "p": 0.824,
+           "observed": 0.933,
+           "n": 122
+          },
+          {
+           "p": 0.872,
+           "observed": 0.974,
+           "n": 123
+          },
+          {
+           "p": 0.904,
+           "observed": 1.0,
+           "n": 123
+          },
+          {
+           "p": 0.954,
+           "observed": 0.97,
+           "n": 123
+          }
+         ]
+        },
+        "established/signal": {
+         "n": 922,
+         "mean_p": 0.655,
+         "observed": 0.771,
+         "brier": 0.1548,
+         "log_score": 0.5386
+        },
+        "new_or_small/signal": {
+         "n": 305,
+         "mean_p": 0.619,
+         "observed": 0.835,
+         "brier": 0.2006,
+         "log_score": 0.6478
+        }
+       }
+      }
+     }
+    },
+    "kobis": {
+     "rows": 7,
+     "used": false,
+     "n_tune": 0,
+     "n_test": 0
+    },
+    "chain": {
+     "rows": 3,
+     "used": false,
+     "n_tune": 0,
+     "n_test": 0
+    },
+    "booking": {
+     "rows": 3,
+     "used": false,
+     "n_tune": 0,
+     "n_test": 0
+    }
+   },
+   "segments": {
+    "format_of_open": {
+     "test": {
+      "n": 2,
+      "mean_p": 0.25,
+      "observed": 0.0,
+      "brier": 0.0625,
+      "log_score": 0.2877
+     }
+    },
+    "short": {
+     "n": 1046,
+     "opened": 3,
+     "rate": 0.0033,
+     "test": {
+      "n": 498,
+      "mean_p": 0.003,
+      "observed": 0.0,
+      "brier": 0.0,
+      "log_score": 0.0025
+     }
+    },
+    "vod_applicant": {
+     "n": 100,
+     "opened": 0,
+     "rate": 0.005,
+     "test": {
+      "n": 51,
+      "mean_p": 0.004,
+      "observed": 0.0,
+      "brier": 0.0,
+      "log_score": 0.0043
+     }
+    }
+   },
+   "population": {
+    "p_open_303d": {
+     "n": 2308,
+     "mean_p": 0.548,
+     "observed": 0.552,
+     "brier": 0.1116,
+     "log_score": 0.3488,
+     "deciles": [
+      {
+       "p": 0.002,
+       "observed": 0.0,
+       "n": 230
+      },
+      {
+       "p": 0.003,
+       "observed": 0.0,
+       "n": 231
+      },
+      {
+       "p": 0.196,
+       "observed": 0.149,
+       "n": 231
+      },
+      {
+       "p": 0.539,
+       "observed": 0.484,
+       "n": 231
+      },
+      {
+       "p": 0.624,
+       "observed": 0.59,
+       "n": 231
+      },
+      {
+       "p": 0.71,
+       "observed": 0.759,
+       "n": 230
+      },
+      {
+       "p": 0.806,
+       "observed": 0.844,
+       "n": 231
+      },
+      {
+       "p": 0.867,
+       "observed": 0.923,
+       "n": 231
+      },
+      {
+       "p": 0.903,
+       "observed": 0.93,
+       "n": 231
+      },
+      {
+       "p": 0.95,
+       "observed": 0.967,
+       "n": 231
+      }
+     ]
+    }
+   }
+  }
+ },
+ "theatrical": {
+  "counts": {
+   "confirmed": 352,
+   "candidate": 148,
+   "unlikely": 68,
+   "token": 0,
+   "ad_only": 0
+  },
+  "candidates_with_intent": 61,
+  "applicants_unlikely": 10,
+  "rule": {
+   "min_ratings": 20,
+   "max_open_share": 0.05,
+   "min_age_days": 180,
+   "token_min_screenings": 40,
+   "min_real_share": 0.3
+  },
+  "screening_measures": 5377
+ },
+ "signals": {
+  "new_signals": 175,
+  "changes": 2,
+  "absent": 0,
+  "records": 568,
+  "runs": 7
+ }
+}

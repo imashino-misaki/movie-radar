@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>무비 레이더</title>
+<meta name="description" content="한국 극장 개봉 예정작을 등급 심의 단계부터 추적합니다. 개봉일 발표, 극장 목록 등장, 개봉 시기 추정.">
+<link rel="alternate" type="application/rss+xml" title="무비 레이더" href="feed.xml">
+<link rel="alternate" type="application/rss+xml" title="무비 레이더 · 새로 포착" href="new.xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2.0.5/fonts/static/woff2/SUIT-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* theme before first paint: stored choice, else the OS setting */
+(function () {
+  var s = null; try { s = localStorage.getItem("mr.theme"); } catch (e) {}
+  var mq = matchMedia("(prefers-color-scheme: dark)");
+  document.documentElement.dataset.theme = s || (mq.matches ? "dark" : "light");
+  mq.addEventListener("change", function (e) { var c = null; try { c = localStorage.getItem("mr.theme"); } catch (x) {} if (!c) document.documentElement.dataset.theme = e.matches ? "dark" : "light"; });
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top" id="top">
+ <div class="top-in">
+  <a class="brand" href="#/"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="2" fill="currentColor" stroke="none"/><path d="M5.5 14.5a6.4 6.4 0 0 1 0-9M14.5 5.5a6.4 6.4 0 0 1 0 9M2.6 17.4a10.5 10.5 0 0 1 0-14.8M17.4 2.6a10.5 10.5 0 0 1 0 14.8" stroke-linecap="round"/></svg>무비 레이더</a>
+  <form class="search" id="sf" role="search" onsubmit="return false">
+   <svg class="si" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4" stroke-linecap="round"/></svg>
+   <input id="q" type="search" autocomplete="off" placeholder="영화 제목, 배급사 · 초성도 돼요 (ㅊㄴ)" aria-label="영화 검색">
+   <kbd aria-hidden="true">/</kbd>
+   <button type="button" class="clr" id="qc" aria-label="검색어 지우기">×</button>
+  </form>
+  <nav class="nav" id="nav" aria-label="주요 화면">
+   <a href="#/" data-tab="home">레이더</a>
+   <a href="#/upcoming" data-tab="upcoming">개봉 예정</a>
+   <a href="#/now" data-tab="now">상영 중</a>
+   <a href="#/watch" data-tab="watch">찜<small class="wn tn"></small></a>
+  </nav>
+  <span class="upd tn" id="upd"></span>
+  <button class="ib sbtn" id="sbtn" type="button" aria-label="검색"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4" stroke-linecap="round"/></svg></button>
+  <button class="ib" id="theme" type="button" aria-label="화면 테마 바꾸기"></button>
+ </div>
+</header>
+<div class="shell" id="shell">
+ <aside class="rail" id="rail" aria-label="필터"></aside>
+ <main class="main"><div id="view"></div><footer class="foot" id="foot"></footer></main>
+ <aside class="pane" id="pane"></aside>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="주요 화면">
+ <a href="#/" data-tab="home"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/><path d="M7 17a7 7 0 0 1 0-10M17 7a7 7 0 0 1 0 10M4 20a11.3 11.3 0 0 1 0-16M20 4a11.3 11.3 0 0 1 0 16" stroke-linecap="round"/></svg><i class="badge tn" id="nb" hidden></i></span><b>레이더</b></a>
+ <a href="#/upcoming" data-tab="upcoming"><span><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke-linecap="round"/></svg></span><b>개봉 예정</b></a>
+ <a href="#/now" data-tab="now"><span><svg viewBox="0 0 24 24"><path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5V10a2 2 0 0 0 0 4v2.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 16.5V14a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg></span><b>상영 중</b></a>
+ <a href="#/watch" data-tab="watch"><span><svg viewBox="0 0 24 24"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" stroke-linejoin="round"/></svg></span><b>찜<small class="wn tn"></small></b></a>
+</nav>
+<div class="sheet side" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-h">
+ <header><h2 id="sheet-h">필터</h2><button class="ib" type="button" data-close-sheet aria-label="닫기"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5l10 10M15 5L5 15" stroke-linecap="round"/></svg></button></header>
+ <div class="sb" id="sheet-body"></div>
+ <footer><button class="linkbtn" type="button" data-reset>전체 해제</button><button class="btn" type="button" data-close-sheet id="sheet-go">결과 보기</button></footer>
+</div>
+<input type="file" id="imp" accept="application/json,.json" hidden>
+<script src="data/site/index.js"></script>
+<script src="data/site/status.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

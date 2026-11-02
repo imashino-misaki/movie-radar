@@ -1,0 +1,50 @@
+name: collect
+on:
+  schedule:
+    # every 2 hours: a run makes ~46 KOBIS open-API calls (limit 3,000 a day)
+    - cron: "7 */2 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: collect
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install httpx pytest pillow openpyxl
+      - name: Tests (where the repository has them)
+        run: if [ -d tests ]; then python -m pytest -q; fi
+      - name: Fetch cgv.json
+        # cgv.json (CGV's movie list) from this repository's cgv-data branch
+        # when present; otherwise CGV is skipped and the run goes on.
+        run: |
+          if git fetch --depth=1 origin cgv-data; then
+            git show FETCH_HEAD:cgv.json > data/cgv_upload.json || rm -f data/cgv_upload.json
+          else
+            echo "no cgv-data branch: CGV skipped"
+          fi
+      - name: Collect
+        run: python scripts/collect.py
+        env:
+          KOBIS_API_KEY: ${{ secrets.KOBIS_API_KEY }}
+          RADAR_LISTS: ${{ secrets.RADAR_LISTS }}
+      - name: Commit data if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898499+github-actions[bot]@users.noreply.github.com"
+          # data/ includes the generated site data (data/site/); the feeds live at the root
+          git add data/ feed.xml new.xml
+          if git diff --cached --quiet; then
+            echo "no data changes"
+          else
+            git commit -m "data: collect $(date -u +%Y-%m-%dT%H:%MZ)"
+            # code pushed to main during the run must not reject the data commit
+            git pull --rebase
+            git push
+          fi
