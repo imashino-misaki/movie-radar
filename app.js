@@ -107,7 +107,7 @@ const LONG_AWAY = !!baseDay && diffDays(baseDay, TODAY) > LOOKBACK; // a last vi
 const NEW_EV = MR.ev.filter(e => BYID[e.id] && (BASESET ? !BASESET.has(evKey(e)) && (!LONG_AWAY || e.d >= LOOK_FROM) : e.d >= WEEK_FROM));
 const WEEK_EV = MR.ev.filter(e => BYID[e.id] && e.d >= WEEK_FROM);
 // first sightings: films whose earliest trace in any source is within LOOKBACK days, newest first
-const HIDE = [["fest", "festin", "영화제·특별 상영"], ["ev", "evin", "콘서트·라이브"]];
+const HIDE = [["fest", "festin", "영화제·특별 상영"], ["ev", "evin", "콘서트·라이브"], ["sport", "sportin", "스포츠 중계"]];
 const isEv = f => HIDE.some(([c]) => f.cats.includes(c));
 // festival / concert listings are not new films
 const FS = MR.fs.filter(s => BYID[s.id] && s.d >= LOOK_FROM && !isEv(BYID[s.id]));
@@ -165,7 +165,7 @@ function radRow(g, compact) {
 
 /* ---------------------------------------------------------------- meta line pieces */
 const EXN = { mb: "메가박스 단독", lt: "롯데시네마 단독", cgv: "CGV 단독" };
-const CATN = { ani: "애니메이션", rr: "재개봉", ev: "콘서트·라이브", fest: "영화제·특별 상영" };
+const CATN = { ani: "애니메이션", rr: "재개봉", ev: "콘서트·라이브", fest: "영화제·특별 상영", sport: "스포츠 중계" };
 // 재개봉 and 콘서트·라이브 read as labels; the genre stays plain text
 const catText = f => f.cats.map(c => (c === "ani" ? CATN[c] : `<span class="xb">${CATN[c]}</span>`)).join(" ");
 const FMTN = { imax: "IMAX", "4d": "4D", sx: "ScreenX", dolby: "Dolby", sub: "자막", dub: "더빙" };
@@ -210,10 +210,10 @@ function estRow(f) {
 const FGROUPS = [
   ["chain", "극장", [["mb", "메가박스"], ["lt", "롯데시네마"], ["cgv", "CGV 계열 배급"]]],
   ["ex", "상영 방식", [["ex", "체인 단독 상영"]]],
-  ["cat", "종류", [["rr", "재개봉"], ["ani", "애니메이션"], ["fest", "영화제·특별 상영"], ["ev", "콘서트·라이브"]]],
+  ["cat", "종류", [["rr", "재개봉"], ["ani", "애니메이션"], ["fest", "영화제·특별 상영"], ["ev", "콘서트·라이브"], ["sport", "스포츠 중계"]]],
   ["fmt", "특별관", [["imax", "IMAX"], ["4d", "4D"], ["sx", "ScreenX"], ["dolby", "Dolby"]]],
   ["grade", "관람 등급", [["g0", "전체 관람가"], ["g12", "12세"], ["g15", "15세"], ["g19", "청소년 관람불가"]]],
-  ["ox", "범위", [["ox", "개봉 불확실작 포함"], ["festin", "영화제·특별 상영 포함"], ["evin", "콘서트·라이브 포함"]]],
+  ["ox", "범위", [["ox", "개봉 불확실작 포함"], ["festin", "영화제·특별 상영 포함"], ["evin", "콘서트·라이브 포함"], ["sportin", "스포츠 중계 포함"]]],
 ];
 // hidden unless asked for: unlikely releases ("ox"), and kinds that are not a regular
 // theatrical run (one-off festival / special screenings, concert / live captures). A kind

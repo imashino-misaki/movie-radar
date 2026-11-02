@@ -73,6 +73,10 @@ def parse_row(m: dict) -> dict:
         # page's MEGA ONLY badge (checked 2026-11-01: 18 of 122 rows Y, the
         # badged film among them); megaOnlyAt was N on every row
         "exclusive": m.get("singlPlayAt") == "Y" or m.get("megaOnlyAt") == "Y",
+        # 클래식 소사이어티: staged-performance broadcasts and lecture screenings (The Met,
+        # NT Live, RBO, 시네도슨트: 8 of 114 rows Y, checked 2026-11-02). festivalYn was N
+        # on every row, including festival screenings, so it is not used
+        "classic": m.get("classicAt") == "Y",
         # poster image path on Megabox's image host (checked 2026-11-01)
         "poster": IMG_ORIGIN + m["imgPathNm"] if str(m.get("imgPathNm") or "").startswith("/") else "",
     }

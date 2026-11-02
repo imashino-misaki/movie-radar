@@ -85,6 +85,32 @@ KIND = {"poster": "포스터", "trailer": "예고편"}
 _PERFORMANCE = re.compile(r"오페라|발레|뮤지컬|연극|콘서트|라이브|실황|nt\s*live|\bmet\b|\brbo\b|opera|ballet|bolshoi",
                           re.I)
 
+
+def screening_kind(title: str, tags: list, mb: dict | None, lt: dict | None, cg: dict | None) -> str:
+    """The kind of a screening that is not a regular theatrical run, or "".
+
+    sport: a live sports broadcast (match wording in the title; no chain marks sports).
+    ev: concerts, live viewings and staged-performance broadcasts.
+    fest: festival and special screenings.
+    Title wording decides first (a "KBO ... 7차전" listing is sport even though CGV
+    files it with concerts); then the chains' own markers: CGV lists all of its
+    non-film content (concerts, performances, sports) under ICECON, Lotte badges
+    concerts and live viewings 롯시플 and names a festival screening's festival, and
+    Megabox flags performance broadcasts and lecture screenings 클래식 소사이어티.
+    """
+    if "sports" in tags:
+        return "sport"
+    bracket = re.match(r"^\s*\[([^\]]*)\]", title)
+    if "concert" in tags or (bracket and _PERFORMANCE.search(bracket.group(1))):
+        return "ev"
+    if bracket or (lt or {}).get("festival"):
+        return "fest"
+    if ((lt or {}).get("badge") == "plus" or (mb or {}).get("classic")
+            or "icecon" in ((cg or {}).get("labels") or [])):
+        return "ev"
+    return ""
+
+
 def tnorm(s: str | None) -> str:
     return re.sub(r"[^0-9a-z가-힣]", "", (s or "").lower())
 
@@ -890,11 +916,9 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             cats.append("ani")
         if "rerelease" in tags or (st.get("release_history") or {}).get("rereleases"):
             cats.append("rr")
-        bracket = re.match(r"^\s*\[([^\]]*)\]", title)
-        if "concert" in tags or (bracket and _PERFORMANCE.search(bracket.group(1))):
-            cats.append("ev")
-        elif bracket:
-            cats.append("fest")
+        kind = screening_kind(title, tags, mb, lt, cg)
+        if kind:
+            cats.append(kind)
         chains = []
         if mb:
             chains.append("mb")
@@ -912,8 +936,6 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             excl.append("cgv")
         if (lt or {}).get("badge") == "pick":
             excl.append("lt")
-        if (lt or {}).get("badge") == "plus" and "ev" not in cats:
-            cats.append("ev")
         uid = stable_id(members.get(f["id"], [f]))
         poster = Path(f["poster"]).name if f.get("poster") else None
         if poster and not poster_exists(poster):

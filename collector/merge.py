@@ -368,6 +368,8 @@ def apply_megabox(films: list[dict], rows: list[dict], today: str) -> tuple[list
                  "grade": next((r["grade"] for r in grp if r["grade"]), ""),
                  "exclusive": any(r["exclusive"] for r in grp),
                  "poster": next((r["poster"] for r in grp if r.get("poster")), "")}
+        if any(r.get("classic") for r in grp):
+            stage["classic"] = True
         mid = megabox_id(k)
         if mid not in by_id:  # a Megabox-only record stored under an earlier title key keeps its id
             mid = next((i for i, f in by_id.items()
@@ -497,6 +499,8 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
         stage = {k: r.get(k, "") for k in ("movie_code", "status", "release_date", "release_month",
                                            "grade", "kobis_cd", "badge", "poster")}
         stage["exclusive"] = bool(r.get("exclusive"))
+        if r.get("festival"):
+            stage["festival"] = r["festival"]
         stage["kobis_open_dt"] = iso_date((kobis_cache or {}).get(r["kobis_cd"], {}).get("openDt", ""))
         lid = lotte_id(r["movie_code"])
         seen = today

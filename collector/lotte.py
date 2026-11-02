@@ -63,6 +63,9 @@ def parse_row(m: dict, status: str) -> dict:
         "status": status,
         "kobis_cd": str(m.get("KOFMovieCd") or "").strip(),
         "badge": BADGES.get(str(m.get("TagDivCd") or ""), ""),
+        # name of the film festival a screening belongs to (empty on all 39 rows of the
+        # 2026-11-02 list; the field exists for festival line-ups)
+        "festival": clean(m.get("MovieFestivalName") or ""),
         # 단독 개봉 (Lotte-only release); every row was N on 2026-11-01 (programs.py)
         "exclusive": str(m.get("SoloOpenYN") or "") == "Y" or str(m.get("TagDivCd") or "") == "2",
         "poster": str(m.get("PosterURL") or "").strip(),

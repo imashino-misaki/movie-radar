@@ -60,6 +60,14 @@ NOT_CONCERT = ("러브 라이브", "러브라이브", "love live", "lovelive")
 
 _KANA = re.compile(r"[぀-ヿ]")
 
+# a live sports broadcast in a theater (league names, match rounds); bare sport words
+# ("축구", "야구") and "생중계" also appear in film titles, so they are not used
+SPORTS = re.compile(
+    r"(?<![a-z0-9])(kbo|mlb|nba|ufc|lck|epl|k\s*리그|k league)(?![a-z0-9])"
+    r"|한국시리즈|포스트시즌|준플레이오프|플레이오프\s*\d|와일드카드\s*결정전|월드시리즈"
+    r"|챔피언스리그|롤드컵|\d+\s*차전",
+    re.I)
+
 
 def _compact(text: str) -> str:
     return re.sub(r"\s+", "", (text or "").lower())
@@ -91,7 +99,9 @@ def tag_film(title: str, original_title: str = "", applicant: str = "", country:
     concert_text = text
     for name in NOT_CONCERT:
         concert_text = concert_text.replace(name, " ")
-    if _has_any(concert_text, CONCERT_KEYWORDS):
+    if SPORTS.search(text):
+        tags.append("sports")
+    elif _has_any(concert_text, CONCERT_KEYWORDS):
         tags.append("concert")
     if _has_any(text, RERELEASE_KEYWORDS):
         tags.append("rerelease")
