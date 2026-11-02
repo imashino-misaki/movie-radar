@@ -60,9 +60,14 @@ SOURCE_LABELS = (
 # Word scale for model estimates, applied to ``release.p_open`` (the probability of ever opening;
 # the last ``release.by`` value when it is missing). Thresholds of the approved
 # viewer design, stated to users in the page's "확률 읽는 법" note: 유력 >= 80 %, 가능 50-79 %,
-# 미지수 < 50 %.
+# 불확실 < 50 %.
 LIKELY = 0.80
 POSSIBLE = 0.50
+# The detail page draws an estimate as DOTS similar films. A film whose p_open rounds to none of
+# them (p_open < 1/(2*DOTS)) is "rare": the page shows no expected date for it, since the median
+# date (given it opens) read as a coming opening for films that almost never open (shorts and
+# VOD-only applicants: release.SEGMENTS, 77 of 159 estimates on 2026-11-02)
+DOTS = 20
 # Events and first sightings older than this (before the data date) are not exported; the page
 # shows 7 and 14 days of them.
 EVENT_KEEP_DAYS = 30
@@ -253,6 +258,8 @@ def certainty(rel: dict) -> dict:
         # the word grades the probability shown next to it: p_open (the last deadline's p without it)
         p = po if po is not None else pp
         w = "unknown" if p is None else "likely" if p >= LIKELY else "possible" if p >= POSSIBLE else "unknown"
+        if po is not None and round(DOTS * po) == 0:
+            w = "rare"
         md = q.get("p50") or None
         return {"p": "est", "w": w, "md": md, "lo": q.get("p10") or None, "hi": q.get("p90") or None,
                 "mm": md[:7] if md else None, "po": round(po, 3) if po is not None else None,
@@ -261,12 +268,14 @@ def certainty(rel: dict) -> dict:
                 # sm: the model has no record of the company and uses the overall fit only
                 # ("자료 적음"). Not `established`: the any-opening model's companies differ so
                 # little that no company outweighs the prior (k_rows 283.6, 0 companies, 2026-11-02)
-                "sm": rel.get("model") == "overall"}
+                "sm": rel.get("model") == "overall",
+                # seg: the rating-day segment behind a rare estimate (short / vod_applicant / ...)
+                "seg": rel.get("segment") or None}
     return {"p": "none", "w": "none"}
 
 
-WORD = {"day": "확정", "month": "월 공개", "likely": "유력", "possible": "가능", "unknown": "미지수",
-        "none": "근거 부족"}
+WORD = {"day": "확정", "month": "월 공개", "likely": "유력", "possible": "가능", "unknown": "불확실",
+        "rare": "가능성 낮음", "none": "근거 부족"}
 
 
 def median_text(iso: str) -> str:
@@ -281,6 +290,8 @@ def cert_text(c: dict, today: str) -> str:
         return f"{kd(c['date'])} 개봉" if c["date"] <= today else f"{kd(c['date'])} 개봉 확정"
     if c["p"] == "month":
         return f"{mon(c['m'], cur)} 개봉 예정"
+    if c["p"] == "est" and c.get("w") == "rare":
+        return "개봉 가능성 낮음"
     if c["p"] == "est" and c.get("md"):
         return median_text(c["md"])
     return "시기 미정 · 아직 소식 없음"
