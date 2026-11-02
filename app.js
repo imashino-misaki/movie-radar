@@ -264,7 +264,7 @@ function matchQ(f, q) {
 }
 
 /* ---------------------------------------------------------------- state <-> URL */
-const S = { tab: "home", id: null, bg: "home", q: "", F: new Set(), sort: "date", nsort: "bo", view: "list", all7: false, more: {}, tsort: null };
+const S = { tab: "home", id: null, full: false, bg: "home", q: "", F: new Set(), sort: "date", nsort: "bo", view: "list", all7: false, more: {}, tsort: null };
 const saved = ls.get("mr.filters", null, isObj);
 function parseHash() {
   const h = location.hash.replace(/^#\/?/, "");
@@ -274,7 +274,8 @@ function parseHash() {
   S.tab = parts[0] || "home";
   if (!["home", "upcoming", "now", "watch", "search", "film"].includes(S.tab)) S.tab = "home";
   S.id = S.tab === "film" ? decodeURIComponent(parts[1] || "") : null;
-  if (S.id && MR.alias[S.id]) { S.id = MR.alias[S.id]; history.replaceState(history.state, "", "#/film/" + S.id); }
+  S.full = S.tab === "film" && parts[2] === "full";
+  if (S.id && MR.alias[S.id]) { S.id = MR.alias[S.id]; history.replaceState(history.state, "", "#/film/" + S.id + (S.full ? "/full" : "")); }
   if (S.tab !== "film") {
     S.bg = S.tab;
     S.q = p.get("q") || (S.tab === "search" ? S.q : "");
@@ -708,9 +709,16 @@ function chart(f) {
     ${bars}${med}</svg>${key}
     <p class="small">각 막대는 그 날까지 개봉할 누적 확률입니다. ${deadline(by[by.length - 1][0]).replace("까지", "")} 이후에 개봉하거나 극장 개봉을 하지 않을 가능성은 ${100 - Math.min(99, Math.round(by[by.length - 1][1] * 100))}%예요.</p></div>`;
 }
-function vDetail(inPane) {
+function vDetail(mode) {
   const f = BYID[S.id];
-  const close = inPane ? `<div class="dclose"><a href="${hashFor(S.bg)}" data-close>✕ 닫기</a><a href="#/film/${f ? f.id : ""}" class="small" data-perma title="이 영화의 주소">링크</a></div>` : `<a class="back" href="${hashFor(S.bg)}" data-back>← ${({ home: "레이더", upcoming: "개봉 예정", now: "상영 중", watch: "찜", search: "검색 결과" })[S.bg] || "목록"}</a>`;
+  const inPane = mode === true, full = mode === "full";
+  const fid = f ? encodeURIComponent(f.id) : "";
+  const bgName = ({ home: "레이더", upcoming: "개봉 예정", now: "상영 중", watch: "찜", search: "검색 결과" })[S.bg] || "목록";
+  const close = inPane
+    ? `<div class="dclose"><a href="${hashFor(S.bg)}" data-close>✕ 닫기</a><span><a href="#/film/${fid}/full" class="small" data-full title="넓은 화면으로 자세히 보기">⤢ 크게 보기</a><a href="#/film/${fid}" class="small" data-perma title="이 영화의 주소">링크</a></span></div>`
+    : full
+      ? `<div class="dclose"><a href="${hashFor(S.bg)}" data-back>← ${bgName}</a><a href="#/film/${fid}" class="small" title="오른쪽 칸으로 돌아가기">작게 보기</a></div>`
+      : `<a class="back" href="${hashFor(S.bg)}" data-back>← ${bgName}</a>`;
   if (!f) return `<div class="dt">${close}<p class="empty">이 영화를 찾을 수 없어요. 목록에서 다시 찾아 주세요.</p></div>`;
   if (!window.MRD && detailsFailed) return `<div class="dt">${close}<h1>${esc(f.t)}</h1><p class="small" style="margin-top:12px">상세 정보를 불러오지 못했어요. <button class="linkbtn" type="button" data-retry-details>다시 시도</button></p></div>`;
   if (!window.MRD) { loadDetails(); return `<div class="dt">${close}<h1>${esc(f.t)}</h1><p class="small" style="margin-top:12px">불러오는 중…</p></div>`; }
@@ -739,20 +747,29 @@ function vDetail(inPane) {
     <dt>예매율</dt><dd>${f.bk ? `<span class="tn">${f.bk.r}위 · ${f.bk.rate}% · 예매 ${f.bk.pa.toLocaleString()}명</span> <span class="t3 tn">(KOBIS ${esc(x.bkas || "")} 기준)</span>` : '<span class="t3">집계 없음</span>'}</dd></dl>`;
   const facts = [f.g && ({ "전체": "전체 관람가", "12세": "12세 관람가", "15세": "15세 관람가", "청불": "청소년 관람불가", "제한": "제한상영가" })[f.g], x.rt && `${x.rt}분`, x.co].filter(Boolean).join(" · ");
   const comps = x.comps.length ? x.comps.map(([r, n]) => `<dt>${esc(r)}</dt><dd>${esc(n)}</dd>`).join("") : (f.app ? `<dt>수입·신청</dt><dd>${esc(f.app)}</dd>` : "");
-  return `<article class="dt">${close}
-    <div class="dh"><div><h1>${esc(f.t)}</h1>${f.ot && f.ot !== f.t ? `<p class="ot">${esc(f.ot)}</p>` : ""}</div>${f.pst ? `<div class="dp"><img src="data/posters/${f.pst}" alt="${esc(f.t)} 포스터"></div>` : ""}</div>
-    <div class="status"><p class="big ${c.cls}"><i class="cg ${c.g}" aria-hidden="true"></i>${big}</p>${c.why ? `<p class="why">${c.why}</p>` : ""}</div>
+  const img = f.pst ? `<img src="data/posters/${f.pst}" alt="${esc(f.t)} 포스터">` : "";
+  // the pane's poster opens the wide page; elsewhere it opens the poster itself
+  const poster = !img ? "" : inPane
+    ? `<a class="dp" href="#/film/${fid}/full" title="크게 보기">${img}</a>`
+    : `<button class="dp" type="button" data-zoom="data/posters/${f.pst}" data-zoom-alt="${esc(f.t)} 포스터" title="포스터 크게 보기">${img}</button>`;
+  const title = `<div><h1>${esc(f.t)}</h1>${f.ot && f.ot !== f.t ? `<p class="ot">${esc(f.ot)}</p>` : ""}</div>`;
+  const meta = `<div class="status"><p class="big ${c.cls}"><i class="cg ${c.g}" aria-hidden="true"></i>${big}</p>${c.why ? `<p class="why">${c.why}</p>` : ""}</div>
     ${newEv.length ? `<p class="dline"><span class="newword"><i class="newdot" aria-hidden="true"></i>새 소식</span> ${[...new Set(newEv.map(evWord))].map(esc).join(" · ")}</p>` : ""}
     ${line ? `<p class="dline">${line}</p>` : ""}
     ${ft ? `<p class="dline"><span class="t2">첫 흔적</span> <span class="tn">${kd(ft.d)}</span> · ${esc(ft.w)}${ft.b ? '<span class="t3"> · 수집을 시작한 날 이미 있었어요</span>' : ft.r ? "" : '<span class="t3"> · 이 날 처음 확인</span>'}</p>` : ""}
     <div class="acts"><button class="btn" data-star="${f.id}" aria-pressed="${on}">${STAR}${on ? "찜함" : "찜하기"}</button>
       <button class="btn" data-ics="${f.id}" ${canIcs ? "" : "disabled"}>캘린더에 추가${d.p === "est" ? " (예상)" : ""}</button></div>
-    ${canIcs ? "" : '<p class="small" style="margin-top:6px">근거가 부족해 아직 캘린더 일정을 만들 수 없어요.</p>'}
-    ${x.nxt ? `<section class="dsec"><h2>다음에 나올 신호</h2><p class="nextsig">${esc(x.nxt)}<br><span>나오면 레이더와 RSS에 올라옵니다.</span></p></section>` : ""}
+    ${canIcs ? "" : '<p class="small" style="margin-top:6px">근거가 부족해 아직 캘린더 일정을 만들 수 없어요.</p>'}`;
+  const head = full
+    ? `<div class="dtop">${poster}<div class="dmeta"><div class="dh">${title}</div>${meta}</div></div>`
+    : `<div class="dh">${title}${poster}</div>${meta}`;
+  return `<article class="dt${full ? " full" : ""}">${close}
+    ${head}
+    <div class="dbody">${x.nxt ? `<section class="dsec"><h2>다음에 나올 신호</h2><p class="nextsig">${esc(x.nxt)}<br><span>나오면 레이더와 RSS에 올라옵니다.</span></p></section>` : ""}
     ${d.p === "est" && d.by && d.by.length ? `<section class="dsec"><h2>개봉 확률 <small>${x.hist ? `이 수입·신청사의 과거 등급 ${x.hist.ratings}편 중 ${x.hist.opened}편 개봉` : "과거 개봉 기록으로 계산"}</small></h2>${chart(f)}</section>` : ""}
     <section class="dsec"><h2>기록 <small>최신순</small></h2>${tlHTML}</section>
     <section class="dsec"><h2>극장</h2>${chains}</section>
-    ${x.syn || comps || facts ? `<section class="dsec"><h2>작품 정보</h2>${facts ? `<p class="note" style="margin-bottom:8px">${esc(facts)}</p>` : ""}${x.syn ? `<p class="syn">${esc(x.syn)}</p>` : ""}${comps ? `<dl class="kv" style="margin-top:12px">${comps}</dl>` : ""}</section>` : ""}
+    ${x.syn || comps || facts ? `<section class="dsec"><h2>작품 정보</h2>${facts ? `<p class="note" style="margin-bottom:8px">${esc(facts)}</p>` : ""}${x.syn ? `<p class="syn">${esc(x.syn)}</p>` : ""}${comps ? `<dl class="kv" style="margin-top:12px">${comps}</dl>` : ""}</section>` : ""}</div>
   </article>`;
 }
 function srcOf(f, x) {
@@ -797,12 +814,17 @@ function render() {
   if (S.tab === "search") $("#top").classList.add("sopen");
   else if (document.activeElement !== qi && !qi.value) $("#top").classList.remove("sopen"); // left search by back
   $("#sf").classList.toggle("has", !!qi.value);
-  const hasRail = ["upcoming", "now", "watch", "search"].includes(bg) && !(film && !wide());
+  const fullv = film && S.full && wide();
+  const hasRail = ["upcoming", "now", "watch", "search"].includes(bg) && !(film && !wide()) && !fullv;
   $("#shell").classList.toggle("norail", !hasRail);
+  $("#shell").classList.toggle("fullv", fullv);
   $("#shell").classList.toggle("tablev", bg === "upcoming" && S.view === "table" && !film && innerWidth >= 1200);
   if (film && !wide()) {
     mainKey = "";
     $("#view").innerHTML = vDetail(false);
+  } else if (fullv) {
+    mainKey = "";
+    $("#view").innerHTML = vDetail("full");
   } else {
     const k2 = hashFor(bg) + "|" + JSON.stringify([S.more, S.tsort, COLON, Object.keys(WATCH), !!window.MRD && S.view === "table", innerWidth >= 900, innerWidth >= 1200]);
     if (k2 !== mainKey) { $("#view").innerHTML = (["home", "upcoming", "now"].includes(bg) ? staleBanner() : "") + VIEWS[bg](); mainKey = k2; }
@@ -810,7 +832,7 @@ function render() {
     if (film) for (const r of $$(`#view .row[data-id="${CSS.escape(S.id)}"]`)) r.classList.add("sel");
   }
   if (hasRail) $("#rail").innerHTML = `${filterPanel(bg)}`;
-  $("#pane").innerHTML = film && wide() ? vDetail(true) : paneDefault();
+  $("#pane").innerHTML = fullv ? "" : film && wide() ? vDetail(true) : paneDefault();
   if (film && wide()) $("#pane").scrollTop = 0;
   if (!$("#sheet").hidden) renderSheet();
   document.title = film && BYID[S.id] ? `${BYID[S.id].t} · 무비 레이더` : "무비 레이더";
@@ -838,9 +860,11 @@ function onHash(first) {
   if (S.tab === "film") { try { sessionStorage.setItem("mr.bg", S.bg); } catch (e) { /* ignore */ } detailsFailed = false; }
   else S.tsort = S.tsort && S.tab === "upcoming" ? S.tsort : null;
   closeSheet(true);
+  closeZoom();
   render();
   onHash.prev = location.hash;
   const h = location.hash;
+  if (S.tab === "film" && S.full && wide()) { scrollTo(0, 0); return; }
   if (S.tab === "film" && wide()) return; // list stays where it was
   if (!first) scrollTo(0, scrollMem[h] || 0);
 }
@@ -890,6 +914,18 @@ function download(text, name, type) {
 }
 
 /* ---------------------------------------------------------------- events */
+function openZoom(src, alt) {
+  let z = $("#zoom");
+  if (!z) { z = document.createElement("div"); z.id = "zoom"; z.className = "zoom"; z.setAttribute("role", "dialog"); z.setAttribute("aria-modal", "true"); document.body.appendChild(z); }
+  z.innerHTML = `<img src="${esc(src)}" alt="${esc(alt)}"><button class="zx" type="button" aria-label="닫기">✕</button>`;
+  z.hidden = false;
+  document.documentElement.classList.add("zooming");
+}
+function closeZoom() {
+  const z = $("#zoom");
+  if (z) { z.hidden = true; z.innerHTML = ""; }
+  document.documentElement.classList.remove("zooming");
+}
 function openFilm(id) { if (S.tab === "search" && S.q) addRecent(S.q); location.hash = "#/film/" + encodeURIComponent(id); }
 document.addEventListener("click", e => {
   const t = e.target;
@@ -903,6 +939,8 @@ document.addEventListener("click", e => {
   const vw = t.closest("[data-view]"); if (vw) { setState({ view: vw.dataset.view }); return; }
   const mo = t.closest("[data-more]"); if (mo) { S.more = Object.assign({}, S.more, { [mo.dataset.more]: true }); render(); return; }
   const th = t.closest("[data-tcol]"); if (th) { const k = th.dataset.tcol; S.tsort = S.tsort && S.tsort.k === k ? (S.tsort.dir > 0 ? { k, dir: -1 } : null) : { k, dir: 1 }; render(); return; }
+  const zb = t.closest("[data-zoom]"); if (zb) { openZoom(zb.dataset.zoom, zb.dataset.zoomAlt || ""); return; }
+  if (t.closest("#zoom")) { closeZoom(); return; }
   const ics = t.closest("[data-ics]"); if (ics) { makeIcs(BYID[ics.dataset.ics]); return; }
   if (t.closest("[data-open-sheet]")) { openSheet(); return; }
   if (t.closest("[data-close-sheet]")) { closeSheet(false); return; }
@@ -981,6 +1019,8 @@ $("#sbtn").addEventListener("click", () => { $("#top").classList.add("sopen"); $
 $("#q").addEventListener("blur", () => { if (!$("#q").value && S.tab !== "search") $("#top").classList.remove("sopen"); });
 document.addEventListener("keydown", e => {
   const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+  if (e.key === "Escape" && $("#zoom") && !$("#zoom").hidden) { closeZoom(); return; }
+  if (e.key === "Escape" && S.tab === "film" && S.full && wide() && !typing) { location.hash = "#/film/" + encodeURIComponent(S.id); return; }
   if (e.key === "Escape") { if (!$("#sheet").hidden) closeSheet(false); else if (S.tab === "search") closeSearch(); else if (typing) document.activeElement.blur(); else if (S.tab === "film" && wide()) location.hash = hashFor(S.bg); return; }
   if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
   if (e.key === "/") { e.preventDefault(); $("#top").classList.add("sopen"); $("#q").focus(); return; }
