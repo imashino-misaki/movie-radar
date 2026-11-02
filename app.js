@@ -51,21 +51,22 @@ const deadline = s => { const last = +monthEnd(s.slice(0, 7)).slice(8); return +
 const opened = f => f.d.p === "day" && f.d.date <= TODAY;
 const isNow = f => opened(f) && f.now;
 const isUp = f => !opened(f);
+const ddText = s => { const n = diffDays(TODAY, s); return n === 0 ? "오늘" : n === 1 ? "내일" : `D-${n}`; };
 function cert(f) {
   const d = f.d;
   if (d.p === "day") return opened(f)
     ? { g: "day", cls: "c-day", when: `${md(d.date)} 개봉`, sentence: `${kd(d.date)} 개봉`, why: `개봉 ${diffDays(d.date, TODAY) + 1}일째` }
-    : { g: "day", cls: "c-day", when: kd(d.date), sentence: `${kd(d.date)} 개봉 확정`, dday: diffDays(TODAY, d.date) };
-  if (d.p === "month") return { g: "month", cls: "c-month", when: `${mon(d.m)} 개봉 예정`, sentence: `${mon(d.m)} 개봉 예정`, why: "개봉 월만 발표됐어요. 날짜가 나오면 업데이트에 올라옵니다." };
+    : { g: "day", cls: "c-day", when: `${kd(d.date)}<b class="dday tn">${ddText(d.date)}</b>`, sentence: `${kd(d.date)} 개봉 확정`, dday: diffDays(TODAY, d.date) };
+  if (d.p === "month") return { g: "month", cls: "c-month", when: `${mon(d.m)} 중 개봉`, sentence: `${mon(d.m)} 중 개봉`, why: "개봉 월만 발표됐어요. 날짜가 나오면 업데이트에 올라옵니다." };
   if (d.p === "est" && d.md) {
     const word = WORD[d.w];
-    return { g: "est", cls: "c-est", word, when: `예상 ${md(d.md)}경`, wp: `예상 ${md(d.md)}경`, sentence: `예상 ${kd(d.md)}경`,
+    return { g: "est", cls: "c-est", word, when: `<span class="etag">예상</span>${md(d.md)}경`, wp: `예상 ${md(d.md)}경`, sentence: `<span class="etag">예상</span>${kd(d.md)}경`,
       why: [d.po != null && `개봉 확률 <b class="tn">${pctE(d.po)}</b>`, `<span class="wtag">${word}</span>`,
         d.lo && d.hi && `범위 <span class="tn">${md(d.lo)} ~ ${md(d.hi)}</span>`].filter(Boolean).join('<span class="t3"> · </span>') };
   }
-  return { g: "none", cls: "c-none", when: "시기 미정 · 아직 소식 없음", wp: "예상일 없음", sentence: "개봉 시기 미정", why: "아직 시기를 추정할 근거가 부족해요 (등급 심의 단계)." };
+  return { g: "none", cls: "c-none", when: "시기 미정", wp: "시기 미정", sentence: "개봉 시기 미정", why: "아직 시기를 추정할 근거가 부족해요 (등급 심의 단계)." };
 }
-const certHTML = (f, key = "when") => { const c = cert(f); return `<span class="${c.cls}"><i class="cg ${c.g}" aria-hidden="true"></i>${c[key]}</span>`; };
+const certHTML = (f, key = "when") => { const c = cert(f); return `<span class="${c.cls}">${c[key]}</span>`; };
 
 /* ---------------------------------------------------------------- watchlist */
 // watched ids under their current film id: an id merged into another film (MR.alias) moves there,
@@ -440,7 +441,7 @@ function vUpcoming() {
     <span class="seg" role="group" aria-label="정렬"><button data-sort="date" aria-pressed="${S.sort === "date" && S.view === "list"}">날짜순</button><button data-sort="book" aria-pressed="${S.sort === "book" && S.view === "list"}">예매율순</button></span>
     <span class="seg d-only push" role="group" aria-label="보기"><button data-view="list" aria-pressed="${S.view === "list"}">목록</button><button data-view="table" aria-pressed="${S.view === "table"}">표</button></span>
     ${S.view === "table" ? colPicker() : ""}</div>`;
-  const cg = wide() ? "" : '<p class="glegend small"><i class="cg day"></i>확정 <i class="cg month"></i>월만 발표 <i class="cg est"></i>예상일</p>';
+  const cg = "";
   let body;
   if (S.view === "table") body = tableView(list);
   else if (S.sort === "book") {
@@ -463,7 +464,7 @@ const COLS = [
   ["date", "개봉·예상일", true, f => sortKey(f),
     f => f.d.p === "day" ? `<b>${dot(f.d.date)}</b> <span class="dim">${WD[D(f.d.date).getUTCDay()]}</span>` : f.d.p === "month" ? `${mon(f.d.m)} <span class="dim">날짜 미정</span>` : f.d.md ? `<b>${dot(f.d.md)}</b><span class="dim">경</span>` : '<span class="dim">–</span>'],
   ["title", "제목", true, f => f.t, f => esc(f.t), "t"],
-  ["word", "확실도", true, f => ["day", "month", "likely", "possible", "unknown", "none"].indexOf(f.d.w), f => `<i class="cg ${cert(f).g}"></i>${WORD[f.d.w]}`],
+  ["word", "확실도", true, f => ["day", "month", "likely", "possible", "unknown", "none"].indexOf(f.d.w), f => WORD[f.d.w]],
   ["pct", "개봉 확률", true, f => f.d.p === "est" && f.d.po != null ? f.d.po : -1, f => f.d.p === "est" && f.d.po != null ? pctE(f.d.po) : '<span class="dim">–</span>', "n"],
   ["range", "범위 (10–90%)", true, f => f.d.p === "est" && f.d.lo && f.d.hi ? diffDays(f.d.lo, f.d.hi) : 99999, f => f.d.p === "est" && f.d.lo && f.d.hi ? `${dot(f.d.lo)} – ${dot(f.d.hi)}` : '<span class="dim">–</span>'],
   ["ex", "단독", true, f => f.ex.join(), f => f.ex.map(e => EXN[e].replace(" 단독", "")).join(", ") || '<span class="dim">–</span>'],
@@ -833,7 +834,7 @@ function vDetail(mode) {
     ? `<a class="dp" href="#/film/${fid}/full" title="크게 보기">${img}</a>`
     : `<button class="dp" type="button" data-zoom="data/posters/${f.pst}" data-zoom-alt="${esc(f.t)} 포스터" title="포스터 크게 보기">${img}</button>`;
   const title = `<div><h1>${esc(f.t)}</h1>${f.ot && f.ot !== f.t ? `<p class="ot">${esc(f.ot)}</p>` : ""}</div>`;
-  const meta = `<div class="status"><p class="big ${c.cls}"><i class="cg ${c.g}" aria-hidden="true"></i>${big}</p>${c.why ? `<p class="why">${c.why}</p>` : ""}</div>
+  const meta = `<div class="status"><p class="big ${c.cls}">${big}</p>${c.why ? `<p class="why">${c.why}</p>` : ""}</div>
     ${newEv.length ? `<p class="dline"><span class="newword">새 소식</span> ${[...new Set(newEv.map(evWord))].map(esc).join(" · ")}</p>` : ""}
     ${line ? `<p class="dline">${line}</p>` : ""}
     ${ft ? `<p class="dline"><span class="t2">첫 흔적</span> <span class="tn">${kd(ft.d)}</span> · ${esc(ft.w)}${ft.b ? '<span class="t3"> · 수집을 시작한 날 이미 있었어요</span>' : ft.r ? "" : '<span class="t3"> · 이 날 처음 확인</span>'}</p>` : ""}
@@ -866,12 +867,12 @@ function srcOf(f, x) {
 function legend() {
   const th = MR.th;
   return `<div class="legend"><h3>확률 읽는 법</h3><dl>
-    <dt><i class="cg day"></i>확정</dt><dd>개봉일이 발표됨. 확률은 표시하지 않아요.</dd>
-    <dt><i class="cg month"></i>월 공개</dt><dd>개봉 월만 발표됨.</dd>
-    <dt><i class="cg est"></i>예상일</dt><dd>개봉한다면의 중앙값: 절반은 이보다 일찍, 절반은 늦게 개봉. 범위는 10–90% 구간.</dd>
+    <dt>11월 4일 <b class="dday">D-2</b></dt><dd>개봉일이 발표됨. 확률은 표시하지 않아요.</dd>
+    <dt>11월 중 개봉</dt><dd>개봉 월만 발표됨.</dd>
+    <dt><span class="etag">예상</span>12월 2일경</dt><dd>개봉한다면의 중앙값: 절반은 이보다 일찍, 절반은 늦게 개봉. 범위는 10–90% 구간.</dd>
     <dt>개봉 확률</dt><dd>앞으로 극장에서 개봉할 확률 (사실상 1년 안). 상세 화면과 표에 표시.</dd>
     <dt>유력·가능·미지수</dt><dd>개봉 확률 ${Math.round(th.likely * 100)}% 이상 · ${Math.round(th.possible * 100)}–${Math.round(th.likely * 100) - 1}% · ${Math.round(th.possible * 100)}% 미만</dd>
-    <dt><i class="cg none"></i>시기 미정</dt><dd>등급 심의 단계라 아직 추정하지 않음</dd></dl>
+    <dt>시기 미정</dt><dd>등급 심의 단계라 아직 추정하지 않음</dd></dl>
     <p class="small">같은 수입·배급사, 같은 단계에 있던 과거 영화들의 실제 개봉 기록으로 계산해요.</p></div>`;
 }
 function paneDefault() {
@@ -999,7 +1000,7 @@ function makeIcs(f) {
   let start, end, summary, desc;
   if (d.p === "day") { start = d.date; end = add(d.date, 1); summary = `${f.t} 개봉`; desc = `${c.sentence}`; }
   else if (d.p === "month") { start = d.m + "-01"; end = add(monthEnd(d.m), 1); summary = `[예상] ${f.t} 개봉 (${mon(d.m)} 중, 날짜 미정)`; desc = "개봉 월만 발표됨. 확정 날짜가 아닙니다."; }
-  else if (d.p === "est" && d.md) { start = d.md; end = add(d.md, 1); summary = `[예상] ${f.t} 개봉 예상일`; desc = `${c.when} (과거 비슷한 영화 기준 중앙값). 확정 날짜가 아니라 예상 시점입니다.`; }
+  else if (d.p === "est" && d.md) { start = d.md; end = add(d.md, 1); summary = `[예상] ${f.t} 개봉 예상일`; desc = `${c.wp} (과거 비슷한 영화 기준 중앙값). 확정 날짜가 아니라 예상 시점입니다.`; }
   else return;
   const ymd = s => s.replace(/-/g, "");
   const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
