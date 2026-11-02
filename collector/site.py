@@ -111,6 +111,32 @@ def screening_kind(title: str, tags: list, mb: dict | None, lt: dict | None, cg:
     return ""
 
 
+ANIME_GENRE = "애니메이션"
+
+
+def official_genres(recs: list[dict]) -> list[str]:
+    """Every official genre the records' stages carry: Lotte's genre, the KOBIS
+    Open API's genres, the KOBIS detail page's and the KOBIS calendar's."""
+    out: list[str] = []
+    for r in recs:
+        st = r.get("stages") or {}
+        if (st.get("lotte") or {}).get("genre"):
+            out.append(st["lotte"]["genre"])
+        for name in ("kobis", "kobis_detail", "schedule"):
+            out += [g for g in (st.get(name) or {}).get("genres") or [] if g]
+    return out
+
+
+def is_anime(recs: list[dict], tags) -> bool:
+    """The 애니메이션 category. Precedence: an official genre (official_genres)
+    decides whenever any source gives one; only a film with no genre from any
+    source falls back to the title heuristic tag "anime" (tags.py)."""
+    genres = official_genres(recs)
+    if genres:
+        return any(ANIME_GENRE in g for g in genres)
+    return "anime" in tags
+
+
 def tnorm(s: str | None) -> str:
     return re.sub(r"[^0-9a-z가-힣]", "", (s or "").lower())
 
@@ -914,7 +940,7 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             or bool(bk and bk.get("total_audience"))
         outside = (f.get("theatrical") or {}).get("class") == "unlikely" or "dormant" in tags
         cats = []
-        if "anime" in tags:
+        if is_anime([f, *members.get(f["id"], [])], tags):  # official genre first, title heuristic only without one
             cats.append("ani")
         if "rerelease" in tags or (st.get("release_history") or {}).get("rereleases"):
             cats.append("rr")
@@ -1019,6 +1045,7 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             cgd=(cg or {}).get("release_date") or None, bkas=(bk or {}).get("as_of"),
             ltpick=(lt or {}).get("badge") == "pick", prog=pg.get("program") if pg else None,
             mbno=((mb or {}).get("movie_nos") or [None])[0], ltno=(lt or {}).get("movie_code") or None,
+            cgno=(cg or {}).get("movie_no") or None,
             stages=dict(intake=(st.get("intake") or {}).get("date"), rating=(st.get("rating") or {}).get("date"),
                         promo=(st.get("promo") or {}).get("first_date"),
                         ad=(st.get("ors_ad") or {}).get("first_date") or day(fs.get("ors_ad")) or None,

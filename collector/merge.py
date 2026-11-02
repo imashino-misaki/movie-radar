@@ -269,6 +269,7 @@ def apply_kobis(films: list[dict], cache: dict, kept_ids: list[str], trusted: se
         stage = {"movie_cd": cd, "open_dt": iso_date(entry.get("openDt", "")),
                  "status": entry.get("prdtStatNm", ""),
                  "distributors": [mask_applicant(d) for d in entry.get("distributors", [])],
+                 "genres": [g for g in entry.get("genres", []) if g],
                  "grades": sorted({a.get("watchGradeNm", "") for a in entry.get("audits", [])} - {""}),
                  "audit_nos": sorted({audit_no(a) for a in entry.get("audits", [])} - {""})}
         seen = entry.get("first_seen", today)
@@ -501,6 +502,8 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
         stage["exclusive"] = bool(r.get("exclusive"))
         if r.get("festival"):
             stage["festival"] = r["festival"]
+        if r.get("genre"):
+            stage["genre"] = r["genre"]
         stage["kobis_open_dt"] = iso_date((kobis_cache or {}).get(r["kobis_cd"], {}).get("openDt", ""))
         lid = lotte_id(r["movie_code"])
         seen = today

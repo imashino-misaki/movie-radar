@@ -66,6 +66,9 @@ def parse_row(m: dict, status: str) -> dict:
         # name of the film festival a screening belongs to (empty on all 39 rows of the
         # 2026-11-02 list; the field exists for festival line-ups)
         "festival": clean(m.get("MovieFestivalName") or ""),
+        # Lotte's genre, e.g. "애니메이션", "드라마" (MovieGenreNameKR / US are null);
+        # decides the site's 애니메이션 category (site.is_anime)
+        "genre": clean(m.get("MovieGenreName") or ""),
         # 단독 개봉 (Lotte-only release); every row was N on 2026-11-01 (programs.py)
         "exclusive": str(m.get("SoloOpenYN") or "") == "Y" or str(m.get("TagDivCd") or "") == "2",
         "poster": str(m.get("PosterURL") or "").strip(),

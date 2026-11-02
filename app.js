@@ -95,11 +95,21 @@ const DATA_DAY = [MR.last, (MR.bkas || "").slice(0, 10)].sort().pop();
 const WEEK_FROM = add(DATA_DAY, -7);
 const LOOKBACK = 14; // days: the "새로 포착" window, and the furthest back "지난 방문 이후" reaches
 const LOOK_FROM = add(TODAY, -LOOKBACK);
-// baseline for this tab session: what the user had seen before this visit (survives reloads in the same tab)
+// baseline for this visit: what the user had seen before it. A visit is one data run in one tab:
+// reloads keep the baseline, but once a newer run loads (phones keep a tab's sessionStorage for
+// days) the baseline moves to what the previous load had shown
+const RUN_ID = (MRS && MRS.run) || MR.bkas || MR.last;
 const isSeen = v => isObj(v) && isTime(v.at) && strArr(v.keys);
-let BASE = ss.get("mr.base", null, v => isSeen(v) || (isObj(v) && v.at === null && v.keys === null));
-if (!BASE) { const prev = ls.get("mr.seen", null, isSeen); BASE = prev ? { at: prev.at, keys: prev.keys } : { at: null, keys: null }; ss.set("mr.base", BASE); }
+let BASE = ss.get("mr.base", null, v => (isSeen(v) || (isObj(v) && v.at === null && v.keys === null)) && v.run === RUN_ID);
+if (!BASE) { const prev = ls.get("mr.seen", null, isSeen); BASE = prev ? { at: prev.at, keys: prev.keys, run: RUN_ID } : { at: null, keys: null, run: RUN_ID }; ss.set("mr.base", BASE); }
 ls.set("mr.seen", { at: new Date().toISOString(), keys: MR.ev.map(evKey).concat(MR.fs.map(fsKey)) });
+// changes the user opened (the film's detail): no longer marked new. Stored as {key: day read} and
+// shared by every tab, so writes merge with what is stored. An entry read before LOOK_FROM is dropped:
+// any later visit's baseline already holds it, and a visit after a longer absence only counts changes
+// dated within LOOKBACK days, which were all read after LOOK_FROM
+const isRead = v => isObj(v) && Object.values(v).every(x => typeof x === "string");
+const readStore = () => { const o = ls.get("mr.read", {}, isRead); for (const k in o) if (o[k] < LOOK_FROM) delete o[k]; return o; };
+let READ = new Set(Object.keys(readStore()));
 const BASESET = BASE.keys ? new Set(BASE.keys) : null;
 const FIRST_VISIT = !BASESET;
 const baseDay = BASE.at ? iso(new Date(new Date(BASE.at).getTime() + 9 * 3600e3)) : null;
@@ -112,7 +122,24 @@ const isEv = f => HIDE.some(([c]) => f.cats.includes(c));
 // festival / concert listings are not new films
 const FS = MR.fs.filter(s => BYID[s.id] && s.d >= LOOK_FROM && !isEv(BYID[s.id]));
 const isNewFs = s => !!BASESET && !BASESET.has(fsKey(s));
-const NEWIDS = new Set(NEW_EV.map(e => e.id).concat(FS.filter(isNewFs).map(s => s.id)));
+// films with a new change the user has not opened yet: the NEW tags and the tab badge
+const unreadIds = () => new Set(NEW_EV.filter(e => !READ.has(evKey(e))).map(e => e.id)
+  .concat(FS.filter(s => isNewFs(s) && !READ.has(fsKey(s))).map(s => s.id)));
+let NEWIDS = unreadIds();
+// true when it changed anything (the caller rebuilds the list)
+function markRead(id) {
+  const keys = MR.ev.filter(e => e.id === id).map(evKey).concat(MR.fs.filter(s => s.id === id).map(fsKey)).filter(k => !READ.has(k));
+  if (!keys.length) return false;
+  const o = readStore();
+  keys.forEach(k => { o[k] = TODAY; });
+  ls.set("mr.read", o); READ = new Set(Object.keys(o)); NEWIDS = unreadIds();
+  return true;
+}
+// another tab read something: pick it up
+window.addEventListener("storage", e => {
+  if (e.key !== "mr.read") return;
+  READ = new Set(Object.keys(readStore())); NEWIDS = unreadIds(); mainKey = ""; render();
+});
 
 // event weight: first sighting > date confirmed > month announced > median shift > range narrowed
 // > chain listing / booking open > other
@@ -156,7 +183,7 @@ function radRow(g, compact) {
   const words = [...new Set((g.evs.some(e => e.f) ? ["처음 포착"] : []).concat(g.evs.map(evWord)))];
   const certRedundant = g.evs.some(e => e.k === "date" || e.k === "month");
   return `<div class="rad" data-id="${f.id}" tabindex="0">
-    <div class="rt"><i class="newdot" aria-hidden="true"></i><span>${esc(f.t)}</span>${g.w ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
+    <div class="rt"><span>${esc(f.t)}</span>${!FIRST_VISIT && NEWIDS.has(f.id) && g.evs.some(e => !READ.has(evKey(e))) ? '<span class="newtag" title="아직 열어 보지 않은 새 소식">NEW</span>' : ""}${g.w ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
     <time class="tn" datetime="${g.top}">${dayRel(g.top)}</time>
     <div class="ew">${words.slice(0, compact ? 2 : 4).map(esc).join('<span class="t3"> · </span>')}</div>
     ${certRedundant || compact ? "" : `<div class="ec">${certHTML(f)}</div>`}
@@ -543,9 +570,9 @@ function changesSection(compact, noWatched, skip) {
   return `<section class="${compact ? "" : "list "}radar">${html}</section>`;
 }
 function fsRow(s) {
-  const f = BYID[s.id], nw = isNewFs(s), who = f.dist || f.app;
+  const f = BYID[s.id], nw = isNewFs(s) && !READ.has(fsKey(s)), who = f.dist || f.app;
   return `<div class="rad" data-id="${f.id}" tabindex="0">
-    <div class="rt">${nw ? '<i class="newdot" aria-hidden="true"></i>' : ""}<span>${esc(f.t)}</span>${nw ? '<span class="newtag" aria-label="지난 방문 이후 새로 포착">NEW</span>' : ""}${WATCH[f.id] ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
+    <div class="rt"><span>${esc(f.t)}</span>${nw ? '<span class="newtag" aria-label="지난 방문 이후 새로 포착">NEW</span>' : ""}${WATCH[f.id] ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
     <time class="tn" datetime="${s.d}">${dayRel(s.d)}${s.r ? "" : " 확인"}</time>
     <div class="ew">${esc(s.w)}${who ? `<span class="t3"> · </span><span class="t2">${esc(who)}</span>` : ""}</div>
   </div>`;
@@ -588,7 +615,7 @@ function stripSection() {
   if (!items.length) return "";
   const up = MR.films.filter(f => isUp(f) && homeOk(f));
   const q = (k, label) => { const n = up.filter(f => f.cats.includes(k)).length; return n ? `<a class="qchip" href="${hashFor("upcoming", { F: new Set([k]), sort: "date", view: "list" })}">${label} <span class="tn">${n}</span></a>` : ""; };
-  const quick = q("rr", "재개봉") + q("ani", "애니메이션");
+  const quick = q("rr", "재개봉");
   return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편</span><a class="end" href="#/upcoming">전체 일정</a></div>
     ${quick ? `<div class="quick">${quick}</div>` : ""}
     <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
@@ -791,9 +818,10 @@ function vDetail(mode) {
   const bookBtn = (no, st, name, url) => no && st && st !== "ended"
     ? `<a class="btn${canBook(st) ? " pri" : ""}" href="${url}" target="_blank" rel="noopener">${name} ${canBook(st) ? "예매" : "영화 페이지"} ↗</a>` : "";
   const bookBtns = bookBtn(x.mbno, f.mb, "메가박스", `https://www.megabox.co.kr/movie-detail?rpstMovieNo=${encodeURIComponent(x.mbno || "")}`)
-    + bookBtn(x.ltno, f.lt, "롯데시네마", `https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=${encodeURIComponent(x.ltno || "")}`);
+    + bookBtn(x.ltno, f.lt, "롯데시네마", `https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=${encodeURIComponent(x.ltno || "")}`)
+    + bookBtn(x.cgno, f.cg, "CGV", `https://cgv.co.kr/cnm/cgvChart/movieChart/${encodeURIComponent(x.cgno || "")}`);
   const chains = `<dl class="kv">
-    ${f.cg ? `<dt>CGV</dt><dd>${CS[f.cg] || esc(f.cg)}${x.cgd ? ` · 개봉 ${kd(x.cgd)}` : ""}${f.ex.includes("cgv") ? " · CGV 단독" : ""}</dd>` : `<dt>CGV</dt><dd>${f.ex.includes("cgv") ? "CGV 단독" : '<span class="t3">목록에 없음</span>'}</dd>`}
+    ${f.cg ? `<dt>CGV</dt><dd>${CS[f.cg] || esc(f.cg)}${x.cgd ? ` · 개봉 ${kd(x.cgd)}` : ""}${f.ex.includes("cgv") ? " · CGV 단독" : ""}${x.cgno ? ext(`https://cgv.co.kr/cnm/cgvChart/movieChart/${encodeURIComponent(x.cgno)}`, f.cg) : ""}</dd>` : `<dt>CGV</dt><dd>${f.ex.includes("cgv") ? "CGV 단독" : '<span class="t3">목록에 없음</span>'}</dd>`}
     <dt>메가박스</dt><dd>${f.mb ? `${CS[f.mb] || esc(f.mb)}${x.mbd ? ` · 개봉 ${kd(x.mbd)}` : ""}${x.prog ? ` · ${esc(x.prog)}` : ""}${mbLink}` : '<span class="t3">목록에 없음</span>'}</dd>
     <dt>롯데시네마</dt><dd>${f.lt ? `${CS[f.lt] || esc(f.lt)}${x.ltd ? ` · 개봉 ${kd(x.ltd)}` : ""}${ltLink}` : '<span class="t3">목록에 없음</span>'}</dd>
     <dt>예매율</dt><dd>${f.bk ? `<span class="tn">${f.bk.r}위 · ${f.bk.rate}% · 예매 ${f.bk.pa.toLocaleString()}명</span> <span class="t3 tn">(KOBIS ${esc(x.bkas || "")} 기준)</span>` : '<span class="t3">집계 없음</span>'}</dd></dl>`;
@@ -806,7 +834,7 @@ function vDetail(mode) {
     : `<button class="dp" type="button" data-zoom="data/posters/${f.pst}" data-zoom-alt="${esc(f.t)} 포스터" title="포스터 크게 보기">${img}</button>`;
   const title = `<div><h1>${esc(f.t)}</h1>${f.ot && f.ot !== f.t ? `<p class="ot">${esc(f.ot)}</p>` : ""}</div>`;
   const meta = `<div class="status"><p class="big ${c.cls}"><i class="cg ${c.g}" aria-hidden="true"></i>${big}</p>${c.why ? `<p class="why">${c.why}</p>` : ""}</div>
-    ${newEv.length ? `<p class="dline"><span class="newword"><i class="newdot" aria-hidden="true"></i>새 소식</span> ${[...new Set(newEv.map(evWord))].map(esc).join(" · ")}</p>` : ""}
+    ${newEv.length ? `<p class="dline"><span class="newword">새 소식</span> ${[...new Set(newEv.map(evWord))].map(esc).join(" · ")}</p>` : ""}
     ${line ? `<p class="dline">${line}</p>` : ""}
     ${ft ? `<p class="dline"><span class="t2">첫 흔적</span> <span class="tn">${kd(ft.d)}</span> · ${esc(ft.w)}${ft.b ? '<span class="t3"> · 수집을 시작한 날 이미 있었어요</span>' : ft.r ? "" : '<span class="t3"> · 이 날 처음 확인</span>'}</p>` : ""}
     <div class="acts"><button class="btn" data-star="${f.id}" aria-pressed="${on}">${STAR}${on ? "찜함" : "찜하기"}</button>
@@ -856,13 +884,18 @@ const VIEWS = { home: vHome, upcoming: vUpcoming, now: vNow, watch: vWatch, sear
 let mainKey = "";
 function render() {
   const film = S.tab === "film";
+  // opening a film reads its changes, before anything that shows NEW marks is built
+  if (film && BYID[S.id] && markRead(S.id)) mainKey = "";
   const bg = VIEWS[S.bg] ? S.bg : "home";
   const navTab = film ? (wide() ? bg : null) : (bg === "search" ? null : bg);
   for (const a of $$("#nav a, #tabbar a")) {
     a.href = hashFor(a.dataset.tab, a.dataset.tab === "home" ? { all7: false } : {});
     if (a.dataset.tab === navTab) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   }
-  const nb = $("#nb"); const nnew = NEWIDS.size; nb.hidden = !nnew || FIRST_VISIT; nb.textContent = nnew > 99 ? "99+" : nnew;
+  // the radar tab's badge: unread new films, until the radar (home) has been shown in this visit
+  // (also as the list beside a film's detail on a wide screen)
+  if (S.tab === "home" || (film && bg === "home" && wide() && !S.full)) ss.set("mr.badge", RUN_ID);
+  const nb = $("#nb"); const nnew = NEWIDS.size; nb.hidden = !nnew || FIRST_VISIT || ss.get("mr.badge") === RUN_ID; nb.textContent = nnew > 99 ? "99+" : nnew;
   const qi = $("#q"); if (document.activeElement !== qi) qi.value = S.tab === "search" || (film && S.bg === "search") ? S.q : "";
   if (S.tab === "search") $("#top").classList.add("sopen");
   else if (document.activeElement !== qi && !qi.value) $("#top").classList.remove("sopen"); // left search by back

@@ -82,7 +82,9 @@ def parse(html: str) -> dict:
     """The fields read from one detail page. Raises on a bad page.
 
     open_dt, rereleases; status (제작상태); grade and runtime (minutes) from
-    요약정보; formats (상영타입, e.g. "2D 디지털"); companies [{role, name,
+    요약정보; genres (요약정보's third field, e.g. ["스릴러", "미스터리"]: it is
+    the genre on all four recorded pages, also on one without runtime and
+    grade); formats (상영타입, e.g. "2D 디지털"); companies [{role, name,
     code}] from 영화사 (배급사, 수입사, 제작사, ...); modified (최종수정, KST);
     poster (the registered main poster, full size); synopsis."""
     status = _field(html, _STATUS_LABEL)
@@ -104,6 +106,7 @@ def parse(html: str) -> dict:
             "status": _text(status),
             "grade": next((x for x in summary if x.endswith(("관람가", "관람불가"))), ""),
             "runtime": runtime,
+            "genres": [g for g in (clean(x) for x in summary[2].split(",")) if g] if len(summary) > 2 else [],
             "formats": [a if a == b else f"{a} {b}" for a, b in
                         ((clean(x), clean(y)) for x, y in _FORMAT.findall(_field(html, "상영타입") or ""))],
             "companies": companies,
@@ -133,7 +136,7 @@ def explained(entry: dict, dates: set[str]) -> bool:
 # a page is read again after this many days; with ~180 codes (2026-11-01)
 # that is ~26 requests a day, and at most ceil(codes / REFRESH_DAYS) per run
 REFRESH_DAYS = 7
-DETAIL_FIELDS = ("status", "grade", "runtime", "formats", "companies", "modified",
+DETAIL_FIELDS = ("status", "grade", "runtime", "genres", "formats", "companies", "modified",
                  "poster", "synopsis")
 
 
@@ -202,7 +205,9 @@ def apply(films: list[dict], cache: dict, rating_codes: dict | None = None) -> d
         rec["stages"]["release_history"] = {"kobis_cd": code, "open_dt": entry["open_dt"],
                                             "rereleases": list(entry["rereleases"])}
         if "modified" in entry:
-            rec["stages"]["kobis_detail"] = {"kobis_cd": code, **{k: entry[k] for k in DETAIL_FIELDS}}
+            # pages cached before "genres" existed lack it until their next refresh
+            rec["stages"]["kobis_detail"] = {"kobis_cd": code,
+                                             **{k: entry[k] for k in DETAIL_FIELDS if k in entry}}
         else:
             rec["stages"].pop("kobis_detail", None)
         n += 1
@@ -381,7 +386,7 @@ def mark_dormant(films: list[dict], today: dt.date) -> int:
 
 
 def apply_schedule(films: list[dict], rows: list[dict]) -> dict:
-    """Attach stage "schedule" {movie_cd, date, month, poster} (in place) to the
+    """Attach stage "schedule" {movie_cd, date, month, poster, genres when known} (in place) to the
     records of films on the calendar; records no longer on it lose the stage."""
     by_cd = {r["movie_cd"]: r for r in rows}
     n = 0
@@ -391,6 +396,9 @@ def apply_schedule(films: list[dict], rows: list[dict]) -> dict:
             rec["stages"].pop("schedule", None)
             continue
         rec["stages"]["schedule"] = {k: hit[k] for k in ("movie_cd", "date", "month", "poster")}
+        genres = [g for g in (clean(x) for x in hit.get("genres", "").split(",")) if g]
+        if genres:  # the calendar's genre text, e.g. "애니메이션"
+            rec["stages"]["schedule"]["genres"] = genres
         n += 1
     return {"with_schedule": n, "schedule_unmatched": len(by_cd) - len(
         {c for rec in films for c in record_codes(rec)} & set(by_cd))}

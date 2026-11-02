@@ -8,8 +8,11 @@ re-tags the whole archive.
       The applicant is the exhibitor itself (or its affiliate). A theatre chain
       applying for a rating on its own usually means a release on that chain
       only (단독 유력) - concerts, events, re-releases, special formats.
-  anime      극장판 / 애니메이션 keywords, 劇場版 or kana in the original title,
-             or a known anime franchise name in the title.
+  anime      극장판 / 애니메이션 keywords, 劇場版, or a known anime franchise name
+             in the title. Only a fallback: the site's 애니메이션 category takes the
+             official genre (Lotte / KOBIS) when any source gives one (site.is_anime).
+             Kana in the original title is not used: Japanese live-action films have
+             it too (날조, 꽃밥, 열정 ...).
   concert    concert / tour / live-capture keywords (콘서트, 투어, 라이브, 인 시네마 ...).
   rerelease  4K, 리마스터, 재개봉, 앙코르 ...
   format     special-format or alternate-cut versions (SCREENX, 4DX, IMAX, Dolby,
@@ -58,8 +61,6 @@ SUBCULTURE_TAGS = ("anime", "concert", "rerelease")
 # franchise names that contain a concert keyword but are films
 NOT_CONCERT = ("러브 라이브", "러브라이브", "love live", "lovelive")
 
-_KANA = re.compile(r"[぀-ヿ]")
-
 # a live sports broadcast in a theater (league names, match rounds); bare sport words
 # ("축구", "야구") and "생중계" also appear in film titles, so they are not used
 SPORTS = re.compile(
@@ -92,9 +93,7 @@ def tag_film(title: str, original_title: str = "", applicant: str = "", country:
             tags.append(tag)
 
     text = f"{title or ''} | {original_title or ''}".lower()
-    if (_has_any(text, ANIME_KEYWORDS) or _ANI_BARE.search(text)
-            or _KANA.search(original_title or "")
-            or _has_any(text, ANIME_FRANCHISES)):
+    if _has_any(text, ANIME_KEYWORDS) or _ANI_BARE.search(text) or _has_any(text, ANIME_FRANCHISES):
         tags.append("anime")
     concert_text = text
     for name in NOT_CONCERT:
