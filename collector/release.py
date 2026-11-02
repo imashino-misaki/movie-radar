@@ -205,6 +205,19 @@ def cycle_start(rec: dict) -> str:
     return min(dates) if dates else ""
 
 
+def last_run_start(srcs: dict) -> str:
+    """The start of the latest run of a record with no current-cycle stage
+    (an old film back for a re-release needs no new rating): its latest KOBIS
+    opening, or a chain / program listing day after it (a re-release the
+    chains list before KOBIS records it). "" without a KOBIS opening."""
+    kobis = [d for d in [srcs.get("kobis", ""), srcs.get("kobis_api", ""),
+                         *srcs.get("kobis_rereleases", []), srcs.get("release_lags", "")] if d]
+    if not kobis:
+        return ""
+    listed = [srcs[k] for k in ("megabox", "lotte", "cgv", "program") if srcs.get(k)]
+    return max(kobis + listed)
+
+
 def rating_row(rec: dict, rows: dict | None) -> dict | None:
     """The release_lags row of the record's own rating ({rating_no: row})."""
     no = rec["stages"].get("rating", {}).get("rating_no")
@@ -263,7 +276,7 @@ def sources(rec: dict, row: dict | None = None) -> dict:
 def confirmed(rec: dict, srcs: dict | None = None) -> tuple[str, str, str] | None:
     """(date, precision, basis) of the current cycle's opening per the sources."""
     srcs = sources(rec) if srcs is None else srcs
-    start = cycle_start(rec)
+    start = cycle_start(rec) or last_run_start(srcs)
 
     def ok(d: str) -> bool:  # a month counts while its last day is in the cycle
         if len(d) == 7:
