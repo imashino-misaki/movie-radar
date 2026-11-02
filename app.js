@@ -35,7 +35,7 @@ const md = s => `${+s.slice(5, 7)}월 ${+s.slice(8, 10)}일`;
 const kd = s => `${md(s)} (${WD[D(s).getUTCDay()]})`;
 const mon = ym => (+ym.slice(0, 4) !== CUR_Y ? `${ym.slice(0, 4)}년 ` : "") + `${+ym.slice(5, 7)}월`;
 const monthEnd = ym => iso(new Date(Date.UTC(+ym.slice(0, 4), +ym.slice(5, 7), 0)));
-const dot = s => s ? `${+s.slice(5, 7)}.${+s.slice(8, 10)}` : "";
+const dot = s => s ? `${s.slice(0, 4) !== TODAY.slice(0, 4) ? s.slice(2, 4) + "." : ""}${+s.slice(5, 7)}.${+s.slice(8, 10)}` : "";
 const dayRel = s => s === TODAY ? "오늘" : s === add(TODAY, -1) ? "어제" : md(s);
 const kstStamp = isoUtc => { const k = new Date(new Date(isoUtc).getTime() + 9 * 3600e3).toISOString(); return `${md(k.slice(0, 10))} ${k.slice(11, 16)}`; };
 
@@ -174,6 +174,7 @@ function chainsText(f) {
   const ch = [];
   if (f.mb && f.mb !== "ended") ch.push("메가박스");
   if (f.lt && f.lt !== "ended") ch.push("롯데");
+  if (f.cg && f.cg !== "ended") ch.push("CGV");
   return ch.join("·");
 }
 function metaParts(f, { cert: withCert = false, bk = false } = {}) {
@@ -188,7 +189,7 @@ function metaParts(f, { cert: withCert = false, bk = false } = {}) {
   return a.join('<span class="sep">·</span>');
 }
 const posterCell = f => `<span class="ps">${f.pst ? `<img src="data/posters/${f.pst}" alt="" loading="lazy" decoding="async">` : ""}</span>`;
-const titleHTML = f => `<div class="rt">${NEWIDS.has(f.id) ? '<i class="newdot" aria-label="새 소식"></i>' : ""}<span>${esc(f.t)}</span></div>`;
+const titleHTML = f => `<div class="rt"><span>${esc(f.t)}</span>${!FIRST_VISIT && NEWIDS.has(f.id) ? '<span class="newtag" title="지난 방문 이후 새 소식">NEW</span>' : ""}</div>`;
 
 /* rows -------------------------------------------------------------- */
 function row(f, opt = {}) {
@@ -208,7 +209,7 @@ function estRow(f) {
 
 /* ---------------------------------------------------------------- filters */
 const FGROUPS = [
-  ["chain", "극장", [["mb", "메가박스"], ["lt", "롯데시네마"], ["cgv", "CGV 계열 배급"]]],
+  ["chain", "극장", [["mb", "메가박스"], ["lt", "롯데시네마"], ["cgv", "CGV"]]],
   ["ex", "상영 방식", [["ex", "체인 단독 상영"]]],
   ["cat", "종류", [["rr", "재개봉"], ["ani", "애니메이션"], ["fest", "영화제·특별 상영"], ["ev", "콘서트·라이브"], ["sport", "스포츠 중계"]]],
   ["fmt", "특별관", [["imax", "IMAX"], ["4d", "4D"], ["sx", "ScreenX"], ["dolby", "Dolby"]]],
@@ -258,7 +259,7 @@ function filterPanel(tab) {
     const on = S.F.has(k);
     return `<label class="fo${n[k] || on ? "" : " zero"}"><input type="checkbox" data-chip="${k}" ${on ? "checked" : ""}>${l}<em class="tn">${n[k]}</em></label>`;
   }).join("")}</div>`).join("");
-  return groups + `<p class="small" style="padding:0 8px">CGV 상영 목록은 아직 수집하지 않아요. ‘CGV 계열 배급’은 CJ 계열이 직접 배급하는 작품입니다.</p>`;
+  return groups + `<p class="small" style="padding:0 8px">‘CGV’는 CGV 상영 목록에 있거나 CJ 계열이 배급하는 작품입니다.</p>`;
 }
 // rebuilding the panel on every tap drops the tap feedback and the scroll position;
 // update the existing checkboxes when the panel already shows this tab
@@ -390,7 +391,7 @@ function renderBlocks(blocks, limitRows) {
       FOLD_INNER[id] = () => b.items.map(estRow).join("");
       const sum = b.type === "est" ? `<span><b>${mon(b.m)} 예상</b> <span class="tn">${b.items.length}편</span></span>`
         : b.type === "unknown" ? `<span><b>예상일 없음</b> <span class="tn">${b.items.length}편</span> · 모델이 날짜를 내지 못한 작품</span>`
-        : `<span><b>근거 부족</b> <span class="tn">${b.items.length}편</span> · 등급 심의 단계라 아직 추정하지 않아요</span>`;
+        : `<span><b>시기 미정</b> <span class="tn">${b.items.length}편</span> · 등급 심의 단계라 아직 추정하지 않아요</span>`;
       out += fold(id, sum, FOLD_INNER[id], b.type === "est" ? "" : "tail");
       shown += 1;
     }
@@ -407,12 +408,12 @@ function vUpcoming() {
   const base = baseFor("upcoming");
   const list = base.filter(f => passFilters(f, S.F));
   const c = upcomingCounts(list);
-  const head = `<div class="vh"><h1>개봉 예정</h1><span class="sub tn">확정 ${c.day} · 월 공개 ${c.month} · 추정 ${c.est} · 근거 부족 ${c.none}</span></div>`;
+  const head = `<div class="vh"><h1>개봉 예정</h1><span class="sub tn">확정 ${c.day} · 월 공개 ${c.month} · 추정 ${c.est} · 시기 미정 ${c.none}</span></div>`;
   const tools = `<div class="tools">${filterBtn()}
     <span class="seg" role="group" aria-label="정렬"><button data-sort="date" aria-pressed="${S.sort === "date" && S.view === "list"}">날짜순</button><button data-sort="book" aria-pressed="${S.sort === "book" && S.view === "list"}">예매율순</button></span>
     <span class="seg d-only push" role="group" aria-label="보기"><button data-view="list" aria-pressed="${S.view === "list"}">목록</button><button data-view="table" aria-pressed="${S.view === "table"}">표</button></span>
     ${S.view === "table" ? colPicker() : ""}</div>`;
-  const cg = S.F.has("cgv") ? '<p class="cgvnote">CGV 상영 목록은 아직 수집하지 않아, CJ 계열이 배급하는 작품만 걸러집니다.</p>' : "";
+  const cg = wide() ? "" : '<p class="glegend small"><i class="cg day"></i>확정 <i class="cg month"></i>월만 발표 <i class="cg est"></i>예상일</p>';
   let body;
   if (S.view === "table") body = tableView(list);
   else if (S.sort === "book") {
@@ -485,7 +486,10 @@ function vNow() {
     <button data-nsort="bo" aria-pressed="${S.nsort === "bo"}">관객순</button><button data-nsort="book" aria-pressed="${S.nsort === "book"}">예매율순</button><button data-nsort="open" aria-pressed="${S.nsort === "open"}">개봉순</button></span><span class="cnt tn push">${list.length}편</span></div>`;
   const head = `<div class="vh"><h1>상영 중</h1></div>`;
   let body;
-  const meta = (f, r) => { const od = f.d.p === "day" ? f.d.date : r && r.open; return [od && `${md(od)} 개봉`, od && `${diffDays(od, TODAY) + 1}일째`, f.ex.length ? exBadges(f) : chainsText(f), catText(f)].filter(Boolean).join('<span class="sep">·</span>'); };
+  const meta = (f, r) => {
+    const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
+    return [f.ex.length ? exBadges(f) : chainsText(f), od && `${md(od)} 개봉`, od && (pre ? "개봉 전 상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+  };
   const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
       <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? meta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
   if (S.nsort === "bo") {
@@ -548,7 +552,7 @@ function fsRow(s) {
 }
 function firstSection() {
   if (!FS.length) return "";
-  const key = "fs", cap = 8;
+  const key = "fs", cap = 3;
   const list = S.more[key] ? FS : FS.slice(0, cap);
   const nNew = FS.filter(isNewFs).length;
   return `<section class="list radar first"><div class="sh"><h2>새로 포착</h2><span class="sub tn">최근 ${LOOKBACK}일 · ${FS.length}편${nNew ? ` · <span class="newword">새 ${nNew}</span>` : ""}</span><a class="end" href="new.xml">RSS로 받기</a></div>
@@ -582,7 +586,11 @@ function stripSection() {
   const end = add(TODAY, 14);
   const items = MR.films.filter(f => f.d.p === "day" && f.d.date > TODAY && f.d.date <= end && homeOk(f)).sort(bySortDate);
   if (!items.length) return "";
+  const up = MR.films.filter(f => isUp(f) && homeOk(f));
+  const q = (k, label) => { const n = up.filter(f => f.cats.includes(k)).length; return n ? `<a class="qchip" href="${hashFor("upcoming", { F: new Set([k]), sort: "date", view: "list" })}">${label} <span class="tn">${n}</span></a>` : ""; };
+  const quick = q("rr", "재개봉") + q("ani", "애니메이션");
   return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편</span><a class="end" href="#/upcoming">전체 일정</a></div>
+    ${quick ? `<div class="quick">${quick}</div>` : ""}
     <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
 }
 // 상영 중 on the home screen: yesterday's box-office order first, then the rest by booking rank
@@ -610,11 +618,11 @@ function countsSection() {
     <a class="card" href="#/now"><b>상영 중</b><span class="tn">${now}편 · 관객순·예매율순</span></a></div>`;
 }
 function vHome() {
-  // 찜한 영화 (news + confirmed/showing watched films), 새로 포착, the two poster strips
-  // (다가오는 개봉, 상영 중), then 업데이트 (watched films with news and those under 새로 포착 are left out)
+  // 찜한 영화 (news + confirmed/showing watched films; only when there are some), the two poster
+  // strips (다가오는 개봉 with shortcuts, 상영 중), 새로 포착, then 업데이트 (watched films with news and those under 새로 포착 are left out)
   const hasNews = !FIRST_VISIT && NEW_EV.some(e => WATCH[e.id]);
   const ch = changesSection(false, hasNews, new Set(FS.map(s => s.id)));
-  const order = [watchSection(), firstSection(), stripSection(), nowSection(), ch];
+  const order = [watchSection(), stripSection(), nowSection(), firstSection(), ch];
   return `<div class="stack">${order.filter(Boolean).join("")}${countsSection()}</div>`;
 }
 
@@ -778,8 +786,14 @@ function vDetail(mode) {
   const ext = (url, st) => ` · <a href="${url}" target="_blank" rel="noopener">${st === "now" ? "예매하기" : "영화 페이지"} ↗</a>`;
   const mbLink = x.mbno ? ext(`https://www.megabox.co.kr/movie-detail?rpstMovieNo=${encodeURIComponent(x.mbno)}`, f.mb) : "";
   const ltLink = x.ltno ? ext(`https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=${encodeURIComponent(x.ltno)}`, f.lt) : "";
+  // a chain lets you book once it lists the film as showing or the film is bookable
+  const canBook = st => st === "now" || (st === "upcoming" && d.ss === "bookable");
+  const bookBtn = (no, st, name, url) => no && st && st !== "ended"
+    ? `<a class="btn${canBook(st) ? " pri" : ""}" href="${url}" target="_blank" rel="noopener">${name} ${canBook(st) ? "예매" : "영화 페이지"} ↗</a>` : "";
+  const bookBtns = bookBtn(x.mbno, f.mb, "메가박스", `https://www.megabox.co.kr/movie-detail?rpstMovieNo=${encodeURIComponent(x.mbno || "")}`)
+    + bookBtn(x.ltno, f.lt, "롯데시네마", `https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=${encodeURIComponent(x.ltno || "")}`);
   const chains = `<dl class="kv">
-    ${f.cg ? `<dt>CGV</dt><dd>${CS[f.cg] || esc(f.cg)}${x.cgd ? ` · 개봉 ${kd(x.cgd)}` : ""}${f.ex.includes("cgv") ? " · CGV 단독" : ""}</dd>` : `<dt>CGV</dt><dd class="t2">상영 목록을 아직 수집하지 않아요${f.ex.includes("cgv") ? " · CGV 단독" : ""}</dd>`}
+    ${f.cg ? `<dt>CGV</dt><dd>${CS[f.cg] || esc(f.cg)}${x.cgd ? ` · 개봉 ${kd(x.cgd)}` : ""}${f.ex.includes("cgv") ? " · CGV 단독" : ""}</dd>` : `<dt>CGV</dt><dd>${f.ex.includes("cgv") ? "CGV 단독" : '<span class="t3">목록에 없음</span>'}</dd>`}
     <dt>메가박스</dt><dd>${f.mb ? `${CS[f.mb] || esc(f.mb)}${x.mbd ? ` · 개봉 ${kd(x.mbd)}` : ""}${x.prog ? ` · ${esc(x.prog)}` : ""}${mbLink}` : '<span class="t3">목록에 없음</span>'}</dd>
     <dt>롯데시네마</dt><dd>${f.lt ? `${CS[f.lt] || esc(f.lt)}${x.ltd ? ` · 개봉 ${kd(x.ltd)}` : ""}${ltLink}` : '<span class="t3">목록에 없음</span>'}</dd>
     <dt>예매율</dt><dd>${f.bk ? `<span class="tn">${f.bk.r}위 · ${f.bk.rate}% · 예매 ${f.bk.pa.toLocaleString()}명</span> <span class="t3 tn">(KOBIS ${esc(x.bkas || "")} 기준)</span>` : '<span class="t3">집계 없음</span>'}</dd></dl>`;
@@ -797,6 +811,7 @@ function vDetail(mode) {
     ${ft ? `<p class="dline"><span class="t2">첫 흔적</span> <span class="tn">${kd(ft.d)}</span> · ${esc(ft.w)}${ft.b ? '<span class="t3"> · 수집을 시작한 날 이미 있었어요</span>' : ft.r ? "" : '<span class="t3"> · 이 날 처음 확인</span>'}</p>` : ""}
     <div class="acts"><button class="btn" data-star="${f.id}" aria-pressed="${on}">${STAR}${on ? "찜함" : "찜하기"}</button>
       <button class="btn" data-ics="${f.id}" ${canIcs ? "" : "disabled"}>캘린더에 추가${d.p === "est" ? " (예상)" : ""}</button></div>
+    ${bookBtns ? `<div class="acts book">${bookBtns}</div>` : ""}
     ${canIcs ? "" : '<p class="small" style="margin-top:6px">근거가 부족해 아직 캘린더 일정을 만들 수 없어요.</p>'}`;
   const head = full
     ? `<div class="dtop">${poster}<div class="dmeta"><div class="dh">${title}</div>${meta}</div></div>`
@@ -828,7 +843,7 @@ function legend() {
     <dt><i class="cg est"></i>예상일</dt><dd>개봉한다면의 중앙값: 절반은 이보다 일찍, 절반은 늦게 개봉. 범위는 10–90% 구간.</dd>
     <dt>개봉 확률</dt><dd>앞으로 극장에서 개봉할 확률 (사실상 1년 안). 상세 화면과 표에 표시.</dd>
     <dt>유력·가능·미지수</dt><dd>개봉 확률 ${Math.round(th.likely * 100)}% 이상 · ${Math.round(th.possible * 100)}–${Math.round(th.likely * 100) - 1}% · ${Math.round(th.possible * 100)}% 미만</dd>
-    <dt><i class="cg none"></i>근거 부족</dt><dd>등급 심의 단계라 아직 추정하지 않음</dd></dl>
+    <dt><i class="cg none"></i>시기 미정</dt><dd>등급 심의 단계라 아직 추정하지 않음</dd></dl>
     <p class="small">같은 수입·배급사, 같은 단계에 있던 과거 영화들의 실제 개봉 기록으로 계산해요.</p></div>`;
 }
 function paneDefault() {
@@ -1106,7 +1121,7 @@ function upd() {
 }
 upd(); setInterval(upd, 60e3);
 const foot = $("#foot");
-foot.innerHTML = `자료: 영상물등급위원회(등급·심의), KOBIS(개봉일·박스오피스·예매율), 메가박스·롯데시네마 상영 목록. CGV 상영 목록은 아직 없어요.
+foot.innerHTML = `자료: 영상물등급위원회(등급·심의), KOBIS(개봉일·박스오피스·예매율), 메가박스·롯데시네마·CGV 상영 목록.
   추적은 ${md(MR.first)}부터예요. 예상일과 확률은 과거 개봉 기록으로 계산한 값이에요.
   RSS: <a href="feed.xml">전체 소식</a> · <a href="new.xml">새로 포착</a> · <button type="button" data-theme-reset>테마: 시스템 설정 따르기</button>
   ${FRESH.rows.length ? `<details class="fresh"><summary>출처별 갱신 상태</summary><ul>${FRESH.rows.map(r => `<li class="${r.bad ? "bad" : ""}"><span>${esc(r.label)}</span><span class="tn">${r.text}</span></li>`).join("")}</ul>

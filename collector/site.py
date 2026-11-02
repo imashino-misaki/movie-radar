@@ -728,7 +728,9 @@ def forecast_events(entries: list[dict], cur_year: int) -> list[tuple[str, str, 
         pp, cp = prev.get("p"), cur.get("p")
         ev: tuple[str, str] | None = None
         if cp == "day" and pp == "day" and prev.get("date") != cur.get("date"):
-            ev = ("moved", f"개봉일 변경 {kd(prev['date'], False)} → {kd(cur['date'], False)}")
+            # an old opening replaced by a re-release date names its year
+            was = (f"{prev['date'][:4]}년 " if prev["date"][:4] != cur["date"][:4] else "") + kd(prev["date"], False)
+            ev = ("moved", f"개봉일 변경 {was} → {kd(cur['date'], False)}")
         elif cp == "day" and pp != "day":
             ev = ("conf", f"월 공개 → {kd(cur['date'], False)} 확정" if pp == "month"
                   else f"개봉일 확정 {kd(cur['date'], False)}")
