@@ -849,6 +849,7 @@ class Fit:
         self.active: list = [0]
         self.count: dict = {}    # rows per company
         self.k_rows = math.inf   # rows at which a company's own record weighs as much as the prior
+        self.recal = None        # (a, b): P(opens) recalibrated as sigmoid(a + b logit pi), or None
 
     def xs(self, x) -> list:
         return [x[i] for i in self.sel]
@@ -876,7 +877,8 @@ class Fit:
         m = _dot(self.beta, xs) + lb
         # mean of the logistic over the effect's uncertainty (probit approximation)
         pi = _sigmoid((_dot(self.gamma, xs) + la) / math.sqrt(1 + math.pi * va / 8))
-        return m, math.sqrt(self.sigma ** 2 + vb), min(1 - _EPS, max(_EPS, pi)), known and self.groups
+        return m, math.sqrt(self.sigma ** 2 + vb), recal_pi(min(1 - _EPS, max(_EPS, pi)), self.recal), \
+            known and self.groups
 
 
 def fit(obs: list[Obs], ref: int, half_life: float | None = None, groups: bool = True,
@@ -1286,6 +1288,127 @@ def describe(lag: Lag, anchor: dt.date, elapsed: int, today: dt.date,
             "by": by, "sd_days": round(math.sqrt(var), 1)}
 
 
+# ---------------------------------------------------------------- recalibration
+# P(opens) recalibrated on out-of-time predictions as pi* = sigmoid(a + b logit pi)
+# (logistic calibration on the logit: it contains the identity a = 0, b = 1; b > 1
+# spreads predictions away from the middle, a moves them all), fitted by the
+# censored likelihood with each row's lag timing held fixed, so it corrects the
+# eventual share and leaves the lag alone. Forms, simplest first; the backtest
+# picks one on a later part of the tuning fold and keeps it only if the test
+# fold agrees. Why: on the test fold (2026-11-02) rating-day P(open within
+# 298 d) ran 0.86 -> 0.91 observed, 0.89 -> 0.94, 0.91 -> 0.97, but 0.66 -> 0.62
+# (mean 0.758 vs 0.78). Result that day: the tuning fold picked "none"
+# (intercept and slope within one standard error), and a fit on the test
+# fold's earlier half (to 2025-01-20) did not beat "none" on its later half
+# (intercept a 0.28: mean 0.823 vs 0.797 observed, over-corrected); the later
+# half was near calibrated already (0.785 vs 0.797). So nothing is applied;
+# every run checks again.
+RECAL_FORMS = ("none", "intercept", "slope")
+# landmarks (days after the rating) at which the conditional P(opens | none yet)
+# is checked on the test fold
+LANDMARKS = (30, 60, 90)
+
+
+def recal_pi(pi: float, ab) -> float:
+    if not ab:
+        return pi
+    a, b = ab
+    return min(1 - _EPS, max(_EPS, _sigmoid(a + b * _logit(pi))))
+
+
+def _recal_rows(pred, rows: list[Obs]) -> list[tuple]:
+    """(logit pi, opened, F(t) - F(t - 1) at the opening or F at the last
+    check, film weight) per row predicted on its rating day."""
+    out = []
+    for o, w in zip(rows, _film_weights(rows)):
+        lag = pred(o)[0]
+        f = lag.cdf(o.t) - lag.cdf(o.t - 1) if o.opened else lag.cdf(o.end - o.r)
+        out.append((_logit(lag.pi), o.opened, f, w))
+    return out
+
+
+def _recal_ll(rows: list[tuple], ab) -> list[float]:
+    """Per-row log likelihood (film-weighted, see _scaled) under (a, b)."""
+    a, b = ab
+    k = len(rows) / sum(r[3] for r in rows)
+    out = []
+    for lg, op, f, w in rows:
+        p = _sigmoid(a + b * lg)
+        v = p * f if op else 1 - p * f
+        out.append(math.log(max(v, 1e-300)) * w * k)
+    return out
+
+
+def fit_recal(rows: list[tuple], form: str):
+    """(a, b) of `form` maximizing the likelihood of `rows` (None for "none"):
+    a grid over a in [-3, 3] (b in [0.25, 4] for "slope") narrowed around the
+    best point (the step halves each round) until the step is below 1e-3."""
+    if form == "none" or not rows:
+        return None
+    lo_a, hi_a = -3.0, 3.0
+    lo_b, hi_b = (0.25, 4.0) if form == "slope" else (1.0, 1.0)
+    best = (0.0, 1.0)
+    while True:
+        sa, sb = (hi_a - lo_a) / 8, (hi_b - lo_b) / 8
+        grid = [(lo_a + i * sa, lo_b + j * sb) for i in range(9) for j in range(9 if sb else 1)]
+        best = max(grid, key=lambda ab: sum(_recal_ll(rows, ab)))
+        if max(sa, sb) < 1e-3:
+            return round(best[0], 4), round(best[1], 4)
+        lo_a, hi_a = best[0] - 2 * sa, best[0] + 2 * sa
+        if sb:
+            lo_b, hi_b = max(0.05, best[1] - 2 * sb), best[1] + 2 * sb
+
+
+def recalibrated(pred, ab):
+    """`pred` with its P(opens) recalibrated by (a, b)."""
+    if not ab:
+        return pred
+
+    def p(o: Obs):
+        lag, own = pred(o)
+        return _with_pi(lag, recal_pi(lag.pi, ab)), own
+    return p
+
+
+def recal_choice(pred, tune: list[Obs], first: dict) -> dict:
+    """The form fitted on the earlier half of the tuning fold (by each film's
+    first day) and picked on the later half (simplest within one standard
+    error of the best), then refitted on the whole fold."""
+    if len(tune) < 4:
+        return {"form": "none", "ab": None}
+    mid = tune[len(tune) // 2].r
+    early = [o for o in tune if first[o.film] < mid]
+    late = [o for o in tune if first[o.film] >= mid]
+    if len(early) < 2 or len(late) < 2:
+        return {"form": "none", "ab": None}
+    re_, rl = _recal_rows(pred, early), _recal_rows(pred, late)
+    scores = [_recal_ll(rl, fit_recal(re_, fm) or (0.0, 1.0)) for fm in RECAL_FORMS]
+    form = RECAL_FORMS[_pick(list(RECAL_FORMS), scores)]
+    return {"form": form, "ab": fit_recal(_recal_rows(pred, tune), form),
+            "loglik_later_half": {fm: round(_mean(s), 4) for fm, s in zip(RECAL_FORMS, scores)}}
+
+
+def landmark_check(pred_at, test: list[Obs], horizon: int, ab) -> dict:
+    """P(open within `horizon` more days | no opening by the landmark) on the
+    test rows still unopened at each landmark and followed up that long,
+    predicted with what was known on the landmark day, raw and recalibrated."""
+    out = {}
+    for e in LANDMARKS:
+        rows = [o for o in test if not (o.opened and o.t < e) and o.end - o.r >= e + horizon]
+        if not rows:
+            continue
+        pr = pred_at(e)
+        raw, cal = [], []
+        for o, w in zip(rows, _film_weights(rows)):
+            lag = pr(o)[0]
+            fe, fh = lag.cdf(e - 1), lag.cdf(e + horizon - 1)
+            y = int(o.opened and o.t <= e + horizon - 1)
+            for pi, acc in ((lag.pi, raw), (recal_pi(lag.pi, ab), cal)):
+                acc.append((pi * (fh - fe) / (1 - pi * fe), y, w))
+        out[str(e)] = {"raw": _calibration(raw), "recalibrated": _calibration(cal) if ab else None}
+    return out
+
+
 # ---------------------------------------------------------------- backtest
 
 def maturity_days(obs: list[Obs]) -> int | None:
@@ -1644,6 +1767,8 @@ def _backtest(obs: list[Obs]) -> tuple[dict, dict | None]:
 
     ms_used = {k: _milestone_choice(obs, k, cut1, cut2, horizon, cfg, cur_fit, cal_at(cut1))
                for k in MILESTONES}
+    first_t = _first_day(obs)
+    rc = recal_choice(predictor(cur_fit, cal_at(cut1)), tune, first_t)
 
     # the untouched test fold: refits every REFIT_DAYS from its first day
     last = test[-1].r
@@ -1654,7 +1779,8 @@ def _backtest(obs: list[Obs]) -> tuple[dict, dict | None]:
     other = fit(obs, cut2, **{**cfg, "censored_groups": not cfg["censored_groups"]})
     by_dist = fit([o.regroup(o.gd) for o in obs], cut2, **cfg)
     shares = cals_t[min(fits)] if cals_t else None
-    model_pred = rolling_predictor(fits, cals_t)
+    raw_pred = rolling_predictor(fits, cals_t)
+    model_pred = recalibrated(raw_pred, rc["ab"])
     overall_pred = rolling_predictor(overall, cals_t)
     xw = _film_weights(test)
 
@@ -1682,10 +1808,42 @@ def _backtest(obs: list[Obs]) -> tuple[dict, dict | None]:
                            "by_distributor_known_at_rating": test_ll(predictor(by_dist, shares, True))},
            "model": metrics(model_pred, test, horizon),
            "overall": metrics(overall_pred, test, horizon),
+           "recalibration": _recal_report(rc, raw_pred, model_pred, test, horizon, xw,
+                                          lambda e: rolling_predictor(fits, cals_t, day=lambda o: o.r + e)),
            "by_distributor_known_at_rating": metrics(predictor(by_dist, shares, True), test, horizon)}
     out["milestones"] = {k: _milestone_report(obs, k, cut2, last, horizon, cfg, fits, cals_t, used)
                          for k, used in ms_used.items()}
+    if rc["ab"]:
+        out["model_uncalibrated"] = metrics(raw_pred, test, horizon)
     return out, {"fits": fits, "cals": cals_t, "pred": model_pred, "cut2": cut2, "horizon": horizon}
+
+
+def _recal_report(rc: dict, raw_pred, model_pred, test: list[Obs], horizon: int, xw: list[float],
+                  pred_at) -> dict:
+    """The chosen form, its test-fold effect (log likelihood, P(open within
+    `horizon`) calibration), the landmark checks, and the (a, b) for the live
+    model: the form refitted on the test fold's out-of-time predictions (the
+    latest ones), used only if the tuning-fold fit did not lower the test
+    fold's log likelihood."""
+    def ll(pr):
+        return round(_mean(_scaled([_cond_ll(pr(o)[0], o) for o in test], xw)), 4)
+
+    def cal(pr):
+        items = []
+        for o, w in zip(test, xw):
+            lag = pr(o)[0]
+            items.append((lag.pi * lag.cdf(horizon - 1), int(o.opened and o.t <= horizon - 1), w))
+        return _calibration(items)
+    ab = rc["ab"]
+    t_raw, t_cal = ll(raw_pred), ll(model_pred)
+    used = bool(ab) and t_cal >= t_raw
+    live = fit_recal(_recal_rows(raw_pred, test), rc["form"]) if used else None
+    return {"form": rc["form"], "tuning_fit": list(ab) if ab else None,
+            "loglik_later_half": rc.get("loglik_later_half"),
+            "test_loglik": {"raw": t_raw, "recalibrated": t_cal},
+            f"p_open_{horizon}d": {"raw": cal(raw_pred), "recalibrated": cal(model_pred) if ab else None},
+            "landmarks": landmark_check(pred_at, test, horizon, ab),
+            "used": used, "live": list(live) if live else None}
 
 
 def _milestone_tests(pairs: list, start: int, stop: int | None, horizon: int) -> list:
@@ -2228,6 +2386,11 @@ def apply(films: list[dict], lags: dict, today: dt.date) -> dict:
     cand = {t: [o for o in obs[t] if not o.seg] for t in obs}
     model, ms_meta = _fit_target(cand["any"], bt, ref, True)
     model_real, _ = _fit_target(cand["real"], bts["real"], ref, False)
+    # recalibrated P(opens) of the rating models (milestone fits stay as fitted)
+    for mdl, b_ in ((model, bt), (model_real, bts["real"])):
+        live = (b_.get("recalibration") or {}).get("live")
+        if mdl and live:
+            mdl.recal = tuple(live)
     overall = fit(cand["any"], ref, **{**fit_settings(bt), "groups": False})
     if model:
         model.booking_seen = {r["rating_no"]: r["booking_seen"] for r in lags.get("rows", [])
