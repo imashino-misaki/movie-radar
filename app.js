@@ -239,15 +239,34 @@ function baseFor(tab) {
   if (tab === "search") return MR.films.filter(f => matchQ(f, S.q));
   return [];
 }
+function filterCounts(tab) {
+  const base = baseFor(tab), n = {};
+  for (const [, , cs] of FGROUPS) for (const [k] of cs) {
+    const F2 = new Set(S.F); F2.add(k);
+    n[k] = base.filter(f => passFilters(f, F2)).length;
+  }
+  return n;
+}
 function filterPanel(tab) {
-  const base = baseFor(tab);
+  const n = filterCounts(tab);
   const groups = FGROUPS.map(([g, label, cs]) => `<div class="fg"><h3>${label}</h3>${cs.map(([k, l]) => {
     const on = S.F.has(k);
-    const F2 = new Set(S.F); F2.add(k);
-    const n = base.filter(f => passFilters(f, F2)).length;
-    return `<label class="fo${n || on ? "" : " zero"}"><input type="checkbox" data-chip="${k}" ${on ? "checked" : ""}>${l}<em class="tn">${n}</em></label>`;
+    return `<label class="fo${n[k] || on ? "" : " zero"}"><input type="checkbox" data-chip="${k}" ${on ? "checked" : ""}>${l}<em class="tn">${n[k]}</em></label>`;
   }).join("")}</div>`).join("");
   return groups + `<p class="small" style="padding:0 8px">CGV 상영 목록은 아직 수집하지 않아요. ‘CGV 계열 배급’은 CJ 계열이 직접 배급하는 작품입니다.</p>`;
+}
+// rebuilding the panel on every tap drops the tap feedback and the scroll position;
+// update the existing checkboxes when the panel already shows this tab
+function syncPanel(el, tab) {
+  const ins = el.querySelectorAll("input[data-chip]");
+  if (el.dataset.tab !== tab || !ins.length) { el.innerHTML = filterPanel(tab); el.dataset.tab = tab; return; }
+  const n = filterCounts(tab);
+  for (const i of ins) {
+    const k = i.dataset.chip, on = S.F.has(k);
+    if (i.checked !== on) i.checked = on;
+    i.parentNode.classList.toggle("zero", !n[k] && !on);
+    const em = i.parentNode.querySelector(".tn"); if (em.textContent !== String(n[k])) em.textContent = n[k];
+  }
 }
 function appliedChips() {
   if (!S.F.size) return "";
@@ -272,7 +291,6 @@ function matchQ(f, q) {
 
 /* ---------------------------------------------------------------- state <-> URL */
 const S = { tab: "home", id: null, full: false, bg: "home", q: "", F: new Set(), sort: "date", nsort: "bo", view: "list", all7: false, more: {}, tsort: null };
-const saved = ls.get("mr.filters", null, isObj);
 function parseHash() {
   const h = location.hash.replace(/^#\/?/, "");
   const [path, qs] = h.split("?");
@@ -831,7 +849,9 @@ function render() {
   $("#shell").classList.toggle("norail", !hasRail);
   $("#shell").classList.toggle("fullv", fullv);
   $("#shell").classList.toggle("tablev", bg === "upcoming" && S.view === "table" && !film && innerWidth >= 1200);
-  if (film && !wide()) {
+  if (!$("#sheet").hidden && !wide()) {
+    // the list is under the full-screen filter sheet; it is rebuilt when the sheet closes
+  } else if (film && !wide()) {
     mainKey = "";
     $("#view").innerHTML = vDetail(false);
   } else if (fullv) {
@@ -843,7 +863,7 @@ function render() {
     for (const r of $$("#view [data-id].sel")) r.classList.remove("sel");
     if (film) for (const r of $$(`#view .row[data-id="${CSS.escape(S.id)}"]`)) r.classList.add("sel");
   }
-  if (hasRail) $("#rail").innerHTML = `${filterPanel(bg)}`;
+  if (hasRail) syncPanel($("#rail"), bg);
   $("#pane").innerHTML = fullv ? "" : film && wide() ? vDetail(true) : paneDefault();
   if (film && wide()) $("#pane").scrollTop = 0;
   if (!$("#sheet").hidden) renderSheet();
@@ -851,7 +871,7 @@ function render() {
 }
 function renderSheet() {
   const bg = S.bg;
-  $("#sheet-body").innerHTML = filterPanel(bg);
+  syncPanel($("#sheet-body"), bg);
   const n = baseFor(bg).filter(f => passFilters(f, S.F)).length;
   $("#sheet-go").textContent = `결과 ${n}편 보기`;
 }
@@ -862,11 +882,12 @@ function onHash(first) {
   if (prevHash && !prevHash.startsWith("#/film/")) scrollMem[prevHash] = scrollY;
   const p = parseHash();
   if (S.tab === "watch" && p.get("add")) importLink(p.get("add"));
-  if (first && S.tab !== "film" && !p.has("f") && !p.has("sort") && !p.has("view") && saved) {
+  const last = ls.get("mr.filters", null, isObj);
+  if (S.tab !== "film" && !p.has("f") && !p.has("sort") && !p.has("view") && last) {
     if (["upcoming", "now", "watch"].includes(S.tab)) {
-      S.F = new Set((strArr(saved.f) ? saved.f : []).filter(k => GOF[k])); S.sort = saved.sort === "book" ? "book" : "date";
-      S.nsort = ["book", "open"].includes(saved.nsort) ? saved.nsort : "bo"; S.view = saved.view === "table" ? "table" : "list";
-      history.replaceState(null, "", hashFor(S.tab));
+      S.F = new Set((strArr(last.f) ? last.f : []).filter(k => GOF[k])); S.sort = last.sort === "book" ? "book" : "date";
+      S.nsort = ["book", "open"].includes(last.nsort) ? last.nsort : "bo"; S.view = last.view === "table" ? "table" : "list";
+      history.replaceState(history.state, "", hashFor(S.tab));
     }
   }
   if (S.tab === "film") { try { sessionStorage.setItem("mr.bg", S.bg); } catch (e) { /* ignore */ } detailsFailed = false; }
@@ -884,9 +905,24 @@ try { S.bg = sessionStorage.getItem("mr.bg") || "home"; } catch (e) { S.bg = "ho
 window.addEventListener("hashchange", () => onHash(false));
 
 /* ---------------------------------------------------------------- sheet (mobile / mid-width filters) */
-function openSheet() { renderSheet(); $("#sheet").hidden = false; history.pushState({ sheet: 1 }, "", location.hash); }
-function closeSheet(silent) { if ($("#sheet").hidden) return; $("#sheet").hidden = true; if (!silent && history.state && history.state.sheet) history.back(); }
-window.addEventListener("popstate", () => { if (!$("#sheet").hidden && !(history.state && history.state.sheet)) $("#sheet").hidden = true; });
+// the sheet pushes a history entry so the phone's back button closes it. Filters picked
+// inside rewrite that entry's address, so stepping back would land on the address from
+// before the sheet opened and undo them: carry the current address over to the entry below.
+let sheetKeep = null;
+function openSheet() { $("#sheet-body").dataset.tab = ""; renderSheet(); $("#sheet").hidden = false; history.pushState({ sheet: 1 }, "", location.hash); }
+function closeSheet(silent) {
+  if ($("#sheet").hidden) return;
+  $("#sheet").hidden = true;
+  if (!silent && history.state && history.state.sheet) { sheetKeep = hashFor(S.bg); history.back(); }
+  else if (!silent) render();
+}
+window.addEventListener("popstate", () => {
+  if (!$("#sheet").hidden && !(history.state && history.state.sheet)) { $("#sheet").hidden = true; sheetKeep = hashFor(S.bg); }
+  if (sheetKeep === null) return;
+  const h = sheetKeep; sheetKeep = null;
+  if (location.hash !== h) history.replaceState(history.state, "", h); // hashchange then renders it
+  else render();
+});
 
 /* ---------------------------------------------------------------- ICS */
 function icsEsc(s) { return String(s).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n"); }
