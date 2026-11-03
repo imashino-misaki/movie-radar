@@ -825,7 +825,7 @@ CHAIN_ST = {"now": "상영·예매 중", "upcoming": "개봉 예정 목록에 �
             "pre": "개봉 전 예매 중", "nb": "상영작 목록에 있지만 예매 불가"}
 
 
-def chain_code(stage: dict) -> str:
+def chain_code(stage: dict, today: str = "") -> str:
     """A chain stage's status for the page. A chain's own now / upcoming list does not say
     whether tickets are on sale (Megabox lists films with no showtimes as 상영중): with the
     stage's `bookable` flag, now without tickets is "nb" and upcoming with tickets is "pre".
@@ -835,7 +835,10 @@ def chain_code(stage: dict) -> str:
         return s
     if s == "now" and not stage["bookable"]:
         return "nb"
-    if s == "upcoming" and stage["bookable"]:
+    # Megabox lists presale films as 상영중 (최종면접, opening 2026-11-04, on 2026-11-03): tickets
+    # on sale before the chain's own opening day read as presale on every chain
+    rd = stage.get("release_date") or ""
+    if stage["bookable"] and (s == "upcoming" or (today and len(rd) == 10 and rd > today)):
         return "pre"
     return s
 
@@ -1003,7 +1006,12 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         cats = []
         if is_anime([f, *members.get(f["id"], [])], tags):  # official genre first, title heuristic only without one
             cats.append("ani")
-        if "rerelease" in tags or (st.get("release_history") or {}).get("rereleases"):
+        # rs: showing again long after its opening with no new date (a chain re-screening an old film,
+        # 극장판 체인소 맨-레제편 at CGV in 2026-11, opened 2025-09-24): its last opening is at least
+        # PRIOR_DAYS back, the age that marks a re-release elsewhere (promo, forecast_events), so the
+        # page does not count the days since then as one run
+        rescreen = c["p"] == "day" and now_ev and _days(c["date"], last_date) >= PRIOR_DAYS
+        if "rerelease" in tags or (st.get("release_history") or {}).get("rereleases") or rescreen:
             cats.append("rr")
         kind = screening_kind(title, tags, mb, lt, cg)
         if kind:
@@ -1032,6 +1040,8 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         item: dict[str, Any] = dict(id=f["id"], t=title, ot=otitle, dist=dist, app=app, g=grade_of(st), d=c,
                                     cats=cats, fmts=sorted(fmts), ch=chains, now=now_ev, ox=outside, pst=poster,
                                     ex=excl)
+        if rescreen:
+            item["rs"] = 1
         if uid != f["id"]:
             item["u"] = uid  # stable identity (stable_id); absent: the id itself
         if bk:
@@ -1043,11 +1053,11 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         if br:
             item["br"] = br
         if mb:
-            item["mb"] = chain_code(mb)
+            item["mb"] = chain_code(mb, last_date)
         if lt:
-            item["lt"] = chain_code(lt)
+            item["lt"] = chain_code(lt, last_date)
         if cg:
-            item["cg"] = chain_code(cg)
+            item["cg"] = chain_code(cg, last_date)
         alts = sorted(alt_titles.get(f["id"], set()) - {title, otitle})
         fields = [x for x in (title, otitle, *alts, dist, app) if x]
         item["k"] = "|".join(dict.fromkeys(choseong(norm(x)) for x in fields))
@@ -1091,7 +1101,7 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             if cc:
                 rd = cc.get("release_date") or ""
                 tl.append([day(fs.get(key)), f"{nm} 목록에 등장",
-                           CHAIN_ST.get(chain_code(cc), "") + (f" · 개봉 {kd(rd)}" if len(rd) == 10 else ""), nm, 0])
+                           CHAIN_ST.get(chain_code(cc, last_date), "") + (f" · 개봉 {kd(rd)}" if len(rd) == 10 else ""), nm, 0])
         if pg:
             tl.append([day(fs.get("program")),
                        f"메가박스 {pg.get('program') or '기획전'}" + (" · 단독 상영" if pg.get("exclusive") else ""),

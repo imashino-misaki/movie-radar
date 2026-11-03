@@ -79,11 +79,15 @@ const otherRates = f => f.bk && f.bk.r ? `전체 ${f.bk.rate}%` : "";
 // when the booking ranking was taken: "11월 3일 11:12"
 const bkWhen = () => MR.bkas ? `${md(MR.bkas.slice(0, 10))} ${MR.bkas.slice(11, 16)}` : "";
 const isUp = f => !opened(f);
+// days since the opening, or "재상영" for a film showing again long after it (f.rs, site.py)
+const ymd2 = s => `${s.slice(0, 4)}년 ${md(s)}`;
+const runText = f => f.rs ? "재상영" : `${diffDays(f.d.date, TODAY) + 1}일째`;
 const ddText = s => { const n = diffDays(TODAY, s); return n === 0 ? "오늘" : n === 1 ? "내일" : `D-${n}`; };
 function cert(f) {
   const d = f.d;
   if (d.p === "day") return opened(f)
-    ? { g: "day", cls: "c-day", when: `${md(d.date)} 개봉`, sentence: `${kd(d.date)} 개봉`, why: `개봉 ${diffDays(d.date, TODAY) + 1}일째` }
+    ? f.rs ? { g: "day", cls: "c-day", when: `${ymd2(d.date)} 개봉`, sentence: `${ymd2(d.date)} 개봉작 재상영`, why: "개봉 1년 뒤 다시 상영 중이에요. 재상영 시작일은 극장이 따로 알리지 않았어요." }
+    : { g: "day", cls: "c-day", when: `${md(d.date)} 개봉`, sentence: `${kd(d.date)} 개봉`, why: `개봉 ${diffDays(d.date, TODAY) + 1}일째` }
     : { g: "day", cls: "c-day", when: `${kd(d.date)}<b class="dday tn">${ddText(d.date)}</b>`, sentence: `${kd(d.date)} 개봉 확정`, dday: diffDays(TODAY, d.date) };
   if (d.p === "month") return { g: "month", cls: "c-month", when: `${mon(d.m)} 중 개봉`, sentence: `${mon(d.m)} 중 개봉`, why: "개봉 월만 발표됐어요. 날짜가 나오면 업데이트에 올라옵니다." };
   if (d.p === "est" && d.w === "rare") {
@@ -576,7 +580,7 @@ function evNote(base) {
 // a ranked row (상영 중 and 예매율 순위): rank cell, poster, title, chains · opening · category
 function rankMeta(f, r) {
   const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
-  return [f.ex.length ? exBadges(f) : chainsText(f), od && `${md(od)} 개봉${preOpen(f) ? " 예정" : ""}`, od && (pre ? (opened(f) ? "개봉 전 상영" : "") : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+  return [f.ex.length ? exBadges(f) : chainsText(f), od && `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`, od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? "재상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
 }
 const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
       <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? rankMeta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
@@ -692,7 +696,7 @@ function watchSection() {
   const fx = S.more.wfix ? fixed : fixed.slice(0, 5);
   const when = f => {
     if (ahead(f)) { const n = diffDays(TODAY, f.d.date); return `${kd(f.d.date)}<span class="sep">·</span><b>${n === 1 ? "내일" : "D-" + n}</b>`; }
-    return f.d.date === TODAY ? "<b>오늘 개봉</b>" : `상영 중<span class="sep">·</span>${diffDays(f.d.date, TODAY) + 1}일째`;
+    return f.d.date === TODAY ? "<b>오늘 개봉</b>" : `상영 중<span class="sep">·</span>${runText(f)}`;
   };
   const sub = [g.length && `새 소식 ${g.length}`, fixed.length && `개봉일 확정 ${fixed.length}`].filter(Boolean).join(" · ");
   return `<section class="list radar watchsec"><div class="sh"><h2>찜한 영화</h2><span class="sub tn">${sub}</span><a class="end" href="#/watch">찜 목록</a></div>
@@ -944,7 +948,7 @@ function vDetail(mode) {
   for (const [dt, label, sub, src, real] of x.tl) items.push(`<li class="${real ? "" : "det"}"><time class="tn">${dot(dt)}</time><div><b>${esc(label)}</b>${dt === oldest ? ' <span class="wtag">첫 흔적</span>' : ""}<small>${[sub && esc(sub), real ? `출처 ${esc(src)}` : `${esc(src)} · 이 날 처음 확인`].filter(Boolean).join(" · ")}</small></div></li>`);
   const tlHTML = items.length ? `<ol class="tl">${items.slice(0, 6).join("")}${items.length > 6 ? `<li style="display:block;padding:0"><details><summary>이전 기록 ${items.length - 6}건</summary><ol class="tl">${items.slice(6).join("")}</ol></details></li>` : ""}</ol>` : '<p class="small">기록이 없어요.</p>';
   const CS = { now: "상영·예매 중", upcoming: "개봉 예정 목록에 있음", ended: "목록에서 내려감", pre: "개봉 전 예매 중", nb: "상영작 목록에 있지만 예매 불가" };
-  const ext = (url, st) => ` · <a href="${url}" target="_blank" rel="noopener">${st === "now" ? "예매하기" : "영화 페이지"} ↗</a>`;
+  const ext = (url, st) => ` · <a href="${url}" target="_blank" rel="noopener">${st === "now" || st === "pre" ? "예매하기" : "영화 페이지"} ↗</a>`;
   const mbLink = x.mbno ? ext(`https://www.megabox.co.kr/movie-detail?rpstMovieNo=${encodeURIComponent(x.mbno)}`, f.mb) : "";
   const ltLink = x.ltno ? ext(`https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=${encodeURIComponent(x.ltno)}`, f.lt) : "";
   // a chain lets you book once it lists the film as showing or the film is bookable
