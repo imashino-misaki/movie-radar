@@ -329,8 +329,7 @@ function passFilters(f, F) {
 }
 function baseFor(tab) {
   if (tab === "upcoming") return MR.films.filter(isUp);
-  // 예매율순: the KOBIS booking ranking, which counts showing and pre-release films together
-  if (tab === "now") return S.nsort === "book" ? MR.films.filter(f => inBook(f, S.bsrc)) : MR.films.filter(isNow);
+  if (tab === "now") return MR.films.filter(isNow);
   if (tab === "watch") return Object.keys(WATCH).map(id => BYID[id]).filter(Boolean);
   if (tab === "search") return MR.films.filter(f => matchQ(f, S.q));
   return [];
@@ -393,7 +392,7 @@ function parseHash() {
   const p = new URLSearchParams(qs || "");
   const parts = (path || "").split("/");
   S.tab = parts[0] || "home";
-  if (!["home", "upcoming", "now", "watch", "search", "film"].includes(S.tab)) S.tab = "home";
+  if (!["home", "upcoming", "now", "watch", "search", "film", "book"].includes(S.tab)) S.tab = "home";
   S.id = S.tab === "film" ? decodeURIComponent(parts[1] || "") : null;
   S.full = S.tab === "film" && parts[2] === "full";
   if (S.id && MR.alias[S.id]) { S.id = MR.alias[S.id]; history.replaceState(history.state, "", "#/film/" + S.id + (S.full ? "/full" : "")); }
@@ -403,7 +402,7 @@ function parseHash() {
     S.F = new Set((p.get("f") || "").split(",").filter(k => GOF[k]));
     S.sort = p.get("sort") === "book" ? "book" : "date";
     S.nsort = ["book", "open"].includes(p.get("sort")) ? p.get("sort") : "bo";
-    S.bsrc = S.nsort === "book" && BSRC[p.get("src")] && p.get("src") ? p.get("src") : "";
+    S.bsrc = S.tab === "book" && BSRC[p.get("src")] && p.get("src") ? p.get("src") : "";
     S.view = p.get("view") === "table" ? "table" : "list";
     S.all7 = p.get("all") === "7";
   }
@@ -417,7 +416,7 @@ function hashFor(tab, extra = {}) {
   if (tab === "upcoming" && st.sort === "book") p.set("sort", "book");
   if (tab === "upcoming" && st.view === "table") p.set("view", "table");
   if (tab === "now" && st.nsort !== "bo") p.set("sort", st.nsort);
-  if (tab === "now" && st.nsort === "book" && st.bsrc) p.set("src", st.bsrc);
+  if (tab === "book" && st.bsrc) p.set("src", st.bsrc);
   if (tab === "home" && st.all7) p.set("all", "7");
   const s = p.toString();
   return "#/" + (tab === "home" ? "" : tab) + (s ? "?" + s : "");
@@ -513,7 +512,7 @@ function vUpcoming() {
   if (S.view === "table") body = tableView(list);
   else if (S.sort === "book") {
     const bk = list.filter(f => f.bk).sort((a, b) => a.bk.r - b.bk.r);
-    body = `<div class="list">${bk.map(f => row(f, { cert: true, right: `<b class="tn">${f.bk.rate}%</b><small class="tn">예매율 ${f.bk.r}위</small>` })).join("") || '<p class="empty">예매율 집계에 오른 개봉 예정작이 없어요.</p>'}</div>
+    body = `${toBook()}<div class="list">${bk.map(f => row(f, { cert: true, right: `<b class="tn">${f.bk.rate}%</b><small class="tn">예매율 ${f.bk.r}위</small>` })).join("") || '<p class="empty">예매율 집계에 오른 개봉 예정작이 없어요.</p>'}</div>
       <p class="small" style="margin-top:8px">KOBIS 실시간 예매율 · ${esc(MR.bkas)} 기준. 예매율이 없는 ${list.length - bk.length}편은 <a href="${hashFor("upcoming", { sort: "date" })}">날짜순</a>에서 볼 수 있어요.</p>`;
   } else {
     const key = "up";
@@ -574,6 +573,15 @@ function evNote(base) {
     return n ? `<p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${name} ${n}편은 숨겼어요. <button class="linkbtn" style="font-size:12px;min-height:0" data-chip="${inc}">포함하기</button></p>` : "";
   }).join("");
 }
+// a ranked row (상영 중 and 예매율 순위): rank cell, poster, title, chains · opening · category
+function rankMeta(f, r) {
+  const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
+  return [f.ex.length ? exBadges(f) : chainsText(f), od && `${md(od)} 개봉${preOpen(f) ? " 예정" : ""}`, od && (pre ? (opened(f) ? "개봉 전 상영" : "") : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+}
+const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
+      <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? rankMeta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
+// the way from a tab's own 예매율순 to the combined ranking
+const toBook = () => `<a class="tobook" href="#/book">개봉 전 영화까지 합친 예매율 순위 보기 →</a>`;
 function vNow() {
   const base = baseFor("now");
   const list = base.filter(f => passFilters(f, S.F));
@@ -581,12 +589,6 @@ function vNow() {
     <button data-nsort="bo" aria-pressed="${S.nsort === "bo"}">관객순</button><button data-nsort="book" aria-pressed="${S.nsort === "book"}">예매율순</button><button data-nsort="open" aria-pressed="${S.nsort === "open"}">개봉순</button></span><span class="cnt tn push">${list.length}편</span></div>`;
   const head = `<div class="vh"><h1>상영 중</h1></div>`;
   let body;
-  const meta = (f, r) => {
-    const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
-    return [f.ex.length ? exBadges(f) : chainsText(f), od && `${md(od)} 개봉${preOpen(f) ? " 예정" : ""}`, od && (pre ? (opened(f) ? "개봉 전 상영" : "") : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
-  };
-  const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
-      <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? meta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
   if (S.nsort === "bo") {
     const ids = new Set(list.map(f => f.id));
     const top = MR.bo.rows.filter(r => r.id ? ids.has(r.id) || (BYID[r.id] && passFilters(BYID[r.id], S.F)) : !S.F.size);
@@ -599,14 +601,9 @@ function vNow() {
       ${capRows("now", rest.map(f => nrow(f, '<div class="rk"></div>', f.bk ? `<b class="tn">${f.bk.rate}%</b><small class="tn">예매율 ${f.bk.r}위</small>` : "")))}</div>
       <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">관객 수는 ${kd(MR.bo.date)} 하루치이며, KOBIS가 확정하기 전까지 바뀔 수 있어요. 순위 변동은 10위 안에서만 표시합니다.</p>`;
   } else if (S.nsort === "book") {
-    const src = S.bsrc, bk = list.filter(f => inBook(f, src)).sort((a, b) => bRank(a, src) - bRank(b, src)), npre = bk.filter(preOpen).length;
-    const srcBar = `<div class="srcbar"><span class="seg" role="group" aria-label="예매율 기준">${Object.entries(BSRC).map(([k, v]) => `<button data-bsrc="${k}" aria-pressed="${src === k}">${v}</button>`).join("")}</span></div>`;
-    // the rank badge carries the state by shape (solid: showing, outline: not open yet) and the
-    // words "개봉 전" under it, so the state never rests on colour alone
-    body = `${srcBar}<div class="list"><div class="wk"><h2>${src ? `${BSRC[src]} 예매율` : "예매율 순위"}</h2><span class="sub tn">${src ? srcWhen(src) : `${bkWhen()} 기준`}${npre ? ` · <span class="rkpre">□</span> 개봉 전 ${npre}편` : ""}</span></div>
-      ${bk.length ? capRows("now", bk.map(f => nrow(f, `<div class="rk${preOpen(f) ? " pre" : ""}"><b class="tn"${preOpen(f) ? ' aria-label="개봉 전"' : ""}>${bRank(f, src)}</b></div>`,
-        `<b class="tn">${bRate(f, src)}%</b>${src ? `<small class="tn">${otherRates(f)}</small>` : `<small class="tn">예매 ${man(f.bk.pa)}명</small>`}`))) : `<div class="empty"><p>${BSRC[src]} 예매율 자료가 아직 없어요.</p></div>`}</div>
-      <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${src ? `${BSRC[src]} 예매율은 ${BSRC[src]} 사이트에 나오는 값으로, 그 극장에서 팔린 표 중 이 영화의 몫이에요. 전체는 ` : ""}KOBIS 실시간 예매율: 지금 팔린 표 중 이 영화의 몫이에요. 상영 중인 영화와 개봉 전 예매작을 합친 순위라 이 화면에는 개봉 전 영화(테두리 순위)도 함께 나와요. 빠진 순위는 이 사이트가 다루지 않는 상영작입니다.</p>`;
+    const bk = list.filter(f => inBook(f)).sort((a, b) => a.bk.r - b.bk.r);
+    body = `${toBook()}<div class="list">${capRows("now", bk.map(f => nrow(f, `<div class="rk"><b class="tn">${f.bk.r}</b></div>`, `<b class="tn">${f.bk.rate}%</b><small class="tn">예매 ${man(f.bk.pa)}명</small>`)))}</div>
+      <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">KOBIS 실시간 예매율 · ${esc(MR.bkas)} 기준. 순위 번호는 개봉 예정작까지 합친 전체 순위라 중간 번호가 비어 있어요.</p>`;
   } else {
     const byOpen = list.slice().sort((a, b) => (a.d.date < b.d.date ? 1 : a.d.date > b.d.date ? -1 : 0) || a.t.localeCompare(b.t, "ko"));
     body = `<div class="list">${capRows("now", byOpen.map(f => nrow(f, '<div class="rk"></div>', f.bk && f.bk.ta ? `<b class="tn">${man(f.bk.ta)}</b><small>누적 관객</small>` : "")))}</div>`;
@@ -616,6 +613,24 @@ function vNow() {
 function capRows(key, rows) {
   const n = S.more[key] ? rows.length : Math.min(rows.length, rowLimit());
   return rows.slice(0, n).join("") + (rows.length > n ? `<button class="more tn" data-more="${key}">더 보기 · ${rows.length - n}편 더</button>` : "");
+}
+
+/* ---------------------------------------------------------------- 예매율 순위 */
+// The booking ranking as the source publishes it: showing and pre-release films together, nothing
+// hidden (concerts and events included, marked by their category), so rank 1 is always there.
+// Its own view, not a sort of 상영 중 / 개봉 예정: a sort reorders a tab's films, this is another set.
+function vBook() {
+  const src = S.bsrc, bk = MR.films.filter(f => inBook(f, src)).sort((a, b) => bRank(a, src) - bRank(b, src) || bRate(b, src) - bRate(a, src));
+  const npre = bk.filter(preOpen).length;
+  const srcBar = `<div class="tools"><span class="seg" role="group" aria-label="예매율 기준">${Object.entries(BSRC).map(([k, v]) => `<button data-bsrc="${k}" aria-pressed="${src === k}">${v}</button>`).join("")}</span><span class="cnt tn push">${bk.length}편</span></div>`;
+  const when = src ? srcWhen(src) : `${bkWhen()} 기준`;
+  // the rank badge carries the state by shape (solid: showing, outline: not open yet), named in the header
+  const rows = bk.map(f => nrow(f, `<div class="rk${preOpen(f) ? " pre" : ""}"><b class="tn"${preOpen(f) ? ' aria-label="개봉 전"' : ""}>${bRank(f, src)}</b></div>`,
+    `<b class="tn">${bRate(f, src)}%</b>${src ? `<small class="tn">${otherRates(f)}</small>` : `<small class="tn">예매 ${man(f.bk.pa)}명</small>`}`));
+  return `<div class="vh"><h1>예매율 순위</h1></div>${srcBar}
+    <div class="list"><div class="wk"><h2>${src ? `${BSRC[src]} 예매율` : "전체 (KOBIS)"}</h2><span class="sub tn">${when}${npre ? ` · <span class="rkpre">□</span> 개봉 전 ${npre}편` : ""}</span></div>
+    ${rows.length ? capRows("book", rows) : `<div class="empty"><p>${BSRC[src]} 예매율 자료가 아직 없어요.</p></div>`}</div>
+    <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${src ? `${BSRC[src]} 사이트에 나오는 예매율이에요: 그 극장에서 팔린 표 중 이 영화의 몫. 오른쪽 아래는 KOBIS 전체 예매율.` : `KOBIS 실시간 예매율: 전국 극장에서 팔린 표 중 이 영화의 몫이에요.${bk.length && bk[bk.length - 1].bk.r > bk.length ? " 빠진 번호는 이 사이트에 없는 상영작이에요." : ""}`} 상영 중인 영화와 개봉 전 예매작을 합친 순위로, 개봉 전 영화는 테두리 순위로 표시해요.</p>`;
 }
 
 /* ---------------------------------------------------------------- 레이더 (home) */
@@ -703,8 +718,8 @@ function bookSection() {
   const items = MR.films.filter(f => inBook(f) && homeOk(f)).sort((a, b) => a.bk.r - b.bk.r);
   if (!items.length) return "";
   const npre = items.filter(preOpen).length;
-  const qs = ["cg", "mb", "lt"].filter(k => MR.films.some(f => inBook(f, k))).map(k => `<a class="qchip" href="${hashFor("now", { nsort: "book", bsrc: k, F: new Set() })}">${BSRC[k]}</a>`).join("");
-  return `<section class="card"><div class="sh"><h2>예매율 순위</h2><span class="sub tn">${MR.bkas.slice(11, 16)} 기준${npre ? ` · 개봉 전 ${npre}편` : ""}</span><a class="end" href="${hashFor("now", { nsort: "book", bsrc: "" })}">전체 순위</a></div>
+  const qs = ["cg", "mb", "lt"].filter(k => MR.films.some(f => inBook(f, k))).map(k => `<a class="qchip" href="${hashFor("book", { bsrc: k })}">${BSRC[k]}</a>`).join("");
+  return `<section class="card"><div class="sh"><h2>예매율 순위</h2><span class="sub tn">${MR.bkas.slice(11, 16)} 기준${npre ? ` · 개봉 전 ${npre}편` : ""}</span><a class="end" href="${hashFor("book", { bsrc: "" })}">전체 순위</a></div>
     ${qs ? `<div class="quick"><span class="qlbl">극장별</span>${qs}</div>` : ""}
     <ul class="strip">${items.slice(0, stripCap()).map(f => {
       const pre = preOpen(f), od = f.d.p === "day" ? f.d.date : "";
@@ -1001,7 +1016,7 @@ function paneDefault() {
 }
 
 /* ---------------------------------------------------------------- render */
-const VIEWS = { home: vHome, upcoming: vUpcoming, now: vNow, watch: vWatch, search: vSearch };
+const VIEWS = { home: vHome, upcoming: vUpcoming, now: vNow, watch: vWatch, search: vSearch, book: vBook };
 let mainKey = "";
 function render() {
   const film = S.tab === "film";
@@ -1036,7 +1051,7 @@ function render() {
     $("#view").innerHTML = vDetail("full");
   } else {
     const k2 = hashFor(bg) + "|" + JSON.stringify([S.more, S.tsort, COLON, Object.keys(WATCH), !!window.MRD && S.view === "table", innerWidth >= 900, innerWidth >= 1200]);
-    if (k2 !== mainKey) { $("#view").innerHTML = (["home", "upcoming", "now"].includes(bg) ? staleBanner() : "") + VIEWS[bg](); mainKey = k2; }
+    if (k2 !== mainKey) { $("#view").innerHTML = (["home", "upcoming", "now", "book"].includes(bg) ? staleBanner() : "") + VIEWS[bg](); mainKey = k2; }
     for (const r of $$("#view [data-id].sel")) r.classList.remove("sel");
     if (film) for (const r of $$(`#view .row[data-id="${CSS.escape(S.id)}"]`)) r.classList.add("sel");
   }
