@@ -743,7 +743,7 @@ function stripSection() {
     <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
 }
 // 예매율 순위 on the home screen: the KOBIS booking ranking as it is, showing and pre-release films
-// together; a pre-release film has an outlined rank badge and "개봉 전 · date" under its rate
+// together; a pre-release film has an outlined rank badge and "D-n 개봉" (or "개봉 전") under its rate
 function bookSection() {
   const items = MR.films.filter(f => inBook(f) && homeOk(f)).sort((a, b) => a.bk.r - b.bk.r);
   if (!items.length) return "";
@@ -753,7 +753,7 @@ function bookSection() {
     ${qs ? `<div class="quick"><span class="qlbl">극장별</span>${qs}</div>` : ""}
     <ul class="strip">${items.slice(0, stripCap()).map(f => {
       const pre = preOpen(f), od = f.d.p === "day" ? f.d.date : "";
-      const sub = `<em class="bkr">${f.bk.rate}%</em>${pre ? `<span class="pre">개봉 전${od ? ` · ${+od.slice(5, 7)}.${+od.slice(8, 10)}` : ""}</span>` : ""}`;
+      const sub = `<em class="bkr">${f.bk.rate}%</em>${pre ? `<span class="pre">${od ? `${ddText(od)} 개봉` : "개봉 전"}</span>` : ""}`;
       return stripItem(f, sub, `<i class="rkb tn${pre ? " pre" : ""}">${f.bk.r}</i>`);
     }).join("")}</ul></section>`;
 }
