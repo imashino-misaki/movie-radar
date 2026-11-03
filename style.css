@@ -202,9 +202,10 @@ body{background:var(--bg);color:var(--text-1);font:400 16px/1.5 "SUIT",system-ui
 .rad time{grid-column:2;grid-row:1;font-size:12px;color:var(--text-3);white-space:nowrap;align-self:baseline}
 .rad .ew{grid-column:1/-1;font-size:14px;color:var(--text-1);line-height:1.5}
 .rad .ec{grid-column:1/-1;font-size:14px;line-height:1.5}
-.rad .evd{display:inline-block;padding:0 6px;border-radius:4px;background:var(--accent);color:#fff;font-weight:700}
-[data-theme=dark] .rad .evd{color:#0F1F1E}
-.rad .evm{color:var(--accent);font-weight:700}
+/* opening-day news: a tinted label (Radix step-3 background + step-11 text, the filter-chip
+   look) rather than a solid fill, which is for actions; month news: accent text only */
+.rad .evd{display:inline-block;padding:0 6px;border-radius:4px;background:var(--accent-weak);color:var(--accent);font-weight:700}
+.rad .evm{color:var(--accent);font-weight:600}
 .rad .wst{color:var(--accent);margin-left:6px;font-size:14px}
 .radar .hint{padding:0 20px 12px;font-size:14px;color:var(--text-2)}
 /* desktop: one row of posters (the rest of the 2 weeks is behind 전체 일정); mobile: a scrolling row (below) */
