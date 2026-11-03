@@ -821,7 +821,30 @@ def forecast_events(entries: list[dict], cur_year: int) -> list[tuple[str, str, 
 
 
 # ---------------------------------------------------------------------------- build
-CHAIN_ST = {"now": "상영·예매 중", "upcoming": "개봉 예정 목록에 있음", "ended": "목록에서 내려감"}
+CHAIN_ST = {"now": "상영·예매 중", "upcoming": "개봉 예정 목록에 있음", "ended": "목록에서 내려감",
+            "pre": "개봉 전 예매 중", "nb": "상영작 목록에 있지만 예매 불가"}
+
+
+def chain_code(stage: dict) -> str:
+    """A chain stage's status for the page. A chain's own now / upcoming list does not say
+    whether tickets are on sale (Megabox lists films with no showtimes as 상영중): with the
+    stage's `bookable` flag, now without tickets is "nb" and upcoming with tickets is "pre".
+    A stage from before the flag keeps its status."""
+    s = stage.get("status") or ""
+    if "bookable" not in stage or s == "ended":
+        return s
+    if s == "now" and not stage["bookable"]:
+        return "nb"
+    if s == "upcoming" and stage["bookable"]:
+        return "pre"
+    return s
+
+
+def chain_bookable(stage: dict | None) -> bool:
+    """Tickets on sale at this chain (a stage from before the flag: listed as now showing)."""
+    if not stage or stage.get("status") == "ended":
+        return False
+    return bool(stage["bookable"]) if "bookable" in stage else stage.get("status") == "now"
 NEXT = {
     "filed": "등급 결정 (영등위)",
     "rating_only": "포스터·예고편 심의 또는 KOBIS 개봉일 등록",
@@ -971,8 +994,11 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         c["ss"] = rel.get("signal_state")
         bk = st.get("booking")
         mb, lt, cg = st.get("megabox"), st.get("lotte"), st.get("cgv")
-        now_ev = (f["id"] in bo_ids) or any((x or {}).get("status") == "now" for x in (mb, lt, cg)) \
+        now_ev = (f["id"] in bo_ids) or any(chain_bookable(x) for x in (mb, lt, cg)) \
             or bool(bk and bk.get("total_audience"))
+        # tickets on sale at a chain before the opening day: bookable, as KOBIS booking says
+        if c["ss"] == "day_announced" and any(chain_bookable(x) for x in (mb, lt, cg)):
+            c["ss"] = "bookable"
         outside = (f.get("theatrical") or {}).get("class") == "unlikely" or "dormant" in tags
         cats = []
         if is_anime([f, *members.get(f["id"], [])], tags):  # official genre first, title heuristic only without one
@@ -1012,11 +1038,11 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             item["bk"] = dict(r=bk.get("rank"), rate=bk.get("rate"), pa=bk.get("presale_audience"),
                               ta=bk.get("total_audience"))
         if mb:
-            item["mb"] = mb.get("status")
+            item["mb"] = chain_code(mb)
         if lt:
-            item["lt"] = lt.get("status")
+            item["lt"] = chain_code(lt)
         if cg:
-            item["cg"] = cg.get("status")
+            item["cg"] = chain_code(cg)
         alts = sorted(alt_titles.get(f["id"], set()) - {title, otitle})
         fields = [x for x in (title, otitle, *alts, dist, app) if x]
         item["k"] = "|".join(dict.fromkeys(choseong(norm(x)) for x in fields))
@@ -1060,7 +1086,7 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             if cc:
                 rd = cc.get("release_date") or ""
                 tl.append([day(fs.get(key)), f"{nm} 목록에 등장",
-                           CHAIN_ST.get(cc.get("status") or "", "") + (f" · 개봉 {kd(rd)}" if len(rd) == 10 else ""), nm, 0])
+                           CHAIN_ST.get(chain_code(cc), "") + (f" · 개봉 {kd(rd)}" if len(rd) == 10 else ""), nm, 0])
         if pg:
             tl.append([day(fs.get("program")),
                        f"메가박스 {pg.get('program') or '기획전'}" + (" · 단독 상영" if pg.get("exclusive") else ""),
@@ -1155,9 +1181,21 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
                 ev("month", day(fs.get("kobis")), 0, sch["month"])
             else:
                 ev("kobis", day(fs.get("kobis")), 0)
-        for key in ("megabox", "lotte"):
-            if st.get(key) and fresh(key):
-                ev("open" if st[key].get("status") == "now" else "chain", day(fs.get(key)), 0, key)
+        for key in ("megabox", "lotte", "cgv"):
+            cc = st.get(key)
+            if not cc:
+                continue
+            if "bookable" not in cc:  # a stage from before the flag: listed as now = booking
+                if key != "cgv" and fresh(key):
+                    ev("open" if cc.get("status") == "now" else "chain", day(fs.get(key)), 0, key)
+                continue
+            # the listing and the ticket sale are separate events: a film listed bookable from
+            # its first sighting has only the opening of sales
+            bf = cc.get("bookable_from") if chain_bookable(cc) else ""
+            if fresh(key) and bf != day(fs.get(key)):
+                ev("chain", day(fs.get(key)), 0, key)
+            if bf:
+                ev("open", bf, 0, key)
         if st.get("program") and fresh("program") and st["program"].get("exclusive"):
             ev("excl", day(fs.get("program")), 0, st["program"].get("chain", ""))
         for d, kind, words, n in forecast_events(hist.get(f["id"], []), cur_year):

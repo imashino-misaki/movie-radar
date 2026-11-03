@@ -18,7 +18,7 @@ import json
 from pathlib import Path
 
 from .http import FetchError
-from .merge import TitleIndex, _sort, fold_into, track_runs, upgrade_title
+from .merge import TitleIndex, _sort, ended_stage, fold_into, set_bookable, track_runs, upgrade_title
 from .tags import tag_film
 
 UPLOAD_NAME = "cgv_upload.json"
@@ -143,6 +143,7 @@ def apply_cgv(films: list[dict], rows: list[dict], seen: str) -> tuple[list[dict
         rec["first_seen"]["cgv"] = min(first, rec["first_seen"].get("cgv", first))
         old_stage = rec["stages"].get("cgv")
         stage["runs"] = track_runs(old_stage, seen, stage["release_date"])
+        set_bookable(stage, old_stage, seen)
         rec["stages"]["cgv"] = stage
         rec["last_seen"] = max(rec.get("last_seen", ""), seen)
         assigned.add(rec["id"])
@@ -150,6 +151,6 @@ def apply_cgv(films: list[dict], rows: list[dict], seen: str) -> tuple[list[dict
     for rec in by_id.values():
         st = rec["stages"].get("cgv")
         if st and rec["id"] not in assigned and st.get("status") != "ended":
-            rec["stages"]["cgv"] = {**st, "status": "ended"}
+            rec["stages"]["cgv"] = ended_stage(st)
             stats["cgv_ended"] += 1
     return _sort(by_id.values()), stats

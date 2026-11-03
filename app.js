@@ -885,7 +885,7 @@ function vDetail(mode) {
   const oldest = x.tl.length ? x.tl[x.tl.length - 1][0] : null;
   for (const [dt, label, sub, src, real] of x.tl) items.push(`<li class="${real ? "" : "det"}"><time class="tn">${dot(dt)}</time><div><b>${esc(label)}</b>${dt === oldest ? ' <span class="wtag">첫 흔적</span>' : ""}<small>${[sub && esc(sub), real ? `출처 ${esc(src)}` : `${esc(src)} · 이 날 처음 확인`].filter(Boolean).join(" · ")}</small></div></li>`);
   const tlHTML = items.length ? `<ol class="tl">${items.slice(0, 6).join("")}${items.length > 6 ? `<li style="display:block;padding:0"><details><summary>이전 기록 ${items.length - 6}건</summary><ol class="tl">${items.slice(6).join("")}</ol></details></li>` : ""}</ol>` : '<p class="small">기록이 없어요.</p>';
-  const CS = { now: "상영·예매 중", upcoming: "개봉 예정 목록에 있음", ended: "목록에서 내려감" };
+  const CS = { now: "상영·예매 중", upcoming: "개봉 예정 목록에 있음", ended: "목록에서 내려감", pre: "개봉 전 예매 중", nb: "상영작 목록에 있지만 예매 불가" };
   const ext = (url, st) => ` · <a href="${url}" target="_blank" rel="noopener">${st === "now" ? "예매하기" : "영화 페이지"} ↗</a>`;
   const mbLink = x.mbno ? ext(`https://www.megabox.co.kr/movie-detail?rpstMovieNo=${encodeURIComponent(x.mbno)}`, f.mb) : "";
   const ltLink = x.ltno ? ext(`https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=${encodeURIComponent(x.ltno)}`, f.lt) : "";

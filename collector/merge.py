@@ -368,6 +368,7 @@ def apply_megabox(films: list[dict], rows: list[dict], today: str) -> tuple[list
                  "release_date": dates[0] if dates else "",
                  "grade": next((r["grade"] for r in grp if r["grade"]), ""),
                  "exclusive": any(r["exclusive"] for r in grp),
+                 "bookable": any(r.get("bookable") for r in grp),
                  "poster": next((r["poster"] for r in grp if r.get("poster")), "")}
         if any(r.get("classic") for r in grp):
             stage["classic"] = True
@@ -397,6 +398,7 @@ def apply_megabox(films: list[dict], rows: list[dict], today: str) -> tuple[list
         if old_stage and "runs" not in old_stage:
             old_stage = {**old_stage, "first_seen": rec["first_seen"]["megabox"]}
         stage["runs"] = track_runs(old_stage, today, stage["release_date"])
+        set_bookable(stage, old_stage, today)
         rec["stages"]["megabox"] = stage
         rec["last_seen"] = today
         assigned.add(rec["id"])
@@ -404,7 +406,7 @@ def apply_megabox(films: list[dict], rows: list[dict], today: str) -> tuple[list
     for rec in by_id.values():
         st = rec["stages"].get("megabox")
         if st and rec["id"] not in assigned and st.get("status") != "ended":
-            rec["stages"]["megabox"] = {**st, "status": "ended"}
+            rec["stages"]["megabox"] = ended_stage(st)
             stats["megabox_ended"] += 1
     return _sort(by_id.values()), stats
 
@@ -445,6 +447,37 @@ def group_variants(films: list[dict]) -> dict:
                 stats["format_variants"] += 1
         stats["format_groups"] += 1
     return stats
+
+
+def bookable_from(old: dict | None, bookable: bool, today: str) -> str | None:
+    """The day a chain's tickets went on sale, as far as the runs saw it: today when
+    the film is newly listed bookable or was listed without tickets; kept while it
+    stays bookable; "" (unknown) when the previous stage predates the bookable flag
+    (the flag's first collection is a baseline, not a booking opening). None: not bookable."""
+    if not bookable:
+        return None
+    if old is None or old.get("status") == "ended":
+        return today
+    if "bookable" not in old:
+        return ""
+    return old.get("bookable_from", "") if old.get("bookable") else today
+
+
+def set_bookable(stage: dict, old: dict | None, today: str) -> None:
+    """Write `bookable_from` next to the stage's `bookable` flag (in place)."""
+    bf = bookable_from(old, bool(stage.get("bookable")), today)
+    stage.pop("bookable_from", None)
+    if bf is not None:
+        stage["bookable_from"] = bf
+
+
+def ended_stage(st: dict) -> dict:
+    """A stage whose film left the chain's list: status ended, no tickets."""
+    out = {**st, "status": "ended"}
+    if "bookable" in out:
+        out["bookable"] = False
+    out.pop("bookable_from", None)
+    return out
 
 
 def track_runs(old: dict | None, today: str, release_date: str) -> list[dict]:
@@ -500,6 +533,7 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
         stage = {k: r.get(k, "") for k in ("movie_code", "status", "release_date", "release_month",
                                            "grade", "kobis_cd", "badge", "poster")}
         stage["exclusive"] = bool(r.get("exclusive"))
+        stage["bookable"] = bool(r.get("bookable"))
         if r.get("festival"):
             stage["festival"] = r["festival"]
         if r.get("genre"):
@@ -532,6 +566,7 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
         if old_stage and "runs" not in old_stage:
             old_stage = {**old_stage, "first_seen": rec["first_seen"]["lotte"]}
         stage["runs"] = track_runs(old_stage, today, stage["release_date"])
+        set_bookable(stage, old_stage, today)
         rec["stages"]["lotte"] = stage
         rec["last_seen"] = today
         assigned.add(rec["id"])
@@ -539,6 +574,6 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
     for rec in by_id.values():
         st = rec["stages"].get("lotte")
         if st and rec["id"] not in assigned and st.get("status") != "ended":
-            rec["stages"]["lotte"] = {**st, "status": "ended"}
+            rec["stages"]["lotte"] = ended_stage(st)
             stats["lotte_ended"] += 1
     return _sort(by_id.values()), stats

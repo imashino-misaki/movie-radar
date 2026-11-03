@@ -4,10 +4,11 @@ One anonymous POST to the list endpoint that backs megabox.co.kr/movie. With
 pageType=rfilmDe and onairYn=N the endpoint returns every listed film, both
 상영중 (now showing) and 상영예정 (upcoming), in one response (checked
 2026-10-31: 89 + 32 rows, totCnt 121). pageType=ticketing returns only the
-bookable now-showing subset, so it is not used.
+bookable subset; each row of the full list carries the same answer in
+bokdAbleYn (see parse_row), so one request is enough.
 
 Only list-level public fields are kept: title, release date, age grade,
-now/upcoming status and the Megabox-exclusive flag. No synopsis, images or
+now/upcoming status, whether tickets are on sale, and the Megabox-exclusive flag. No synopsis, images or
 anything booking-related is stored.
 """
 from __future__ import annotations
@@ -69,6 +70,11 @@ def parse_row(m: dict) -> dict:
         "release_date": iso(m.get("rfilmDeReal") or ""),
         "grade": (m.get("admisClassNm") or "").strip(),
         "status": STATUS.get(stat, stat),
+        # tickets on sale: 상영중 does not mean bookable. Checked 2026-11-03: of 82 상영중 rows
+        # 4 had bokdAbleYn N (two 2025 films re-listed with no showtimes, one with its opening
+        # 8 days ahead); 1 of 30 상영예정 rows had Y (presale). The 79 rows of pageType=ticketing
+        # (the booking page's film list) were the Y rows; schdlYn agreed on every row
+        "bookable": m.get("bokdAbleYn") == "Y",
         # Megabox-exclusive screening: singlPlayAt is the flag behind the main
         # page's MEGA ONLY badge (checked 2026-11-01: 18 of 122 rows Y, the
         # badged film among them); megaOnlyAt was N on every row

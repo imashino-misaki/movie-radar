@@ -8,7 +8,8 @@ code is "AD" (a banner slot, not a film); it is dropped.
 
 Only list-level public fields are kept: title, release date (or only the
 planned month while Lotte has no date), age grade, now/upcoming status, the
-KOBIS movie code Lotte lists for the film, and Lotte's programme badges. No
+KOBIS movie code Lotte lists for the film, Lotte's programme badges and
+whether tickets are on sale. No
 synopsis, images or anything booking-related is stored.
 """
 from __future__ import annotations
@@ -61,6 +62,9 @@ def parse_row(m: dict, status: str) -> dict:
         "release_month": "" if planned else (m.get("PlanedRelsMnth") or ""),
         "grade": GRADES.get(code, clean(str(m.get("ViewGradeNameKR") or ""))),
         "status": status,
+        # tickets on sale (BookingYN): checked 2026-11-03, Y on all 46 now-showing rows and on
+        # 14 of 38 upcoming ones (presale)
+        "bookable": str(m.get("BookingYN") or "") == "Y",
         "kobis_cd": str(m.get("KOFMovieCd") or "").strip(),
         "badge": BADGES.get(str(m.get("TagDivCd") or ""), ""),
         # name of the film festival a screening belongs to (empty on all 39 rows of the
