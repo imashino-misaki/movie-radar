@@ -58,6 +58,26 @@ const band = w => { const l = Math.round(MR.th.likely * 100), p = Math.round(MR.
 const deadline = s => { const last = +monthEnd(s.slice(0, 7)).slice(8); return +s.slice(8) >= last - 3 ? `${+s.slice(5, 7)}월 말까지` : `${md(s)}까지`; };
 const opened = f => f.d.p === "day" && f.d.date <= TODAY;
 const isNow = f => opened(f) && f.now;
+// the booking ranking shown: "" = KOBIS (all chains), or one chain's own share (f.br)
+const BSRC = { "": "전체", cg: "CGV", mb: "메가박스", lt: "롯데시네마" };
+// shares are shown to one decimal, as KOBIS gives them (CGV sends two)
+const bRate = (f, src) => src ? Math.round(((f.br && f.br[src]) || 0) * 10) / 10 : f.bk && f.bk.r ? f.bk.rate : 0;
+// in the ranking (showing or not open yet)
+const inBook = (f, src = "") => bRate(f, src) > 0;
+// rank in a chain's ranking: order by share over every indexed film (KOBIS gives its own rank)
+const bRank = (() => { const memo = {};
+  return (f, src) => { if (!src) return f.bk.r;
+    if (!memo[src]) { memo[src] = new Map(); MR.films.filter(x => inBook(x, src)).sort((a, b) => bRate(b, src) - bRate(a, src)).forEach((x, i, arr) => memo[src].set(x.id, i && bRate(arr[i - 1], src) === bRate(x, src) ? memo[src].get(arr[i - 1].id) : i + 1)); }
+    return memo[src].get(f.id); }; })();
+const preOpen = f => !opened(f);
+// when a chain's list was read (its source's last good run), and the other rankings' shares
+const srcWhen = src => { const key = { cg: "cgv", mb: "megabox", lt: "lotte" }[src];
+  const row = (window.MRS && MRS.src || []).find(r => r[0] === key);
+  return row && row[3] ? `${kstStamp(row[3])} 수집` : "극장 사이트"; };
+// one comparison only (the row's right column is narrow on a phone): the all-chain share
+const otherRates = f => f.bk && f.bk.r ? `전체 ${f.bk.rate}%` : "";
+// when the booking ranking was taken: "11월 3일 11:12"
+const bkWhen = () => MR.bkas ? `${md(MR.bkas.slice(0, 10))} ${MR.bkas.slice(11, 16)}` : "";
 const isUp = f => !opened(f);
 const ddText = s => { const n = diffDays(TODAY, s); return n === 0 ? "오늘" : n === 1 ? "내일" : `D-${n}`; };
 function cert(f) {
@@ -309,7 +329,8 @@ function passFilters(f, F) {
 }
 function baseFor(tab) {
   if (tab === "upcoming") return MR.films.filter(isUp);
-  if (tab === "now") return MR.films.filter(isNow);
+  // 예매율순: the KOBIS booking ranking, which counts showing and pre-release films together
+  if (tab === "now") return S.nsort === "book" ? MR.films.filter(f => inBook(f, S.bsrc)) : MR.films.filter(isNow);
   if (tab === "watch") return Object.keys(WATCH).map(id => BYID[id]).filter(Boolean);
   if (tab === "search") return MR.films.filter(f => matchQ(f, S.q));
   return [];
@@ -365,7 +386,7 @@ function matchQ(f, q) {
 }
 
 /* ---------------------------------------------------------------- state <-> URL */
-const S = { tab: "home", id: null, full: false, bg: "home", q: "", F: new Set(), sort: "date", nsort: "bo", view: "list", all7: false, more: {}, tsort: null };
+const S = { tab: "home", id: null, full: false, bg: "home", q: "", F: new Set(), sort: "date", nsort: "bo", bsrc: "", view: "list", all7: false, more: {}, tsort: null };
 function parseHash() {
   const h = location.hash.replace(/^#\/?/, "");
   const [path, qs] = h.split("?");
@@ -382,19 +403,21 @@ function parseHash() {
     S.F = new Set((p.get("f") || "").split(",").filter(k => GOF[k]));
     S.sort = p.get("sort") === "book" ? "book" : "date";
     S.nsort = ["book", "open"].includes(p.get("sort")) ? p.get("sort") : "bo";
+    S.bsrc = S.nsort === "book" && BSRC[p.get("src")] && p.get("src") ? p.get("src") : "";
     S.view = p.get("view") === "table" ? "table" : "list";
     S.all7 = p.get("all") === "7";
   }
   return p;
 }
 function hashFor(tab, extra = {}) {
-  const st = Object.assign({ q: S.q, F: S.F, sort: S.sort, nsort: S.nsort, view: S.view, all7: S.all7 }, extra);
+  const st = Object.assign({ q: S.q, F: S.F, sort: S.sort, nsort: S.nsort, bsrc: S.bsrc, view: S.view, all7: S.all7 }, extra);
   const p = new URLSearchParams();
   if (tab === "search" && st.q) p.set("q", st.q);
   if (["upcoming", "now", "search", "watch"].includes(tab) && st.F.size) p.set("f", [...st.F].join(","));
   if (tab === "upcoming" && st.sort === "book") p.set("sort", "book");
   if (tab === "upcoming" && st.view === "table") p.set("view", "table");
   if (tab === "now" && st.nsort !== "bo") p.set("sort", st.nsort);
+  if (tab === "now" && st.nsort === "book" && st.bsrc) p.set("src", st.bsrc);
   if (tab === "home" && st.all7) p.set("all", "7");
   const s = p.toString();
   return "#/" + (tab === "home" ? "" : tab) + (s ? "?" + s : "");
@@ -560,7 +583,7 @@ function vNow() {
   let body;
   const meta = (f, r) => {
     const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
-    return [f.ex.length ? exBadges(f) : chainsText(f), od && `${md(od)} 개봉`, od && (pre ? "개봉 전 상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+    return [f.ex.length ? exBadges(f) : chainsText(f), od && `${md(od)} 개봉${preOpen(f) ? " 예정" : ""}`, od && (pre ? (opened(f) ? "개봉 전 상영" : "") : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
   };
   const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
       <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? meta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
@@ -576,9 +599,14 @@ function vNow() {
       ${capRows("now", rest.map(f => nrow(f, '<div class="rk"></div>', f.bk ? `<b class="tn">${f.bk.rate}%</b><small class="tn">예매율 ${f.bk.r}위</small>` : "")))}</div>
       <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">관객 수는 ${kd(MR.bo.date)} 하루치이며, KOBIS가 확정하기 전까지 바뀔 수 있어요. 순위 변동은 10위 안에서만 표시합니다.</p>`;
   } else if (S.nsort === "book") {
-    const bk = list.filter(f => f.bk).sort((a, b) => a.bk.r - b.bk.r);
-    body = `<div class="list">${capRows("now", bk.map(f => nrow(f, `<div class="rk"><b class="tn">${f.bk.r}</b></div>`, `<b class="tn">${f.bk.rate}%</b><small class="tn">예매 ${man(f.bk.pa)}명</small>`)))}</div>
-      <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">KOBIS 실시간 예매율 · ${esc(MR.bkas)} 기준. 순위는 개봉 예정작을 포함한 전체 예매율 순위입니다.</p>`;
+    const src = S.bsrc, bk = list.filter(f => inBook(f, src)).sort((a, b) => bRank(a, src) - bRank(b, src)), npre = bk.filter(preOpen).length;
+    const srcBar = `<div class="srcbar"><span class="seg" role="group" aria-label="예매율 기준">${Object.entries(BSRC).map(([k, v]) => `<button data-bsrc="${k}" aria-pressed="${src === k}">${v}</button>`).join("")}</span></div>`;
+    // the rank badge carries the state by shape (solid: showing, outline: not open yet) and the
+    // words "개봉 전" under it, so the state never rests on colour alone
+    body = `${srcBar}<div class="list"><div class="wk"><h2>${src ? `${BSRC[src]} 예매율` : "예매율 순위"}</h2><span class="sub tn">${src ? srcWhen(src) : `${bkWhen()} 기준`}${npre ? ` · <span class="rkpre">□</span> 개봉 전 ${npre}편` : ""}</span></div>
+      ${bk.length ? capRows("now", bk.map(f => nrow(f, `<div class="rk${preOpen(f) ? " pre" : ""}"><b class="tn"${preOpen(f) ? ' aria-label="개봉 전"' : ""}>${bRank(f, src)}</b></div>`,
+        `<b class="tn">${bRate(f, src)}%</b>${src ? `<small class="tn">${otherRates(f)}</small>` : `<small class="tn">예매 ${man(f.bk.pa)}명</small>`}`))) : `<div class="empty"><p>${BSRC[src]} 예매율 자료가 아직 없어요.</p></div>`}</div>
+      <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${src ? `${BSRC[src]} 예매율은 ${BSRC[src]} 사이트에 나오는 값으로, 그 극장에서 팔린 표 중 이 영화의 몫이에요. 전체는 ` : ""}KOBIS 실시간 예매율: 지금 팔린 표 중 이 영화의 몫이에요. 상영 중인 영화와 개봉 전 예매작을 합친 순위라 이 화면에는 개봉 전 영화(테두리 순위)도 함께 나와요. 빠진 순위는 이 사이트가 다루지 않는 상영작입니다.</p>`;
   } else {
     const byOpen = list.slice().sort((a, b) => (a.d.date < b.d.date ? 1 : a.d.date > b.d.date ? -1 : 0) || a.t.localeCompare(b.t, "ko"));
     body = `<div class="list">${capRows("now", byOpen.map(f => nrow(f, '<div class="rk"></div>', f.bk && f.bk.ta ? `<b class="tn">${man(f.bk.ta)}</b><small>누적 관객</small>` : "")))}</div>`;
@@ -669,6 +697,21 @@ function stripSection() {
     ${quick ? `<div class="quick">${quick}</div>` : ""}
     <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
 }
+// 예매율 순위 on the home screen: the KOBIS booking ranking as it is, showing and pre-release films
+// together; a pre-release film has an outlined rank badge and "개봉 전 · date" under its rate
+function bookSection() {
+  const items = MR.films.filter(f => inBook(f) && homeOk(f)).sort((a, b) => a.bk.r - b.bk.r);
+  if (!items.length) return "";
+  const npre = items.filter(preOpen).length;
+  const qs = ["cg", "mb", "lt"].filter(k => MR.films.some(f => inBook(f, k))).map(k => `<a class="qchip" href="${hashFor("now", { nsort: "book", bsrc: k, F: new Set() })}">${BSRC[k]}</a>`).join("");
+  return `<section class="card"><div class="sh"><h2>예매율 순위</h2><span class="sub tn">${MR.bkas.slice(11, 16)} 기준${npre ? ` · 개봉 전 ${npre}편` : ""}</span><a class="end" href="${hashFor("now", { nsort: "book", bsrc: "" })}">전체 순위</a></div>
+    ${qs ? `<div class="quick"><span class="qlbl">극장별</span>${qs}</div>` : ""}
+    <ul class="strip">${items.slice(0, stripCap()).map(f => {
+      const pre = preOpen(f), od = f.d.p === "day" ? f.d.date : "";
+      const sub = `<em class="bkr">${f.bk.rate}%</em>${pre ? `<span class="pre">개봉 전${od ? ` · ${+od.slice(5, 7)}.${+od.slice(8, 10)}` : ""}</span>` : ""}`;
+      return stripItem(f, sub, `<i class="rkb tn${pre ? " pre" : ""}">${f.bk.r}</i>`);
+    }).join("")}</ul></section>`;
+}
 // 상영 중 on the home screen: yesterday's box-office order first, then the rest by booking rank
 function nowSection() {
   const now = MR.films.filter(f => isNow(f) && homeOk(f));
@@ -694,11 +737,11 @@ function countsSection() {
     <a class="card" href="#/now"><b>상영 중</b><span class="tn">${now}편 · 관객순·예매율순</span></a></div>`;
 }
 function vHome() {
-  // 찜한 영화 (news + confirmed/showing watched films; only when there are some), the two poster
-  // strips (다가오는 개봉 with shortcuts, 상영 중), 새로 포착, then 업데이트 (watched films with news and those under 새로 포착 are left out)
+  // 찜한 영화 (news + confirmed/showing watched films; only when there are some), the poster
+  // strips (예매율 순위, 다가오는 개봉 with shortcuts, 상영 중), 새로 포착, then 업데이트 (watched films with news and those under 새로 포착 are left out)
   const hasNews = !FIRST_VISIT && NEW_EV.some(e => WATCH[e.id]);
   const ch = changesSection(false, hasNews, new Set(FS.map(s => s.id)));
-  const order = [watchSection(), stripSection(), nowSection(), firstSection(), ch];
+  const order = [watchSection(), bookSection(), stripSection(), nowSection(), firstSection(), ch];
   return `<div class="stack">${order.filter(Boolean).join("")}${countsSection()}</div>`;
 }
 
@@ -1118,6 +1161,7 @@ document.addEventListener("click", e => {
   if (t.closest("[data-reset]")) { S.more = {}; setState({ F: new Set() }); return; }
   const so = t.closest("[data-sort]"); if (so) { setState({ sort: so.dataset.sort, view: "list" }); return; }
   const ns = t.closest("[data-nsort]"); if (ns) { S.more = {}; setState({ nsort: ns.dataset.nsort }); return; }
+  const bs = t.closest("[data-bsrc]"); if (bs) { S.more = {}; setState({ bsrc: bs.dataset.bsrc }); return; }
   const vw = t.closest("[data-view]"); if (vw) { setState({ view: vw.dataset.view }); return; }
   const mo = t.closest("[data-more]"); if (mo) { S.more = Object.assign({}, S.more, { [mo.dataset.more]: true }); render(); return; }
   const th = t.closest("[data-tcol]"); if (th) { const k = th.dataset.tcol; S.tsort = S.tsort && S.tsort.k === k ? (S.tsort.dir > 0 ? { k, dir: -1 } : null) : { k, dir: 1 }; render(); return; }

@@ -1037,6 +1037,11 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         if bk:
             item["bk"] = dict(r=bk.get("rank"), rate=bk.get("rate"), pa=bk.get("presale_audience"),
                               ta=bk.get("total_audience"))
+        # br: each chain's own booking share in % (its site's ranking; showing and presale together)
+        br = {k: round(x["booking_rate"], 2) for k, x in (("cg", cg), ("mb", mb), ("lt", lt))
+              if x and x.get("status") != "ended" and (x.get("booking_rate") or 0) > 0}
+        if br:
+            item["br"] = br
         if mb:
             item["mb"] = chain_code(mb)
         if lt:

@@ -369,6 +369,8 @@ def apply_megabox(films: list[dict], rows: list[dict], today: str) -> tuple[list
                  "grade": next((r["grade"] for r in grp if r["grade"]), ""),
                  "exclusive": any(r["exclusive"] for r in grp),
                  "bookable": any(r.get("bookable") for r in grp),
+                 # versions of one film ((자막), (더빙)) share its booking: their shares add up
+                 "booking_rate": round(sum(r.get("booking_rate") or 0 for r in grp), 2),
                  "poster": next((r["poster"] for r in grp if r.get("poster")), "")}
         if any(r.get("classic") for r in grp):
             stage["classic"] = True
@@ -476,6 +478,8 @@ def ended_stage(st: dict) -> dict:
     out = {**st, "status": "ended"}
     if "bookable" in out:
         out["bookable"] = False
+    if "booking_rate" in out:
+        out["booking_rate"] = 0
     out.pop("bookable_from", None)
     return out
 
@@ -534,6 +538,7 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
                                            "grade", "kobis_cd", "badge", "poster")}
         stage["exclusive"] = bool(r.get("exclusive"))
         stage["bookable"] = bool(r.get("bookable"))
+        stage["booking_rate"] = r.get("booking_rate") or 0
         if r.get("festival"):
             stage["festival"] = r["festival"]
         if r.get("genre"):

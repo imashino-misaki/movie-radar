@@ -8,7 +8,8 @@ bookable subset; each row of the full list carries the same answer in
 bokdAbleYn (see parse_row), so one request is enough.
 
 Only list-level public fields are kept: title, release date, age grade,
-now/upcoming status, whether tickets are on sale, and the Megabox-exclusive flag. No synopsis, images or
+now/upcoming status, whether tickets are on sale, the booking share, and the
+Megabox-exclusive flag. No synopsis, images or
 anything booking-related is stored.
 """
 from __future__ import annotations
@@ -62,6 +63,13 @@ def unescape_all(text: str) -> str:
 IMG_ORIGIN = "https://img.megabox.co.kr"
 
 
+def _rate(v) -> float:
+    try:
+        return max(0.0, float(v or 0))
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def parse_row(m: dict) -> dict:
     stat = (m.get("movieStatNm") or "").strip()
     return {
@@ -75,6 +83,9 @@ def parse_row(m: dict) -> dict:
         # 8 days ahead); 1 of 30 상영예정 rows had Y (presale). The 79 rows of pageType=ticketing
         # (the booking page's film list) were the Y rows; schdlYn agreed on every row
         "bookable": m.get("bokdAbleYn") == "Y",
+        # the chain's booking share in % (boxoBokdRt; boxoRank is its order): checked 2026-11-03,
+        # 50 rows above 0 summing to 99.3, showing and presale films together
+        "booking_rate": _rate(m.get("boxoBokdRt")),
         # Megabox-exclusive screening: singlPlayAt is the flag behind the main
         # page's MEGA ONLY badge (checked 2026-11-01: 18 of 122 rows Y, the
         # badged film among them); megaOnlyAt was N on every row
