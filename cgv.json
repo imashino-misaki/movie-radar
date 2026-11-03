@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-03T09:35:38Z",
+ "fetched_at": "2026-11-03T10:39:12Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 125,
-  "now": 45,
+  "chart": 123,
+  "now": 44,
   "upcoming": 119,
   "icecon": 20,
   "arthouse": 25,
@@ -1188,30 +1188,6 @@
    "badge": ""
   },
   {
-   "movie_no": "30001614",
-   "title": "호루몽",
-   "status": "upcoming",
-   "release_date": "2026-11-11",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "15세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001614/30001614_320.jpg",
-   "booking_rate": 0.17,
-   "booking_rank": 45,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "upcoming"
-   ],
-   "labels": [],
-   "badge": ""
-  },
-  {
    "movie_no": "30001728",
    "title": "[SIPFF2026] 다운타운",
    "status": "upcoming",
@@ -1418,7 +1394,7 @@
    "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001630/30001630_320.jpg",
    "booking_rate": 0.11,
    "booking_rank": 55,
-   "bookable": true,
+   "bookable": false,
    "formats": [],
    "format_codes": [
     "01"
@@ -2268,33 +2244,6 @@
     "upcoming"
    ],
    "labels": [],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001591",
-   "title": "부에노스 아이레스여 안녕",
-   "status": "now",
-   "release_date": "2026-10-21",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "12세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001591/30001591_320.jpg",
-   "booking_rate": 0.03,
-   "booking_rank": 88,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "arthouse"
-   ],
-   "labels": [
-    "arthouse"
-   ],
    "badge": ""
   },
   {
@@ -3201,6 +3150,29 @@
    "badge": ""
   },
   {
+   "movie_no": "30001614",
+   "title": "호루몽",
+   "status": "upcoming",
+   "release_date": "2026-11-11",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "15세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001614/30001614_320.jpg",
+   "booking_rate": 0.17,
+   "booking_rank": 45,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "upcoming"
+   ],
+   "labels": [],
+   "badge": ""
+  },
+  {
    "movie_no": "30001581",
    "title": "극장판 카드캡터 체리-봉인된 카드",
    "status": "upcoming",
@@ -4084,6 +4056,31 @@
    "labels": [
     "icecon",
     "cgv_only"
+   ],
+   "badge": ""
+  },
+  {
+   "movie_no": "30001591",
+   "title": "부에노스 아이레스여 안녕",
+   "status": "now",
+   "release_date": "2026-10-21",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "12세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001591/30001591_320.jpg",
+   "booking_rate": 0.03,
+   "booking_rank": 88,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "arthouse"
+   ],
+   "labels": [
+    "arthouse"
    ],
    "badge": ""
   }
