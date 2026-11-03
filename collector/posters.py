@@ -14,7 +14,8 @@ Each image is fetched once per source URL, scaled down to at most
 WIDTH px wide and saved as WebP (quality: Pillow's default 80); on
 2026-11-01 that gave 36-62 KB per poster. A record gets `poster`, the file's
 path in the repository. Files no record uses any more are deleted. A source
-that fails is retried on a later day; the next source is tried meanwhile.
+that fails is retried on a later day; the next source is tried meanwhile,
+and while every source fails a record keeps the file it had.
 
 Per-format records of a grouped film (variant_of) share their lead's poster.
 """
@@ -69,13 +70,14 @@ def fetch(client, films: list[dict], cache: dict, poster_dir: Path, stamp: str) 
     for rec in films:
         if rec.get("variant_of"):
             continue
-        rec.pop("poster", None)
+        prev, failed = rec.pop("poster", None), False
         for url in candidates(rec):
             entry = cache.get(url, {})
             if entry.get("file") and (poster_dir / entry["file"]).exists():
                 rec["poster"] = f"{REPO_DIR}/{entry['file']}"
                 break
             if entry.get("error") and entry.get("checked", "") >= stamp:
+                failed = True
                 continue  # failed today: next source, retried another day
             try:
                 data, size = to_webp(client.get(url).content)
@@ -84,6 +86,7 @@ def fetch(client, films: list[dict], cache: dict, poster_dir: Path, stamp: str) 
             except Exception as exc:  # noqa: BLE001 - one bad image must not fail the source
                 cache[url] = {"error": type(exc).__name__, "checked": stamp}
                 errors += 1
+                failed = True
                 continue
             name = file_name(url)
             (poster_dir / name).write_bytes(data)
@@ -91,6 +94,8 @@ def fetch(client, films: list[dict], cache: dict, poster_dir: Path, stamp: str) 
             rec["poster"] = f"{REPO_DIR}/{name}"
             fetched += 1
             break
+        if "poster" not in rec and failed and prev and (poster_dir / Path(prev).name).exists():
+            rec["poster"] = prev  # a replacement failed: the previous image stays until one arrives
     for rec in films:  # per-format records show their lead's poster
         lead = by_id.get(rec.get("variant_of", ""))
         if lead is not None:

@@ -115,8 +115,10 @@ def _entry(chain, program, month, date, exclusive, url) -> dict:
 
 def apply(films: list[dict], megabox_res: dict | None, lotte_rows: list[dict] | None,
           cgv_rows_seen: bool, stamp: str) -> dict:
-    """Set stage "program" on records in place (pure, no I/O). A record keeps
-    its last programme when the programme no longer lists it."""
+    """Set stage "program" on records in place (pure, no I/O). When a chain's
+    programme was read and no longer lists a record, its entry stays as history
+    with exclusive False and `ended` (the stamp it was first found missing); an
+    entry of a chain not read this run (failed or skipped) is kept as it was."""
     found: dict[str, list[dict]] = {}
     stats = {"program_rows": 0, "program_matched": 0, "program_unmatched": 0}
     index = TitleIndex(films, wanted=[r["title"] for r in (megabox_res or {}).get("rows", [])])
@@ -155,13 +157,25 @@ def apply(films: list[dict], megabox_res: dict | None, lotte_rows: list[dict] | 
             if "cgv_only" in st.get("labels", []) and st.get("status") != "ended":
                 month = (st.get("release_date") or "")[:7] or st.get("release_month", "")
                 join(f, _entry("cgv", CGV_PROGRAM, month, st.get("release_date", ""), True, CGV_URL))
+    # chains whose programme this run read (the same conditions that gate the joins above)
+    checked = {c for c, ok in (("megabox", bool(megabox_res)), ("lotte", bool(lotte_rows)),
+                               ("cgv", cgv_rows_seen)) if ok}
     for f in films:
-        entries = sorted(found.get(f["id"], []), key=lambda e: CHAIN_ORDER.index(e["chain"]))
+        new = found.get(f["id"], [])
+        old = f["stages"].get("program")
+        prior = ([{k: v for k, v in old.items() if k != "also"}] + list(old.get("also", []))) if old else []
+        listed = {e["chain"] for e in new}
+        kept = [e if e.get("chain") not in checked
+                else {**e, "exclusive": False, "ended": e.get("ended") or stamp}
+                for e in prior if e.get("chain") not in listed]
+        entries = sorted(new + kept, key=lambda e: (not e.get("exclusive"), CHAIN_ORDER.index(e["chain"])
+                                                    if e.get("chain") in CHAIN_ORDER else len(CHAIN_ORDER)))
         if entries:
             stage = dict(entries[0])
             if len(entries) > 1:
                 stage["also"] = entries[1:]
             f["stages"]["program"] = stage
-            f["first_seen"]["program"] = min(stamp, f["first_seen"].get("program", stamp))
+            if new:
+                f["first_seen"]["program"] = min(stamp, f["first_seen"].get("program", stamp))
     stats["with_program"] = sum("program" in f["stages"] for f in films)
     return stats

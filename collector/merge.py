@@ -66,6 +66,23 @@ def chain_listed(rec: dict) -> bool:
     return any(k in rec.get("stages", {}) for k in ("megabox", "lotte", "cgv"))
 
 
+# Stages naming the film's KOBIS movie code (the "kobis" kind of site.ID_FIELDS).
+KOBIS_CODE_FIELDS = (("kobis", "movie_cd"), ("kobis_detail", "kobis_cd"), ("release_history", "kobis_cd"),
+                     ("lotte", "kobis_cd"), ("booking", "movie_cd"), ("schedule", "movie_cd"))
+
+
+def kobis_codes(rec: dict, skip: tuple[str, ...] = ()) -> set[str]:
+    """KOBIS movie codes a record carries (a KOBIS-only record's own id included), leaving out
+    the stages in `skip`. KOBIS keeps one code per film, so two records with codes and none in
+    common are two films (as site.dedupe decides)."""
+    st = rec.get("stages", {})
+    out = {str(st[s][k]) for s, k in KOBIS_CODE_FIELDS
+           if s not in skip and isinstance(st.get(s), dict) and st[s].get(k)}
+    if rec.get("id", "").startswith("k"):
+        out.add(rec["id"][1:])
+    return out
+
+
 def merge(existing: list[dict], intake_rows: list[dict], general_rows: list[dict],
           adult_rows: list[dict], today: str, trusted: set[str]) -> tuple[list[dict], dict]:
     """Return (films, stats). Pure function: no I/O. `trusted` = masked applicant names."""
@@ -174,7 +191,11 @@ def merge(existing: list[dict], intake_rows: list[dict], general_rows: list[dict
         rec, how = locate(r["rcv_no"], r["title"], applicant)
         rated = rec is not None and "rating" in rec["stages"]
         if not rated and not is_trusted(applicant) and not (rec is not None and chain_listed(rec)):
-            listed = [f for f in chain_index.find(r["title"]) if f["id"] in films]
+            # as in locate(): a record of another receipt is another film (a re-release filed
+            # under the same title), even when a chain lists it
+            listed = [f for f in chain_index.find(r["title"]) if f["id"] in films
+                      and not (r["rcv_no"] and films[f["id"]].get("rcv_no")
+                               and films[f["id"]]["rcv_no"] != r["rcv_no"])]
             if len(listed) != 1:
                 stats["intake_withheld"] += 1
                 continue
@@ -222,10 +243,15 @@ def upgrade_title(rec: dict, title: str, original: str = "") -> None:
 def fold_into(dst: dict, src: dict) -> None:
     """Fold record `src` into `dst` (in place): every stage `dst` lacks is
     carried over, promo stages are united, and each first_seen keeps the
-    earliest date."""
+    earliest date. `absorbed` lists every id folded into `dst` (transitively):
+    the site maps them to the film (site.dedupe aliases), so a watch or a link
+    of a folded record still finds it."""
     from .ors_ad import merge_stage as merge_ors_ad
     from .promo import merge_stage  # local import: promo imports from here
 
+    gone = (set(dst.get("absorbed", [])) | set(src.get("absorbed", [])) | {src.get("id", "")}) - {"", dst.get("id")}
+    if gone:
+        dst["absorbed"] = sorted(gone)
     upgrade_title(dst, src.get("title", ""), src.get("original_title", ""))
     for k, v in src.get("first_seen", {}).items():
         dst["first_seen"][k] = min(v, dst["first_seen"].get(k, v))
@@ -421,7 +447,8 @@ def group_variants(films: list[dict]) -> dict:
     another applicant (the format's own distributor). Records whose titles
     differ only by such a label are one film: the record with the plain title
     leads the group (if exactly one has it: two plain records mean two films
-    of that title, which are left alone), else the first by format_rank. The
+    of that title, which are left alone), else the first by format_rank. A
+    record whose KOBIS code conflicts with the lead's stays out. The
     lead gets `formats` [{"format", "id"}] (the per-format records, itself
     included); every other member gets `variant_of` (the lead's id). Recomputed
     every run."""
@@ -440,7 +467,11 @@ def group_variants(films: list[dict]) -> dict:
             continue
         members = sorted(members, key=format_rank)
         lead = heads[0] if heads else members[0]
-        if not heads and len(members) == 1:
+        # a format record with a KOBIS code the lead does not share is another film of that
+        # title (kobis_codes; site.dedupe keeps edition labels of another code apart the same way)
+        codes = kobis_codes(lead)
+        members = [f for f in members if f is lead or not (codes and (c := kobis_codes(f)) and not codes & c)]
+        if not any(f is not lead for f in members):
             continue  # one format only: nothing to group
         lead["formats"] = [{"format": split_format(f["title"])[1], "id": f["id"]} for f in members]
         for f in members:
@@ -507,7 +538,8 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
 
     A row joins the record of the KOBIS movie code Lotte lists for it (a
     KOBIS-only record or one whose KOBIS stage has that code), else a record
-    whose normalised title matches (as for Megabox). Unmatched rows become
+    whose normalised title matches (as for Megabox) and that carries no other
+    KOBIS code. Unmatched rows become
     Lotte-only records (id "l" + Lotte movie code), folded into a KMRB/KOBIS/
     Megabox record once one matches. Records that held a Lotte stage but are
     not in today's lists are kept with status "ended"; `runs` keeps every
@@ -550,7 +582,11 @@ def apply_lotte(films: list[dict], rows: list[dict], today: str,
         if cands:
             stats["lotte_matched_kobis_cd"] += 1
         else:
-            cands = [f for f in index.find(r["title"]) if f["id"] in by_id]
+            # a title match of another KOBIS code is another film (a record's own Lotte stage
+            # does not count: it may hold the very join being checked)
+            cands = [f for f in index.find(r["title"]) if f["id"] in by_id
+                     and not (r["kobis_cd"] and (c := kobis_codes(f, skip=("lotte",)))
+                              and r["kobis_cd"] not in c)]
         if cands:
             rec = pick(cands, r["release_date"])
             upgrade_title(rec, r["title"])

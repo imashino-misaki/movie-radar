@@ -5,7 +5,7 @@ from the repository's cgv-data branch when present: the workflow copies it to
 data/cgv_upload.json (git-ignored) before the collector runs, and this module
 reads it. No file means the source is skipped, not failed.
 
-The file is applied with its own observation date (the UTC date of
+The file is applied with its own observation date (the Korean date of
 `fetched_at`), so first_seen / runs / ended reflect when CGV listed a film,
 not when the collector ran. A file older than STALE_CYCLES of the update
 cycles it reports is still applied, and the source is marked "stale" in
@@ -20,6 +20,8 @@ from pathlib import Path
 from .http import FetchError
 from .merge import TitleIndex, _sort, ended_stage, fold_into, set_bookable, track_runs, upgrade_title
 from .tags import tag_film
+
+KST = dt.timezone(dt.timedelta(hours=9))  # Asia/Seoul (no DST), as run.KST
 
 UPLOAD_NAME = "cgv_upload.json"
 SCHEMA = 1
@@ -87,7 +89,7 @@ def read_upload(path: Path, now: dt.datetime) -> dict | None:
     rows = [r for r in rows if not (r["movie_no"] in seen_ids or seen_ids.add(r["movie_no"]))]
     age = (now.astimezone(dt.timezone.utc) - fetched).total_seconds() / 60
     limit = stale_after_minutes(doc)
-    return {"rows": rows, "seen": fetched.date().isoformat(), "stats": {
+    return {"rows": rows, "seen": fetched.astimezone(KST).date().isoformat(), "stats": {
         "rows": len(rows),
         "now": sum(r["status"] == "now" for r in rows),
         "upcoming": sum(r["status"] == "upcoming" for r in rows),
@@ -99,7 +101,7 @@ def read_upload(path: Path, now: dt.datetime) -> dict | None:
 
 
 def apply_cgv(films: list[dict], rows: list[dict], seen: str) -> tuple[list[dict], dict]:
-    """Attach the CGV lists (pure, no I/O). `seen`: the upload's UTC date.
+    """Attach the CGV lists (pure, no I/O). `seen`: the upload's Korean (KST) date.
 
     A row joins a record whose normalised title matches (as for Megabox and
     Lotte; CGV gives no KOBIS code), Megabox- and Lotte-only records included.

@@ -121,10 +121,13 @@ def fetch_list(client) -> dict:
     """Fetch the full list. Returns {"rows": [...], "stats": {...}}."""
     rows: list[dict] = []
     total = 0
+    seen: set[str] = set()
     for page in range(1, MAX_PAGES + 1):
         resp = client.post(LIST_URL, json=body(page), headers={"Referer": REFERER})
         got, total = parse_page(resp.text)
-        rows += got
+        # unique films only: a repeated movie_no (a page repeating rows of another) must not
+        # count toward totCnt in place of a film never received
+        rows += [r for r in got if r["movie_no"] and not (r["movie_no"] in seen or seen.add(r["movie_no"]))]
         if not got or len(rows) >= total:
             break
     if not rows:
@@ -132,9 +135,7 @@ def fetch_list(client) -> dict:
         raise FetchError("megabox list: empty")
     if len(rows) < total:
         # a short list would mark the missing films as ended
-        raise FetchError(f"megabox list: {len(rows)}/{total} rows")
-    seen: set[str] = set()
-    rows = [r for r in rows if r["movie_no"] and not (r["movie_no"] in seen or seen.add(r["movie_no"]))]
+        raise FetchError(f"megabox list: {len(rows)}/{total} unique films")
     return {"rows": rows, "stats": {
         "rows": len(rows), "total_reported": total,
         "now": sum(r["status"] == "now" for r in rows),

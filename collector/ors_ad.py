@@ -205,7 +205,8 @@ def apply(films: list[dict], rows: list[dict], stamp: str,
     """Attach stage "ors_ad" (pure, no I/O). A row joins a record of the same
     title (or original title) under `pick`; otherwise it creates a record
     unless can_create says no (counted in `ors_ad_not_created` by reason).
-    `stamp`: the run time (first_seen.ors_ad); `withheld`: company keys of
+    `stamp`: the run time with the KST offset (first_seen.ors_ad; its date part
+    is the day); `withheld`: company keys of
     applicants with adult KMRB ratings. Filings accumulate across runs by
     receipt id; `open` is rewritten every run with the filings in today's
     lists ({receipt id: status}), so a decided filing drops out of it."""

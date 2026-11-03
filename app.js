@@ -61,13 +61,17 @@ const isNow = f => opened(f) && f.now;
 // the booking ranking shown: "" = KOBIS (all chains), or one chain's own share (f.br)
 const BSRC = { "": "전체", cg: "CGV", mb: "메가박스", lt: "롯데시네마" };
 // shares are shown to one decimal, as KOBIS gives them (CGV sends two)
-const bRate = (f, src) => src ? Math.round(((f.br && f.br[src]) || 0) * 10) / 10 : f.bk && f.bk.r ? f.bk.rate : 0;
+// bRaw is the share as sent: inclusion and ordering use it, so a 0.04% share still ranks (rounding first made it 0
+// and dropped the film); bRate is the displayed value. Rank ties (bRank) compare bRate, so equal displayed
+// percentages share a rank; the sort is by raw value, so such films are adjacent.
+const bRaw = (f, src) => src ? (f.br && f.br[src]) || 0 : f.bk && f.bk.r ? f.bk.rate : 0;
+const bRate = (f, src) => src ? Math.round(bRaw(f, src) * 10) / 10 : bRaw(f, src);
 // in the ranking (showing or not open yet)
-const inBook = (f, src = "") => bRate(f, src) > 0;
+const inBook = (f, src = "") => bRaw(f, src) > 0;
 // rank in a chain's ranking: order by share over every indexed film (KOBIS gives its own rank)
 const bRank = (() => { const memo = {};
   return (f, src) => { if (!src) return f.bk.r;
-    if (!memo[src]) { memo[src] = new Map(); MR.films.filter(x => inBook(x, src)).sort((a, b) => bRate(b, src) - bRate(a, src)).forEach((x, i, arr) => memo[src].set(x.id, i && bRate(arr[i - 1], src) === bRate(x, src) ? memo[src].get(arr[i - 1].id) : i + 1)); }
+    if (!memo[src]) { memo[src] = new Map(); MR.films.filter(x => inBook(x, src)).sort((a, b) => bRaw(b, src) - bRaw(a, src)).forEach((x, i, arr) => memo[src].set(x.id, i && bRate(arr[i - 1], src) === bRate(x, src) ? memo[src].get(arr[i - 1].id) : i + 1)); }
     return memo[src].get(f.id); }; })();
 const preOpen = f => !opened(f);
 // when a chain's list was read (its source's last good run), and the other rankings' shares
@@ -121,7 +125,15 @@ function canonWatch(w) {
   return out;
 }
 let WATCH = canonWatch(ls.get("mr.watch", {}, isObj));
-const saveWatch = () => { ls.set("mr.watch", WATCH); const n = Object.keys(WATCH).length; $$(".wn").forEach(el => el.textContent = n || ""); };
+// LAST = the list as last read from / written to storage. Saving applies only this tab's own adds and removes
+// (WATCH vs LAST) onto the freshly stored list, so another tab's additions are not overwritten.
+let LAST = { ...WATCH };
+const readWatch = () => canonWatch(ls.get("mr.watch", {}, isObj));
+const saveWatch = () => {
+  const m = readWatch();
+  for (const id in LAST) if (!(id in WATCH)) delete m[id];
+  for (const id in WATCH) if (!(id in LAST) && !(id in m)) m[id] = WATCH[id];
+  WATCH = m; LAST = { ...m }; ls.set("mr.watch", m); const n = Object.keys(WATCH).length; $$(".wn").forEach(el => el.textContent = n || ""); };
 const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" stroke-linejoin="round"/></svg>';
 const starBtn = f => `<button class="star" data-star="${f.id}" aria-pressed="${!!WATCH[f.id]}" aria-label="${esc(f.t)} 찜${WATCH[f.id] ? " 해제" : "하기"}">${STAR}</button>`;
 const CHEV = '<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -193,6 +205,11 @@ function markRead(id) {
   ls.set("mr.read", o); READ = new Set(Object.keys(o)); NEWIDS = unreadIds();
   return true;
 }
+// another tab changed the watchlist: pick it up
+window.addEventListener("storage", e => {
+  if (e.key !== "mr.watch") return;
+  WATCH = readWatch(); LAST = { ...WATCH }; $$(".wn").forEach(el => el.textContent = Object.keys(WATCH).length || ""); mainKey = ""; render();
+});
 // another tab read something: pick it up
 window.addEventListener("storage", e => {
   if (e.key !== "mr.read") return;
@@ -397,7 +414,8 @@ function parseHash() {
   const parts = (path || "").split("/");
   S.tab = parts[0] || "home";
   if (!["home", "upcoming", "now", "watch", "search", "film", "book"].includes(S.tab)) S.tab = "home";
-  S.id = S.tab === "film" ? decodeURIComponent(parts[1] || "") : null;
+  S.id = null;
+  if (S.tab === "film") { try { S.id = decodeURIComponent(parts[1] || ""); } catch (e) { S.id = ""; } } // malformed %-escape: unknown film
   S.full = S.tab === "film" && parts[2] === "full";
   if (S.id && MR.alias[S.id]) { S.id = MR.alias[S.id]; history.replaceState(history.state, "", "#/film/" + S.id + (S.full ? "/full" : "")); }
   if (S.tab !== "film") {
@@ -624,7 +642,7 @@ function capRows(key, rows) {
 // hidden (concerts and events included, marked by their category), so rank 1 is always there.
 // Its own view, not a sort of 상영 중 / 개봉 예정: a sort reorders a tab's films, this is another set.
 function vBook() {
-  const src = S.bsrc, bk = MR.films.filter(f => inBook(f, src)).sort((a, b) => bRank(a, src) - bRank(b, src) || bRate(b, src) - bRate(a, src));
+  const src = S.bsrc, bk = MR.films.filter(f => inBook(f, src)).sort((a, b) => bRank(a, src) - bRank(b, src) || bRaw(b, src) - bRaw(a, src));
   const npre = bk.filter(preOpen).length;
   const srcBar = `<div class="tools"><span class="seg" role="group" aria-label="예매율 기준">${Object.entries(BSRC).map(([k, v]) => `<button data-bsrc="${k}" aria-pressed="${src === k}">${v}</button>`).join("")}</span><span class="cnt tn push">${bk.length}편</span></div>`;
   const when = src ? srcWhen(src) : `${bkWhen()} 기준`;

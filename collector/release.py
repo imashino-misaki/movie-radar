@@ -31,7 +31,8 @@ signal state and a display tier from that state's measured hit rates
 (tier_table, display).
 
   logit pi = x.gamma + a_g        m = x.beta + b_g
-x: binary film features known at the rating (FEATURES, picked by the
+x: film features known at the rating (FEATURES: binary, or log(1 + n) of a
+count; picked by the
 backtest). g: the applicant (known at the rating; individuals form one
 group), also once KOBIS names the film's distributor: a distributor-grouped
 fit is backtested only as if the distributor were known at the rating
@@ -49,13 +50,16 @@ by tau^2 / (tau^2 + v_g) (empirical Bayes; v_g its sampling variance); a new
 company gets the prior from its film's features. Censored rows enter every
 step through the EM expectations (P(opens) q and the expected log lag beyond
 the censoring point), so slow or never-opening companies are not mistaken
-for fast ones. Row weights halve every h days of age.
+for fast ones. Row weights halve every h days of age (tau^2 is estimated
+with the sampling variance of the weighted estimates; in the shrinkage of
+P(opens) a row of weight w counts as w rows).
 
 Backtest: rows are scored only once matured (followed up for at least the
 95th percentile of real-opening lags, see maturity_days). Nested time
 split: h, then features (forward, in FEATURES order), the calendar, the
 company-effect variant and milestones are chosen on a tuning fold (fits on
-what was known on its first day), keeping the simpler candidate unless the
+what was known on its first day, scored on the outcomes known on the test
+fold's first day), keeping the simpler candidate unless the
 more complex one is better by one standard error; the chosen model is
 refitted every REFIT_DAYS from the first day of the later, untouched test
 fold (each time on what was known that day; a row is predicted by the
@@ -110,8 +114,17 @@ SCHEMA = 1
 # candidate half-lives (days) for the recency weights; None = no weighting.
 # The backtest picks one (the simplest within one standard error of the best).
 H_GRID = (30, 60, 90, 180, 365, 730, None)
-# film features known at the rating, tried in this order by the backtest
-FEATURES = ("short", "format", "promo", "restricted", "foreign", "rerelease", "rule_adult")
+# film features known at the rating, tried in this order by the backtest.
+# Counts (promo_n, app_volume, app_batch, versions; see RatingCounts) enter as
+# log(1 + n): the logit and log-lag are linear in the features and the counts
+# are heavy-tailed with diminishing returns (analysis 2026-11-02 of 6,979
+# feature-length ratings 2019-2025: 96% of the films with 5+ trailer / poster
+# filings opened; applicants file from 1 to hundreds of ratings a year), and
+# an absent count stays 0. anime / concert: tags.tag_film on the rating's
+# title, original title and applicant (KMRB's category is not in the list the
+# collector reads, so it cannot be a live feature).
+FEATURES = ("short", "format", "promo", "restricted", "foreign", "rerelease", "rule_adult",
+            "promo_n", "app_volume", "app_batch", "versions", "anime", "concert")
 # company features (prior mean of the company effects)
 GROUP_FEATURES = ("ratings_per_year", "promo", "short", "restricted", "foreign", "format")
 RESTRICTED = ("청소년관람불가", "제한상영가")
@@ -123,6 +136,12 @@ SHORT_MINUTES = 40
 # a trailer / poster rating more than this many days before the film rating
 # belongs to an earlier release (promo.PRIOR_DAYS, the collector's rule)
 PROMO_LOOKBACK_DAYS = 365
+# a run (KOBIS re-release, presale, chain or program day) more than this many
+# days after the cycle's KOBIS opening starts a later cycle: the collector's
+# promo.PRIOR_DAYS rule. Measured 2026-11-03 on data/release_lags.json: 85 of
+# the 87 re-release openings (open_dt after the KOBIS first opening) came more
+# than 365 days after it (the other two after 70 and 176 days)
+CYCLE_GAP_DAYS = PROMO_LOOKBACK_DAYS
 # the backtest's 90-day target and the `by` horizon
 HORIZON_DAYS = 90
 # horizons (days from today) of the published and scored P(open within d)
@@ -210,18 +229,56 @@ def last_run_start(srcs: dict) -> str:
     (an old film back for a re-release needs no new rating): its latest KOBIS
     opening, or a chain / program listing day after it (a re-release the
     chains list before KOBIS records it). "" without a KOBIS opening."""
-    kobis = [d for d in [srcs.get("kobis", ""), srcs.get("kobis_api", ""),
-                         *srcs.get("kobis_rereleases", []), srcs.get("release_lags", "")] if d]
+    kobis = _kobis_days(srcs)
     if not kobis:
         return ""
     listed = [srcs[k] for k in ("megabox", "lotte", "cgv", "program") if srcs.get(k)]
     return max(kobis + listed)
 
 
+def _kobis_days(srcs: dict) -> list[str]:
+    return [d for d in [srcs.get("kobis", ""), srcs.get("kobis_api", ""),
+                        *srcs.get("kobis_rereleases", []), srcs.get("release_lags", "")] if d]
+
+
+def current_start(rec: dict, srcs: dict) -> str:
+    """Start of the record's current cycle. A record keeps its stages from an
+    earlier release (an archived rating), so cycle_start can lie in a cycle
+    that ended: once that cycle has a KOBIS opening, a KOBIS re-release or a
+    presale / chain / program day more than CYCLE_GAP_DAYS after it starts a
+    later cycle (the earliest such day; repeated for every later run)."""
+    start = cycle_start(rec)
+    if not start:
+        return last_run_start(srcs)
+    kobis = sorted(_kobis_days(srcs))
+    runs = sorted({*kobis, *(srcs[k] for k in ("booking_rerelease", "booking", "megabox", "lotte",
+                                                "cgv", "program") if srcs.get(k))})
+    while True:
+        opened = next((d for d in kobis if d >= start), "")
+        if not opened:
+            return start
+        cut = (_d(opened) + dt.timedelta(days=CYCLE_GAP_DAYS)).isoformat()
+        later = [d for d in runs if d > cut]
+        if not later:
+            return start
+        start = later[0]
+
+
 def rating_row(rec: dict, rows: dict | None) -> dict | None:
     """The release_lags row of the record's own rating ({rating_no: row})."""
     no = rec["stages"].get("rating", {}).get("rating_no")
     return (rows or {}).get(no) if no else None
+
+
+def _withdrawn(stage: dict, date: str) -> bool:
+    """An ended chain stage's opening day (or month) after the last day the
+    chain listed the film: an announcement withdrawn before the film opened
+    there, not a past opening (a stage without listing periods is kept)."""
+    if stage.get("status") != "ended":
+        return False
+    runs = stage.get("runs") or []
+    last = _valid_day(runs[-1].get("to")) if runs and isinstance(runs[-1], dict) else ""
+    return bool(last) and date > last[:len(date)]
 
 
 def sources(rec: dict, row: dict | None = None) -> dict:
@@ -243,25 +300,31 @@ def sources(rec: dict, row: dict | None = None) -> dict:
     # it: the record's own stages lack it when KOBIS listed the film only
     # before the collector first saw it (the Open API list keeps films
     # opened in the last kobis.RECENT_DAYS days) or does not list a
-    # screening-format rating's number at all
+    # screening-format rating's number at all. Only then: a KOBIS opening of
+    # the rating's cycle in the record's own stages is the fresher answer (a
+    # corrected date replaces the one the row recorded, see accumulate)
     lag_open = _valid_day((row or {}).get("open_dt")) if (row or {}).get("kobis_cd") else ""
-    if lag_open and lag_open not in (k_hist, k_api, *rr):
+    row_rd = _valid_day((row or {}).get("rating_date"))
+    if lag_open and lag_open not in (k_hist, k_api, *rr) and not any(
+            d and d >= row_rd for d in (k_hist, k_api, *rr)):
         out["release_lags"] = lag_open
     bk = st.get("booking", {})
     for key, field in (("booking_rerelease", "rerelease_dt"), ("booking", "open_dt")):
         if _valid_day(bk.get(field)):
             out[key] = _valid_day(bk.get(field))
     for chain in ("megabox", "lotte", "cgv"):
-        if _valid_day(st.get(chain, {}).get("release_date")):
-            out[chain] = _valid_day(st[chain]["release_date"])
+        day = _valid_day(st.get(chain, {}).get("release_date"))
+        if day and not _withdrawn(st[chain], day):
+            out[chain] = day
     sch = st.get("schedule", {})
     if _valid_day(sch.get("date")):
         out["schedule"] = _valid_day(sch["date"])
     elif _valid_month(sch.get("month")):
         out["schedule"] = _valid_month(sch["month"])
     for chain in ("lotte", "cgv"):
-        if _valid_month(st.get(chain, {}).get("release_month")):
-            out[f"{chain}_month"] = _valid_month(st[chain]["release_month"])
+        month = _valid_month(st.get(chain, {}).get("release_month"))
+        if month and not _withdrawn(st[chain], month):
+            out[f"{chain}_month"] = month
     # a chain's program line-up (`stages.program`: chain, program, month,
     # date, exclusive): its day, else its month
     prog = st.get("program", {})
@@ -273,19 +336,19 @@ def sources(rec: dict, row: dict | None = None) -> dict:
     return out
 
 
-def confirmed(rec: dict, srcs: dict | None = None) -> tuple[str, str, str] | None:
-    """(date, precision, basis) of the current cycle's opening per the sources."""
+def confirmed(rec: dict, srcs: dict | None = None,
+              start: str | None = None) -> tuple[str, str, str] | None:
+    """(date, precision, basis) of the current cycle's opening per the sources
+    (`start`: of the cycle starting that day instead, "" for every date)."""
     srcs = sources(rec) if srcs is None else srcs
-    start = cycle_start(rec) or last_run_start(srcs)
+    start = current_start(rec, srcs) if start is None else start
 
     def ok(d: str) -> bool:  # a month counts while its last day is in the cycle
         if len(d) == 7:
             return not start or _month_end(_d(d + "-01")).isoformat() >= start
         return not start or d >= start
 
-    kobis = sorted(d for d in [srcs.get("kobis", ""), srcs.get("kobis_api", ""),
-                               *srcs.get("kobis_rereleases", []), srcs.get("release_lags", "")]
-                   if d and ok(d))
+    kobis = sorted(d for d in _kobis_days(srcs) if ok(d))
     if kobis:
         return kobis[0], "day", "kobis"
     for key, basis in (("booking_rerelease", "booking"), ("booking", "booking"),
@@ -351,17 +414,92 @@ def _promo_before(promo_first: str, rating_date: str) -> int:
     return int((_d(rating_date) - _d(promo_first)).days <= PROMO_LOOKBACK_DAYS)
 
 
-def row_features(row: dict) -> tuple:
-    """FEATURES of a release_lags.json row (values known at its rating)."""
+def _title_key(title: str) -> str:
+    return norm_key(split_format(title or "")[0])
+
+
+class RatingCounts:
+    """KMRB ratings (release_lags rows) by applicant and by base title, for
+    the count features known on a rating day: app_volume (the applicant's
+    ratings in the PROMO_LOOKBACK_DAYS before the day), app_batch (its other
+    ratings that day), versions (other ratings of the same base title in the
+    PROMO_LOOKBACK_DAYS up to and including the day). Masked or empty
+    applicants count 0."""
+
+    def __init__(self, rows: list[dict]):
+        from .theatrical import applicant_key
+        self._app_key = applicant_key
+        self.app: dict = {}
+        self.title: dict = {}
+        for r in rows:
+            rd = _valid_day(r.get("rating_date"))
+            if not rd:
+                continue
+            if k := applicant_key(r.get("applicant", "")):
+                self.app.setdefault(k, []).append(rd)
+            if t := _title_key(r.get("title", "")):
+                self.title.setdefault(t, []).append(rd)
+        for d in (self.app, self.title):
+            for v in d.values():
+                v.sort()
+
+    def counts(self, applicant: str, title: str, day: str, own: bool) -> dict:
+        """Counts for a rating of `applicant` / `title` on `day`; `own`: the
+        rating itself is one of the rows (left out of its counts)."""
+        from bisect import bisect_left, bisect_right
+        lo = (_d(day) - dt.timedelta(days=PROMO_LOOKBACK_DAYS)).isoformat()
+        a = self.app.get(self._app_key(applicant), []) if applicant else []
+        t = self.title.get(_title_key(title), []) if title else []
+        first, same = bisect_left(a, lo), bisect_left(a, day)
+        return {"app_volume": same - first,
+                "app_batch": max(0, bisect_right(a, day) - same - own) if a else 0,
+                "versions": max(0, bisect_right(t, day) - bisect_left(t, lo) - own) if t else 0}
+
+
+def _tag_features(title: str, original_title: str, applicant: str) -> dict:
+    from .tags import tag_film
+    tags = tag_film(title, original_title, applicant)
+    return {"anime": int("anime" in tags), "concert": int("concert" in tags)}
+
+
+def _promo_n(dates: list[str], day: str) -> int:
+    """Distinct trailer / poster rating days in the PROMO_LOOKBACK_DAYS up to
+    and including `day` (the collector keeps a record's filing days)."""
+    lo = (_d(day) - dt.timedelta(days=PROMO_LOOKBACK_DAYS)).isoformat()
+    return sum(lo <= d <= day for d in dates)
+
+
+def row_features(row: dict, counts: "RatingCounts | None" = None) -> tuple:
+    """FEATURES of a release_lags.json row (values known at its rating);
+    `counts`: the RatingCounts of all rows (count features 0 without)."""
     rd = _valid_day(row.get("rating_date"))
+    c = counts.counts(row.get("applicant", ""), row.get("title", ""), rd, True) \
+        if counts and rd else {}
     v = {"short": _short(row.get("runtime")),
          "format": int(bool(row.get("format"))),
          "promo": _promo_before(_valid_day(row.get("promo_first")), rd),
          "restricted": int(row.get("grade", "") in RESTRICTED),
          "foreign": int(row.get("kind") == "국외영화"),
          "rerelease": int(bool(row.get("rerelease"))),
-         "rule_adult": int(row.get("adult_check") == "rule")}
+         "rule_adult": int(row.get("adult_check") == "rule"),
+         "promo_n": math.log1p(int(row.get("promo_n") or 0)),
+         **{k: math.log1p(c.get(k, 0)) for k in ("app_volume", "app_batch", "versions")},
+         **_tag_features(row.get("title", ""), row.get("original_title", ""),
+                         row.get("applicant", ""))}
     return tuple(v[f] for f in FEATURES)
+
+
+# FEATURES read from a release_lags row field that rows built before the
+# field existed lack: a candidate only once every row has it (the next
+# scripts/build_lags.py run writes it), else old rows would count as 0
+ROW_FIELD_FEATURES = {"promo_n": "promo_n"}
+
+
+def available_features(lags: dict) -> tuple:
+    """FEATURES the backtest may try on these rows (ROW_FIELD_FEATURES)."""
+    rows = lags.get("rows", [])
+    return tuple(f for f in FEATURES
+                 if f not in ROW_FIELD_FEATURES or all(ROW_FIELD_FEATURES[f] in r for r in rows))
 
 
 def promo_dates(rec: dict) -> list[str]:
@@ -371,13 +509,23 @@ def promo_dates(rec: dict) -> list[str]:
     return sorted(ds)
 
 
-def rec_features(rec: dict, anchor_kind: str = "rating") -> tuple:
+def rec_features(rec: dict, anchor_kind: str = "rating", counts: "RatingCounts | None" = None,
+                 row: dict | None = None, today: dt.date | None = None) -> tuple:
     """FEATURES of a current record as they stand at its rating (for a film
-    not rated yet: a trailer / poster filed now precedes its rating)."""
+    not rated yet: a trailer / poster filed now precedes its rating, and the
+    count features are those of a rating `today`). `counts`: RatingCounts of
+    the release_lags rows (count features 0 without); `row`: the record's
+    own row (rating_row), whose title, original title and applicant the
+    training rows use."""
     st = rec["stages"]
     rating = st.get("rating", {})
     rd = _valid_day(rating.get("date"))
     pd = promo_dates(rec)
+    src = row or {"title": rec.get("title", ""), "original_title": rec.get("original_title", ""),
+                  "applicant": rec.get("applicant", "")}
+    day = rd or (today.isoformat() if today else "")
+    c = counts.counts(src.get("applicant", ""), src.get("title", ""), day, bool(rd and row)) \
+        if counts and day else {}
     # an ORS filing anchor is a trailer / poster filed before the rating
     promo = (_promo_before(pd[0], rd) if pd and rd
              else int((bool(pd) or anchor_kind == "ors_ad") and anchor_kind != "rating"))
@@ -387,7 +535,13 @@ def rec_features(rec: dict, anchor_kind: str = "rating") -> tuple:
          "format": int(bool(split_format(rec.get("title", ""))[1])),
          "promo": promo, "restricted": int(rating.get("grade", "") in RESTRICTED),
          "foreign": int(foreign), "rerelease": int("rerelease" in rec.get("tags", [])),
-         "rule_adult": 0}
+         # the row's count (the KMRB export by title) when the collector,
+         # which keeps filings since its first run, saw fewer
+         "rule_adult": 0, "promo_n": math.log1p(max(int((row or {}).get("promo_n") or 0),
+                                                    _promo_n(pd, day) if day else 0)),
+         **{k: math.log1p(c.get(k, 0)) for k in ("app_volume", "app_batch", "versions")},
+         **_tag_features(src.get("title", ""), src.get("original_title", ""),
+                         src.get("applicant", ""))}
     return tuple(v[f] for f in FEATURES)
 
 
@@ -421,10 +575,17 @@ def _milestone_dates(rec: dict, today_s: str) -> dict:
     return out
 
 
-def accumulate(lags: dict, films: list[dict], today: dt.date) -> dict:
+def accumulate(lags: dict, films: list[dict], today: dt.date, openings_checked: bool = True) -> dict:
     """Add a row for every current rated record and fill openings (KOBIS
     opening days only) and milestone dates of rows that had none (in place).
-    Rows are never dropped."""
+    Rows are never dropped. A KOBIS opening of the rating's cycle in the
+    record's own stages replaces a different one the row recorded (KOBIS
+    corrected it; the old values are kept in `open_dt_was`), also when the
+    corrected day is still ahead (the row has no opening then). Rating-day
+    features (`rerelease`, `format`) are those of the row's first run.
+    `followed_to`: the last day the row's opening was observed, today for the
+    current records when `openings_checked` (the run's KOBIS checks
+    succeeded), else left where it was (a new row: its rating day)."""
     rows = lags.setdefault("rows", [])
     by_no = {r.get("rating_no"): r for r in rows if r.get("rating_no")}
     today_s = today.isoformat()
@@ -444,7 +605,8 @@ def accumulate(lags: dict, films: list[dict], today: dt.date) -> dict:
         no, rdate = rating.get("rating_no", ""), _valid_day(rating.get("date"))
         if not no or not rdate:
             continue
-        conf = confirmed(rec)
+        # the opening of this rating's cycle (not a later re-release's)
+        conf = confirmed(rec, start=cycle_start(rec))
         # an opening is recorded only when KOBIS has it: a passed chain,
         # program, presale or schedule date is a listing, not an observed
         # opening (Megabox lists event screenings KOBIS does not record)
@@ -453,7 +615,8 @@ def accumulate(lags: dict, films: list[dict], today: dt.date) -> dict:
         pd = [d for d in promo_dates(rec) if d <= (open_dt or today_s)]
         row = {"rating_no": no, "rating_date": rdate,
                "receipt_date": _valid_day(st.get("intake", {}).get("date")),
-               "title": rec.get("title", ""), "applicant": rec.get("applicant", ""),
+               "title": rec.get("title", ""), "original_title": rec.get("original_title", ""),
+               "applicant": rec.get("applicant", ""),
                "distributor": distributor(rec), "kind": rating.get("kind", ""),
                "kobis_cd": st.get("kobis", {}).get("movie_cd", "")
                or st.get("release_history", {}).get("kobis_cd", ""),
@@ -462,6 +625,7 @@ def accumulate(lags: dict, films: list[dict], today: dt.date) -> dict:
                "format": split_format(rec.get("title", ""))[1],
                "promo_first": next((d for d in pd if _promo_before(d, rdate) or d >= rdate), ""),
                "promo_after": next((d for d in pd if d >= rdate), ""),
+               "promo_n": _promo_n(pd, rdate),
                # the first planned opening (a later day, or a month) a source
                # gave and the day it was seen: slips can be measured later
                "planned_first": conf[0] if conf and not open_dt and conf[0] >= today_s[:len(conf[0])]
@@ -471,12 +635,22 @@ def accumulate(lags: dict, films: list[dict], today: dt.date) -> dict:
                **_milestone_dates(rec, today_s)}
         old = by_no.get(no)
         if old is None:
+            row["followed_to"] = today_s if openings_checked else rdate
             rows.append(row)
             by_no[no] = row
             added += 1
             opened += bool(open_dt)
             continue
-        if not old.get("open_dt") and open_dt:
+        if openings_checked:
+            old["followed_to"] = today_s
+        # KOBIS's own answer for this rating's cycle: an opening day (passed
+        # or not) of the film the row is tied to
+        kobis_day = conf[0] if conf and conf[2] == "kobis" and conf[0] >= rdate else ""
+        same_film = not old.get("kobis_cd") or not row["kobis_cd"] or old["kobis_cd"] == row["kobis_cd"]
+        if kobis_day and same_film and old.get("open_dt") and old["open_dt"] != open_dt:
+            old.setdefault("open_dt_was", []).append(old["open_dt"])
+            old["open_dt"] = open_dt
+        elif not old.get("open_dt") and open_dt:
             old["open_dt"] = open_dt
             opened += 1
         for k in ("receipt_date", "distributor", "kobis_cd", "grade", "runtime", "promo_first",
@@ -485,8 +659,6 @@ def accumulate(lags: dict, films: list[dict], today: dt.date) -> dict:
                 old[k] = row[k]
         if not old.get("planned_first") and row["planned_first"]:
             old["planned_first"], old["planned_seen"] = row["planned_first"], row["planned_seen"]
-        if row["rerelease"]:
-            old["rerelease"] = True
     rows.sort(key=lambda r: (r.get("rating_date", ""), r.get("rating_no", "")))
     dates = [r["rating_date"] for r in rows if _valid_day(r.get("rating_date"))]
     cov = lags.setdefault("coverage", {})
@@ -529,9 +701,11 @@ class Obs:
 
 def observations(lags: dict, tracked: set[str], today: dt.date,
                  scheduled: dict | None = None, target: str = "real") -> list[Obs]:
-    """Rows as observations. Rows of records still collected are followed up
-    to today; others only to the date the file's openings were last checked
-    in full (`generated`). `target` "any": every opening counts; "real": an
+    """Rows as observations. A row is followed up to the last day its
+    opening was observed: its `followed_to` (accumulate), else today for a
+    record still collected (`tracked`), and at least to the date the file's
+    openings were last checked in full (`generated`) and to an observed
+    opening (never censored before it). `target` "any": every opening counts; "real": an
     opening counts when `real_open` is true, a token release (`real_open`
     false) counts as none and an opening not labelled yet censors the row
     the day before it. `scheduled`: rating_no -> a later day a source has
@@ -539,6 +713,7 @@ def observations(lags: dict, tracked: set[str], today: dt.date,
     (row_segments)."""
     scheduled = scheduled or {}
     segs = row_segments(lags.get("rows", []))
+    counts = RatingCounts(lags.get("rows", []))
     checked = _valid_day(lags.get("generated")) or today.isoformat()
     checked_o, today_o = _d(checked).toordinal(), today.toordinal()
     ms_from = lags.get("milestones_from", {})
@@ -548,7 +723,11 @@ def observations(lags: dict, tracked: set[str], today: dt.date,
         if not rd:
             continue
         r = _d(rd).toordinal()
-        end = today_o if row.get("rating_no") in tracked else max(checked_o, r)
+        fol = _valid_day(row.get("followed_to"))
+        if fol:
+            end = max(checked_o, _d(fol).toordinal(), r)
+        else:
+            end = today_o if row.get("rating_no") in tracked else max(checked_o, r)
         od = _valid_day(row.get("open_dt"))
         t, token = None, False
         if od:
@@ -556,20 +735,21 @@ def observations(lags: dict, tracked: set[str], today: dt.date,
             if lag < 0:
                 continue
             real = row.get("real_open")
+            end = max(end, r + lag)  # the opening was seen on its day
             if target == "any" or real is True:
                 t = lag
                 token = real is False
             elif real is False:
                 token = True
             else:
-                end = min(end, r + max(lag - 1, 0))
+                end = r + max(lag - 1, 0)
         ms = {}
         for kind, field in MILESTONES.items():
             md = _valid_day(row.get(field))
             if md and md > rd and (kind == "promo" or md > ms_from.get(field, "")):
                 ms[kind] = _d(md).toordinal() - r
         sd = _valid_day(scheduled.get(row.get("rating_no"), "")) if t is None else ""
-        out.append(Obs(r, t, end, group_key("", row.get("applicant", "")), row_features(row),
+        out.append(Obs(r, t, end, group_key("", row.get("applicant", "")), row_features(row, counts),
                        _d(sd).toordinal() - r if sd and sd >= rd else None, ms, token,
                        group_key(row.get("distributor", ""), row.get("applicant", "")),
                        _row_film(row), segs.get(row.get("rating_no"), "")))
@@ -599,7 +779,8 @@ def row_segments(rows: list[dict]) -> dict[str, str]:
     """{rating_no: segment} for rows outside the theatrical candidates, each
     decided with what was known on its rating day: `short`; `format_of_open`
     (a screening-format rating of a film that had opened before it:
-    match "format", first opening before the rating, no opening of its own);
+    match "format", first opening before the rating; whether the row opens
+    later is its outcome, so it does not decide the segment);
     `vod_applicant` (theatrical.unlikely over the applicant's ratings at least
     HISTORY_MIN_AGE_DAYS older than this one, counting the openings on or
     before this rating's date)."""
@@ -615,7 +796,7 @@ def row_segments(rows: list[dict]) -> dict[str, str]:
         first = _valid_day(r.get("first_open_dt"))
         if _seg_short(r.get("category", ""), r.get("runtime")):
             out[no] = "short"
-        elif r.get("match") == "format" and not _valid_day(r.get("open_dt")) and first and first < rd:
+        elif r.get("match") == "format" and first and first < rd:
             out[no] = "format_of_open"
         if k := applicant_key(r.get("applicant", "")):
             by_app.setdefault(k, []).append((rd, _valid_day(r.get("open_dt")), no))
@@ -997,11 +1178,12 @@ def _warm_start(f: Fit, init: Fit, gs: list) -> None:
 def _m_step_pi(f: Fit, rows: list) -> None:
     """Logit coefficients of the film features (Newton steps with the
     company effects as offsets), then the company effects."""
-    agg: dict = {}  # (g, xs) -> [sum w, sum w q]
+    agg: dict = {}  # (g, xs) -> [sum w, sum w q, sum w^2]
     for w, q, _, _, g, xs in rows:
-        e = agg.setdefault((g, xs), [0.0, 0.0])
+        e = agg.setdefault((g, xs), [0.0, 0.0, 0.0])
         e[0] += w
         e[1] += w * q
+        e[2] += w * w
     # Newton steps on (c, gamma) with a common intercept c added to every
     # company effect: the level and the slopes move together (alternating
     # them converges slowly when a feature is common: measured 2026-11-01 on
@@ -1011,7 +1193,7 @@ def _m_step_pi(f: Fit, rows: list) -> None:
         # score and information summed per feature cell first
         cell: dict = {}
         cl = {}
-        for (g, xs), (sw, swq) in agg.items():
+        for (g, xs), (sw, swq, _) in agg.items():
             if xs not in cl:
                 cl[xs] = _dot(f.gamma, xs)
                 cell[xs] = [0.0, 0.0]
@@ -1047,27 +1229,42 @@ def _m_step_pi(f: Fit, rows: list) -> None:
         return  # the one company's effect is the common intercept, set above
     score: dict = {}
     cl = {xs: _dot(f.gamma, xs) for _, xs in agg}
-    for (g, xs), (sw, swq) in agg.items():
+    for (g, xs), (sw, swq, sw2) in agg.items():
         pr = _sigmoid(cl[xs] + f.a[g])
-        e = score.setdefault(g, [0.0, 0.0])
+        e = score.setdefault(g, [0.0, 0.0, 0.0])
         e[0] += swq - sw * pr
         e[1] += sw * pr * (1 - pr)
-    # one Newton step per company: its own estimate theta and variance v
+        e[2] += sw2 * pr * (1 - pr)
+    # one Newton step per company: its own estimate theta and its sampling
+    # variance v for the between-company variance tau^2. With recency weights
+    # theta is a weighted estimate, whose variance is sum w^2 p(1-p) /
+    # (sum w p(1-p))^2 (1 / sum p(1-p) unweighted). 1 / sum w p(1-p) (the
+    # weights as fractional rows) overstated v and tau^2 collapsed: measured
+    # 2026-11-03 on data/release_lags.json (candidate rows, fit on 2026-11-03,
+    # features format / promo / restricted), tau^2 of the logit 0.036 with a
+    # 365-day half-life (0.0 for the real-opening target) against 1.26
+    # unweighted, while the 109 companies with 10+ ratings rated before
+    # 2025-06 have opening shares overdispersed by chi^2 1,211 on 108 df
+    # (moment estimate of tau^2 on the logit scale 2.2); with this v 1.11
+    # (real opening 1.50). The shrinkage below keeps the fractional rows.
     est = {g: (max(-_LOGIT_MAX, min(_LOGIT_MAX, f.a[g] + s / i)) if i > 0 else f.a[g],
-               1 / i if i > 0 else math.inf) for g, (s, i) in score.items()}
+               i2 / (i * i) if i > 0 else math.inf) for g, (s, i, i2) in score.items()}
     if not f.groups:
         f.a = {g: th for g, (th, _) in est.items()}
         return
     f.delta, f.tau2_a = meta_regression([(f.z[g], th, v) for g, (th, v) in est.items()
                                          if math.isfinite(v)], f.tau2_a, f.active, _META_STEPS)
-    f.a, f.wa = _posterior(f, est, f.delta, f.tau2_a)
+    # the company's own estimate is shrunk by its recency-discounted evidence
+    # (a row of weight w counts as w rows: v = 1 / sum w p(1-p))
+    own = {g: (th, 1 / score[g][1] if score[g][1] > 0 else math.inf) for g, (th, _) in est.items()}
+    f.a, f.wa = _posterior(f, own, f.delta, f.tau2_a)
 
 
 def _pi_objective(f: Fit, agg: dict) -> float:
     """Expected complete-data log likelihood of the P(opens) part."""
     tot = 0.0
     cl: dict = {}
-    for (g, xs), (sw, swq) in agg.items():
+    for (g, xs), (sw, swq, _) in agg.items():
         if xs not in cl:
             cl[xs] = _dot(f.gamma, xs)
         x = max(-_LOGIT_MAX, min(_LOGIT_MAX, cl[xs] + f.a[g]))
@@ -1585,7 +1782,7 @@ def metrics(pred, test: list[Obs], horizon: int, elapsed=None, signal=None) -> d
                      ("week", _iso_week(p50_day) == _iso_week(open_day)),
                      ("month", (p50_day.year, p50_day.month) == (open_day.year, open_day.month))):
             hits[k].append((float(v), w))
-            hits_all[k].append((float(v and o.t < horizon), w))
+            hits_all[k].append((float(v and o.t < e + horizon), w))
         width.append((qs[90] - qs[10], w))
         cover80.append((float(qs[10] <= o.t <= qs[90]), w))
         wkday.append((float((o.r + qs[50]) % 7 == (o.r + o.t) % 7), w))
@@ -1676,6 +1873,13 @@ def milestone_pairs(obs: list[Obs], kind: str) -> list[tuple[Obs, int, Obs]]:
     return out
 
 
+def _censor(o: Obs, day: int) -> Obs:
+    """The row as known on `day` (ordinal): its follow-up ends there."""
+    if o.end <= day:
+        return o
+    return Obs(o.r, o.t, day, o.g, o.x, o.sched, o.ms, o.token, o.gd, o.film, o.seg)
+
+
 def _mean(s: list[float]) -> float:
     return round(sum(s) / len(s), 4)
 
@@ -1695,20 +1899,20 @@ def fit_settings(bt: dict) -> dict:
             "censored_groups": bt.get("company_location_from", "") != "opened rows"}
 
 
-def backtest(obs: list[Obs]) -> dict:
+def backtest(obs: list[Obs], candidates: tuple = FEATURES) -> dict:
     """Nested time split over matured rows (followed up for maturity_days):
     the latest TEST_SHARE is the untouched test fold; the TEST_SHARE before
     it is the tuning fold; a film's rows share the fold of its first rating.
     Half-life, features, company-effect variant, calendar and milestones are
     chosen by fits on what was known on the first tuning day, scored on the
-    tuning fold. The chosen model is refitted every REFIT_DAYS from the
+    tuning fold with its outcomes censored at the first test day. The chosen model is refitted every REFIT_DAYS from the
     first test day, each time on what was known then, and reported on the
     test fold only (each row predicted by the latest refit on or before its
     rating day)."""
-    return _backtest(obs)[0]
+    return _backtest(obs, candidates)[0]
 
 
-def _backtest(obs: list[Obs]) -> tuple[dict, dict | None]:
+def _backtest(obs: list[Obs], candidates: tuple = FEATURES) -> tuple[dict, dict | None]:
     horizon = maturity_days(obs)
     if horizon is None:
         return {"n_test": 0, "reason": "too few openings to set the maturity horizon"}, None
@@ -1720,7 +1924,11 @@ def _backtest(obs: list[Obs]) -> tuple[dict, dict | None]:
     cut1 = eligible[int(n * (1 - 2 * TEST_SHARE))].r
     cut2 = eligible[int(n * (1 - TEST_SHARE))].r
     first = _first_day(obs)
-    tune = [o for o in eligible if cut1 <= o.r < cut2 and first[o.film] >= cut1]
+    # the tuning fold as known on the test fold's first day: every choice it
+    # makes is used for predictions from cut2 on, so no outcome after cut2
+    # (scored by the censored log likelihood, so a row followed up only
+    # briefly by then still counts for what was known)
+    tune = [_censor(o, cut2) for o in eligible if cut1 <= o.r < cut2 and first[o.film] >= cut1]
     test = [o for o in eligible if o.r >= cut2 and first[o.film] >= cut2]
     h_order = [None] + sorted((h for h in H_GRID if h), reverse=True)  # simplest first
     fits_h = [fit(obs, cut1, h_order[0])]
@@ -1743,7 +1951,7 @@ def _backtest(obs: list[Obs]) -> tuple[dict, dict | None]:
     cfg = {"half_life": h_order[hi], "feats": (), "censored_groups": True}
     cur_fit, cur_ll = fits_h[hi], scores[hi]
     gain = {}
-    for feat in FEATURES:
+    for feat in (f for f in FEATURES if f in candidates):
         c = {**cfg, "feats": cfg["feats"] + (feat,)}
         cf = fit(obs, cut1, **c)
         c_ll = ll(cf)
@@ -1860,7 +2068,8 @@ def _milestone_choice(obs, kind, cut1, cut2, horizon, cfg, rating_fit, shares) -
     """On the tuning fold: does the model anchored on the milestone beat the
     rating model given no opening by the milestone day?"""
     pairs = milestone_pairs(obs, kind)
-    tune = _milestone_tests(pairs, cut1, cut2, horizon)
+    tune = [(_censor(o, cut2), k, _censor(d, cut2))
+            for o, k, d in _milestone_tests(pairs, cut1, cut2, horizon)]
     mfit = fit([d for _, _, d in pairs], cut1, **cfg) if len(tune) >= 2 else None
     if mfit is None:
         return {"used": False, "n_tune": len(tune)}
@@ -1973,7 +2182,7 @@ def segment_rates(obs: list[Obs], ref: int, horizon: int | None) -> dict:
             for s, (n, k) in sorted(acc.items())}
 
 
-def evaluate(obs: list[Obs]) -> dict:
+def evaluate(obs: list[Obs], candidates: tuple = FEATURES) -> dict:
     """Backtest of the theatrical model on the rows outside every segment,
     plus the whole population on the same untouched test fold: segment rows
     predicted by their segment's share, the rest by the model, both as known
@@ -1981,7 +2190,7 @@ def evaluate(obs: list[Obs]) -> dict:
     maturity horizon))."""
     from bisect import bisect_right
     cand = [o for o in obs if not o.seg]
-    bt, ctx = _backtest(cand)
+    bt, ctx = _backtest(cand, candidates)
     if ctx is None:
         return bt
     horizon, cut2 = ctx["horizon"], ctx["cut2"]
@@ -2070,10 +2279,8 @@ def _tier(n: float, hits: dict) -> tuple[str, dict]:
 def _kobis_open(rec: dict, srcs: dict, today_s: str, planned: str) -> str:
     """The KOBIS opening (first or re-release) of the current cycle on or
     before today nearest to a planned day or month, else ""."""
-    start = cycle_start(rec)
-    ds = [d for d in [srcs.get("kobis", ""), srcs.get("kobis_api", ""), *srcs.get("kobis_rereleases", []),
-                      srcs.get("release_lags", "")]
-          if d and d <= today_s and (not start or d >= start)]
+    start = current_start(rec, srcs) if cycle_start(rec) else ""
+    ds = [d for d in _kobis_days(srcs) if d <= today_s and (not start or d >= start)]
     if not ds:
         return ""
     ref = _d(planned if len(planned) == 10 else planned + "-01")
@@ -2153,7 +2360,7 @@ def commitment_counts(films: list[dict], lags: dict, today: dt.date) -> dict:
         if "dormant" in rec.get("tags", []):
             continue
         srcs = sources(rec, rating_row(rec, rows))
-        start = cycle_start(rec)
+        start = current_start(rec, srcs) if cycle_start(rec) else ""
         film = _rec_film(rec)
         for key, state in _SNAPSHOT_DAY.items():
             d = srcs.get(key, "")
@@ -2363,13 +2570,15 @@ def _fit_target(obs: list[Obs], bt: dict, ref: int, milestones: bool):
     return model, ms_meta
 
 
-def apply(films: list[dict], lags: dict, today: dt.date) -> dict:
+def apply(films: list[dict], lags: dict, today: dt.date, openings_checked: bool = True) -> dict:
     """Set `release` on every record and add the current records to `lags`
     (the content of data/release_lags.json), both in place; returns the
     model's meta entry. Two outcomes: any theatrical opening (`p_open`, the
-    dates) and a real one (`p_open_real`, token releases counted as none)."""
+    dates) and a real one (`p_open_real`, token releases counted as none).
+    `openings_checked` False (the run's KOBIS checks failed): the rows'
+    follow-up stays where it was (accumulate)."""
     from .theatrical import applicant_history
-    acc = accumulate(lags, films, today)
+    acc = accumulate(lags, films, today, openings_checked)
     tracked = {f["stages"]["rating"]["rating_no"] for f in films
                if f["stages"].get("rating", {}).get("rating_no")}
     rows = {r.get("rating_no"): r for r in lags.get("rows", []) if r.get("rating_no")}
@@ -2380,7 +2589,8 @@ def apply(films: list[dict], lags: dict, today: dt.date) -> dict:
         if no and conf and conf[1] == "day" and conf[0] > today.isoformat():
             scheduled[no] = conf[0]
     obs = {t: observations(lags, tracked, today, scheduled, t) for t in ("any", "real")}
-    bts = {t: evaluate(obs[t]) for t in ("any", "real")}
+    cands = available_features(lags)
+    bts = {t: evaluate(obs[t], cands) for t in ("any", "real")}
     bt = bts["any"]
     ref = today.toordinal() + 1
     cand = {t: [o for o in obs[t] if not o.seg] for t in obs}
@@ -2400,6 +2610,7 @@ def apply(films: list[dict], lags: dict, today: dt.date) -> dict:
     tiers = tier_table(bt, rates, lags)
     seg_rates = {t: segment_rates(obs[t], ref, bts[t].get("maturity_days")) for t in obs}
     ctx = {"real": model_real, "rates": rates, "tiers": tiers, "seg_rates": seg_rates,
+           "counts": RatingCounts(lags.get("rows", [])),
            "history": applicant_history(lags, today), "rows": rows}
 
     counts: dict = {}
@@ -2519,15 +2730,17 @@ def _p_given(m: float, s: float, pi: float, elapsed: int) -> float:
     return pi * (1 - f_e) / (1 - pi * f_e)
 
 
-def real_ratio(rec: dict, model: Fit | None, real: Fit | None, today: dt.date) -> float | None:
+def real_ratio(rec: dict, model: Fit | None, real: Fit | None, today: dt.date,
+               x: tuple | None = None) -> float | None:
     """P(real opening) / P(any opening) of the two rating-anchored applicant
     models for this film (None without both): the share of its theatrical
     chance that is a real release, given no opening since the rating (a film
-    not rated yet: as on its rating day)."""
+    not rated yet: as on its rating day). `x`: its rating-anchored
+    rec_features (default: without the count features)."""
     rd = _valid_day(rec["stages"].get("rating", {}).get("date"))
     if not model or not real:
         return None
-    x = rec_features(rec)
+    x = rec_features(rec) if x is None else x
     g = group_key("", rec.get("applicant", ""))
     el = max(0, (today - _d(rd)).days) if rd else 0
     m1, s1, p1, _ = model.dist(g, x)
@@ -2550,7 +2763,9 @@ def estimate(rec: dict, today: dt.date, model: Fit | None, delays: dict,
     conf = confirmed(rec, srcs)
     rates, tiers = ctx.get("rates", {}), ctx.get("tiers", {})
     seg = rec_segment(rec, row, ctx.get("history", {}))
-    ratio = real_ratio(rec, model, ctx.get("real"), today)
+    counts = ctx.get("counts")
+    ratio = real_ratio(rec, model, ctx.get("real"), today,
+                       rec_features(rec, "rating", counts, row, today))
 
     def finish(out: dict, state: str, p, p_real, date: str, quantiles=None) -> dict:
         # a segment is a rating-day judgment: once a source dates the film
@@ -2589,7 +2804,7 @@ def estimate(rec: dict, today: dt.date, model: Fit | None, delays: dict,
         kind, adate = anc
         el = max(0, (today - _d(adate)).days)
         rr = "rerelease" in rec.get("tags", [])
-        x = rec_features(rec, kind)
+        x = rec_features(rec, kind, counts, row, today)
         # applicant companies also once KOBIS names a distributor: the
         # distributor-grouped model is only backtested as if known at the
         # rating (optimistic), so it is a diagnostic, not a live model

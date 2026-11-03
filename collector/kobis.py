@@ -262,7 +262,7 @@ def fetch(kc: KobisClient, cache: dict, today: dt.date, trusted: set[str],
     adult = sum(1 for r in rows if ADULT_GENRE in (r.get("genreAlt") or ""))
     kept = {r["movieCd"]: r for r in rows if r.get("movieCd") and keep_row(r, today)}
     today_s = today.isoformat()           # KST date: drives the refresh rule (fetched_at)
-    stamp = stamp or today_s              # UTC run date: first_seen / last_seen
+    stamp = stamp or today_s              # run date (KST, run.py): first_seen / last_seen
     for cd, r in kept.items():  # list fields are fresh every run; no info call needed
         if cd in cache:
             cache[cd].update(openDt=r.get("openDt", ""), prdtStatNm=r.get("prdtStatNm", ""),

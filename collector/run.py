@@ -74,8 +74,13 @@ class AllSourcesFailed(RuntimeError):
 def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = None) -> dict:
     """Fetch, merge and write. Raises AllSourcesFailed (writing nothing) if every
     attempted source failed."""
-    today_utc = now.astimezone(dt.timezone.utc).date().isoformat()
     today_kst = now.astimezone(KST).date()
+    # calendar-day stamps (first_seen, last_seen, runs, bookable_from, cache "checked"
+    # days) are the Korean day: the runs at 15:00-24:00 UTC (collect.yml, every 2 hours)
+    # fall on the next KST day. Days stored before 2026-11-03 are UTC days, never later
+    # than the KST day of a later run, so the switch only extends periods. Run times
+    # (last_run_utc, last_ok_utc, signals) stay UTC.
+    today = today_kst.isoformat()
     key = kobis.get_key() if kobis_key is None else kobis_key
 
     def timed(name: str, fn, key: str = ""):
@@ -91,6 +96,9 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     prev_meta = load_json(data_dir / "meta.json", {})
     prev_sources = prev_meta.get("sources", {})
     run_utc = now.astimezone(dt.timezone.utc).replace(microsecond=0).isoformat()
+    # the run time with the KST offset: first_seen.ors_ad, whose first 10 characters
+    # are read as the day (ors_ad.apply, site.day)
+    run_kst = now.astimezone(KST).replace(microsecond=0).isoformat()
 
     intake, s_ors = timed("ors_intake", lambda: ors.fetch_intake(client))
     # trailer / advertising filings in progress (join records, or create them: ors_ad.py)
@@ -140,7 +148,7 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     if not intake:  # keep the applicants of the last good intake list
         names += list(comp_cache)
     cres, s_companies = timed("kobis_companies", lambda: companies.check(
-        client, names, known, comp_new, today_utc))
+        client, names, known, comp_new, today))
     if cres:
         comp_cache = comp_new
     company_trusted = companies.trusted_names(comp_cache)
@@ -187,7 +195,7 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
         kc = kobis.KobisClient(client, key, cap=kobis.CALL_CAP)
         kres, s_kobis = timed(
             "kobis", lambda: kobis.fetch(kc, cache, today_kst, trusted, withheld_audits,
-                                         stamp=today_utc, extra_codes=lotte_codes,
+                                         stamp=today, extra_codes=lotte_codes,
                                          undated_codes=undated, blocked=blocked), key)
         s_kobis["calls"] = kc.calls
         s_kobis["call_cap"] = kc.cap
@@ -213,7 +221,7 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     promo_backfill = promo_doc.get("backfill") or None
     promo_days = promo.WINDOW_DAYS if promo_backfill else promo.BACKFILL_DAYS
     pres, s_promo = timed("kmrb_promo", lambda: promo.fetch(client, promo_cache, today_kst,
-                                                                 trusted, today_utc, promo_days))
+                                                                 trusted, today, promo_days))
     if pres and not promo_backfill:
         promo_backfill = {"date": today_kst.isoformat(), "days": promo_days}
 
@@ -232,7 +240,9 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     else:
         cgv_res, s_cgv = None, {"status": "skipped", "reason": "no upload"}
 
-    attempted = [s for s in (s_ors, s_kmrb, s_promo, s_kobis, s_megabox, s_lotte)
+    # every source whose result is applied on its own: ORS filings create records, a
+    # fresh CGV upload updates the CGV stages (a stale one is "stale", not ok)
+    attempted = [s for s in (s_ors, s_ors_ad, s_kmrb, s_promo, s_kobis, s_megabox, s_lotte, s_cgv)
                  if s["status"] != "skipped"]
     if all(s["status"] != "ok" for s in attempted):
         raise AllSourcesFailed("; ".join(f'{s["status"]}: {s.get("reason", "")}' for s in attempted))
@@ -240,24 +250,24 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     films_path = data_dir / "films.json"
     existing = load_films(films_path)
     films, stats = merge(existing, intake_rows, general, adult,
-                         today_utc, trusted)
+                         today, trusted)
     kstats = {}
     if kres:
         films, kstats = apply_kobis(films, cache, kres["kept_ids"], trusted, withheld_audits,
-                                    today_utc, allow_new=ratings is not None, blocked=blocked)
+                                    today, allow_new=ratings is not None, blocked=blocked)
     pstats = {}
     if pres:  # before Megabox, so a Megabox listing can join a promo-only record
         new_since = (today_kst - dt.timedelta(days=promo.WINDOW_DAYS)).isoformat()
-        films, pstats = promo.apply_promo(films, pres["groups"], promo_cache, today_utc, new_since)
+        films, pstats = promo.apply_promo(films, pres["groups"], promo_cache, today, new_since)
     # records created from ORS filings join the film's record once it exists
     # (every run, before the chains: a listing then joins the film's record)
     films, settle_stats = ors_ad.settle(films, ad_withheld)
     mstats = {}
     if mres:
-        films, mstats = apply_megabox(films, mres["rows"], today_utc)
+        films, mstats = apply_megabox(films, mres["rows"], today)
     ltstats = {}
     if lres_list:  # after Megabox: a Lotte row joins a Megabox-only record by title
-        films, ltstats = apply_lotte(films, lres_list["rows"], today_utc, cache)
+        films, ltstats = apply_lotte(films, lres_list["rows"], today, cache)
     cstats = {}
     if cgv_res:  # after Lotte: a CGV row joins any chain's record by title
         films, cstats = cgv.apply_cgv(films, cgv_res["rows"], cgv_res["seen"])
@@ -266,14 +276,14 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     adstats = {}
     if adres:
         ad_rows = [r for r in adres["rows"] if not is_blocked(r["applicant"])]
-        films, adstats = ors_ad.apply(films, ad_rows, run_utc, ad_withheld)
-    pgstats = programs.apply(films, pgres, (lres_list or {}).get("rows"), bool(cgv_res), today_utc)
+        films, adstats = ors_ad.apply(films, ad_rows, run_kst, ad_withheld)
+    pgstats = programs.apply(films, pgres, (lres_list or {}).get("rows"), bool(cgv_res), today)
     # past KMRB ratings for records the 3-month rating list does not cover
     lookup_path = data_dir / "lookup.json"
     lookup_cache = dict(load_json(lookup_path, {}).get("titles", {}))
     lookup_new = {k: dict(v) for k, v in lookup_cache.items()}
     lres, s_lookup = timed("kmrb_lookup", lambda: lookup.fetch(
-        client, films, lookup_new, promo_cache, today_kst, today_utc))
+        client, films, lookup_new, promo_cache, today_kst, today))
     if lres:
         lookup_cache = lookup_new
     lstats = lookup.apply_past_ratings(films, lookup_cache)
@@ -291,7 +301,7 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     except Exception as exc:  # noqa: BLE001 - retried (and reported) by the release step below
         log.warning("release_lags.json unreadable: %s", exc)
         lags, rating_codes = None, {}
-    wres, s_web = timed("kobis_web", lambda: kobis_web.fetch(client, films, web_cache, today_utc,
+    wres, s_web = timed("kobis_web", lambda: kobis_web.fetch(client, films, web_cache, today,
                                                              rating_codes))
     wstats = kobis_web.apply(films, web_cache, rating_codes)
     schstats = kobis_web.apply_schedule(films, sres["rows"]) if sres else {}
@@ -309,7 +319,9 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     # opening dates: confirmed by a source, else estimated (collector/release.py)
     try:
         lags = lags if lags is not None else release.load_lags(lags_path)
-        release_meta = release.apply(films, lags, today_kst)
+        # a row's follow-up advances only on a day both KOBIS opening sources were read
+        checked = s_kobis["status"] == "ok" and s_web["status"] == "ok"
+        release_meta = release.apply(films, lags, today_kst, openings_checked=checked)
     except Exception as exc:  # noqa: BLE001 - a model failure must not stop the collection
         log.warning("release model failed: %s", exc)
         release_meta, lags = {"status": "error", "reason": f"{type(exc).__name__}: {exc}"[:200]}, None
@@ -325,7 +337,7 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
     poster_cache = {u: dict(e) for u, e in load_json(poster_path, {}).get("sources", {}).items()}
     prev_posters = {f["id"]: f["poster"] for f in existing if f.get("poster")}
     pores, s_posters = timed("posters", lambda: posters.fetch(
-        client, films, poster_cache, data_dir / "posters", today_utc))
+        client, films, poster_cache, data_dir / "posters", today))
     if not pores:  # keep the posters records had (their files were not touched)
         for f in films:
             if f["id"] in prev_posters:
@@ -391,7 +403,7 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
             "rerelease_candidates": sum(f["stages"].get("promo", {}).get("rerelease", False)
                                         for f in films),
             "chain_rereleases": sum(promo.chain_rerelease(f) for f in films),
-            "seen_this_run": sum(f["last_seen"] == today_utc for f in films),
+            "seen_this_run": sum(f["last_seen"] == today for f in films),
             **gstats,
             "distributors": len(company_index["companies"]),
             "tags": dict(sorted(tag_counts.items())),

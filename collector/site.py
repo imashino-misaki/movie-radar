@@ -157,7 +157,8 @@ def company_key(name: str | None) -> str:
 
 
 def day(value: str | None) -> str:
-    """A first_seen value as a UTC date: most are dates, ``ors_ad`` is a run time."""
+    """A first_seen value as a day: most are dates, ``ors_ad`` is a run time (its date part:
+    the KST day since run.py stamps it with the KST offset, the UTC day before 2026-11-03)."""
     return (value or "")[:10]
 
 
@@ -507,7 +508,22 @@ def dedupe(films_raw: list[Film]) -> tuple[list[Film], dict[str, str], list[dict
             f["variant_of"] = aliases[v]
         if f.get("variant_of") and f["variant_of"] not in ids:
             f.pop("variant_of")  # its lead is gone: show it on its own
-    leads = {f["id"] for f in films if not f.get("variant_of")}
+    # ids the collector folded away (merge.fold_into keeps them in `absorbed`) resolve to the film
+    # that holds their record now, so a watch or link of a folded record keeps working
+    for fid, recs in members.items():
+        for r in recs:
+            for a in r.get("absorbed") or []:
+                if a not in ids:
+                    aliases.setdefault(a, fid)
+
+    def final(i: str) -> str:  # the page resolves an alias in one step: point every one at a film
+        hops: set[str] = set()
+        while i in aliases and i not in hops:
+            hops.add(i)
+            i = aliases[i]
+        return i
+    aliases = {a: final(a) for a in aliases}
+    leads ={f["id"] for f in films if not f.get("variant_of")}
     for f in films:  # a collector variant (variant_of) is its lead's film: its records count for the lead
         if f.get("variant_of") in leads:
             members[f["variant_of"]] += [copy.deepcopy(m) for m in members[f["id"]]]
@@ -901,13 +917,15 @@ def _pub(d: str) -> str:
 
 def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[dict],
           poster_exists: Callable[[str], bool] = lambda name: True,
-          history: dict | None = None) -> tuple[dict[str, str], dict]:
+          history: dict | None = None, today: str | None = None) -> tuple[dict[str, str], dict]:
     """-> ({output path relative to the repository root: text}, stats). Pure. ``history``: the
-    forecast history (``update_history``), the source of forecast-change events."""
+    forecast history (``update_history``), the source of forecast-change events. ``today``: the
+    collection's KST day, the page's current day (presale, now-showing, event window); without
+    it, the last first sighting."""
     hist = (history or {}).get("films", {})
     films, aliases, merge_log, members, editions = dedupe(films_raw)
     seen_days = [day(d) for f in films for d in (f.get("first_seen") or {}).values() if day(d)]
-    last_date = max(seen_days) if seen_days else dt.date(1970, 1, 1).isoformat()
+    last_date = today or (max(seen_days) if seen_days else dt.date(1970, 1, 1).isoformat())
     first_date = min(seen_days) if seen_days else last_date
     cur_year = int(last_date[:4])
     base = source_baselines(films)
@@ -1027,11 +1045,15 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         if (cg or {}).get("cgv_only") or "cgv_only" in ((cg or {}).get("labels") or []):
             excl.append("cgv")
         pg = st.get("program") or {}
-        if (mb or {}).get("exclusive") or (pg.get("exclusive") and pg.get("chain") == "megabox"):
+        # an ended chain listing no longer says the film is exclusive there
+        mb_on = mb if (mb or {}).get("status") != "ended" else None
+        lt_on = lt if (lt or {}).get("status") != "ended" else None
+        if (mb_on or {}).get("exclusive") or (pg.get("exclusive") and pg.get("chain") == "megabox"):
             excl.append("mb")
         if pg.get("exclusive") and pg.get("chain") == "cgv" and "cgv" not in excl:
             excl.append("cgv")
-        if (lt or {}).get("badge") == "pick":
+        # 롯시픽 badge, or Lotte's own 단독 개봉 flag (SoloOpenYN, lotte.parse_row)
+        if (lt_on or {}).get("badge") == "pick" or (lt_on or {}).get("exclusive"):
             excl.append("lt")
         uid = stable_id(members.get(f["id"], [f]))
         poster = Path(f["poster"]).name if f.get("poster") else None
@@ -1294,7 +1316,7 @@ def write(data_dir: Path, today: str | None = None) -> dict:
     if today:
         history = update_history(history, films, today)
         outputs[f"data/{HISTORY}"] = json.dumps(history, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
-    built, stats = build(films, bo_days, lags, lambda name: (posters / name).is_file(), history)
+    built, stats = build(films, bo_days, lags, lambda name: (posters / name).is_file(), history, today)
     outputs.update(built)
     outputs[f"data/{SITE_DIR}/{STATUS_JS}"] = _js("MRS", status(_load(data_dir / "meta.json", {})))
     root = data_dir.parent
