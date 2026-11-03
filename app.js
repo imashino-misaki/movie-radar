@@ -1194,6 +1194,17 @@ const MOON = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-
 function themeIcon() { const dark = document.documentElement.dataset.theme === "dark"; const b = $("#theme"); b.innerHTML = dark ? SUN : MOON; b.setAttribute("aria-label", dark ? "밝은 화면으로" : "어두운 화면으로"); b.title = b.getAttribute("aria-label"); }
 $("#theme").addEventListener("click", () => { const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = next; try { localStorage.setItem("mr.theme", next); } catch (e) { /* ignore */ } themeIcon(); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => setTimeout(themeIcon, 0));
+// a mouse wheel over a sideways strip (narrow layout, e.g. a zoomed-in desktop) moves the strip;
+// at either end, and for touch, trackpad side swipes, shift or pinch, the event is left alone
+const finePtr = matchMedia("(hover: hover) and (pointer: fine)");
+addEventListener("wheel", e => {
+  const s = finePtr.matches && !e.deltaX && !e.shiftKey && !e.ctrlKey && e.target.closest && e.target.closest(".strip");
+  if (!s) return;
+  const max = s.scrollWidth - s.clientWidth;
+  if (max <= 0 || (e.deltaY < 0 && s.scrollLeft <= 0) || (e.deltaY > 0 && s.scrollLeft >= max - 1)) return;
+  s.scrollLeft += e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * s.clientWidth : e.deltaY;
+  e.preventDefault();
+}, { passive: false });
 themeIcon();
 
 /* ---------------------------------------------------------------- updated N hours ago + footer */

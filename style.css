@@ -406,6 +406,23 @@ html.zooming{overflow:hidden}
   .sheet.side{width:auto;left:0}
 }
 @media (min-width:1200px){.dt h1{font-size:32px}.pane .dt h1{font-size:28px}}
+/* ---------------------------------------------------------------- input (device) settings
+   The layout follows the CSS width: a zoomed-in desktop gets the narrow layout, a tablet in
+   landscape the wide one. How things scroll follows the input instead. */
+/* sideways scrollers never hand an edge swipe to the browser (trackpad back / forward) */
+.strip,.tblw{overscroll-behavior-x:contain}
+/* a mouse cannot swipe: a strip keeps a visible scrollbar and no snapping (the wheel moves it,
+   app.js), and the table keeps its box inside the screen so its sideways scrollbar is in reach
+   (without a max height it sits under the last row) */
+@media (max-width:899px) and (hover:hover) and (pointer:fine){
+  .strip{scrollbar-width:thin;scroll-snap-type:none;padding-bottom:12px}
+  .tblw{max-height:calc(100vh - var(--hh) - 120px)}
+}
+/* a finger on a wide layout (tablet): the table scrolls sideways in its box and up and down with
+   the page, as on a phone, instead of a nested vertical scroll box */
+@media (min-width:900px) and (pointer:coarse){
+  .tblw{max-height:none}
+}
 .chart .med{stroke:var(--text-1);stroke-width:2;stroke-dasharray:6 3}
 .dotplot circle.o{fill:var(--accent)}
 .dotplot circle.t{fill:var(--accent);opacity:.3}
