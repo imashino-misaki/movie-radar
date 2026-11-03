@@ -416,8 +416,8 @@
     "total": 21,
     "distributor": 5,
     "applicant": 18,
-    "showing": 2,
-    "scheduled": 3,
+    "showing": 3,
+    "scheduled": 2,
     "rated": 14,
     "announced": 1,
     "dormant": 1
@@ -425,6 +425,13 @@
    "films": [
     {
      "id": "k20258640",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2594677",
      "status": "showing",
      "roles": [
       "distributor"
@@ -443,13 +450,6 @@
      "status": "scheduled",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2594677",
-     "status": "scheduled",
-     "roles": [
       "distributor"
      ]
     },
@@ -4809,12 +4809,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2594677",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
@@ -4987,6 +4987,28 @@
      "status": "announced",
      "roles": [
       "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n코리아스크린",
+   "name": "(주)코리아스크린",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "a01da24e1b50b",
+     "status": "announced",
+     "roles": [
+      "applicant"
      ]
     }
    ]
@@ -5222,12 +5244,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2594677",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
