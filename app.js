@@ -598,7 +598,7 @@ function evNote(base) {
 // a ranked row (상영 중 and 예매율 순위): rank cell, poster, title, chains · opening · category
 function rankMeta(f, r) {
   const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
-  return [f.ex.length ? exBadges(f) : chainsText(f), od && `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`, od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? "재상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+  return [f.ex.length ? exBadges(f) : chainsText(f), od && (pre && !f.rs ? `${ddText(od)} 개봉` : `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`), od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? "재상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
 }
 const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
       <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? rankMeta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
