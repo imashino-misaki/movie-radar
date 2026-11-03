@@ -1195,10 +1195,20 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             k = st["kobis"]
             sch = st.get("schedule") or {}
             dday = k.get("open_dt") or sch.get("date")
+            mon_ = sch.get("month")
+            # the sighting shows what KOBIS said then, not now: the first forecast entry on or
+            # after the sighting (a day KOBIS added later has its own "conf" event). 뉘른베르크,
+            # 2026-11-03: KOBIS listed it as 2026-12 on 11-01 and added 12-02 on 11-03, and
+            # the sighting read "12월 2일" as if known on 11-01
+            then = next((h for h in hist.get(f["id"], []) if h.get("d", "") >= day(fs.get("kobis"))), None)
+            if then and then.get("p") == "month" and then.get("date"):
+                dday, mon_ = "", then["date"]
+            elif then and then.get("p") == "day" and then.get("date"):
+                dday = then["date"]
             if dday:
                 ev("date", day(fs.get("kobis")), 0, dday)
-            elif sch.get("month"):
-                ev("month", day(fs.get("kobis")), 0, sch["month"])
+            elif mon_:
+                ev("month", day(fs.get("kobis")), 0, mon_)
             else:
                 ev("kobis", day(fs.get("kobis")), 0)
         for key in ("megabox", "lotte", "cgv"):
