@@ -670,8 +670,16 @@ function fsRow(s) {
     <div class="rt"><span>${esc(f.t)}</span>${nw ? '<span class="newtag" aria-label="지난 방문 이후 새로 포착">NEW</span>' : ""}${WATCH[f.id] ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
     <time class="tn" datetime="${s.ld || s.d}">${dayRel(s.ld || s.d)}${(s.ld ? s.lr : s.r) ? "" : " 확인"}</time>
     <div class="ew">${esc(s.lw || s.w)}${who ? `<span class="t3"> · </span><span class="t2">${esc(who)}</span>` : ""}</div>
-    ${s.ld ? `<div class="ec t2">처음 포착 ${dayRel(s.d)} · ${esc(s.w)}</div>` : ""}
+    ${fsDate(f)}${s.ld ? `<div class="ec t2">처음 포착 ${dayRel(s.d)} · ${esc(s.w)}</div>` : ""}
   </div>`;
+}
+// a sighting whose opening is already announced says so, in the 업데이트 labels (day: filled,
+// month: accent text); the others, still undated, stay plain
+function fsDate(f) {
+  const d = f.d;
+  if (d.p === "day") return `<div class="ec"><b class="evd">${opened(f) ? `${md(d.date)} 개봉` : `${kd(d.date)} 개봉 확정`}</b>${opened(f) ? "" : `<b class="dday tn">${ddText(d.date)}</b>`}</div>`;
+  if (d.p === "month") return `<div class="ec"><b class="evm">${mon(d.m)} 개봉 발표</b></div>`;
+  return "";
 }
 function firstSection() {
   if (!FS.length) return "";
@@ -679,7 +687,7 @@ function firstSection() {
   const list = S.more[key] ? FS : FS.slice(0, cap);
   const nNew = FS.filter(isNewFs).length;
   return `<section class="list radar first"><div class="sh"><h2>새로 포착</h2><span class="sub tn">최근 ${LOOKBACK}일 · ${FS.length}편${nNew ? ` · <span class="newword">새 ${nNew}</span>` : ""}</span><a class="end" href="new.xml">RSS로 받기</a></div>
-    <p class="hint">개봉 발표 전에 등급·광고 심의 신청, KOBIS, 극장 목록에 처음 나타난 영화예요. 가장 최근 단서 순.</p>
+    <p class="hint">등급·광고 심의 신청, KOBIS, 극장 목록에 처음 나타난 영화예요. 개봉일이 나온 영화는 날짜를 함께 보여 드려요. 가장 최근 단서 순.</p>
     ${list.map(fsRow).join("")}${FS.length > list.length ? `<button class="more tn" data-more="${key}">${FS.length - list.length}편 더 보기</button>` : ""}</section>`;
 }
 // 찜한 영화: new events for watched films (cap 3), then every watched film whose opening day is

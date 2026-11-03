@@ -13,7 +13,10 @@ re-tags the whole archive.
              official genre (Lotte / KOBIS) when any source gives one (site.is_anime).
              Kana in the original title is not used: Japanese live-action films have
              it too (날조, 꽃밥, 열정 ...).
-  concert    concert / tour / live-capture keywords (콘서트, 투어, 라이브, 인 시네마 ...).
+  concert    concert / tour / live-capture keywords (콘서트, 투어, 라이브, 인 시네마 ...),
+             or a theatre company (극단) applying: a recorded stage play. Checked
+             2026-11-03 on the KMRB ratings 2019-2026: 25 ratings by 극단
+             applicants ((재)국립극단 20, 희원극단 5), none opened in theatres.
   rerelease  4K, 리마스터, 재개봉, 앙코르 ...
   format     special-format or alternate-cut versions (SCREENX, 4DX, IMAX, Dolby,
              무삭제, 감독판, 확장판 ...).
@@ -58,6 +61,9 @@ FORMAT_KEYWORDS = (
 
 SUBCULTURE_TAGS = ("anime", "concert", "rerelease")
 
+# a theatre company applying for a rating: a recorded stage play (see the docstring)
+THEATRE_COMPANY = "극단"
+
 # franchise names that contain a concert keyword but are films
 NOT_CONCERT = ("러브 라이브", "러브라이브", "love live", "lovelive")
 
@@ -100,7 +106,7 @@ def tag_film(title: str, original_title: str = "", applicant: str = "", country:
         concert_text = concert_text.replace(name, " ")
     if SPORTS.search(text):
         tags.append("sports")
-    elif _has_any(concert_text, CONCERT_KEYWORDS):
+    elif _has_any(concert_text, CONCERT_KEYWORDS) or THEATRE_COMPANY in applicant_c:
         tags.append("concert")
     if _has_any(text, RERELEASE_KEYWORDS):
         tags.append("rerelease")
