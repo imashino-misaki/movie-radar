@@ -113,13 +113,28 @@ const DATA_DAY = [MR.last, (MR.bkas || "").slice(0, 10)].sort().pop();
 const WEEK_FROM = add(DATA_DAY, -7);
 const LOOKBACK = 14; // days: the "새로 포착" window, and the furthest back "지난 방문 이후" reaches
 const LOOK_FROM = add(TODAY, -LOOKBACK);
-// baseline for this visit: what the user had seen before it. A visit is one data run in one tab:
-// reloads keep the baseline, but once a newer run loads (phones keep a tab's sessionStorage for
-// days) the baseline moves to what the previous load had shown
+// baseline for this visit: what the user had seen before it. A visit is one tab's stretch of use:
+// reloads keep the baseline, but it moves to what the previous load had shown once a newer data
+// run loads or the tab was left for VISIT_GAP (phones keep a tab's sessionStorage for days, and a
+// data run can stall for hours, so the run alone left the baseline at a visit long past)
 const RUN_ID = (MRS && MRS.run) || MR.bkas || MR.last;
+const VISIT_GAP = 30 * 60e3; // ms: the common web-analytics session timeout (30 min of inactivity)
 const isSeen = v => isObj(v) && isTime(v.at) && strArr(v.keys);
-let BASE = ss.get("mr.base", null, v => (isSeen(v) || (isObj(v) && v.at === null && v.keys === null)) && v.run === RUN_ID);
-if (!BASE) { const prev = ls.get("mr.seen", null, isSeen); BASE = prev ? { at: prev.at, keys: prev.keys, run: RUN_ID } : { at: null, keys: null, run: RUN_ID }; ss.set("mr.base", BASE); }
+let BASE = ss.get("mr.base", null, v => (isSeen(v) || (isObj(v) && v.at === null && v.keys === null)) && v.run === RUN_ID
+  && !v.expired && isTime(v.t) && Date.now() - new Date(v.t).getTime() < VISIT_GAP);
+if (!BASE) { const prev = ls.get("mr.seen", null, isSeen); BASE = prev ? { at: prev.at, keys: prev.keys, run: RUN_ID } : { at: null, keys: null, run: RUN_ID }; }
+// t: the last moment this tab was in use (a touch, click, key, wheel or scroll; the load itself),
+// saved when the page is left or reloaded. A tab shown again after VISIT_GAP away is marked expired
+// at once, so a reload after using it again still starts a new visit
+let lastUse = Date.now();
+for (const k of ["pointerdown", "keydown", "wheel", "touchstart", "scroll"]) addEventListener(k, () => { lastUse = Date.now(); }, { passive: true, capture: true });
+const saveBase = () => { BASE.t = new Date(lastUse).toISOString(); ss.set("mr.base", BASE); };
+saveBase();
+addEventListener("pagehide", saveBase);
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") saveBase();
+  else if (Date.now() - lastUse > VISIT_GAP) { BASE.expired = true; ss.set("mr.base", BASE); }
+});
 ls.set("mr.seen", { at: new Date().toISOString(), keys: MR.ev.map(evKey).concat(MR.fs.map(fsKey)) });
 // changes the user opened (the film's detail): no longer marked new. Stored as {key: day read} and
 // shared by every tab, so writes merge with what is stored. An entry read before LOOK_FROM is dropped:
@@ -163,6 +178,9 @@ window.addEventListener("storage", e => {
 // > chain listing / booking open > other
 // upd (the forecast changed otherwise: withdrawn, back, without a date) ranks with a median shift;
 // tier (only the display tier moved: the date is unchanged) with a narrowed range
+// opening-day events (a day announced, a month turned into a day, a day moved) and opening-month
+// ones: the update list labels them, and a film whose day is confirmed is news there only with a day event
+const DAY_EV = new Set(["date", "conf", "moved"]), MON_EV = new Set(["month", "mon"]);
 const STRENGTH = { conf: 7, moved: 7, date: 7, mon: 6, month: 6, shift: 5, upd: 5, narrow: 4, tier: 4, excl: 3, open: 3, chain: 3,
   kobis: 2, ad: 2, promo: 2, rated: 1, filed: 1 };
 const FIRST_W = 8;
@@ -198,12 +216,16 @@ function groupEvents(evs) {
 }
 function radRow(g, compact) {
   const f = g.f;
-  const words = [...new Set((g.evs.some(e => e.f) ? ["처음 포착"] : []).concat(g.evs.map(evWord)))];
+  // an opening day announced, confirmed or moved stands out as a label; other news stays plain
+  const seen = new Set(), words = (g.evs.some(e => e.f) ? [esc("처음 포착")] : []).concat(g.evs.map(e => {
+    const w = evWord(e); if (seen.has(w)) return ""; seen.add(w);
+    return DAY_EV.has(e.k) ? `<b class="evd">${esc(w)}</b>` : MON_EV.has(e.k) ? `<b class="evm">${esc(w)}</b>` : esc(w);
+  })).filter(Boolean);
   const certRedundant = g.evs.some(e => e.k === "date" || e.k === "month");
   return `<div class="rad" data-id="${f.id}" tabindex="0">
     <div class="rt"><span>${esc(f.t)}</span>${!FIRST_VISIT && NEWIDS.has(f.id) && g.evs.some(e => !READ.has(evKey(e))) ? '<span class="newtag" title="아직 열어 보지 않은 새 소식">NEW</span>' : ""}${g.w ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
     <time class="tn" datetime="${g.top}">${dayRel(g.top)}</time>
-    <div class="ew">${words.slice(0, compact ? 2 : 4).map(esc).join('<span class="t3"> · </span>')}</div>
+    <div class="ew">${words.slice(0, compact ? 2 : 4).join('<span class="t3"> · </span>')}</div>
     ${certRedundant || compact ? "" : `<div class="ec">${certHTML(f)}</div>`}
   </div>`;
 }
@@ -571,12 +593,15 @@ function capRows(key, rows) {
 function changesSection(compact, noWatched, skip) {
   const showAll = S.all7 || FIRST_VISIT;
   const evs = showAll ? WEEK_EV : NEW_EV;
-  const groups = groupEvents(evs).filter(g => !(noWatched && g.w) && !(skip && skip.has(g.f.id)) && (g.w || !isEv(g.f)));
+  // a film with a confirmed opening day shows only when that day was announced or moved in the
+  // window (its later theater lists and booking starts are not news here); watched films keep all
+  const groups = groupEvents(evs).filter(g => !(noWatched && g.w) && !(skip && skip.has(g.f.id)) && (g.w || !isEv(g.f))
+    && (g.w || g.f.d.p !== "day" || g.evs.some(e => DAY_EV.has(e.k))));
   const strong = groups.filter(g => g.str >= 2 || g.w), weak = groups.filter(g => g.str < 2 && !g.w);
   const lastAt = BASE.at ? new Date(BASE.at) : null;
   const title = showAll ? "최근 7일 업데이트" : "업데이트";
   const sub = showAll ? (FIRST_VISIT ? "처음 오셨네요. 다음 방문부터는 그 사이 바뀐 것만 보여 드려요." : `${md(WEEK_FROM)}부터`)
-    : lastAt ? `지난 방문(${kstStamp(lastAt.toISOString())}) 이후 바뀐 개봉일·예상일·극장 목록${LONG_AWAY ? ` · 최근 ${LOOKBACK}일만` : ""}` : "";
+    : lastAt ? `지난 방문(${kstStamp(lastAt.toISOString())}) 이후 개봉일이 나온 영화와 개봉일 미정 영화의 소식${LONG_AWAY ? ` · 최근 ${LOOKBACK}일만` : ""}` : "";
   const cap = compact ? 6 : 8;
   const key = compact ? "radc" : "rad";
   const list = S.more[key] ? strong : strong.slice(0, cap);
