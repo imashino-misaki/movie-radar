@@ -1126,6 +1126,11 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         if not it or it["ox"]:
             continue
         s = first_sighting(members.get(f["id"], [f]), base, kobis_code)
+        # a film that opened before its first trace is not a new sighting: a chain re-listing an old
+        # film (Megabox put two 2025 films back on its list on 2026-11-03, with no showtimes). A
+        # re-release has its new date here, so it still counts
+        if s and it["d"].get("p") == "day" and it["d"]["date"] < s["d"]:
+            continue
         if s and s["d"] >= keep_from:
             sightings.append({"id": f["id"], **s})
     sightings.sort(key=lambda s: (s.get("ld") or s["d"], s["d"], s["id"]), reverse=True)
