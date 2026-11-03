@@ -721,15 +721,15 @@
     "20230987"
    ],
    "counts": {
-    "active": 14,
+    "active": 13,
     "total": 16,
     "distributor": 14,
     "applicant": 9,
-    "showing": 5,
+    "showing": 4,
     "scheduled": 5,
     "rated": 1,
     "announced": 3,
-    "released": 2
+    "released": 3
    },
    "films": [
     {
@@ -741,14 +741,6 @@
     },
     {
      "id": "r2593503",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2593726",
      "status": "showing",
      "roles": [
       "applicant",
@@ -837,6 +829,14 @@
     },
     {
      "id": "r2585579",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2593726",
      "status": "released",
      "roles": [
       "applicant",
@@ -1476,6 +1476,79 @@
    ]
   },
   {
+   "id": "c20229461",
+   "name": "(주)바이포엠스튜디오 BY4MSTUDIO",
+   "spellings": [
+    "(주)바이포엠스튜디오",
+    "주식회사 바이포엠스튜디오"
+   ],
+   "kobis_codes": [
+    "20229461"
+   ],
+   "counts": {
+    "active": 6,
+    "total": 7,
+    "distributor": 7,
+    "applicant": 2,
+    "showing": 3,
+    "scheduled": 3,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2583762",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2596523",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600523",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20240822",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20259200",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602659",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2586558",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20173221",
    "name": "소니픽쳐스엔터테인먼트코리아주식회사극장배급지점",
    "spellings": [
@@ -1876,72 +1949,6 @@
      "id": "k20126955",
      "status": "dormant",
      "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20229461",
-   "name": "(주)바이포엠스튜디오 BY4MSTUDIO",
-   "spellings": [
-    "(주)바이포엠스튜디오",
-    "주식회사 바이포엠스튜디오"
-   ],
-   "kobis_codes": [
-    "20229461"
-   ],
-   "counts": {
-    "active": 5,
-    "total": 6,
-    "distributor": 6,
-    "applicant": 2,
-    "showing": 3,
-    "scheduled": 2,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2583762",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2596523",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600523",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20240822",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20259200",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586558",
-     "status": "released",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     }
@@ -2969,7 +2976,8 @@
     "distributor": 0,
     "applicant": 3,
     "showing": 1,
-    "rated": 2
+    "scheduled": 1,
+    "rated": 1
    },
    "films": [
     {
@@ -2980,14 +2988,14 @@
      ]
     },
     {
-     "id": "r2588199",
-     "status": "rated",
+     "id": "r2601671",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
     },
     {
-     "id": "r2601671",
+     "id": "r2588199",
      "status": "rated",
      "roles": [
       "applicant"
@@ -6555,6 +6563,28 @@
     {
      "id": "r2598844",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n지이프로덕션",
+   "name": "지이프로덕션",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2602659",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
