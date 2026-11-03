@@ -24,6 +24,8 @@ from typing import Any, Callable, Iterable
 from urllib.parse import quote
 from xml.sax.saxutils import escape as xesc
 
+from .promo import PRIOR_DAYS
+
 Film = dict[str, Any]
 
 SITE_DIR = "site"  # under the data directory
@@ -775,9 +777,13 @@ def forecast_events(entries: list[dict], cur_year: int) -> list[tuple[str, str, 
         pp, cp = prev.get("p"), cur.get("p")
         ev: tuple[str, str] | None = None
         if cp == "day" and pp == "day" and prev.get("date") != cur.get("date"):
-            # an old opening replaced by a re-release date names its year
-            was = (f"{prev['date'][:4]}년 " if prev["date"][:4] != cur["date"][:4] else "") + kd(prev["date"], False)
-            ev = ("moved", f"개봉일 변경 {was} → {kd(cur['date'], False)}")
+            if _days(prev["date"], cur["date"]) >= PRIOR_DAYS:
+                # an old opening replaced by a date a year or more later is a re-release (the
+                # same gap promo.py reads as one), not a moved opening
+                ev = ("moved", f"재개봉 확정 · {kd(cur['date'], False)}")
+            else:
+                was = (f"{prev['date'][:4]}년 " if prev["date"][:4] != cur["date"][:4] else "") + kd(prev["date"], False)
+                ev = ("moved", f"개봉일 변경 {was} → {kd(cur['date'], False)}")
         elif cp == "day" and pp != "day":
             ev = ("conf", f"월 공개 → {kd(cur['date'], False)} 확정" if pp == "month"
                   else f"개봉일 확정 {kd(cur['date'], False)}")
