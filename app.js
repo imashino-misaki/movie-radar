@@ -105,7 +105,8 @@ const CHEV = '<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentC
 /* ---------------------------------------------------------------- events: "since your last visit" */
 // one key per change: forecast changes carry their history index (n), chain listings their chain
 const evKey = e => [uidOf(e.id), e.k, e.d].concat(e.n != null ? [e.n] : e.k === "chain" || e.k === "open" ? [e.x] : []).join("|");
-const fsKey = s => `fs|${s.g}`;
+// a later trace makes the sighting news again
+const fsKey = s => `fs|${s.g}${s.ld ? `|${s.ld}` : ""}`;
 // newest timestamp in the data: the KOBIS advance-ticket snapshot (KST), else the last sighting day
 const MRS = window.MRS || null;
 const ASOF = MR.bkas ? new Date(MR.bkas.replace(" ", "T") + ":00+09:00") : D(MR.last);
@@ -620,8 +621,9 @@ function fsRow(s) {
   const f = BYID[s.id], nw = isNewFs(s) && !READ.has(fsKey(s)), who = f.dist || f.app;
   return `<div class="rad" data-id="${f.id}" tabindex="0">
     <div class="rt"><span>${esc(f.t)}</span>${nw ? '<span class="newtag" aria-label="지난 방문 이후 새로 포착">NEW</span>' : ""}${WATCH[f.id] ? '<span class="wst" aria-label="찜한 영화">★</span>' : ""}</div>
-    <time class="tn" datetime="${s.d}">${dayRel(s.d)}${s.r ? "" : " 확인"}</time>
-    <div class="ew">${esc(s.w)}${who ? `<span class="t3"> · </span><span class="t2">${esc(who)}</span>` : ""}</div>
+    <time class="tn" datetime="${s.ld || s.d}">${dayRel(s.ld || s.d)}${(s.ld ? s.lr : s.r) ? "" : " 확인"}</time>
+    <div class="ew">${esc(s.lw || s.w)}${who ? `<span class="t3"> · </span><span class="t2">${esc(who)}</span>` : ""}</div>
+    ${s.ld ? `<div class="ec t2">처음 포착 ${dayRel(s.d)} · ${esc(s.w)}</div>` : ""}
   </div>`;
 }
 function firstSection() {
@@ -630,7 +632,7 @@ function firstSection() {
   const list = S.more[key] ? FS : FS.slice(0, cap);
   const nNew = FS.filter(isNewFs).length;
   return `<section class="list radar first"><div class="sh"><h2>새로 포착</h2><span class="sub tn">최근 ${LOOKBACK}일 · ${FS.length}편${nNew ? ` · <span class="newword">새 ${nNew}</span>` : ""}</span><a class="end" href="new.xml">RSS로 받기</a></div>
-    <p class="hint">개봉 발표 전에 등급·광고 심의 신청, KOBIS, 극장 목록에 처음 나타난 영화예요.</p>
+    <p class="hint">개봉 발표 전에 등급·광고 심의 신청, KOBIS, 극장 목록에 처음 나타난 영화예요. 가장 최근 단서 순.</p>
     ${list.map(fsRow).join("")}${FS.length > list.length ? `<button class="more tn" data-more="${key}">${FS.length - list.length}편 더 보기</button>` : ""}</section>`;
 }
 // 찜한 영화: new events for watched films (cap 3), then every watched film whose opening day is

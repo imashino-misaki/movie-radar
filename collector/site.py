@@ -665,11 +665,19 @@ def first_sighting(records: list[Film], base: dict[str, str], kobis_code: str = 
     undated = bool(boot and not (real_dates and min(real_dates) < min(boot)))
     if undated and not keep_boot:
         return None
-    tied = sorted((t for t in all_tr if t[0] == first), key=lambda t: (TRACE_ORDER.index(t[1]), t[3]))
-    labels = list(dict.fromkeys(_trace_label(src, (rec.get("stages") or {}).get(src) or {})
-                                for _, src, _, _, rec in tied))
+    def on(d: str) -> tuple[list, str]:
+        tied = sorted((t for t in all_tr if t[0] == d), key=lambda t: (TRACE_ORDER.index(t[1]), t[3]))
+        return tied, " · ".join(dict.fromkeys(_trace_label(src, (rec.get("stages") or {}).get(src) or {})
+                                              for _, src, _, _, rec in tied))
+    tied, words = on(first)
     lead = tied[0]
-    out = {"d": first, "w": " · ".join(labels), "s": lead[1], "r": lead[2], "g": f"{lead[1]}-{lead[3]}"}
+    out = {"d": first, "w": words, "s": lead[1], "r": lead[2], "g": f"{lead[1]}-{lead[3]}"}
+    # the latest trace when there is a later one (a poster rating first, KOBIS since): the page
+    # leads with it and orders the list by it; the first trace stays as the sighting
+    last = max(d for d, *_ in all_tr)
+    if last > first:
+        lt, lw = on(last)
+        out.update(ld=last, lw=lw, lr=lt[0][2])
     if keep_boot:
         out["b"] = int(undated)  # 1: already there when collection started: the real first trace is older
     return out
@@ -1089,7 +1097,7 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         s = first_sighting(members.get(f["id"], [f]), base, kobis_code)
         if s and s["d"] >= keep_from:
             sightings.append({"id": f["id"], **s})
-    sightings.sort(key=lambda s: (s["d"], s["id"]), reverse=True)
+    sightings.sort(key=lambda s: (s.get("ld") or s["d"], s["d"], s["id"]), reverse=True)
     fs_by_id = {s["id"]: s for s in sightings}
 
     # ------------------------------------------------ events
