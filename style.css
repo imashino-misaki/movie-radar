@@ -205,8 +205,9 @@ body{background:var(--bg);color:var(--text-1);font:400 16px/1.5 "SUIT",system-ui
 .rad .wst{color:var(--accent);margin-left:6px;font-size:14px}
 .radar .hint{padding:0 20px 12px;font-size:14px;color:var(--text-2)}
 /* desktop: one row of posters (the rest of the 2 weeks is behind 전체 일정); mobile: a scrolling row (below) */
-.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));grid-template-rows:auto;grid-auto-rows:0;row-gap:0;column-gap:12px;overflow:hidden;padding:8px 20px 20px}
-.strip li{cursor:pointer;min-width:0;overflow:hidden}
+/* a poster strip scrolls sideways on every layout (the wide one used to clip it to one row) */
+.strip{display:flex;gap:12px;overflow-x:auto;padding:8px 20px 20px;scroll-padding-left:20px}
+.strip li{flex:0 0 112px;cursor:pointer;min-width:0;overflow:hidden}
 .strip .pp{aspect-ratio:2/2.9;border-radius:2px;overflow:hidden;background:var(--bg);display:block}
 .strip .pp img{width:100%;height:100%;object-fit:cover;display:block}
 .strip .pp.txt{display:flex;align-items:flex-end;padding:8px;border:1px solid var(--line);background:var(--surface);font-size:14px;font-weight:600;line-height:1.35;color:var(--text-2)}
@@ -414,14 +415,18 @@ html.zooming{overflow:hidden}
 /* a mouse cannot swipe: a strip keeps a visible scrollbar and no snapping (the wheel moves it,
    app.js), and the table keeps its box inside the screen so its sideways scrollbar is in reach
    (without a max height it sits under the last row) */
-@media (max-width:899px) and (hover:hover) and (pointer:fine){
+@media (hover:hover) and (pointer:fine){
   .strip{scrollbar-width:thin;scroll-snap-type:none;padding-bottom:12px}
+}
+@media (max-width:899px) and (hover:hover) and (pointer:fine){
   .tblw{max-height:calc(100vh - var(--hh) - 120px)}
 }
 /* a finger on a wide layout (tablet): the table scrolls sideways in its box and up and down with
    the page, as on a phone, instead of a nested vertical scroll box */
 @media (min-width:900px) and (pointer:coarse){
   .tblw{max-height:none}
+  .strip{scroll-snap-type:x proximity;scrollbar-width:none}
+  .strip li{scroll-snap-align:start}
 }
 .chart .med{stroke:var(--text-1);stroke-width:2;stroke-dasharray:6 3}
 .dotplot circle.o{fill:var(--accent)}

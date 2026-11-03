@@ -630,7 +630,7 @@ function watchSection() {
     ${fx.map(f => `<div class="wrow" data-id="${f.id}" tabindex="0"><span>${esc(f.t)}</span><em class="tn">${when(f)}</em></div>`).join("")}${fixed.length > fx.length ? `<button class="more tn" data-more="wfix">${fixed.length - fx.length}편 더 보기</button>` : ""}</section>`;
 }
 const stripItem = (f, sub, badge) => `<li data-id="${f.id}">${f.pst ? `<span class="pp">${badge || ""}<img src="data/posters/${f.pst}" alt="" loading="lazy"></span>` : `<span class="pp txt">${badge || ""}${esc(f.t)}</span>`}<b>${esc(f.t)}</b><span class="tn">${sub}</span></li>`;
-const stripCap = () => (wide() ? 12 : 16);
+const stripCap = () => 16;
 function stripSection() {
   const end = add(TODAY, 14);
   const items = MR.films.filter(f => f.d.p === "day" && f.d.date > TODAY && f.d.date <= end && homeOk(f)).sort(bySortDate);
@@ -1194,7 +1194,7 @@ const MOON = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-
 function themeIcon() { const dark = document.documentElement.dataset.theme === "dark"; const b = $("#theme"); b.innerHTML = dark ? SUN : MOON; b.setAttribute("aria-label", dark ? "밝은 화면으로" : "어두운 화면으로"); b.title = b.getAttribute("aria-label"); }
 $("#theme").addEventListener("click", () => { const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = next; try { localStorage.setItem("mr.theme", next); } catch (e) { /* ignore */ } themeIcon(); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => setTimeout(themeIcon, 0));
-// a mouse wheel over a sideways strip (narrow layout, e.g. a zoomed-in desktop) moves the strip;
+// a mouse wheel over a sideways poster strip moves the strip;
 // at either end, and for touch, trackpad side swipes, shift or pinch, the event is left alone
 const finePtr = matchMedia("(hover: hover) and (pointer: fine)");
 addEventListener("wheel", e => {
