@@ -86,7 +86,7 @@ const isUp = f => !opened(f);
 // days since the opening, or "재상영" for a film showing again long after it (f.rs, site.py)
 const ymd2 = s => `${s.slice(0, 4)}년 ${md(s)}`;
 const runText = f => f.rs ? "재상영" : `${diffDays(f.d.date, TODAY) + 1}일째`;
-const ddText = s => { const n = diffDays(TODAY, s); return n === 0 ? "오늘" : n === 1 ? "내일" : `D-${n}`; };
+const ddText = s => { const n = diffDays(TODAY, s); return n === 0 ? "D-Day" : `D-${n}`; };
 function cert(f) {
   const d = f.d;
   if (d.p === "day") return opened(f)
@@ -598,7 +598,7 @@ function evNote(base) {
 // a ranked row (상영 중 and 예매율 순위): rank cell, poster, title, chains · opening · category
 function rankMeta(f, r) {
   const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
-  return [f.ex.length ? exBadges(f) : chainsText(f), od && (pre && !f.rs ? `${ddText(od)} 개봉` : `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`), od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? "재상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+  return [f.ex.length ? exBadges(f) : chainsText(f), od ? (pre && !f.rs ? `<b class="ddc">${ddText(od)} 개봉</b>` : `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`) : preOpen(f) && '<b class="ddc">개봉 전</b>', od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? "재상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
 }
 const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
       <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? rankMeta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
@@ -646,13 +646,13 @@ function vBook() {
   const npre = bk.filter(preOpen).length;
   const srcBar = `<div class="tools"><span class="seg" role="group" aria-label="예매율 기준">${Object.entries(BSRC).map(([k, v]) => `<button data-bsrc="${k}" aria-pressed="${src === k}">${v}</button>`).join("")}</span><span class="cnt tn push">${bk.length}편</span></div>`;
   const when = src ? srcWhen(src) : `${bkWhen()} 기준`;
-  // the rank badge carries the state by shape (solid: showing, outline: not open yet), named in the header
-  const rows = bk.map(f => nrow(f, `<div class="rk${preOpen(f) ? " pre" : ""}"><b class="tn"${preOpen(f) ? ' aria-label="개봉 전"' : ""}>${bRank(f, src)}</b></div>`,
+  // a film not open yet carries an accent "D-n 개봉" chip in its meta line (rankMeta)
+  const rows = bk.map(f => nrow(f, `<div class="rk"><b class="tn">${bRank(f, src)}</b></div>`,
     `<b class="tn">${bRate(f, src)}%</b>${src ? `<small class="tn">${otherRates(f)}</small>` : `<small class="tn">예매 ${man(f.bk.pa)}명</small>`}`));
   return `<div class="vh"><h1>예매율 순위</h1></div>${srcBar}
-    <div class="list"><div class="wk"><h2>${src ? `${BSRC[src]} 예매율` : "전체 (KOBIS)"}</h2><span class="sub tn">${when}${npre ? ` · <span class="rkpre">□</span> 개봉 전 ${npre}편` : ""}</span></div>
+    <div class="list"><div class="wk"><h2>${src ? `${BSRC[src]} 예매율` : "전체 (KOBIS)"}</h2><span class="sub tn">${when}${npre ? ` · 개봉 전 ${npre}편` : ""}</span></div>
     ${rows.length ? capRows("book", rows) : `<div class="empty"><p>${BSRC[src]} 예매율 자료가 아직 없어요.</p></div>`}</div>
-    <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${src ? `${BSRC[src]} 사이트에 나오는 예매율이에요: 그 극장에서 팔린 표 중 이 영화의 몫. 오른쪽 아래는 KOBIS 전체 예매율.` : `KOBIS 실시간 예매율: 전국 극장에서 팔린 표 중 이 영화의 몫이에요.${bk.length && bk[bk.length - 1].bk.r > bk.length ? " 빠진 번호는 이 사이트에 없는 상영작이에요." : ""}`} 상영 중인 영화와 개봉 전 예매작을 합친 순위로, 개봉 전 영화는 테두리 순위로 표시해요.</p>`;
+    <p class="small" style="margin-top:8px;padding:0 ${wide() ? 0 : 16}px">${src ? `${BSRC[src]} 사이트에 나오는 예매율이에요: 그 극장에서 팔린 표 중 이 영화의 몫. 오른쪽 아래는 KOBIS 전체 예매율.` : `KOBIS 실시간 예매율: 전국 극장에서 팔린 표 중 이 영화의 몫이에요.${bk.length && bk[bk.length - 1].bk.r > bk.length ? " 빠진 번호는 이 사이트에 없는 상영작이에요." : ""}`} 상영 중인 영화와 개봉 전 예매작을 합친 순위로, 개봉 전 영화는 남은 날을 색 표시로 보여 드려요.</p>`;
 }
 
 /* ---------------------------------------------------------------- 레이더 (home) */
@@ -721,7 +721,7 @@ function watchSection() {
   const news = S.more.watch ? g : g.slice(0, 3);
   const fx = S.more.wfix ? fixed : fixed.slice(0, 5);
   const when = f => {
-    if (ahead(f)) { const n = diffDays(TODAY, f.d.date); return `${kd(f.d.date)}<span class="sep">·</span><b>${n === 1 ? "내일" : "D-" + n}</b>`; }
+    if (ahead(f)) { return `${kd(f.d.date)}<span class="sep">·</span><b>${ddText(f.d.date)}</b>`; }
     return f.d.date === TODAY ? "<b>오늘 개봉</b>" : `상영 중<span class="sep">·</span>${runText(f)}`;
   };
   const sub = [g.length && `새 소식 ${g.length}`, fixed.length && `개봉일 확정 ${fixed.length}`].filter(Boolean).join(" · ");
@@ -743,7 +743,7 @@ function stripSection() {
     <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
 }
 // 예매율 순위 on the home screen: the KOBIS booking ranking as it is, showing and pre-release films
-// together; a pre-release film has an outlined rank badge and "D-n 개봉" (or "개봉 전") under its rate
+// together; a pre-release film has an accent "D-n 개봉" (or "개봉 전") chip under its rate
 function bookSection() {
   const items = MR.films.filter(f => inBook(f) && homeOk(f)).sort((a, b) => a.bk.r - b.bk.r);
   if (!items.length) return "";
@@ -753,8 +753,8 @@ function bookSection() {
     ${qs ? `<div class="quick"><span class="qlbl">극장별</span>${qs}</div>` : ""}
     <ul class="strip">${items.slice(0, stripCap()).map(f => {
       const pre = preOpen(f), od = f.d.p === "day" ? f.d.date : "";
-      const sub = `<em class="bkr">${f.bk.rate}%</em>${pre ? `<span class="pre">${od ? `${ddText(od)} 개봉` : "개봉 전"}</span>` : ""}`;
-      return stripItem(f, sub, `<i class="rkb tn${pre ? " pre" : ""}">${f.bk.r}</i>`);
+      const sub = `<em class="bkr">${f.bk.rate}%</em>${pre ? `<span class="ddc">${od ? `${ddText(od)} 개봉` : "개봉 전"}</span>` : ""}`;
+      return stripItem(f, sub, `<i class="rkb tn">${f.bk.r}</i>`);
     }).join("")}</ul></section>`;
 }
 // 상영 중 on the home screen: yesterday's box-office order first, then the rest by booking rank

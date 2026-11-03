@@ -95,6 +95,8 @@ body{background:var(--bg);color:var(--text-1);font:400 16px/1.5 "SUIT",system-ui
 .c-est{color:var(--text-2)}
 .etag{display:inline-block;margin-right:4px;padding:0 4px;border:1px solid var(--line);border-radius:4px;font-size:11px;font-weight:600;line-height:16px;color:var(--text-3);vertical-align:1px}
 .dday{margin-left:6px;font-weight:700;color:var(--accent)}
+/* not open yet: the same accent as the D-day elsewhere, as a chip so it reads at a glance */
+.ddc{display:inline-block;padding:0 6px;border-radius:4px;background:var(--accent-weak);color:var(--accent);font-weight:700;white-space:nowrap}
 .c-est b{font-weight:600}
 .wtag{font-size:12px;color:var(--text-3);font-weight:500}
 .rr.c-est small{color:var(--text-3)}
@@ -143,8 +145,6 @@ body{background:var(--bg);color:var(--text-1);font:400 16px/1.5 "SUIT",system-ui
 .rk{width:40px;text-align:center;line-height:1.2}
 .rk b{display:block;font-size:20px;font-weight:700}
 .rk small{display:block;font-size:12px;color:var(--text-2);font-weight:600}
-.rk.pre b{display:inline-block;min-width:28px;border-radius:2px;box-shadow:inset 0 0 0 1.5px var(--text-2)}
-.rkpre{font-weight:700;color:var(--text-1)}
 .tobook{display:block;padding:0 16px 12px;font-size:14px;font-weight:600}
 @media (min-width:900px){.tobook{padding:0 0 12px}}
 .quick .qlbl{font-size:12px;color:var(--text-2);margin-right:2px;align-self:center}
@@ -226,9 +226,8 @@ body{background:var(--bg);color:var(--text-1);font:400 16px/1.5 "SUIT",system-ui
 .strip .pp{position:relative}
 .strip .rkb{position:absolute;left:0;top:0;min-width:22px;padding:2px 6px;background:var(--text-1);color:var(--surface);font-size:12px;font-weight:700;font-style:normal;line-height:1.4;text-align:center;border-bottom-right-radius:2px}
 /* not open yet: the same badge as an outline (state by shape, not by a second hue: posters carry the colour) */
-.strip .rkb.pre{background:var(--surface);color:var(--text-1);box-shadow:inset 0 0 0 1.5px var(--text-1)}
+.strip span.ddc{display:inline-block;color:var(--accent);margin-top:4px}
 .strip .bkr{display:block;font-style:normal;font-size:14px;font-weight:700;color:var(--text-1);font-variant-numeric:tabular-nums}
-.strip span.pre{color:var(--text-2)}
 .wrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:10px 20px;border-top:1px solid var(--line);cursor:pointer;font-size:14px}
 .wrow:hover{background:var(--hover)}
 .wrow span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
