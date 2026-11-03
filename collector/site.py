@@ -1248,6 +1248,21 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
                                     ex=excl)
         if rescreen:
             item["rs"] = 1
+            # rsf / rsc: when and where the re-screening began, as far as we saw it: the start of
+            # the current listing period (track_runs) of each active chain listing, PRIOR_DAYS or
+            # more after the opening. rsb = 1: that period began on the chain's first collection
+            # day (source_baselines), so it was already showing then and began on or before rsf.
+            starts = {}
+            for key, stg in (("megabox", mb), ("lotte", lt), ("cgv", cg)):
+                runs = (stg or {}).get("runs") or []
+                frm = (runs[-1].get("from") or "") if runs and stg.get("status") != "ended" else ""
+                if frm and _days(c["date"], frm) >= PRIOR_DAYS:
+                    starts[key] = frm
+            if starts:
+                item["rsf"] = min(starts.values())
+                item["rsc"] = [k for k in CHAIN_STAGES if starts.get(k) == item["rsf"]]
+                if any(base.get(k) == item["rsf"] for k in item["rsc"]):
+                    item["rsb"] = 1
         if uid != f["id"]:
             item["u"] = uid  # stable identity (stable_id); absent: the id itself
         if bk:

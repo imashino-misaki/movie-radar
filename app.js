@@ -95,12 +95,16 @@ const bkWhen = () => MR.bkas ? `${md(MR.bkas.slice(0, 10))} ${MR.bkas.slice(11, 
 const isUp = f => !opened(f);
 // days since the opening, or "재상영" for a film showing again long after it (f.rs, site.py)
 const ymd2 = s => `${s.slice(0, 4)}년 ${md(s)}`;
-const runText = f => f.rs ? "재상영" : `${diffDays(f.d.date, TODAY) + 1}일째`;
+// f.rsf: the day the re-screening was first seen (site.py); f.rsb: it was already showing when
+// that chain was first read, so it began on or before then
+const rsWhen = f => f.rsb ? `${md(f.rsf)} 이전부터` : `${md(f.rsf)}부터`;
+const runText = f => f.rs ? (f.rsf ? `${rsWhen(f)} 재상영` : "재상영") : `${diffDays(f.d.date, TODAY) + 1}일째`;
+const rsWhere = f => (f.rsc || []).map(k => CHN[k]).join("·");
 const ddText = s => { const n = diffDays(TODAY, s); return n === 0 ? "D-Day" : `D-${n}`; };
 function cert(f) {
   const d = f.d;
   if (d.p === "day") return opened(f)
-    ? f.rs ? { g: "day", cls: "c-day", when: `${ymd2(d.date)} 개봉`, sentence: `${ymd2(d.date)} 개봉작 재상영`, why: "개봉 1년 뒤 다시 상영 중이에요. 재상영 시작일은 극장이 따로 알리지 않았어요." }
+    ? f.rs ? { g: "day", cls: "c-day", when: `${ymd2(d.date)} 개봉`, sentence: `${ymd2(d.date)} 개봉작 재상영`, why: f.rsf ? `개봉 1년 뒤 다시 상영 중이에요. ${f.rsb ? `${md(f.rsf)} ${rsWhere(f)} 목록을 처음 읽었을 때 이미 상영 중이었어요.` : `${md(f.rsf)}에 ${rsWhere(f)} 상영 목록에 다시 올라왔어요.`} 극장이 알린 재상영 시작일은 아니에요.` : "개봉 1년 뒤 다시 상영 중이에요. 재상영 시작일은 극장이 따로 알리지 않았어요." }
     : { g: "day", cls: "c-day", when: `${md(d.date)} 개봉`, sentence: `${kd(d.date)} 개봉`, why: `개봉 ${diffDays(d.date, TODAY) + 1}일째` }
     // an announced day reads as confirmed only when its display tier is (d.w "day"; site.py DAY_WORD)
     : { g: "day", cls: "c-day", when: `${kd(d.date)}<b class="dday tn">${ddText(d.date)}</b>`, sentence: `${kd(d.date)} 개봉 ${d.w === "day" ? "확정" : "예정"}`, dday: diffDays(TODAY, d.date),
@@ -615,7 +619,7 @@ function evNote(base) {
 // a ranked row (상영 중 and 예매율 순위): rank cell, poster, title, chains · opening · category
 function rankMeta(f, r) {
   const od = f.d.p === "day" ? f.d.date : r && r.open, pre = od && od > TODAY;
-  return [f.ex.length ? exBadges(f) : chainsText(f), od ? (pre && !f.rs ? `<b class="ddc">${ddText(od)} 개봉</b>` : `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`) : preOpen(f) && '<b class="ddc">개봉 전</b>', od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? "재상영" : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
+  return [f.ex.length ? exBadges(f) : chainsText(f), od ? (pre && !f.rs ? `<b class="ddc">${ddText(od)} 개봉</b>` : `${f.rs ? ymd2(od) : md(od)} 개봉${preOpen(f) ? " 예정" : ""}`) : preOpen(f) && '<b class="ddc">개봉 전</b>', od && (pre ? (opened(f) ? "개봉 전 상영" : "") : f.rs ? runText(f) : `${diffDays(od, TODAY) + 1}일째`), catText(f)].filter(Boolean).join('<span class="sep">·</span>');
 }
 const nrow = (f, rk, right, title, r) => `<div class="row rank${f && S.id === f.id ? " sel" : ""}"${f ? ` data-id="${f.id}" tabindex="0"` : ""}>${rk}${f ? posterCell(f) : '<span class="ps"></span>'}
       <div class="rm">${f ? titleHTML(f) : `<div class="rt"><span>${esc(title)}</span></div>`}<div class="rs">${f ? rankMeta(f, r) : r && r.open ? `${md(r.open)} 개봉` : ""}</div></div><div class="rr">${right}</div>${f ? starBtn(f) : "<span></span>"}</div>`;
@@ -748,16 +752,24 @@ function watchSection() {
 }
 const stripItem = (f, sub, badge) => `<li data-id="${f.id}">${f.pst ? `<span class="pp">${badge || ""}<img src="data/posters/${f.pst}" alt="" loading="lazy"></span>` : `<span class="pp txt">${badge || ""}${esc(f.t)}</span>`}<b>${esc(f.t)}</b><span class="tn">${sub}</span></li>`;
 const stripCap = () => 16;
+// the strip's window: ahead for openings, back for re-screenings that just began
+const STRIP_DAYS = 14;
 function stripSection() {
-  const end = add(TODAY, 14);
+  const end = add(TODAY, STRIP_DAYS), since = add(TODAY, -STRIP_DAYS);
   const items = MR.films.filter(f => f.d.p === "day" && f.d.date > TODAY && f.d.date <= end && homeOk(f)).sort(bySortDate);
-  if (!items.length) return "";
+  // a re-screening starts without an announced date (f.rs): the ones first seen in the same
+  // window sit under the openings, newest first, so a returning film is not only in 상영 중
+  const rs = MR.films.filter(f => f.rsf && f.rsf >= since && isNow(f) && homeOk(f))
+    .sort((a, b) => (a.rsf < b.rsf ? 1 : a.rsf > b.rsf ? -1 : 0) || (a.bk ? a.bk.r : 999) - (b.bk ? b.bk.r : 999));
+  if (!items.length && !rs.length) return "";
   const up = MR.films.filter(f => isUp(f) && homeOk(f));
   const q = (k, label) => { const n = up.filter(f => f.cats.includes(k)).length; return n ? `<a class="qchip" href="${hashFor("upcoming", { F: new Set([k]), sort: "date", view: "list" })}">${label} <span class="tn">${n}</span></a>` : ""; };
   const quick = q("rr", "재개봉");
-  return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편</span><a class="end" href="#/upcoming">전체 일정</a></div>
+  return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편${rs.length ? ` · 재상영 ${rs.length}편` : ""}</span><a class="end" href="#/upcoming">전체 일정</a></div>
     ${quick ? `<div class="quick">${quick}</div>` : ""}
-    <ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul></section>`;
+    ${items.length ? `<ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul>` : ""}
+    ${rs.length ? `<div class="quick"><span class="qlbl">재상영 중</span><a class="qchip" href="${hashFor("now", { F: new Set(["rr"]) })}">상영 중 재개봉</a></div>
+    <ul class="strip">${rs.slice(0, stripCap()).map(f => stripItem(f, `${rsWhen(f)} · ${rsWhere(f)}`)).join("")}</ul>` : ""}</section>`;
 }
 // 예매율 순위 on the home screen: the KOBIS booking ranking as it is, showing and pre-release films
 // together; a pre-release film has an accent "D-n 개봉" (or "개봉 전") chip under its rate
