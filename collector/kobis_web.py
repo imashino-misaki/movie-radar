@@ -46,7 +46,7 @@ import re
 from .applicants import TRUST_WINDOW_MONTHS
 from .http import BlockedError, FetchError, check_block
 from .kmrb import months_back
-from .text import clean
+from .text import clean, norm_key
 
 DETAIL_URL = "https://www.kobis.or.kr/kobis/business/mast/mvie/searchMovieDtl.do"
 LIST_URL = "https://www.kobis.or.kr/kobis/business/mast/mvie/searchMovieList.do"
@@ -475,17 +475,57 @@ BOOKING_FIELDS = ("movie_cd", "rank", "rate", "presale_audience", "presale_sales
                   "total_audience", "total_sales", "open_dt", "rerelease_dt")
 
 
+def _undate_older(row: dict, rec: dict) -> dict:
+    """A title-joined row without its dates when they predate the record's
+    latest chain opening: the chains list an old film screened again whose
+    re-release KOBIS did not register, so the row's open_dt is the first run's
+    (checked 2026-11-03: 미션 2008-06-20 for a 2026-10-28 run, 더 랍스터
+    2021-04-29 for a 2026-11-11 run). The dates outrank the chains', so they
+    would move the record back to the old run."""
+    chain = max((str(rec["stages"].get(c, {}).get("release_date") or "")[:10]
+                 for c in ("megabox", "lotte", "cgv")), default="")
+    when = row.get("rerelease_dt") or row.get("open_dt") or ""
+    if chain and when and when < chain:
+        return {**row, "open_dt": "", "rerelease_dt": ""}
+    return row
+
+
 def apply_booking(films: list[dict], booking: dict) -> dict:
     """Attach stage "booking" {BOOKING_FIELDS..., as_of} (in place) to the
-    records of films with tickets on sale; the others lose the stage."""
+    records of films with tickets on sale; the others lose the stage.
+
+    A record with no KOBIS code (a film only a chain list brought in: an old
+    film screened again, a festival programme) joins a row by its exact
+    normalised title when exactly one such record and exactly one row share it.
+    Checked 2026-11-03: 206 of the 304 booking rows matched no code; among them
+    진격의 거인: 홍련의 화살 (재개봉 2026-10-28) and 쿵푸 허슬 (2026-10-28), whose
+    KOBIS 재개봉일 the page did not have."""
     by_cd = {r["movie_cd"]: r for r in booking["rows"]}
-    n = 0
+    coded = {c for rec in films for c in record_codes(rec)}
+    rows_by_title: dict[str, list[dict]] = {}
+    for r in booking["rows"]:
+        if r["movie_cd"] not in coded and norm_key(r.get("title", "")):
+            rows_by_title.setdefault(norm_key(r["title"]), []).append(r)
+    # every record of the title counts, coded ones too: a coded record of the same title means
+    # two films of that name, so the title decides nothing
+    recs_by_title: dict[str, list[dict]] = {}
+    for rec in films:
+        if norm_key(rec.get("title", "")):
+            recs_by_title.setdefault(norm_key(rec["title"]), []).append(rec)
+    by_title = {k: rs[0] for k, rs in rows_by_title.items()
+                if len(rs) == 1 and len(recs_by_title.get(k, [])) == 1 and not record_codes(recs_by_title[k][0])}
+    n = by_name = 0
     for rec in films:
         hit = next((by_cd[c] for c in sorted(record_codes(rec)) if c in by_cd), None)
+        if hit is None and not record_codes(rec):
+            hit = by_title.get(norm_key(rec.get("title", "")))
+            if hit is not None:
+                by_name += 1
+                hit = _undate_older(hit, rec)
         if hit is None:
             rec["stages"].pop("booking", None)
             continue
         rec["stages"]["booking"] = {**{k: hit[k] for k in BOOKING_FIELDS}, "as_of": booking["as_of"]}
         n += 1
-    return {"with_booking": n, "booking_unmatched": len(by_cd) - len(
-        {c for rec in films for c in record_codes(rec)} & set(by_cd))}
+    return {"with_booking": n, "booking_by_title": by_name,
+            "booking_unmatched": len(by_cd) - len(coded & set(by_cd)) - by_name}
