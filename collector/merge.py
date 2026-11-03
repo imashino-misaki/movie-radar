@@ -296,6 +296,7 @@ def apply_kobis(films: list[dict], cache: dict, kept_ids: list[str], trusted: se
                  "status": entry.get("prdtStatNm", ""),
                  "distributors": [mask_applicant(d) for d in entry.get("distributors", [])],
                  "genres": [g for g in entry.get("genres", []) if g],
+                 "nations": [n for n in entry.get("nations", []) if n],
                  "grades": sorted({a.get("watchGradeNm", "") for a in entry.get("audits", [])} - {""}),
                  "audit_nos": sorted({audit_no(a) for a in entry.get("audits", [])} - {""})}
         seen = entry.get("first_seen", today)

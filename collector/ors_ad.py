@@ -128,16 +128,31 @@ def merge_stage(a: dict | None, b: dict | None) -> dict:
                   set(a.get("dates", [])) | set(b.get("dates", [])),
                   set(a.get("kinds", [])) | set(b.get("kinds", [])),
                   set(a.get("applicants", [])) | set(b.get("applicants", [])),
-                  {**b.get("open", {}), **a.get("open", {})})
+                  {**b.get("open", {}), **a.get("open", {})},
+                  {**b.get("filings", {}), **a.get("filings", {})})
+
+
+# per filing, the public fields of its latest row: decision date, progress
+# label, medium (no names: the applicant is kept, masked, in `applicants`)
+FILING_KEYS = ("check_date", "progress", "media")
+
+
+def _filing(prev: dict | None, row: dict) -> dict:
+    """A filing's fields from today's row; a decision date seen before is kept
+    when the row no longer carries one."""
+    out = {k: row.get(k, "") for k in FILING_KEYS}
+    out["check_date"] = out["check_date"] or (prev or {}).get("check_date", "")
+    return out
 
 
 def _stage(rcv_nos: set, dates: set, kinds: set, applicants=frozenset(),
-           open_now: dict | None = None) -> dict:
+           open_now: dict | None = None, filings: dict | None = None) -> dict:
     dates = sorted(d for d in dates if d)
     return {"first_date": dates[0] if dates else "", "last_date": dates[-1] if dates else "",
             "kinds": sorted(kinds), "count": len(rcv_nos), "dates": dates,
             "rcv_nos": sorted(rcv_nos), "applicants": sorted(a for a in applicants if a),
-            "open": dict(sorted((open_now or {}).items()))}
+            "open": dict(sorted((open_now or {}).items())),
+            "filings": dict(sorted((filings or {}).items()))}
 
 
 def _activity(rec: dict) -> str:
@@ -209,7 +224,9 @@ def apply(films: list[dict], rows: list[dict], stamp: str,
     is the day); `withheld`: company keys of
     applicants with adult KMRB ratings. Filings accumulate across runs by
     receipt id; `open` is rewritten every run with the filings in today's
-    lists ({receipt id: status}), so a decided filing drops out of it."""
+    lists ({receipt id: status}), so a decided filing drops out of it;
+    `filings` keeps each filing's last-seen decision date, progress and
+    medium ({receipt id: {check_date, progress, media}})."""
     from .merge import _sort
 
     stats = {"ors_ad_rows": len(rows), "ors_ad_matched_rows": 0, "ors_ad_records": 0,
@@ -248,10 +265,13 @@ def apply(films: list[dict], rows: list[dict], stamp: str,
             stats["ors_ad_matched_rows"] += 1
         prev = rec["stages"].get("ors_ad") or {}
         open_now.setdefault(rec["id"], {})[r["rcv_no"]] = r["status"]
+        filings = dict(prev.get("filings", {}))
+        filings[r["rcv_no"]] = _filing(filings.get(r["rcv_no"]), r)
         rec["stages"]["ors_ad"] = _stage(set(prev.get("rcv_nos", [])) | {r["rcv_no"]},
                                          set(prev.get("dates", [])) | {r["date"]},
                                          set(prev.get("kinds", [])) | {r["kind"]},
-                                         set(prev.get("applicants", [])) | {r["applicant"]})
+                                         set(prev.get("applicants", [])) | {r["applicant"]},
+                                         filings=filings)
         rec["first_seen"]["ors_ad"] = min(stamp, rec["first_seen"].get("ors_ad", stamp))
         rec["last_seen"] = max(rec.get("last_seen", ""), day)
         touched[rec["id"]] = rec

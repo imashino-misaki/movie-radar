@@ -15,11 +15,15 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import logging
+import math
 from pathlib import Path
 
 from .http import FetchError
 from .merge import TitleIndex, _sort, ended_stage, fold_into, set_bookable, track_runs, upgrade_title
 from .tags import tag_film
+
+log = logging.getLogger("collector.cgv")
 
 KST = dt.timezone(dt.timedelta(hours=9))  # Asia/Seoul (no DST), as run.KST
 
@@ -31,6 +35,27 @@ STALE_CYCLES = 2
 STAGE_KEYS = ("movie_no", "status", "release_date", "release_month", "first_release_date",
               "rerelease", "grade", "poster", "booking_rate", "booking_rank", "bookable",
               "formats", "labels", "badge")
+
+
+def _number(value) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def numeric_fields(row: dict) -> int:
+    """Normalise the upload's numeric fields (in place) as cgv/parse.py writes
+    them: `booking_rate` a share >= 0 rounded to 2 places, `booking_rank` a
+    rank >= 1, either null when unknown. A field of any other type or range is
+    set to null, so one bad value cannot break later arithmetic; returns how
+    many were dropped."""
+    dropped = 0
+    rate, rank = row.get("booking_rate"), row.get("booking_rank")
+    if rate is not None and not (_number(rate) and rate >= 0):
+        rate, dropped = None, dropped + 1
+    row["booking_rate"] = None if rate is None else round(float(rate), 2)
+    if rank is not None and not (_number(rank) and rank == int(rank) and rank >= 1):
+        rank, dropped = None, dropped + 1
+    row["booking_rank"] = None if rank is None else int(rank)
+    return dropped
 
 
 def cgv_id(movie_no: str) -> str:
@@ -69,6 +94,7 @@ def read_upload(path: Path, now: dt.datetime) -> dict | None:
         if not isinstance(movies, list) or not movies:
             raise ValueError("no movies")  # an empty list would end every CGV stage
         rows = []
+        dropped = 0
         for m in movies:
             row = {k: m.get(k) for k in STAGE_KEYS}
             row["title"] = " ".join(str(m.get("title") or "").split())
@@ -82,15 +108,19 @@ def read_upload(path: Path, now: dt.datetime) -> dict | None:
             row["labels"] = list(row["labels"] or [])
             row["rerelease"] = bool(row["rerelease"])
             row["bookable"] = bool(row["bookable"])
+            dropped += numeric_fields(row)
             rows.append(row)
     except (ValueError, KeyError, TypeError) as exc:
         raise FetchError(f"cgv upload: {type(exc).__name__}: {exc}") from None
+    if dropped:
+        log.warning("cgv upload: %d numeric fields dropped (wrong type or range)", dropped)
     seen_ids: set[str] = set()
     rows = [r for r in rows if not (r["movie_no"] in seen_ids or seen_ids.add(r["movie_no"]))]
     age = (now.astimezone(dt.timezone.utc) - fetched).total_seconds() / 60
     limit = stale_after_minutes(doc)
     return {"rows": rows, "seen": fetched.astimezone(KST).date().isoformat(), "stats": {
         "rows": len(rows),
+        "dropped_fields": dropped,
         "now": sum(r["status"] == "now" for r in rows),
         "upcoming": sum(r["status"] == "upcoming" for r in rows),
         "fetched_at": fetched.isoformat().replace("+00:00", "Z"),

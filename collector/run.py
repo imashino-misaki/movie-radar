@@ -324,7 +324,19 @@ def collect(client, data_dir: Path, now: dt.datetime, kobis_key: str | None = No
         release_meta = release.apply(films, lags, today_kst, openings_checked=checked)
     except Exception as exc:  # noqa: BLE001 - a model failure must not stop the collection
         log.warning("release model failed: %s", exc)
-        release_meta, lags = {"status": "error", "reason": f"{type(exc).__name__}: {exc}"[:200]}, None
+        release_meta = {"status": "error", "reason": f"{type(exc).__name__}: {exc}"[:200]}
+        # the records carry last run's `release`: re-derive it from this
+        # run's sources alone (no model), so a fresh source date replaces it
+        # and no stale estimate stays; if even that fails, none is kept
+        try:
+            release_meta["fallback"] = release.apply_sources(films, lags, today_kst)
+        except Exception as exc2:  # noqa: BLE001
+            log.warning("release sources failed: %s", exc2)
+            for f in films:
+                f.pop("release", None)
+            release_meta["fallback"] = {"status": "error",
+                                        "reason": f"{type(exc2).__name__}: {exc2}"[:200]}
+        lags = None  # a half-updated file is not written
     # theatrical / candidate / non-theatrical class (collector/theatrical.py)
     try:
         theatrical_meta = theatrical.apply(

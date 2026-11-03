@@ -351,25 +351,43 @@ def record_codes(rec: dict) -> set[str]:
 # window, a release-schedule entry, tickets on sale, a chain listing, a
 # trailer or poster filing
 ACTIVE_STAGES = frozenset({"intake", "rating", "schedule", "booking", "megabox", "lotte", "cgv", "promo"})
+CHAIN_STAGES = ("megabox", "lotte", "cgv")
 # the same year the applicant trust rule looks back (applicants.py)
 DORMANT_MONTHS = TRUST_WINDOW_MONTHS
 
 
+def _ended_chain_dates(st: dict) -> list[str]:
+    """Dates of chain stages that ended (the film left the chain's list): the
+    last day of each listing period, the stage's first sighting and its release
+    date. An ended listing is past evidence, not activity."""
+    out = []
+    for name in CHAIN_STAGES:
+        stage = st.get(name)
+        if stage and stage.get("status") == "ended":
+            out += [stage.get("first_seen", ""), stage.get("release_date", ""),
+                    *(r.get("to", "") for r in stage.get("runs", []))]
+    return out
+
+
 def dormant(rec: dict, today: dt.date) -> bool:
     """A KOBIS 개봉예정 / 개봉준비 entry nobody has touched for a year: no
-    active stage, and the KOBIS page's last edit, any opening or re-release
+    active stage (a chain listing that ended counts by its dates instead), and
+    the KOBIS page's last edit, any ended chain listing, any opening or re-release
     date and any past rating all older than DORMANT_MONTHS (or missing). Some
     were registered a decade ago and never opened, or kept 개봉예정 next to an
     opening date that passed years ago."""
     st = rec["stages"]
-    if "kobis" not in st or ACTIVE_STAGES & set(st):
+    active = {k for k in ACTIVE_STAGES & set(st)
+              if not (k in CHAIN_STAGES and st[k].get("status") == "ended")}
+    if "kobis" not in st or active:
         return False
     modified = st.get("kobis_detail", {}).get("modified", "")[:10]
     if not modified:
         return False
     hist = st.get("release_history", {})
     latest = max([modified, st["kobis"].get("open_dt", ""), hist.get("open_dt", ""),
-                  *hist.get("rereleases", []), st.get("past_rating", {}).get("date", "")])
+                  *hist.get("rereleases", []), st.get("past_rating", {}).get("date", ""),
+                  *_ended_chain_dates(st)])
     return latest < months_back(today, DORMANT_MONTHS).isoformat()
 
 

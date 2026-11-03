@@ -16,6 +16,7 @@ from __future__ import annotations
 import copy
 import datetime as dt
 import json
+import math
 import os
 import re
 from collections import defaultdict
@@ -59,11 +60,10 @@ SOURCE_LABELS = (
     ("cgv", "CGV"),
 )
 
-# Word scale for model estimates, applied to ``release.p_open_real`` (the probability of ever
-# opening for real, else ``release.p_open``;
-# the last ``release.by`` value when it is missing). Thresholds of the approved
-# viewer design, stated to users in the page's "확률 읽는 법" note: 유력 >= 80 %, 가능 50-79 %,
-# 불확실 < 50 %.
+# Word scale for model estimates, applied to the shown probability (``certainty``: a real opening
+# when the model gives one, else any opening, labelled as such; the last ``release.by`` value when
+# both are missing). Thresholds of the approved viewer design, stated to users in the page's
+# "확률 읽는 법" note: 유력 >= 80 %, 가능 50-79 %, 불확실 < 50 %.
 LIKELY = 0.80
 POSSIBLE = 0.50
 # The detail page draws an estimate as DOTS similar films. A film whose p_open rounds to none of
@@ -242,49 +242,109 @@ def pct(p: float) -> str:
     return f"{min(99, round(p * 100))}%"
 
 
+def pct_low(p: float) -> str:
+    """pct, with "1% 미만" for a chance that rounds to 0 % (app.js pctLow)."""
+    return "1% 미만" if p < 0.01 else pct(p)
+
+
+def number(v: Any) -> float | None:
+    """A finite number, else None: a field of an upload (a string "2.5", a bool, NaN) that is no
+    number degrades to missing instead of failing the build."""
+    if isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v):
+        return None
+    return v
+
+
 # ---------------------------------------------------------------------------- certainty
+# The word of an announced day, by its display date_tier (how exactly films of its state opened on
+# the announced day, given they opened: release.tier_table), else by its display tier (the
+# interval the state's measured hit rates vouch for, release.TIER_GATES): only "confirmed" reads
+# as a confirmed day, and a day whose state passed no gate (tier "estimate", `validated` false)
+# as announced only.
+DAY_WORD = {"confirmed": "day", "likely": "week", "expected": "dmon"}
+
+
+def _probability(out: dict, rel: dict) -> None:
+    """po: the shown probability; pk: its target, "real" (a real opening, token releases counted
+    as none) or "any" (any opening, token releases included: shown only when the real-opening
+    model gives none, and labelled so); pa: P(any opening) beside a real one. None for an opened
+    film."""
+    if rel.get("signal_state") == "opened":
+        return
+    pa, pr = rel.get("p_open"), rel.get("p_open_real")
+    if pr is not None:
+        out.update(po=round(pr, 3), pk="real")
+        if pa is not None:
+            out["pa"] = round(pa, 3)
+    elif pa is not None:
+        out.update(po=round(pa, 3), pk="any")
+
+
 def certainty(rel: dict) -> dict:
     """One certainty per film, shared by every view. Keys: p (day / month / est / none), w (word
-    key), and per kind: day: date | month: m | est: md / lo / hi (the model's median, p10 and p90
-    dates, given it opens), mm (the median's month, the page's grouping), po (``release.p_open``:
-    P(it ever opens | not open yet)), by [[deadline, p]...] (cumulative, for the detail chart),
-    pp (p at the last deadline), dl (the last deadline: the model's last ``by`` key)."""
+    key, WORD), po / pk / pa (``_probability``), and per kind: day: date, t (the display tier),
+    v (false: the date is shown as announced, no measured hit rate backs it) | month: m, t, v |
+    est: md / lo / hi (the median, p10 and p90 dates, given it opens, of the shown probability's
+    target), mm (the median's month, the page's grouping), by [[deadline, p]...] (cumulative, for
+    the detail chart's deadlines), pp (p at the last deadline), dl (the last ``by`` key).
+
+    An announced day keeps its date (the page groups and counts down by it) but its word follows
+    ``release.display``. An estimate shows the real-opening probability only together with the
+    real-opening timing (``quantiles_real``); without that timing the probability and the dates
+    are both the any-opening ones (pk "any"), never one target's dates beside the other's
+    probability."""
     prec = rel.get("precision")
+    disp = rel.get("display") or {}
+    tier = disp.get("tier")
+    out: dict[str, Any]
     if prec in ("day", "week") and rel.get("date"):
-        return {"p": "day", "w": "day", "date": rel["date"]}
-    if prec == "month" and rel.get("date"):
-        return {"p": "month", "w": "month", "m": rel["date"][:7]}
-    if prec == "estimate":
+        out = {"p": "day", "w": "day", "date": rel["date"]}
+        if disp.get("date_tier"):
+            # an announced day is graded by how exactly films open on it given that they open
+            # (release.tier_table tier_given_open); a confirmed day shows no probability
+            out.update(t=disp["date_tier"], w=DAY_WORD.get(disp["date_tier"], "ann"))
+            if out["w"] == "day":
+                return out
+        elif tier:
+            out.update(t=tier, w=DAY_WORD.get(tier, "ann") if disp.get("validated") is not False else "ann")
+    elif prec == "month" and rel.get("date"):
+        out = {"p": "month", "w": "month", "m": rel["date"][:7]}
+        if tier:
+            out["t"] = tier
+    elif prec == "estimate":
         by = sorted((rel.get("by") or {}).items())
-        q = rel.get("quantiles") or {}
-        # the shown probability is a real opening (KOFIC: 40+ screenings in the year,
-        # lags_build.real_open); a token release (few screenings ahead of VOD) counts as
-        # none. pa: any opening, token included (the detail page names it when it differs)
-        pa = rel.get("p_open")
-        po = rel.get("p_open_real") if rel.get("p_open_real") is not None else pa
+        real_q = rel.get("quantiles_real") if rel.get("p_open_real") is not None else None
+        q = real_q or rel.get("quantiles") or {}
+        out = {"p": "est"}
+        _probability(out, rel if real_q else {k: v for k, v in rel.items() if k != "p_open_real"})
         pp = by[-1][1] if by else None
-        # the word grades the probability shown next to it: p_open (the last deadline's p without it)
-        p = po if po is not None else pp
+        # the word grades the probability shown next to it (the last deadline's p without one)
+        p = out.get("po", pp)
         w = "unknown" if p is None else "likely" if p >= LIKELY else "possible" if p >= POSSIBLE else "unknown"
-        if po is not None and round(DOTS * po) == 0:
+        if out.get("po") is not None and round(DOTS * out["po"]) == 0:
             w = "rare"
         md = q.get("p50") or None
-        return {"p": "est", "w": w, "md": md, "lo": q.get("p10") or None, "hi": q.get("p90") or None,
-                "mm": md[:7] if md else None, "po": round(po, 3) if po is not None else None,
-                "pa": round(pa, 3) if pa is not None else None,
-                "by": [[k, round(v, 3)] for k, v in by], "pp": round(pp, 3) if pp is not None else None,
-                "dl": by[-1][0] if by else None,
-                # sm: the model has no record of the company and uses the overall fit only
-                # ("자료 적음"). Not `established`: the any-opening model's companies differ so
-                # little that no company outweighs the prior (k_rows 283.6, 0 companies, 2026-11-02)
-                "sm": rel.get("model") == "overall",
-                # seg: the rating-day segment behind a rare estimate (short / vod_applicant / ...)
-                "seg": rel.get("segment") or None}
-    return {"p": "none", "w": "none"}
+        out.update(w=w, md=md, lo=q.get("p10") or None, hi=q.get("p90") or None, mm=md[:7] if md else None,
+                   by=[[k, round(v, 3)] for k, v in by], pp=round(pp, 3) if pp is not None else None,
+                   dl=by[-1][0] if by else None,
+                   # sm: the model has no record of the company and uses the overall fit only
+                   # ("자료 적음"). Not `established`: the any-opening model's companies differ so
+                   # little that no company outweighs the prior (k_rows 283.6, 0 companies, 2026-11-02)
+                   sm=rel.get("model") == "overall",
+                   # seg: the rating-day segment behind a rare estimate (short / vod_applicant / ...)
+                   seg=rel.get("segment") or None)
+        out.setdefault("po", None)
+        return out
+    else:
+        return {"p": "none", "w": "none"}
+    if disp.get("validated") is False:
+        out["v"] = False
+    _probability(out, rel)
+    return out
 
 
-WORD = {"day": "확정", "month": "월 공개", "likely": "유력", "possible": "가능", "unknown": "불확실",
-        "rare": "가능성 낮음", "none": "근거 부족"}
+WORD = {"day": "확정", "week": "주 단위", "dmon": "월 단위", "ann": "발표", "month": "월 공개", "likely": "유력",
+        "possible": "가능", "unknown": "불확실", "rare": "가능성 낮음", "none": "근거 부족"}
 
 
 def median_text(iso: str) -> str:
@@ -296,7 +356,9 @@ def cert_text(c: dict, today: str) -> str:
     """Same wording as app.js cert(): used in the feeds."""
     cur = int(today[:4])
     if c["p"] == "day":
-        return f"{kd(c['date'])} 개봉" if c["date"] <= today else f"{kd(c['date'])} 개봉 확정"
+        if c["date"] <= today:
+            return f"{kd(c['date'])} 개봉"
+        return f"{kd(c['date'])} 개봉 {'확정' if c['w'] == 'day' else '예정'}"
     if c["p"] == "month":
         return f"{mon(c['m'], cur)} 개봉 예정"
     if c["p"] == "est" and c.get("w") == "rare":
@@ -534,13 +596,39 @@ def dedupe(films_raw: list[Film]) -> tuple[list[Film], dict[str, str], list[dict
     return films, dict(sorted(aliases.items())), log, members, editions
 
 
+CHAIN_STAGES = ("megabox", "lotte", "cgv")
+
+
+def _last_listed(stage: dict) -> str:
+    """The last day of a chain stage's listing periods ("" before periods were kept)."""
+    return max((r.get("to") or "" for r in stage.get("runs") or []), default="")
+
+
+def reconcile_chain(a: dict, b: dict) -> dict:
+    """One chain stage of a film from two of its records (a lead's plain-title listing, a 4DX
+    variant's): the listing still on the chain's list over an ended one, then the one listed last,
+    else ``a``; the listing periods of both kept (deduplicated, oldest first)."""
+    def key(st: dict) -> tuple:
+        return st.get("status") != "ended", _last_listed(st)
+    out = dict(b if key(b) > key(a) else a)
+    runs = {json.dumps(r, sort_keys=True): r for r in (a.get("runs") or []) + (b.get("runs") or [])}
+    if runs:
+        out["runs"] = sorted(runs.values(), key=lambda r: (r.get("from") or "", r.get("to") or ""))
+    return out
+
+
 def absorb(lead: Film, other: Film) -> None:
-    """Fold one more record of the film into its lead (in place): stages the lead lacks, the
-    earliest first sightings, tags, poster, original title, the strongest theatrical class, and the
-    release when the other record has a more precise one (an announced or confirmed day over a
-    month over a model estimate, whatever source gave it)."""
+    """Fold one more record of the film into its lead (in place): stages the lead lacks (a chain
+    stage both have: ``reconcile_chain``), the earliest first sightings, tags, poster, original
+    title, the strongest theatrical class, and the release when the other record has a more precise
+    one (an announced or confirmed day over a month over a model estimate, whatever source gave
+    it)."""
+    stages = lead.setdefault("stages", {})
     for k, v in (other.get("stages") or {}).items():
-        lead.setdefault("stages", {}).setdefault(k, v)
+        if k in CHAIN_STAGES and isinstance(stages.get(k), dict) and isinstance(v, dict):
+            stages[k] = reconcile_chain(stages[k], v)
+        else:
+            stages.setdefault(k, v)
     for k, v in (other.get("first_seen") or {}).items():
         fs = lead.setdefault("first_seen", {})
         fs[k] = min(v, fs.get(k, v))
@@ -611,8 +699,53 @@ def _trace_label(src: str, stage: dict) -> str:
     if src == "kobis":
         return "KOBIS 등록"
     if src == "program":
-        return f"메가박스 {stage.get('program') or '기획전'}"
+        return program_name(stage)
     return f"{CHAIN_NAME.get(src, src)} 목록 등장"
+
+
+def program_name(entry: dict) -> str:
+    """A programme entry in words, with its chain unless the name already says it ("CGV ONLY",
+    "메가박스 MEGA ONLY", "롯데시네마 롯시픽")."""
+    name = entry.get("program") or "기획전"
+    chain = CHAIN_NAME.get(entry.get("chain") or "", "")
+    return name if not chain or chain.lower() in name.lower() else f"{chain} {name}"
+
+
+def program_entries(stage: dict | None) -> list[dict]:
+    """The programme stage's entries: its main one, then `also` (programs.apply)."""
+    if not stage:
+        return []
+    return [{k: v for k, v in stage.items() if k != "also"}] + list(stage.get("also") or [])
+
+
+# ---------------------------------------------------------------------------- date sources
+# release.sources keys -> the source named on the detail page; a source counts for the shown date
+# only when it gives that date (a list: when it holds it)
+SOURCE_NAME = {"kobis": "KOBIS", "kobis_api": "KOBIS", "kobis_rereleases": "KOBIS", "release_lags": "KOBIS",
+               "booking": "KOBIS", "booking_rerelease": "KOBIS", "schedule": "KOBIS",
+               "megabox": "메가박스", "lotte": "롯데시네마", "cgv": "CGV"}
+# release.basis -> its source keys, named first
+BASIS_KEYS = {"kobis": ("kobis", "kobis_api", "kobis_rereleases", "release_lags"),
+              "booking": ("booking", "booking_rerelease"), "schedule": ("schedule",),
+              "chain": ("megabox", "lotte", "cgv", "program")}
+
+
+def date_sources(rel: dict, shown: str, stages: dict) -> list[str]:
+    """The sources that give the shown date (a day, or a month "YYYY-MM"), the release's basis
+    first. A programme counts as its chain."""
+    srcs = rel.get("sources") or {}
+    keys = list(BASIS_KEYS.get(rel.get("basis") or "", ())) + [k for k in srcs if not k.endswith("_month")]
+    out: list[str] = []
+    for k in keys:
+        v = srcs.get(k)
+        vals = v if isinstance(v, list) else [v]
+        if not any(isinstance(x, str) and x[:len(shown)] == shown and len(x) in (len(shown), 10) for x in vals):
+            continue
+        name = CHAIN_NAME.get((stages.get("program") or {}).get("chain") or "", "") if k == "program" \
+            else SOURCE_NAME.get(k, "")
+        if name and name not in out:
+            out.append(name)
+    return out
 
 
 def promo_dates(stage: dict) -> list[str]:
@@ -703,10 +836,16 @@ def first_sighting(records: list[Film], base: dict[str, str], kobis_code: str = 
 # Owner-approved display rules for "업데이트": a film's forecast is recorded again only when it
 # changed meaningfully against its last record: the median moved at least MEDIAN_SHIFT_DAYS, the
 # p10-p90 range shrank by at least RANGE_SHRINK of its width, or the precision (day / month /
-# estimate / none), the announced date or month, or the display tier changed.
+# estimate / none), the announced date or month, or the display tier changed. An estimate's
+# probability counts as changed when its word (pw: rare / unknown / possible / likely) changed:
+# the word boundaries are the page's own scale (LIKELY, POSSIBLE, and DOTS for "rare"), so a
+# change is news exactly when the page would describe the film differently; a move inside one
+# word (0.85 -> 0.81) is not. The target of the probability (pk) changing (the real-opening
+# timing appearing or going) re-seeds the history: recorded, but no event, since the dates and
+# the probability then describe another question, not news about the film.
 MEDIAN_SHIFT_DAYS = 7
 RANGE_SHRINK = 0.25
-FORECAST_KINDS = ("conf", "moved", "mon", "shift", "narrow", "upd", "tier")
+FORECAST_KINDS = ("conf", "moved", "mon", "shift", "narrow", "upd", "tier", "prob")
 # Display tiers (collector/release.py TIER_GATES) in words: the interval a tier vouches for.
 TIER_WORD = {"confirmed": "확정", "likely": "주 단위", "expected": "월 단위", "estimate": "추정"}
 
@@ -721,9 +860,16 @@ def snapshot(rel: dict) -> dict:
         snap["date"] = c["m"]
     elif c["p"] == "est":
         snap.update(p50=c.get("md"), p10=c.get("lo"), p90=c.get("hi"))
+        if c.get("po") is not None:
+            # po / pk: the shown probability and its target; pw: its word (the change rule);
+            # ss: the signal state behind it (context: a state change alone has its own source
+            # event: a rating, a promo, an ad filing, a date)
+            snap.update(po=c["po"], pk=c["pk"], pw=c["w"])
     tier = (rel.get("display") or {}).get("tier")
     if tier:
         snap["tier"] = tier
+    if c["p"] == "est" and rel.get("signal_state"):
+        snap["ss"] = rel["signal_state"]
     return snap
 
 
@@ -735,18 +881,37 @@ def _width(s: dict) -> int | None:
     return _days(s["p10"], s["p90"]) if s.get("p10") and s.get("p90") else None
 
 
+def _retargeted(prev: dict, cur: dict) -> bool:
+    """Both estimates, of different probability targets (an entry from before the field had the
+    any-opening timing: the only one shown then)."""
+    return prev.get("p") == cur.get("p") == "est" and prev.get("pk", "any") != cur.get("pk", "any")
+
+
 def changed(prev: dict, cur: dict) -> bool:
     if prev.get("p") != cur.get("p") or prev.get("tier") != cur.get("tier"):
         return True
     if cur["p"] in ("day", "month"):
         return prev.get("date") != cur.get("date")
     if cur["p"] == "est":
-        a, b = prev.get("p50"), cur.get("p50")
-        if bool(a) != bool(b) or (a and b and abs(_days(a, b)) >= MEDIAN_SHIFT_DAYS):
+        if _retargeted(prev, cur):
             return True
-        wa, wb = _width(prev), _width(cur)
-        return bool(wa and wb is not None and wb <= wa * (1 - RANGE_SHRINK))
+        return _reworded(prev, cur) or _dates_moved(prev, cur)
     return False
+
+
+def _reworded(prev: dict, cur: dict) -> bool:
+    """The probability's word changed (an entry from before pw was kept has none to compare)."""
+    return "pw" in prev and "pw" in cur and prev["pw"] != cur["pw"]
+
+
+def _dates_moved(prev: dict, cur: dict) -> bool:
+    """Two estimates' dates differ meaningfully: a median appeared or went, moved at least
+    MEDIAN_SHIFT_DAYS, or the p10-p90 range shrank by RANGE_SHRINK."""
+    a, b = prev.get("p50"), cur.get("p50")
+    if bool(a) != bool(b) or (a and b and abs(_days(a, b)) >= MEDIAN_SHIFT_DAYS):
+        return True
+    wa, wb = _width(prev), _width(cur)
+    return bool(wa and wb is not None and wb <= wa * (1 - RANGE_SHRINK))
 
 
 def update_history(history: dict, films_raw: list[Film], today: str) -> dict:
@@ -791,26 +956,32 @@ def _state_text(s: dict, cur_year: int) -> str:
 
 def forecast_events(entries: list[dict], cur_year: int) -> list[tuple[str, str, str, int]]:
     """(day, kind, words, n) per recorded change, n its index in ``entries`` (a stable key: the
-    history is append-only). The first entry is the seed and makes none; every later entry makes
-    exactly one: the specific wording below, else the change in words ("upd"), else (only the
-    display tier moved) the tiers ("tier")."""
+    history is append-only). The first entry is the seed and makes none, and so does an entry
+    that re-seeds on a new probability target (``_retargeted``); every other later entry makes
+    exactly one: the specific wording below, else the change in words ("upd"), else the
+    probability's word ("prob"), else (only the display tier moved) the tiers ("tier"). A day
+    reads as confirmed (확정) only in the confirmed display tier (an entry from before tiers were
+    kept: as it was worded then), else as announced (발표)."""
     out = []
     for n, (prev, cur) in enumerate(zip(entries, entries[1:]), 1):
         if not changed({k: v for k, v in prev.items() if k != "d"}, {k: v for k, v in cur.items() if k != "d"}):
             continue
+        if _retargeted(prev, cur):
+            continue
         pp, cp = prev.get("p"), cur.get("p")
+        said = "확정" if cur.get("tier") in (None, "confirmed") else "발표"
         ev: tuple[str, str] | None = None
         if cp == "day" and pp == "day" and prev.get("date") != cur.get("date"):
             if _days(prev["date"], cur["date"]) >= PRIOR_DAYS:
                 # an old opening replaced by a date a year or more later is a re-release (the
                 # same gap promo.py reads as one), not a moved opening
-                ev = ("moved", f"재개봉 확정 · {kd(cur['date'], False)}")
+                ev = ("moved", f"재개봉 {said} · {kd(cur['date'], False)}")
             else:
                 was = (f"{prev['date'][:4]}년 " if prev["date"][:4] != cur["date"][:4] else "") + kd(prev["date"], False)
                 ev = ("moved", f"개봉일 변경 {was} → {kd(cur['date'], False)}")
         elif cp == "day" and pp != "day":
-            ev = ("conf", f"월 공개 → {kd(cur['date'], False)} 확정" if pp == "month"
-                  else f"개봉일 확정 {kd(cur['date'], False)}")
+            ev = ("conf", f"월 공개 → {kd(cur['date'], False)} {said}" if pp == "month"
+                  else f"개봉일 {said} {kd(cur['date'], False)}")
         elif cp == "month" and pp == "month" and prev.get("date") != cur.get("date"):
             ev = ("mon", f"개봉 월 변경 {mon(prev['date'], cur_year)} → {mon(cur['date'], cur_year)}")
         elif cp == "month" and pp != "month":
@@ -821,14 +992,15 @@ def forecast_events(entries: list[dict], cur_year: int) -> list[tuple[str, str, 
                 ev = ("shift", f"개봉일 미정으로 바뀜 · 예상 {kd(b, False)}경")
             elif pp == "est" and a and abs(_days(a, b)) >= MEDIAN_SHIFT_DAYS:
                 ev = ("shift", f"예상 {kd(a, False)}경 → {kd(b, False)}경")
-            elif pp == "est" and changed({k: v for k, v in prev.items() if k not in ("d", "tier")},
-                                         {k: v for k, v in cur.items() if k not in ("d", "tier")}) \
-                    and cur.get("p10") and cur.get("p90"):
+            elif pp == "est" and _dates_moved(prev, cur) and cur.get("p10") and cur.get("p90"):
                 ev = ("narrow", f"예상 범위가 좁혀졌어요 ({_part(cur['p10'])}~{_part(cur['p90'])})")
         if ev is None:
             was, now = _state_text(prev, cur_year), _state_text(cur, cur_year)
             if was != now:
                 ev = ("upd", f"{was} → {now}")
+            elif cp == pp == "est" and _reworded(prev, cur):
+                ev = ("prob", f"개봉 확률 {WORD[prev['pw']]} → {WORD[cur['pw']]} "
+                              f"({pct_low(prev['po'])} → {pct_low(cur['po'])})")
             else:
                 ev = ("tier", f"예측 등급 {TIER_WORD.get(prev.get('tier'), '없음')} → "
                               f"{TIER_WORD.get(cur.get('tier'), '없음')}")
@@ -872,11 +1044,19 @@ NEXT = {
     "month_announced": "정확한 개봉일 발표",
     "day_announced": "극장 예매 오픈",
     "bookable": "개봉",
+    "passed_unverified": "KOBIS 개봉 기록",
 }
 EVW = {"filed": "등급 심의 신청", "rated": "등급 결정", "promo": "포스터·예고편 심의", "ad": "광고 심의 신청",
        "date": "개봉일 발표", "month": "개봉월 발표", "kobis": "KOBIS 등록", "chain": "극장 목록 등장",
        "open": "예매 시작", "excl": "단독 상영 발표"}
 CHN = {"megabox": "메가박스", "lotte": "롯데시네마"}
+
+
+def horizons(within: dict | None) -> list[list] | None:
+    """release.within ({"30": p, ...}) as [[30, p], ...], shortest first; None without numbers."""
+    rows = sorted((int(k), round(v, 3)) for k, v in (within or {}).items()
+                  if str(k).isdigit() and number(v) is not None)
+    return [list(r) for r in rows] or None
 
 
 def _js(name: str, obj: Any) -> str:
@@ -1020,7 +1200,10 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         # tickets on sale at a chain before the opening day: bookable, as KOBIS booking says
         if c["ss"] == "day_announced" and any(chain_bookable(x) for x in (mb, lt, cg)):
             c["ss"] = "bookable"
-        outside = (f.get("theatrical") or {}).get("class") == "unlikely" or "dormant" in tags
+        # not shown in the radar (kept for search with "개봉 불확실작 포함"): applicants that almost
+        # never open in cinemas, records of ad filings alone whose applicants have no theatrical
+        # history (theatrical.py; the README's "극장 외"), and dormant records
+        outside = (f.get("theatrical") or {}).get("class") in ("unlikely", "ad_only") or "dormant" in tags
         cats = []
         if is_anime([f, *members.get(f["id"], [])], tags):  # official genre first, title heuristic only without one
             cats.append("ani")
@@ -1042,18 +1225,19 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
         if st.get("cgv") or "chain_cgv" in tags:
             chains.append("cgv")
         excl = []
-        if (cg or {}).get("cgv_only") or "cgv_only" in ((cg or {}).get("labels") or []):
-            excl.append("cgv")
         pg = st.get("program") or {}
+        progs = program_entries(st.get("program"))
+        pg_excl = {e.get("chain") for e in progs if e.get("exclusive") and not e.get("ended")}
         # an ended chain listing no longer says the film is exclusive there
         mb_on = mb if (mb or {}).get("status") != "ended" else None
         lt_on = lt if (lt or {}).get("status") != "ended" else None
-        if (mb_on or {}).get("exclusive") or (pg.get("exclusive") and pg.get("chain") == "megabox"):
-            excl.append("mb")
-        if pg.get("exclusive") and pg.get("chain") == "cgv" and "cgv" not in excl:
+        cg_on = cg if (cg or {}).get("status") != "ended" else None
+        if (cg_on or {}).get("cgv_only") or "cgv_only" in ((cg_on or {}).get("labels") or []) or "cgv" in pg_excl:
             excl.append("cgv")
+        if (mb_on or {}).get("exclusive") or "megabox" in pg_excl:
+            excl.append("mb")
         # 롯시픽 badge, or Lotte's own 단독 개봉 flag (SoloOpenYN, lotte.parse_row)
-        if (lt_on or {}).get("badge") == "pick" or (lt_on or {}).get("exclusive"):
+        if (lt_on or {}).get("badge") == "pick" or (lt_on or {}).get("exclusive") or "lotte" in pg_excl:
             excl.append("lt")
         uid = stable_id(members.get(f["id"], [f]))
         poster = Path(f["poster"]).name if f.get("poster") else None
@@ -1070,8 +1254,9 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             item["bk"] = dict(r=bk.get("rank"), rate=bk.get("rate"), pa=bk.get("presale_audience"),
                               ta=bk.get("total_audience"))
         # br: each chain's own booking share in % (its site's ranking; showing and presale together)
-        br = {k: round(x["booking_rate"], 2) for k, x in (("cg", cg), ("mb", mb), ("lt", lt))
-              if x and x.get("status") != "ended" and (x.get("booking_rate") or 0) > 0}
+        # (a share that is no number, from a bad upload, is left out: that share only)
+        br = {k: round(number(x.get("booking_rate")), 2) for k, x in (("cg", cg), ("mb", mb), ("lt", lt))
+              if x and x.get("status") != "ended" and (number(x.get("booking_rate")) or 0) > 0}
         if br:
             item["br"] = br
         if mb:
@@ -1118,30 +1303,41 @@ def build(films_raw: list[Film], bo_days: dict[str, list[dict]], lag_rows: list[
             if len(when) == 10:
                 when = kd(when)
             tl.append([day(fs.get("kobis")), "KOBIS 등록 확인", f"개봉일 {when}" if when else "개봉일 미정", "KOBIS", 0])
-        for key, nm in (("megabox", "메가박스"), ("lotte", "롯데시네마")):
-            cc = st.get(key)
+        for key in CHAIN_STAGES:
+            cc, nm = st.get(key), CHAIN_NAME[key]
             if cc:
                 rd = cc.get("release_date") or ""
                 tl.append([day(fs.get(key)), f"{nm} 목록에 등장",
                            CHAIN_ST.get(chain_code(cc, last_date), "") + (f" · 개봉 {kd(rd)}" if len(rd) == 10 else ""), nm, 0])
         if pg:
-            tl.append([day(fs.get("program")),
-                       f"메가박스 {pg.get('program') or '기획전'}" + (" · 단독 상영" if pg.get("exclusive") else ""),
-                       f"상영 {kd(pg['date'])}" if pg.get("date") else "", "메가박스", 0])
+            # the main entry, dated by the programme's first sighting (the stage keeps one)
+            rd = pg.get("date") or ""
+            tl.append([day(fs.get("program")), program_name(pg) + (" · 단독 상영" if pg.get("exclusive") else ""),
+                       f"상영 {kd(rd)}" if len(rd) == 10 else "", CHAIN_NAME.get(pg.get("chain") or "", "기획전"), 0])
         tl = [x for x in tl if x[0]]
         tl.sort(key=lambda x: (x[0], x[1], x[2]), reverse=True)
         comps = [[cc["role"], clean_co(cc.get("name"))] for cc in kdet.get("companies", [])
                  if cc.get("role") in ("배급사", "수입사", "제작사")]
-        chain_seen = [day(fs[k]) for k in ("megabox", "lotte") if day(fs.get(k))]
+        chain_seen = [day(fs[k]) for k in CHAIN_STAGES if st.get(k) and day(fs.get(k))]
         details[f["id"]] = dict(
             tl=tl, ft=first_sighting(members.get(f["id"], [f]), base, kobis_code, keep_boot=True),
             syn=kdet.get("synopsis", ""), comps=comps, rt=runtime_of(st),
-            co=(st.get("rating") or {}).get("country", ""), q=(rel.get("quantiles") or None),
+            co=(st.get("rating") or {}).get("country", "")
+            or ", ".join(n for n in (st.get("kobis") or {}).get("nations") or [] if isinstance(n, str) and n),
             hist=(f.get("theatrical") or {}).get("applicant_history"),
             nxt=NEXT.get(rel.get("signal_state") or "") if c["p"] != "day" or c["date"] > last_date else None,
             mbd=(mb or {}).get("release_date"), ltd=(lt or {}).get("release_date"),
-            cgd=(cg or {}).get("release_date") or None, q20=rel.get("q20") if c["p"] == "est" else None, bkas=(bk or {}).get("as_of"),
-            ltpick=(lt or {}).get("badge") == "pick", prog=pg.get("program") if pg else None,
+            cgd=(cg or {}).get("release_date") or None, bkas=(bk or {}).get("as_of"),
+            # q20 / wn: the timing (20 quantiles) and P(open within n days) of the shown
+            # probability's target (certainty: real-opening fields only with a real probability)
+            q20=rel.get("q20_real" if c.get("pk") == "real" else "q20") if c["p"] == "est" else None,
+            wn=horizons(rel.get("within_real" if c.get("pk") == "real" else "within")) if c["p"] == "est" else None,
+            # srcd: the sources giving the shown date (an announced day or month)
+            srcd=date_sources(rel, c["date"] if c["p"] == "day" else c["m"], st) if c["p"] in ("day", "month") else None,
+            ltpick=(lt or {}).get("badge") == "pick",
+            # progs: [chain, programme in words, exclusive now (1 / 0)] per programme entry
+            progs=[[e.get("chain") or "", program_name(e), int(bool(e.get("exclusive")) and not e.get("ended"))]
+                   for e in progs] or None,
             mbno=((mb or {}).get("movie_nos") or [None])[0], ltno=(lt or {}).get("movie_code") or None,
             cgno=(cg or {}).get("movie_no") or None,
             stages=dict(intake=(st.get("intake") or {}).get("date"), rating=(st.get("rating") or {}).get("date"),
