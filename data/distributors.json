@@ -2890,9 +2890,17 @@
     "total": 3,
     "distributor": 0,
     "applicant": 3,
-    "announced": 3
+    "scheduled": 1,
+    "announced": 2
    },
    "films": [
+    {
+     "id": "af30702ec85be",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
     {
      "id": "aa5c1d01554f9",
      "status": "announced",
@@ -2906,12 +2914,48 @@
      "roles": [
       "applicant"
      ]
+    }
+   ]
+  },
+  {
+   "id": "c20189621",
+   "name": "(주)라온컴퍼니플러스",
+   "spellings": [
+    "주식회사 라온컴퍼니플러스"
+   ],
+   "kobis_codes": [
+    "20189621"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 3,
+    "distributor": 3,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "r2589587",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
     },
     {
-     "id": "af30702ec85be",
+     "id": "k20250649",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20236357",
      "status": "announced",
      "roles": [
-      "applicant"
+      "distributor"
      ]
     }
    ]
@@ -3311,49 +3355,6 @@
      "id": "k20182563",
      "status": "dormant",
      "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20189621",
-   "name": "(주)라온컴퍼니플러스",
-   "spellings": [
-    "주식회사 라온컴퍼니플러스"
-   ],
-   "kobis_codes": [
-    "20189621"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 3,
-    "distributor": 3,
-    "applicant": 1,
-    "scheduled": 1,
-    "announced": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "k20250649",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20236357",
-     "status": "announced",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2589587",
-     "status": "released",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     }
