@@ -754,22 +754,24 @@ const stripItem = (f, sub, badge) => `<li data-id="${f.id}">${f.pst ? `<span cla
 const stripCap = () => 16;
 // the strip's window: ahead for openings, back for re-screenings that just began
 const STRIP_DAYS = 14;
+let RSX_OPEN = false;
 function stripSection() {
   const end = add(TODAY, STRIP_DAYS), since = add(TODAY, -STRIP_DAYS);
   const items = MR.films.filter(f => f.d.p === "day" && f.d.date > TODAY && f.d.date <= end && homeOk(f)).sort(bySortDate);
   // a re-screening starts without an announced date (f.rs): the ones first seen in the same
-  // window sit under the openings, newest first, so a returning film is not only in 상영 중
+  // window, newest first, open from a chip so a returning film is not only in 상영 중
   const rs = MR.films.filter(f => f.rsf && f.rsf >= since && isNow(f) && homeOk(f))
     .sort((a, b) => (a.rsf < b.rsf ? 1 : a.rsf > b.rsf ? -1 : 0) || (a.bk ? a.bk.r : 999) - (b.bk ? b.bk.r : 999));
   if (!items.length && !rs.length) return "";
   const up = MR.films.filter(f => isUp(f) && homeOk(f));
   const q = (k, label) => { const n = up.filter(f => f.cats.includes(k)).length; return n ? `<a class="qchip" href="${hashFor("upcoming", { F: new Set([k]), sort: "date", view: "list" })}">${label} <span class="tn">${n}</span></a>` : ""; };
-  const quick = q("rr", "재개봉");
-  return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편${rs.length ? ` · 재상영 ${rs.length}편` : ""}</span><a class="end" href="#/upcoming">전체 일정</a></div>
+  // re-screenings stay folded behind a chip (RSX_OPEN keeps it open across renders)
+  const rsChip = rs.length ? `<button class="qchip" type="button" data-rsx aria-expanded="${RSX_OPEN}" aria-controls="rsx">재상영 중 <span class="tn">${rs.length}</span></button>` : "";
+  const quick = q("rr", "재개봉") + rsChip;
+  return `<section class="card"><div class="sh"><h2>다가오는 개봉</h2><span class="sub tn">2주 안 · ${items.length}편</span><a class="end" href="#/upcoming">전체 일정</a></div>
     ${quick ? `<div class="quick">${quick}</div>` : ""}
-    ${items.length ? `<ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul>` : ""}
-    ${rs.length ? `<div class="quick"><span class="qlbl">재상영 중</span><a class="qchip" href="${hashFor("now", { F: new Set(["rr"]) })}">상영 중 재개봉</a></div>
-    <ul class="strip">${rs.slice(0, stripCap()).map(f => stripItem(f, `${rsWhen(f)} · ${rsWhere(f)}`)).join("")}</ul>` : ""}</section>`;
+    ${rs.length ? `<ul class="strip" id="rsx"${RSX_OPEN ? "" : " hidden"}>${rs.slice(0, stripCap()).map(f => stripItem(f, `${rsWhen(f)} · ${rsWhere(f)}`)).join("")}</ul>` : ""}
+    ${items.length ? `<ul class="strip">${items.slice(0, stripCap()).map(f => stripItem(f, kd(f.d.date) + (f.ex.length ? " · " + EXN[f.ex[0]] : ""))).join("")}</ul>` : ""}</section>`;
 }
 // 예매율 순위 on the home screen: the KOBIS booking ranking as it is, showing and pre-release films
 // together; a pre-release film has an accent "D-n 개봉" (or "개봉 전") chip under its rate
@@ -1259,6 +1261,7 @@ document.addEventListener("click", e => {
   if (t.closest("[data-theme-reset]")) { try { localStorage.removeItem("mr.theme"); } catch (x) { /* ignore */ } document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; themeIcon(); return; }
   if (t.closest("[data-close-search]")) { e.preventDefault(); closeSearch(); return; }
   if (t.closest("[data-retry-details]")) { retryDetails(); render(); return; }
+  const rx = t.closest("[data-rsx]"); if (rx) { RSX_OPEN = !RSX_OPEN; rx.setAttribute("aria-expanded", RSX_OPEN); const u = $("#rsx"); if (u) u.hidden = !RSX_OPEN; return; }
   const rc = t.closest("[data-recent]"); if (rc) { const q = rc.dataset.recent; $("#q").value = q; $("#sf").classList.add("has"); S.q = q; history.replaceState(history.state, "", hashFor("search", { q })); mainKey = ""; render(); return; }
   if (t.closest("[data-recent-clear]")) { ls.set("mr.recent", []); mainKey = ""; render(); return; }
   if (t.closest("summary, details, a, input, label")) return;

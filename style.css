@@ -468,6 +468,10 @@ html{overflow-anchor:none} /* list scroll is restored by the app on view changes
 .qchip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:16px;border:1px solid var(--line);color:var(--text-1);font-size:14px;font-weight:600;text-decoration:none}
 .qchip span{color:var(--text-3);font-weight:500}
 .qchip:hover{border-color:var(--accent);color:var(--accent)}
+.strip[hidden]{display:none}
+button.qchip{background:none;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.qchip[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+.qchip[aria-expanded="true"] span{color:var(--accent)}
 .acts.book{margin-top:8px}
 a.btn{text-decoration:none}
 .acts .btn.pri:hover{filter:brightness(1.08)}
