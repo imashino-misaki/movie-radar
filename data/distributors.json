@@ -416,14 +416,21 @@
     "total": 20,
     "distributor": 5,
     "applicant": 17,
-    "showing": 2,
-    "scheduled": 12,
+    "showing": 3,
+    "scheduled": 11,
     "rated": 5,
     "dormant": 1
    },
    "films": [
     {
      "id": "k20258640",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2594677",
      "status": "showing",
      "roles": [
       "distributor"
@@ -506,13 +513,6 @@
      "status": "scheduled",
      "roles": [
       "applicant"
-     ]
-    },
-    {
-     "id": "r2594677",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
      ]
     },
     {
@@ -713,15 +713,15 @@
     "20230987"
    ],
    "counts": {
-    "active": 13,
+    "active": 12,
     "total": 16,
     "distributor": 14,
     "applicant": 9,
-    "showing": 4,
+    "showing": 3,
     "scheduled": 4,
     "rated": 1,
     "announced": 4,
-    "released": 3
+    "released": 4
    },
    "films": [
     {
@@ -733,14 +733,6 @@
     },
     {
      "id": "r2593503",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2593726",
      "status": "showing",
      "roles": [
       "applicant",
@@ -821,6 +813,14 @@
     },
     {
      "id": "r2585579",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2593726",
      "status": "released",
      "roles": [
       "applicant",
@@ -2162,6 +2162,65 @@
    ]
   },
   {
+   "id": "c20100036",
+   "name": "㈜인디스토리 INDIESTORY Inc.",
+   "spellings": [
+    "(주)인디스토리",
+    "㈜인디스토리"
+   ],
+   "kobis_codes": [
+    "20100036"
+   ],
+   "counts": {
+    "active": 5,
+    "total": 5,
+    "distributor": 4,
+    "applicant": 3,
+    "showing": 2,
+    "scheduled": 2,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "k20249184",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2586478",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20268218",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602018",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "aa3ad9bacd066",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n더콘텐츠온",
    "name": "(주)더콘텐츠온",
    "spellings": [],
@@ -2520,57 +2579,6 @@
     },
     {
      "id": "r2602731",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20100036",
-   "name": "㈜인디스토리 INDIESTORY Inc.",
-   "spellings": [
-    "㈜인디스토리",
-    "(주)인디스토리"
-   ],
-   "kobis_codes": [
-    "20100036"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 4,
-    "distributor": 4,
-    "applicant": 2,
-    "showing": 2,
-    "scheduled": 2
-   },
-   "films": [
-    {
-     "id": "k20249184",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586478",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268218",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602018",
      "status": "scheduled",
      "roles": [
       "applicant",
@@ -3053,6 +3061,42 @@
     {
      "id": "r2588199",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n위즈온센",
+   "name": "(주)위즈온센",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 3,
+    "total": 3,
+    "distributor": 0,
+    "applicant": 3,
+    "announced": 3
+   },
+   "films": [
+    {
+     "id": "a76b183862737",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "aac4e839b7ac6",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "acdd5484d69cc",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -3994,35 +4038,6 @@
    ]
   },
   {
-   "id": "n위즈온센",
-   "name": "(주)위즈온센",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 0,
-    "applicant": 2,
-    "announced": 2
-   },
-   "films": [
-    {
-     "id": "aac4e839b7ac6",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "acdd5484d69cc",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n대원미디어",
    "name": "대원미디어(주)",
    "spellings": [],
@@ -4940,12 +4955,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2594677",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
@@ -5375,12 +5390,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2594677",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
