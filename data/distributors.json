@@ -1200,8 +1200,7 @@
     "applicant": 12,
     "showing": 3,
     "scheduled": 2,
-    "rated": 1,
-    "intake": 2,
+    "rated": 3,
     "released": 5
    },
    "films": [
@@ -1249,14 +1248,14 @@
     },
     {
      "id": "r2603239",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
     },
     {
      "id": "r2603240",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -1397,8 +1396,7 @@
     "applicant": 10,
     "showing": 2,
     "scheduled": 2,
-    "rated": 1,
-    "intake": 1,
+    "rated": 2,
     "released": 6
    },
    "films": [
@@ -1439,7 +1437,7 @@
     },
     {
      "id": "r2603401",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -2046,7 +2044,7 @@
     "distributor": 2,
     "applicant": 4,
     "showing": 1,
-    "intake": 1,
+    "rated": 1,
     "announced": 3,
     "dormant": 1
    },
@@ -2060,7 +2058,7 @@
     },
     {
      "id": "r2602226",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -3104,6 +3102,49 @@
    ]
   },
   {
+   "id": "c20123058",
+   "name": "그린나래미디어(주)",
+   "spellings": [
+    "그린나래미디어(주) GREEN NARAE MEDIA"
+   ],
+   "kobis_codes": [
+    "20123058"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 2,
+    "showing": 1,
+    "scheduled": 1,
+    "intake": 1
+   },
+   "films": [
+    {
+     "id": "r2599978",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597956",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2605632",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n미디어나무",
    "name": "미디어나무주식회사",
    "spellings": [],
@@ -3625,6 +3666,49 @@
    ]
   },
   {
+   "id": "c20162183",
+   "name": "주식회사 오디언스",
+   "spellings": [
+    "주식회사 오디언스 AUDIENCE",
+    "주식회사 오디언스 (AUDIENCE)"
+   ],
+   "kobis_codes": [
+    "20162183"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 1,
+    "dormant": 1
+   },
+   "films": [
+    {
+     "id": "a4af1baadc63a",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "k20257381",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20259239",
+     "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n국립극단",
    "name": "(재)국립극단",
    "spellings": [],
@@ -3934,41 +4018,6 @@
      "status": "announced",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20123058",
-   "name": "그린나래미디어(주)",
-   "spellings": [
-    "그린나래미디어(주) GREEN NARAE MEDIA"
-   ],
-   "kobis_codes": [
-    "20123058"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "scheduled": 1
-   },
-   "films": [
-    {
-     "id": "r2599978",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2597956",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -4525,40 +4574,6 @@
      "status": "released",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20162183",
-   "name": "주식회사 오디언스",
-   "spellings": [
-    "주식회사 오디언스 AUDIENCE"
-   ],
-   "kobis_codes": [
-    "20162183"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 0,
-    "scheduled": 1,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "k20257381",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20259239",
-     "status": "dormant",
-     "roles": [
       "distributor"
      ]
     }
