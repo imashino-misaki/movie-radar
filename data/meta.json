@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "last_run_utc": "2026-11-05T02:17:21+00:00",
+ "last_run_utc": "2026-11-05T04:44:34+00:00",
  "manual_lists": {
   "active": false,
   "blocked_names": 0,
@@ -10,8 +10,8 @@
   "records_removed": 0
  },
  "counts": {
-  "films": 616,
-  "with_intake": 41,
+  "films": 623,
+  "with_intake": 48,
   "with_rating": 324,
   "with_kobis": 180,
   "with_megabox": 152,
@@ -23,25 +23,25 @@
   "with_past_rating": 110,
   "rerelease_candidates": 18,
   "chain_rereleases": 47,
-  "seen_this_run": 569,
+  "seen_this_run": 576,
   "format_groups": 6,
   "format_variants": 9,
   "format_ambiguous": 0,
-  "distributors": 210,
+  "distributors": 211,
   "tags": {
-   "anime": 28,
+   "anime": 29,
    "chain_cgv": 21,
    "chain_lotte": 14,
    "chain_megabox": 5,
    "concert": 24,
    "dormant": 34,
-   "format": 15,
+   "format": 16,
    "rerelease": 64,
    "sports": 7
   },
-  "intake_rows": 121,
-  "intake_published": 26,
-  "intake_withheld": 95,
+  "intake_rows": 139,
+  "intake_published": 33,
+  "intake_withheld": 106,
   "rating_rows": 326,
   "rating_published": 311,
   "rating_withheld_restricted": 15,
@@ -73,21 +73,21 @@
  "sources": {
   "ors_intake": {
    "status": "ok",
-   "seconds": 4.2,
+   "seconds": 5.2,
    "requests": 2,
    "tabs": {
     "MV_DOM": {
-     "rows": 43
+     "rows": 49
     },
     "MV_FOR": {
-     "rows": 78
+     "rows": 90
     }
    },
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kmrb_rating": {
    "status": "ok",
-   "seconds": 23.9,
+   "seconds": 23.6,
    "requests": 14,
    "window": "3months",
    "general_pages": 4,
@@ -96,11 +96,11 @@
    "all_pages": 9,
    "all_declared": 837,
    "all_rows": 837,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kmrb_promo": {
    "status": "ok",
-   "seconds": 9.5,
+   "seconds": 10.2,
    "requests": 7,
    "window_days": 7,
    "trailer_rows": 126,
@@ -113,15 +113,15 @@
    "promo_only": 9,
    "promo_rerelease": 14,
    "promo_old_unmatched": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "ors_ad": {
    "status": "ok",
-   "seconds": 4.7,
+   "seconds": 5.4,
    "requests": 3,
    "tabs": {
     "MVTRAIL": {
-     "rows": 58,
+     "rows": 62,
      "received": 52
     },
     "MVAD": {
@@ -129,13 +129,13 @@
      "received": 16
     },
     "MVADVTM": {
-     "rows": 121,
+     "rows": 134,
      "received": 109
     }
    },
-   "ors_ad_rows": 196,
-   "ors_ad_matched_rows": 145,
-   "ors_ad_records": 50,
+   "ors_ad_rows": 213,
+   "ors_ad_matched_rows": 162,
+   "ors_ad_records": 51,
    "ors_ad_unmatched_titles": 44,
    "ors_ad_created": 0,
    "ors_ad_not_created": {
@@ -145,7 +145,7 @@
    },
    "ors_ad_folded": 0,
    "ors_ad_removed": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "megabox_program": {
    "status": "ok",
@@ -164,11 +164,11 @@
    "program_matched": 50,
    "program_unmatched": 0,
    "with_program": 58,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis": {
    "status": "ok",
-   "seconds": 22.3,
+   "seconds": 23.4,
    "requests": 19,
    "calls": 19,
    "call_cap": 300,
@@ -185,25 +185,25 @@
    "kobis_pending_info": 0,
    "kobis_adult_removed": 0,
    "kobis_only_deferred": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "megabox": {
    "status": "ok",
-   "seconds": 1.8,
+   "seconds": 2.8,
    "requests": 1,
-   "rows": 109,
-   "total_reported": 109,
+   "rows": 108,
+   "total_reported": 108,
    "now": 80,
-   "upcoming": 29,
-   "megabox_groups": 109,
+   "upcoming": 28,
+   "megabox_groups": 108,
    "megabox_matched": 75,
-   "megabox_only": 34,
-   "megabox_ended": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "megabox_only": 33,
+   "megabox_ended": 1,
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "lotte": {
    "status": "ok",
-   "seconds": 2.3,
+   "seconds": 2.9,
    "requests": 2,
    "rows": 76,
    "now": 41,
@@ -213,28 +213,28 @@
    "lotte_matched_kobis_cd": 48,
    "lotte_only": 6,
    "lotte_ended": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "cgv": {
    "status": "ok",
    "seconds": 0.0,
    "requests": 0,
-   "rows": 168,
+   "rows": 167,
    "dropped_fields": 0,
    "now": 102,
-   "upcoming": 66,
-   "fetched_at": "2026-11-05T01:46:16Z",
-   "age_minutes": 31,
+   "upcoming": 65,
+   "fetched_at": "2026-11-05T04:44:13Z",
+   "age_minutes": 0,
    "stale_after_minutes": 132,
    "stale": false,
    "cgv_matched": 100,
-   "cgv_only": 68,
-   "cgv_ended": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "cgv_only": 67,
+   "cgv_ended": 1,
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kmrb_lookup": {
    "status": "ok",
-   "seconds": 2.1,
+   "seconds": 2.8,
    "requests": 3,
    "wanted": 258,
    "searched": 2,
@@ -242,7 +242,7 @@
    "errors": 2,
    "pending": 2,
    "past_rating": 110,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis_web": {
    "status": "ok",
@@ -258,7 +258,7 @@
    "with_rereleases": 13,
    "with_detail": 296,
    "dormant": 34,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "posters": {
    "status": "ok",
@@ -270,11 +270,11 @@
    "removed": 0,
    "files": 382,
    "bytes": 18774490,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis_schedule": {
    "status": "ok",
-   "seconds": 18.5,
+   "seconds": 22.1,
    "requests": 13,
    "months": {
     "2026-11": 57,
@@ -292,47 +292,47 @@
    },
    "with_schedule": 96,
    "schedule_unmatched": 2,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis_companies": {
    "status": "ok",
-   "seconds": 1.8,
-   "requests": 2,
+   "seconds": 0.0,
+   "requests": 0,
    "names": 59,
-   "looked_up": 1,
+   "looked_up": 0,
    "errors": 0,
    "found": 51,
    "verified": 49,
    "trusted": 49,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kmrb_reps": {
    "status": "ok",
    "seconds": 3.6,
    "requests": 1,
    "applicants": 168,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis_booking": {
    "status": "ok",
-   "seconds": 3.1,
+   "seconds": 3.8,
    "requests": 2,
-   "rows": 313,
-   "as_of": "2026-11-05 11:18",
-   "undated": 120,
+   "rows": 310,
+   "as_of": "2026-11-05 13:46",
+   "undated": 119,
    "with_booking": 163,
    "booking_by_title": 54,
-   "booking_unmatched": 159,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "booking_unmatched": 156,
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis_upcoming": {
    "status": "ok",
-   "seconds": 30.9,
-   "requests": 26,
+   "seconds": 51.2,
+   "requests": 27,
    "개봉예정": 168,
    "개봉준비": 89,
    "not_adult_genre": 232,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   },
   "kobis_boxoffice": {
    "status": "ok",
@@ -347,10 +347,10 @@
    "with_boxoffice": 22,
    "latest_day": "2026-11-04",
    "top10_unmatched": 0,
-   "last_ok_utc": "2026-11-05T02:17:21+00:00"
+   "last_ok_utc": "2026-11-05T04:44:34+00:00"
   }
  },
- "requests": 98,
+ "requests": 97,
  "release_model": {
   "rows": 10339,
   "rows_opened": 5711,
@@ -366,16 +366,16 @@
   "openings_added": 0,
   "records": {
    "booking": 17,
-   "chain": 109,
+   "chain": 108,
    "kobis": 225,
-   "model": 181,
+   "model": 188,
    "schedule": 14
   },
   "records_by_state_tier": {
    "ad_filing/estimate": 12,
    "bookable/estimate": 30,
-   "day_announced/estimate": 78,
-   "filed/estimate": 28,
+   "day_announced/estimate": 77,
+   "filed/estimate": 35,
    "month_announced/estimate": 15,
    "opened/confirmed": 240,
    "passed_unverified/estimate": 2,
@@ -9097,8 +9097,8 @@
  "theatrical": {
   "counts": {
    "confirmed": 400,
-   "candidate": 141,
-   "unlikely": 72,
+   "candidate": 144,
+   "unlikely": 76,
    "token": 0,
    "ad_only": 3
   },
@@ -9114,10 +9114,10 @@
   "screening_measures": 5377
  },
  "signals": {
-  "new_signals": 3,
-  "changes": 0,
+  "new_signals": 7,
+  "changes": 12,
   "absent": 0,
-  "records": 623,
-  "runs": 83
+  "records": 630,
+  "runs": 84
  }
 }
