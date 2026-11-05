@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "last_run_utc": "2026-11-05T17:56:57+00:00",
+ "last_run_utc": "2026-11-05T18:55:04+00:00",
  "manual_lists": {
   "active": false,
   "blocked_names": 0,
@@ -73,7 +73,7 @@
  "sources": {
   "ors_intake": {
    "status": "ok",
-   "seconds": 4.3,
+   "seconds": 4.6,
    "requests": 2,
    "tabs": {
     "MV_DOM": {
@@ -83,11 +83,11 @@
      "rows": 71
     }
    },
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kmrb_rating": {
    "status": "ok",
-   "seconds": 20.1,
+   "seconds": 24.6,
    "requests": 14,
    "window": "3months",
    "general_pages": 4,
@@ -96,11 +96,11 @@
    "all_pages": 9,
    "all_declared": 835,
    "all_rows": 835,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kmrb_promo": {
    "status": "ok",
-   "seconds": 7.5,
+   "seconds": 8.5,
    "requests": 6,
    "window_days": 7,
    "trailer_rows": 128,
@@ -113,11 +113,11 @@
    "promo_only": 9,
    "promo_rerelease": 15,
    "promo_old_unmatched": 0,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "ors_ad": {
    "status": "ok",
-   "seconds": 4.5,
+   "seconds": 4.8,
    "requests": 3,
    "tabs": {
     "MVTRAIL": {
@@ -145,11 +145,11 @@
    },
    "ors_ad_folded": 0,
    "ors_ad_removed": 0,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "megabox_program": {
    "status": "ok",
-   "seconds": 2.0,
+   "seconds": 2.2,
    "requests": 3,
    "megabox_tab_rows": 7,
    "megabox_lineups": [
@@ -164,32 +164,20 @@
    "program_matched": 50,
    "program_unmatched": 0,
    "with_program": 59,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kobis": {
-   "status": "ok",
-   "seconds": 22.0,
-   "requests": 19,
-   "calls": 19,
+   "status": "error",
+   "reason": "KobisError: searchMovieList.json: FetchError: GET https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json: ConnectTimeout('timed out') (3 attempts)",
+   "seconds": 47.2,
+   "requests": 3,
+   "calls": 1,
    "call_cap": 300,
-   "list_rows": 1889,
-   "adult_genre_dropped": 1101,
-   "kept": 88,
-   "info_fetched": 0,
-   "info_deferred": 0,
-   "extra_codes": 0,
-   "undated_codes": 172,
-   "kobis_matched": 68,
-   "kobis_only_published": 94,
-   "kobis_only_withheld": 98,
-   "kobis_pending_info": 0,
-   "kobis_adult_removed": 0,
-   "kobis_only_deferred": 0,
    "last_ok_utc": "2026-11-05T17:56:57+00:00"
   },
   "megabox": {
    "status": "ok",
-   "seconds": 1.8,
+   "seconds": 2.5,
    "requests": 1,
    "rows": 111,
    "total_reported": 111,
@@ -199,11 +187,11 @@
    "megabox_matched": 77,
    "megabox_only": 34,
    "megabox_ended": 0,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "lotte": {
    "status": "ok",
-   "seconds": 2.1,
+   "seconds": 2.9,
    "requests": 2,
    "rows": 79,
    "now": 43,
@@ -213,7 +201,7 @@
    "lotte_matched_kobis_cd": 51,
    "lotte_only": 6,
    "lotte_ended": 0,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "cgv": {
    "status": "ok",
@@ -223,18 +211,18 @@
    "dropped_fields": 0,
    "now": 105,
    "upcoming": 71,
-   "fetched_at": "2026-11-05T17:56:37Z",
+   "fetched_at": "2026-11-05T18:54:45Z",
    "age_minutes": 0,
    "stale_after_minutes": 132,
    "stale": false,
    "cgv_matched": 104,
    "cgv_only": 72,
    "cgv_ended": 0,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kmrb_lookup": {
    "status": "ok",
-   "seconds": 2.0,
+   "seconds": 2.3,
    "requests": 3,
    "wanted": 267,
    "searched": 2,
@@ -242,7 +230,7 @@
    "errors": 2,
    "pending": 2,
    "past_rating": 116,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kobis_web": {
    "status": "ok",
@@ -258,7 +246,7 @@
    "with_rereleases": 13,
    "with_detail": 296,
    "dormant": 34,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "posters": {
    "status": "ok",
@@ -270,28 +258,14 @@
    "removed": 0,
    "files": 388,
    "bytes": 19049464,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kobis_schedule": {
-   "status": "ok",
-   "seconds": 17.5,
-   "requests": 13,
-   "months": {
-    "2026-11": 57,
-    "2026-12": 23,
-    "2027-01": 2,
-    "2027-02": 1,
-    "2027-03": 1,
-    "2027-04": 0,
-    "2027-05": 1,
-    "2027-06": 0,
-    "2027-07": 1,
-    "2027-08": 0,
-    "2027-09": 0,
-    "2027-10": 0
-   },
-   "with_schedule": 96,
-   "schedule_unmatched": 2,
+   "status": "error",
+   "reason": "FetchError: GET https://www.kobis.or.kr/kobis/business/mast/mvie/findOpenScheduleList.do: ConnectTimeout('timed out') (3 attempts)",
+   "seconds": 47.5,
+   "requests": 3,
+   "months": {},
    "last_ok_utc": "2026-11-05T17:56:57+00:00"
   },
   "kobis_companies": {
@@ -304,34 +278,28 @@
    "found": 49,
    "verified": 47,
    "trusted": 47,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kmrb_reps": {
    "status": "ok",
-   "seconds": 2.7,
+   "seconds": 3.3,
    "requests": 1,
    "applicants": 168,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   },
   "kobis_booking": {
-   "status": "ok",
-   "seconds": 3.0,
-   "requests": 2,
-   "rows": 340,
-   "as_of": "2026-11-06 02:58",
-   "undated": 139,
-   "with_booking": 176,
-   "booking_by_title": 61,
-   "booking_unmatched": 175,
+   "status": "error",
+   "reason": "FetchError: GET https://www.kobis.or.kr/kobis/business/stat/boxs/findRealTicketList.do: ConnectTimeout('timed out') (3 attempts)",
+   "seconds": 47.3,
+   "requests": 3,
    "last_ok_utc": "2026-11-05T17:56:57+00:00"
   },
   "kobis_upcoming": {
-   "status": "ok",
-   "seconds": 28.3,
-   "requests": 26,
-   "개봉예정": 168,
-   "개봉준비": 89,
-   "not_adult_genre": 232,
+   "status": "error",
+   "reason": "FetchError: POST https://www.kobis.or.kr/kobis/business/mast/mvie/searchMovieList.do: ConnectTimeout('timed out') (3 attempts)",
+   "seconds": 48.2,
+   "requests": 3,
+   "not_adult_genre": 0,
    "last_ok_utc": "2026-11-05T17:56:57+00:00"
   },
   "kobis_boxoffice": {
@@ -347,10 +315,10 @@
    "with_boxoffice": 24,
    "latest_day": "2026-11-05",
    "top10_unmatched": 0,
-   "last_ok_utc": "2026-11-05T17:56:57+00:00"
+   "last_ok_utc": "2026-11-05T18:55:04+00:00"
   }
  },
- "requests": 95,
+ "requests": 47,
  "release_model": {
   "rows": 10345,
   "rows_opened": 5712,
@@ -9118,6 +9086,6 @@
   "changes": 0,
   "absent": 0,
   "records": 641,
-  "runs": 96
+  "runs": 97
  }
 }
