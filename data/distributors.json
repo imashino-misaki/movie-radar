@@ -2705,7 +2705,8 @@
     "applicant": 3,
     "showing": 1,
     "scheduled": 1,
-    "intake": 2
+    "rated": 1,
+    "intake": 1
    },
    "films": [
     {
@@ -2725,7 +2726,7 @@
     },
     {
      "id": "r2600968",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4034,8 +4035,7 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "scheduled": 1,
-    "intake": 1
+    "scheduled": 2
    },
    "films": [
     {
@@ -4047,7 +4047,7 @@
     },
     {
      "id": "r2602697",
-     "status": "intake",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -4133,7 +4133,7 @@
     "distributor": 1,
     "applicant": 1,
     "scheduled": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
@@ -4145,7 +4145,7 @@
     },
     {
      "id": "r2603820",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4934,6 +4934,28 @@
     {
      "id": "r2593539",
      "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n빅웨이브시네마",
+   "name": "(주)빅웨이브시네마",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "af043b61a8109",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
