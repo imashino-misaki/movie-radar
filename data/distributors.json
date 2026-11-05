@@ -2053,7 +2053,8 @@
     "applicant": 4,
     "showing": 1,
     "rated": 1,
-    "announced": 3,
+    "intake": 1,
+    "announced": 2,
     "dormant": 1
    },
    "films": [
@@ -2072,6 +2073,13 @@
      ]
     },
     {
+     "id": "af17a3a9291b7",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
      "id": "a18dff932070d",
      "status": "announced",
      "roles": [
@@ -2080,13 +2088,6 @@
     },
     {
      "id": "a9d8df7335c05",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "af17a3a9291b7",
      "status": "announced",
      "roles": [
       "applicant"
@@ -2547,6 +2548,52 @@
      "roles": [
       "applicant",
       "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n엔케이컨텐츠",
+   "name": "(주)엔케이컨텐츠",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 4,
+    "total": 4,
+    "distributor": 0,
+    "applicant": 4,
+    "showing": 1,
+    "scheduled": 1,
+    "rated": 1,
+    "intake": 1
+   },
+   "films": [
+    {
+     "id": "r2593016",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2601671",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2588199",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605101",
+     "status": "intake",
+     "roles": [
+      "applicant"
      ]
     }
    ]
@@ -3025,44 +3072,6 @@
      "roles": [
       "applicant",
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n엔케이컨텐츠",
-   "name": "(주)엔케이컨텐츠",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 3,
-    "total": 3,
-    "distributor": 0,
-    "applicant": 3,
-    "showing": 1,
-    "scheduled": 1,
-    "rated": 1
-   },
-   "films": [
-    {
-     "id": "r2593016",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2601671",
-     "status": "scheduled",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2588199",
-     "status": "rated",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -6978,12 +6987,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "announced": 1
+    "intake": 1
    },
    "films": [
     {
      "id": "a75f026cb82b7",
-     "status": "announced",
+     "status": "intake",
      "roles": [
       "applicant"
      ]
