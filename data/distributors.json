@@ -1240,13 +1240,20 @@
     "total": 13,
     "distributor": 10,
     "applicant": 7,
-    "showing": 2,
-    "scheduled": 3,
+    "showing": 3,
+    "scheduled": 2,
     "announced": 2,
     "released": 2,
     "dormant": 4
    },
    "films": [
+    {
+     "id": "k20267121",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2591434",
      "status": "showing",
@@ -1260,13 +1267,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20267121",
-     "status": "scheduled",
-     "roles": [
       "distributor"
      ]
     },
@@ -1857,16 +1857,17 @@
     "active": 6,
     "total": 6,
     "distributor": 6,
-    "applicant": 2,
+    "applicant": 3,
     "showing": 3,
     "scheduled": 1,
     "announced": 2
    },
    "films": [
     {
-     "id": "maaf2e559e9ad",
+     "id": "p87dfd9ef4b37",
      "status": "showing",
      "roles": [
+      "applicant",
       "distributor"
      ]
     },
@@ -2454,6 +2455,66 @@
    ]
   },
   {
+   "id": "c20188381",
+   "name": "필름다빈",
+   "spellings": [
+    "필름다빈 FILM DABIN"
+   ],
+   "kobis_codes": [
+    "20188381"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 5,
+    "distributor": 4,
+    "applicant": 5,
+    "showing": 3,
+    "rated": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2587973",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590850",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2599288",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600379",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2590891",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n스토리제이",
    "name": "(주)스토리제이",
    "spellings": [],
@@ -2781,66 +2842,6 @@
      "status": "announced",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20188381",
-   "name": "필름다빈",
-   "spellings": [
-    "필름다빈 FILM DABIN"
-   ],
-   "kobis_codes": [
-    "20188381"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 5,
-    "distributor": 4,
-    "applicant": 5,
-    "showing": 2,
-    "rated": 1,
-    "released": 2
-   },
-   "films": [
-    {
-     "id": "r2590850",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2599288",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600379",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2587973",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590891",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     }
    ]
@@ -3632,6 +3633,46 @@
     },
     {
      "id": "r2590956",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20228845",
+   "name": "(주)키다리스튜디오",
+   "spellings": [],
+   "kobis_codes": [
+    "20228845"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 1,
+    "scheduled": 1,
+    "announced": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20268288",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "pa7f10d17ad48",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2588845",
      "status": "released",
      "roles": [
       "distributor"
@@ -4507,38 +4548,6 @@
     {
      "id": "k20191248",
      "status": "dormant",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20228845",
-   "name": "(주)키다리스튜디오",
-   "spellings": [],
-   "kobis_codes": [
-    "20228845"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 0,
-    "scheduled": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "k20268288",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2588845",
-     "status": "released",
      "roles": [
       "distributor"
      ]
