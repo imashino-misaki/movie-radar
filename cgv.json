@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-06T09:17:05Z",
+ "fetched_at": "2026-11-06T10:19:09Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 139,
-  "now": 102,
+  "chart": 136,
+  "now": 99,
   "upcoming": 71,
   "icecon": 19,
   "arthouse": 25,
@@ -648,34 +648,6 @@
    ],
    "labels": [
     "arthouse"
-   ],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001758",
-   "title": "2026 KBO 한국시리즈 3차전 - KT 위즈 vs 삼성 라이온즈",
-   "status": "now",
-   "release_date": "2026-11-06",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "전체관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001758/30001758_320.jpg",
-   "booking_rate": 0.68,
-   "booking_rank": 24,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "icecon"
-   ],
-   "labels": [
-    "icecon",
-    "cgv_only"
    ],
    "badge": ""
   },
@@ -2604,30 +2576,6 @@
    "badge": ""
   },
   {
-   "movie_no": "30001723",
-   "title": "[SIPFF2026] 꿈을 꾸었다 말해요",
-   "status": "now",
-   "release_date": "2026-11-05",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "청소년관람불가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001723/30001723_320.jpg",
-   "booking_rate": 0.01,
-   "booking_rank": 112,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now"
-   ],
-   "labels": [],
-   "badge": ""
-  },
-  {
    "movie_no": "30001707",
    "title": "[SIPFF2026] 해외 단편 컬렉션 1",
    "status": "now",
@@ -2886,30 +2834,6 @@
    "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001752/30001752_320.jpg",
    "booking_rate": 0.01,
    "booking_rank": 110,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now"
-   ],
-   "labels": [],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001711",
-   "title": "[SIPFF2026] 그 여름",
-   "status": "now",
-   "release_date": "2026-11-05",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "12세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001711/30001711_320.jpg",
-   "booking_rate": 0.0,
-   "booking_rank": 115,
    "bookable": true,
    "formats": [],
    "format_codes": [
@@ -3541,7 +3465,7 @@
    "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001614/30001614_320.jpg",
    "booking_rate": 0.0,
    "booking_rank": 44,
-   "bookable": false,
+   "bookable": true,
    "formats": [],
    "format_codes": [
     "01"
@@ -4326,6 +4250,32 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "30001758",
+   "title": "2026 KBO 한국시리즈 3차전 - KT 위즈 vs 삼성 라이온즈",
+   "status": "now",
+   "release_date": "2026-11-06",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "전체관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001758/30001758_320.jpg",
+   "booking_rate": 0.68,
+   "booking_rank": 24,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "icecon"
+   ],
+   "labels": [
+    "icecon",
+    "cgv_only"
+   ],
    "badge": ""
   }
  ]
