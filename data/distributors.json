@@ -1240,13 +1240,20 @@
     "total": 13,
     "distributor": 10,
     "applicant": 7,
-    "showing": 2,
-    "scheduled": 3,
+    "showing": 3,
+    "scheduled": 2,
     "announced": 2,
     "released": 2,
     "dormant": 4
    },
    "films": [
+    {
+     "id": "k20267121",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2591434",
      "status": "showing",
@@ -1260,13 +1267,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20267121",
-     "status": "scheduled",
-     "roles": [
       "distributor"
      ]
     },
@@ -2409,8 +2409,7 @@
     "total": 5,
     "distributor": 5,
     "applicant": 2,
-    "showing": 1,
-    "scheduled": 1,
+    "showing": 2,
     "announced": 2,
     "released": 1
    },
@@ -2425,7 +2424,7 @@
     },
     {
      "id": "r2600117",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant",
       "distributor"
@@ -2797,10 +2796,10 @@
    "counts": {
     "active": 3,
     "total": 5,
-    "distributor": 4,
+    "distributor": 5,
     "applicant": 5,
     "showing": 2,
-    "rated": 1,
+    "scheduled": 1,
     "released": 2
    },
    "films": [
@@ -2822,9 +2821,10 @@
     },
     {
      "id": "r2600379",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
-      "applicant"
+      "applicant",
+      "distributor"
      ]
     },
     {
@@ -2994,42 +2994,6 @@
      "status": "released",
      "roles": [
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n대경토탈",
-   "name": "(주)대경토탈",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 3,
-    "total": 3,
-    "distributor": 0,
-    "applicant": 3,
-    "announced": 3
-   },
-   "films": [
-    {
-     "id": "a73b6d77d8a62",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "aa5c1d01554f9",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "af30702ec85be",
-     "status": "announced",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -3867,6 +3831,35 @@
     {
      "id": "r2601859",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n대경토탈",
+   "name": "(주)대경토탈",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 0,
+    "applicant": 2,
+    "announced": 2
+   },
+   "films": [
+    {
+     "id": "a73b6d77d8a62",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "aa5c1d01554f9",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
