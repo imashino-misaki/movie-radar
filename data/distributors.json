@@ -444,8 +444,8 @@
     "total": 20,
     "distributor": 5,
     "applicant": 17,
-    "showing": 4,
-    "scheduled": 10,
+    "showing": 3,
+    "scheduled": 11,
     "rated": 5,
     "dormant": 1
    },
@@ -470,13 +470,6 @@
      "roles": [
       "applicant",
       "distributor"
-     ]
-    },
-    {
-     "id": "r2597539",
-     "status": "showing",
-     "roles": [
-      "applicant"
      ]
     },
     {
@@ -545,6 +538,13 @@
     },
     {
      "id": "r2592884",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2597539",
      "status": "scheduled",
      "roles": [
       "applicant"
@@ -741,16 +741,16 @@
     "20230987"
    ],
    "counts": {
-    "active": 13,
+    "active": 12,
     "total": 16,
     "distributor": 13,
     "applicant": 10,
-    "showing": 5,
+    "showing": 4,
     "scheduled": 3,
     "rated": 1,
     "intake": 1,
     "announced": 3,
-    "released": 3
+    "released": 4
    },
    "films": [
     {
@@ -762,14 +762,6 @@
     },
     {
      "id": "r2593503",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2593726",
      "status": "showing",
      "roles": [
       "applicant",
@@ -850,6 +842,14 @@
     },
     {
      "id": "r2585579",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2593726",
      "status": "released",
      "roles": [
       "applicant",
@@ -1328,19 +1328,12 @@
     "total": 8,
     "distributor": 8,
     "applicant": 0,
-    "showing": 2,
-    "scheduled": 4,
+    "showing": 1,
+    "scheduled": 5,
     "announced": 1,
     "released": 1
    },
    "films": [
-    {
-     "id": "r2597539",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
     {
      "id": "r2598504",
      "status": "showing",
@@ -1371,6 +1364,13 @@
     },
     {
      "id": "pdb97c3a1d19f",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597539",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -2014,9 +2014,8 @@
     "distributor": 5,
     "applicant": 3,
     "showing": 2,
-    "scheduled": 1,
+    "scheduled": 2,
     "rated": 1,
-    "announced": 1,
     "dormant": 2
    },
    "films": [
@@ -2035,6 +2034,13 @@
      ]
     },
     {
+     "id": "ab9d5333552aa",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
      "id": "r2601737",
      "status": "scheduled",
      "roles": [
@@ -2045,13 +2051,6 @@
     {
      "id": "r2592393",
      "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "ab9d5333552aa",
-     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -2791,8 +2790,7 @@
     "total": 4,
     "distributor": 3,
     "applicant": 1,
-    "scheduled": 2,
-    "intake": 1,
+    "scheduled": 3,
     "released": 1
    },
    "films": [
@@ -2812,7 +2810,7 @@
     },
     {
      "id": "r2603067",
-     "status": "intake",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
