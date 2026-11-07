@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-07T04:16:29Z",
+ "fetched_at": "2026-11-07T05:15:14Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 136,
-  "now": 101,
+  "chart": 135,
+  "now": 100,
   "upcoming": 69,
   "icecon": 18,
   "arthouse": 25,
@@ -427,34 +427,6 @@
    ],
    "labels": [
     "icecon"
-   ],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001759",
-   "title": "2026 KBO 한국시리즈 4차전 - KT 위즈 vs 삼성 라이온즈",
-   "status": "now",
-   "release_date": "2026-11-07",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "전체관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001759/30001759_320.jpg",
-   "booking_rate": 0.86,
-   "booking_rank": 16,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "icecon"
-   ],
-   "labels": [
-    "icecon",
-    "cgv_only"
    ],
    "badge": ""
   },
@@ -4250,6 +4222,32 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "30001759",
+   "title": "2026 KBO 한국시리즈 4차전 - KT 위즈 vs 삼성 라이온즈",
+   "status": "now",
+   "release_date": "2026-11-07",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "전체관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001759/30001759_320.jpg",
+   "booking_rate": 0.86,
+   "booking_rank": 16,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "icecon"
+   ],
+   "labels": [
+    "icecon",
+    "cgv_only"
+   ],
    "badge": ""
   }
  ]
