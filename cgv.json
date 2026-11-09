@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-09T00:10:16Z",
+ "fetched_at": "2026-11-09T01:11:29Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 109,
-  "now": 76,
+  "chart": 108,
+  "now": 75,
   "upcoming": 65,
   "icecon": 12,
   "arthouse": 25,
@@ -2646,33 +2646,6 @@
    "badge": ""
   },
   {
-   "movie_no": "89457",
-   "title": "씽씽",
-   "status": "now",
-   "release_date": "2026-10-21",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "15세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000089/89457/89457_320.jpg",
-   "booking_rate": 0.0,
-   "booking_rank": 99,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "arthouse"
-   ],
-   "labels": [
-    "arthouse"
-   ],
-   "badge": ""
-  },
-  {
    "movie_no": "30001399",
    "title": "인턴",
    "status": "now",
@@ -2708,7 +2681,7 @@
    "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001783/30001783_320.jpg",
    "booking_rate": 0.0,
    "booking_rank": null,
-   "bookable": false,
+   "bookable": true,
    "formats": [
     "SCREENX"
    ],
@@ -3528,6 +3501,31 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "89457",
+   "title": "씽씽",
+   "status": "now",
+   "release_date": "2026-10-21",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "15세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000089/89457/89457_320.jpg",
+   "booking_rate": 0.0,
+   "booking_rank": 99,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "arthouse"
+   ],
+   "labels": [
+    "arthouse"
+   ],
    "badge": ""
   }
  ]
