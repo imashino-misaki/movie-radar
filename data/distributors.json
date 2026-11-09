@@ -880,8 +880,8 @@
     "total": 16,
     "distributor": 13,
     "applicant": 10,
-    "showing": 4,
-    "scheduled": 3,
+    "showing": 5,
+    "scheduled": 2,
     "rated": 1,
     "intake": 1,
     "announced": 3,
@@ -911,6 +911,14 @@
      ]
     },
     {
+     "id": "r2598196",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
      "id": "r2601417",
      "status": "showing",
      "roles": [
@@ -929,14 +937,6 @@
      "id": "l25189",
      "status": "scheduled",
      "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2598196",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     },
@@ -2702,6 +2702,57 @@
    ]
   },
   {
+   "id": "c20123058",
+   "name": "그린나래미디어(주)",
+   "spellings": [
+    "그린나래미디어(주) GREEN NARAE MEDIA"
+   ],
+   "kobis_codes": [
+    "20123058"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 4,
+    "distributor": 2,
+    "applicant": 3,
+    "showing": 1,
+    "scheduled": 1,
+    "intake": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "r2599978",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597956",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2605632",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "a7f860b7f68e0",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20141469",
    "name": "메가박스중앙(주) 플러스엠 엔터테인먼트 Plus M Entertainment",
    "spellings": [
@@ -3134,49 +3185,6 @@
      "status": "announced",
      "roles": [
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20123058",
-   "name": "그린나래미디어(주)",
-   "spellings": [
-    "그린나래미디어(주) GREEN NARAE MEDIA"
-   ],
-   "kobis_codes": [
-    "20123058"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 2,
-    "showing": 1,
-    "scheduled": 1,
-    "intake": 1
-   },
-   "films": [
-    {
-     "id": "r2599978",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2597956",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2605632",
-     "status": "intake",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -4767,12 +4775,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2601426",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
@@ -6568,12 +6576,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2601426",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
