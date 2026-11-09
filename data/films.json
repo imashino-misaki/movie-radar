@@ -730,12 +730,12 @@
       },
       "2606421": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606610": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       }
      }
@@ -1362,7 +1362,7 @@
     },
     "booking": {
      "movie_cd": "20268218",
-     "rank": 169,
+     "rank": 173,
      "rate": 0.0,
      "presale_audience": 22,
      "presale_sales": 191500,
@@ -1370,7 +1370,7 @@
      "total_sales": 0,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis": {
      "movie_cd": "20268218",
@@ -1458,8 +1458,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.776,
+    "p_open": 0.7874,
+    "p_open_real": 0.773,
     "intent": [
      "ors_ad",
      "promo"
@@ -1477,22 +1477,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.776,
+    "p_open": 0.7874,
+    "p_open_real": 0.773,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -1529,7 +1529,7 @@
      "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001773/30001773_320.jpg",
      "booking_rate": 0.0,
      "booking_rank": null,
-     "bookable": false,
+     "bookable": true,
      "formats": [],
      "labels": [],
      "badge": "",
@@ -1544,7 +1544,8 @@
        "to": "2026-11-09",
        "release_date": "2026-11-25"
       }
-     ]
+     ],
+     "bookable_from": "2026-11-09"
     },
     "rating": {
      "date": "2026-11-02",
@@ -1695,6 +1696,18 @@
        "release_date": "2026-11-25"
       }
      ]
+    },
+    "booking": {
+     "movie_cd": "20266461",
+     "rank": 161,
+     "rate": 0.0,
+     "presale_audience": 26,
+     "presale_sales": 338000,
+     "total_audience": 432,
+     "total_sales": 3888000,
+     "open_dt": "2026-11-25",
+     "rerelease_dt": "",
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -1715,10 +1728,11 @@
      "megabox",
      "lotte",
      "cgv",
+     "booking",
      "schedule"
     ],
-    "p_open": 0.7937,
-    "p_open_real": 0.794,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad"
     ]
@@ -1729,29 +1743,30 @@
     "basis": "kobis",
     "sources": {
      "kobis": "2026-11-25",
+     "booking": "2026-11-25",
      "megabox": "2026-11-25",
      "lotte": "2026-11-25",
      "cgv": "2026-11-25",
      "schedule": "2026-11-25"
     },
     "commitment": {
-     "q": 0.7937,
+     "q": 0.7874,
      "r": {
-      "3": 0.9922,
-      "week": 0.9922,
-      "month": 0.9922
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 113,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7937,
-    "p_open_real": 0.794,
-    "signal_state": "day_announced",
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
+    "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-25",
-     "p_open": 0.7937,
-     "basis_state": "day_announced",
+     "p_open": 0.7874,
+     "basis_state": "bookable",
      "validated": false,
      "target": "any",
      "date_tier": "confirmed"
@@ -2014,7 +2029,7 @@
      "movie_cd": "20244970",
      "date": "2026-11-25",
      "month": "2026-11",
-     "poster": "https://www.kobis.or.kr/common/mast/movie/2026/11/thumb_x192/thn_41c027becc9e4619a921a784a09f1d6f.jpg",
+     "poster": "https://www.kobis.or.kr/common/mast/movie/2026/11/thumb_x192/thn_8bc324993d2c4daab9c9aefd8ace75cf.jpg",
      "genres": [
       "액션"
      ]
@@ -2193,12 +2208,12 @@
       },
       "2606306": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606307": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -2440,7 +2455,7 @@
     },
     "booking": {
      "movie_cd": "20233192",
-     "rank": 220,
+     "rank": 223,
      "rate": 0.0,
      "presale_audience": 6,
      "presale_sales": 60000,
@@ -2448,7 +2463,7 @@
      "total_sales": 4204000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "megabox": {
      "movie_nos": [
@@ -2489,22 +2504,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -2519,8 +2534,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad"
     ]
@@ -2984,15 +2999,15 @@
     },
     "booking": {
      "movie_cd": "20257570",
-     "rank": 208,
+     "rank": 202,
      "rate": 0.0,
-     "presale_audience": 8,
-     "presale_sales": 71500,
+     "presale_audience": 10,
+     "presale_sales": 95500,
      "total_audience": 450206,
      "total_sales": 4402823930,
      "open_dt": "2025-10-22",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -3070,15 +3085,15 @@
     },
     "booking": {
      "movie_cd": "20256701",
-     "rank": 203,
+     "rank": 198,
      "rate": 0.0,
-     "presale_audience": 9,
-     "presale_sales": 90000,
+     "presale_audience": 12,
+     "presale_sales": 117100,
      "total_audience": 272653,
      "total_sales": 2787112910,
      "open_dt": "2025-08-13",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -3167,7 +3182,7 @@
      "filings": {
       "2606458": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -3332,7 +3347,7 @@
      "filings": {
       "2606369": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국내영화예고편"
       }
      }
@@ -4117,7 +4132,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25219_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 1.31,
+     "booking_rate": 1.3,
      "genre": "멜로/로맨스",
      "kobis_open_dt": "2026-11-18",
      "runs": [
@@ -4141,13 +4156,13 @@
      "movie_cd": "20268288",
      "rank": 35,
      "rate": 0.3,
-     "presale_audience": 696,
-     "presale_sales": 7563200,
+     "presale_audience": 695,
+     "presale_sales": 7544950,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "2026-11-18",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -4170,8 +4185,8 @@
      "schedule",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -4189,22 +4204,22 @@
      "program": "2026-11-18"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-18",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -4524,15 +4539,15 @@
     },
     "booking": {
      "movie_cd": "20265535",
-     "rank": 60,
+     "rank": 56,
      "rate": 0.1,
-     "presale_audience": 195,
-     "presale_sales": 2326200,
+     "presale_audience": 204,
+     "presale_sales": 2415200,
      "total_audience": 452,
      "total_sales": 4804000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "lotte": {
      "movie_code": "25142",
@@ -4581,22 +4596,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.788,
+    "p_open": 0.7874,
+    "p_open_real": 0.786,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -4613,8 +4628,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.788,
+    "p_open": 0.7874,
+    "p_open_real": 0.786,
     "intent": [
      "promo"
     ]
@@ -4919,15 +4934,15 @@
     },
     "booking": {
      "movie_cd": "20266079",
-     "rank": 243,
+     "rank": 237,
      "rate": 0.0,
-     "presale_audience": 3,
-     "presale_sales": 30000,
+     "presale_audience": 4,
+     "presale_sales": 40000,
      "total_audience": 4255,
      "total_sales": 45695750,
      "open_dt": "2026-08-19",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -5559,7 +5574,7 @@
     },
     "booking": {
      "movie_cd": "20261068",
-     "rank": 58,
+     "rank": 57,
      "rate": 0.1,
      "presale_audience": 200,
      "presale_sales": 2600000,
@@ -5567,7 +5582,7 @@
      "total_sales": 65259150,
      "open_dt": "2026-09-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -5796,7 +5811,7 @@
     },
     "booking": {
      "movie_cd": "20263521",
-     "rank": 258,
+     "rank": 260,
      "rate": 0.0,
      "presale_audience": 1,
      "presale_sales": 9000,
@@ -5804,7 +5819,7 @@
      "total_sales": 217278240,
      "open_dt": "2026-05-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -6343,7 +6358,7 @@
       },
       "2606084": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국내영화예고편"
       }
      }
@@ -7171,13 +7186,13 @@
      "movie_cd": "20210087",
      "rank": 3,
      "rate": 9.3,
-     "presale_audience": 18707,
-     "presale_sales": 365653000,
+     "presale_audience": 18895,
+     "presale_sales": 369360500,
      "total_audience": 1664600,
      "total_sales": 18595854460,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "ors_ad": {
      "first_date": "2026-11-06",
@@ -7223,22 +7238,22 @@
      "program": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -7252,8 +7267,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad"
     ]
@@ -7480,13 +7495,13 @@
      "movie_cd": "20267121",
      "rank": 12,
      "rate": 2.3,
-     "presale_audience": 4613,
-     "presale_sales": 38059100,
+     "presale_audience": 4676,
+     "presale_sales": 38726400,
      "total_audience": 298,
      "total_sales": 3278000,
      "open_dt": "2026-11-18",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis": {
      "movie_cd": "20267121",
@@ -7560,22 +7575,22 @@
      "schedule": "2026-11-18"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-18",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -7592,8 +7607,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -7766,32 +7781,32 @@
       },
       "2606351": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606352": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606353": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606356": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606358": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606359": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606677": {
@@ -9456,12 +9471,12 @@
       },
       "2606313": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606446": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -9736,7 +9751,7 @@
       },
       "2605938": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606166": {
@@ -9791,52 +9806,52 @@
       },
       "2606475": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국내영화예고편"
       },
       "2606479": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606480": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606481": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606482": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606483": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606484": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606485": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606487": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606488": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606627": {
@@ -10086,7 +10101,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/24744_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 1.0,
+     "booking_rate": 1.33,
      "genre": "드라마",
      "kobis_open_dt": "2026-11-11",
      "runs": [
@@ -10248,22 +10263,22 @@
       },
       "2606310": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
     },
     "booking": {
      "movie_cd": "20265420",
-     "rank": 26,
-     "rate": 0.5,
-     "presale_audience": 947,
-     "presale_sales": 9249600,
+     "rank": 21,
+     "rate": 0.6,
+     "presale_audience": 1180,
+     "presale_sales": 12227700,
      "total_audience": 124,
      "total_sales": 1364000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis": {
      "movie_cd": "20265420",
@@ -10339,22 +10354,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -10371,8 +10386,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -10813,7 +10828,7 @@
     },
     "booking": {
      "movie_cd": "20268228",
-     "rank": 220,
+     "rank": 223,
      "rate": 0.0,
      "presale_audience": 6,
      "presale_sales": 36000,
@@ -10821,7 +10836,7 @@
      "total_sales": 0,
      "open_dt": "2026-11-13",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis": {
      "movie_cd": "20268228",
@@ -10904,22 +10919,22 @@
      "schedule": "2026-11-13"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-13",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -10933,8 +10948,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "promo"
     ]
@@ -11073,13 +11088,13 @@
      "movie_cd": "20001391",
      "rank": 30,
      "rate": 0.4,
-     "presale_audience": 815,
-     "presale_sales": 9501300,
+     "presale_audience": 842,
+     "presale_sales": 9773800,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -11105,22 +11120,22 @@
      "program": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.783,
+    "p_open": 0.7874,
+    "p_open_real": 0.78,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -11136,8 +11151,8 @@
      "schedule",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.783,
+    "p_open": 0.7874,
+    "p_open_real": 0.78,
     "intent": [
      "promo"
     ]
@@ -11208,7 +11223,7 @@
     },
     "booking": {
      "movie_cd": "20224573",
-     "rank": 250,
+     "rank": 252,
      "rate": 0.0,
      "presale_audience": 2,
      "presale_sales": 20000,
@@ -11216,7 +11231,7 @@
      "total_sales": 3365433160,
      "open_dt": "2026-09-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20224573",
@@ -11566,7 +11581,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/201612/10893_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 13.94,
+     "booking_rate": 13.89,
      "genre": "드라마",
      "kobis_open_dt": "2016-12-07",
      "runs": [
@@ -11592,13 +11607,13 @@
      "movie_cd": "20167904",
      "rank": 6,
      "rate": 5.8,
-     "presale_audience": 11558,
-     "presale_sales": 119636800,
+     "presale_audience": 11732,
+     "presale_sales": 121364800,
      "total_audience": 3802166,
      "total_sales": 31494217978,
      "open_dt": "2017-12-08",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20167904",
@@ -11687,7 +11702,7 @@
       },
       "2606418": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -11725,22 +11740,22 @@
      "cgv": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -11757,8 +11772,8 @@
      "cgv",
      "booking"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -11800,15 +11815,15 @@
     },
     "booking": {
      "movie_cd": "20070115",
-     "rank": 37,
+     "rank": 36,
      "rate": 0.3,
-     "presale_audience": 652,
-     "presale_sales": 6517000,
+     "presale_audience": 663,
+     "presale_sales": 6627000,
      "total_audience": 1605589,
      "total_sales": 10283775300,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -11826,22 +11841,22 @@
      "megabox": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -11854,8 +11869,8 @@
      "megabox",
      "booking"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/5aca51dcdcbcd8be.webp"
   },
@@ -12055,7 +12070,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202612/25177_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.49,
+     "booking_rate": 0.48,
      "kobis_open_dt": "",
      "runs": [
       {
@@ -12464,7 +12479,7 @@
     },
     "booking": {
      "movie_cd": "20263001",
-     "rank": 113,
+     "rank": 115,
      "rate": 0.0,
      "presale_audience": 53,
      "presale_sales": 514000,
@@ -12472,7 +12487,7 @@
      "total_sales": 0,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "promo": {
      "first_date": "2026-11-05",
@@ -12510,22 +12525,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -12539,8 +12554,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -12702,17 +12717,17 @@
       },
       "2606355": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606360": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606388": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       }
      }
@@ -12841,15 +12856,15 @@
     },
     "booking": {
      "movie_cd": "20040489",
-     "rank": 157,
+     "rank": 145,
      "rate": 0.0,
-     "presale_audience": 28,
-     "presale_sales": 283000,
+     "presale_audience": 31,
+     "presale_sales": 313000,
      "total_audience": 116681,
      "total_sales": 778973500,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -12867,22 +12882,22 @@
      "cgv": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -12895,8 +12910,8 @@
      "cgv",
      "booking"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/742a9c8d5b6c8fab.webp"
   },
@@ -13036,13 +13051,13 @@
      "movie_cd": "19980040",
      "rank": 187,
      "rate": 0.0,
-     "presale_audience": 15,
-     "presale_sales": 158000,
+     "presale_audience": 16,
+     "presale_sales": 166000,
      "total_audience": 293,
      "total_sales": 2157000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -13060,22 +13075,22 @@
      "cgv": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -13088,8 +13103,8 @@
      "cgv",
      "booking"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/11dae5dd810fb6e3.webp"
   },
@@ -13221,15 +13236,15 @@
     },
     "booking": {
      "movie_cd": "19960051",
-     "rank": 99,
+     "rank": 97,
      "rate": 0.0,
-     "presale_audience": 64,
-     "presale_sales": 646500,
+     "presale_audience": 66,
+     "presale_sales": 666500,
      "total_audience": 117,
      "total_sales": 784000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -13247,22 +13262,22 @@
      "cgv": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -13275,8 +13290,8 @@
      "cgv",
      "booking"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/6461a0714d75e8c0.webp"
   },
@@ -13491,15 +13506,15 @@
     },
     "booking": {
      "movie_cd": "20233299",
-     "rank": 131,
+     "rank": 122,
      "rate": 0.0,
-     "presale_audience": 42,
-     "presale_sales": 424000,
+     "presale_audience": 47,
+     "presale_sales": 479000,
      "total_audience": 70244,
      "total_sales": 719415800,
      "open_dt": "2023-12-20",
      "rerelease_dt": "2024-11-06",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "promo": {
      "first_date": "2026-11-05",
@@ -13799,7 +13814,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25010_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.97,
+     "booking_rate": 1.0,
      "genre": "미스터리",
      "kobis_open_dt": "2026-11-04",
      "runs": [
@@ -13829,13 +13844,13 @@
      "movie_cd": "20266765",
      "rank": 17,
      "rate": 1.2,
-     "presale_audience": 2346,
-     "presale_sales": 23571650,
+     "presale_audience": 2400,
+     "presale_sales": 24121850,
      "total_audience": 21393,
      "total_sales": 226651700,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266765",
@@ -14549,7 +14564,7 @@
       },
       "2606452": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -14712,17 +14727,17 @@
       },
       "2606293": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606453": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606454": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -15876,14 +15891,14 @@
     "booking": {
      "movie_cd": "20268264",
      "rank": 2,
-     "rate": 11.9,
-     "presale_audience": 23859,
-     "presale_sales": 596475000,
+     "rate": 12.4,
+     "presale_audience": 25121,
+     "presale_sales": 628025000,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "2026-11-18",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -15906,8 +15921,8 @@
      "schedule",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "release": {
     "date": "2026-11-18",
@@ -15921,22 +15936,22 @@
      "program": "2026-11-18"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-18",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -16991,7 +17006,7 @@
      "filings": {
       "2606357": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -17059,15 +17074,15 @@
     },
     "booking": {
      "movie_cd": "20268504",
-     "rank": 183,
+     "rank": 171,
      "rate": 0.0,
-     "presale_audience": 17,
-     "presale_sales": 510000,
+     "presale_audience": 23,
+     "presale_sales": 690000,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -17087,8 +17102,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -17103,22 +17118,22 @@
      "program": "2026-11-22"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-22",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -17242,13 +17257,13 @@
      "movie_cd": "20255110",
      "rank": 20,
      "rate": 0.7,
-     "presale_audience": 1334,
-     "presale_sales": 13278650,
+     "presale_audience": 1386,
+     "presale_sales": 13787650,
      "total_audience": 1594,
      "total_sales": 16237000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20255110",
@@ -17353,22 +17368,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -17385,8 +17400,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -17581,12 +17596,12 @@
       },
       "2606240": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606241": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606242": {
@@ -17606,7 +17621,7 @@
       },
       "2606461": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -18600,15 +18615,15 @@
     },
     "booking": {
      "movie_cd": "20254062",
-     "rank": 125,
+     "rank": 129,
      "rate": 0.0,
-     "presale_audience": 45,
-     "presale_sales": 512500,
+     "presale_audience": 42,
+     "presale_sales": 465500,
      "total_audience": 8345,
      "total_sales": 78489700,
      "open_dt": "2025-04-24",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -18700,15 +18715,15 @@
     },
     "booking": {
      "movie_cd": "20255168",
-     "rank": 75,
-     "rate": 0.1,
-     "presale_audience": 150,
-     "presale_sales": 1631500,
+     "rank": 134,
+     "rate": 0.0,
+     "presale_audience": 38,
+     "presale_sales": 419000,
      "total_audience": 9433,
      "total_sales": 87504900,
      "open_dt": "2025-06-19",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -18807,7 +18822,7 @@
       },
       "2606379": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -19111,67 +19126,67 @@
       },
       "2606503": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606504": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606506": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606507": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606508": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606509": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606510": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606511": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606512": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606513": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606514": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606515": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606516": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -19682,7 +19697,7 @@
      "filings": {
       "2606295": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606451": {
@@ -20032,7 +20047,7 @@
     },
     "booking": {
      "movie_cd": "20266762",
-     "rank": 102,
+     "rank": 103,
      "rate": 0.0,
      "presale_audience": 62,
      "presale_sales": 895000,
@@ -20040,7 +20055,7 @@
      "total_sales": 1011500,
      "open_dt": "2026-12-02",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -20067,22 +20082,22 @@
      "schedule": "2026-12-02"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.72,
+    "p_open": 0.7874,
+    "p_open_real": 0.718,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-12-02",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -20099,8 +20114,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.72,
+    "p_open": 0.7874,
+    "p_open_real": 0.718,
     "intent": [
      "ors_ad",
      "promo"
@@ -20373,13 +20388,13 @@
      "movie_cd": "20080556",
      "rank": 102,
      "rate": 0.0,
-     "presale_audience": 62,
-     "presale_sales": 649300,
+     "presale_audience": 63,
+     "presale_sales": 658300,
      "total_audience": 1421,
      "total_sales": 10190300,
      "open_dt": "2009-03-12",
      "rerelease_dt": "2026-11-11",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "ors_ad": {
      "first_date": "2026-11-02",
@@ -20441,22 +20456,22 @@
      "program": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -20472,8 +20487,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -20551,12 +20566,12 @@
       },
       "2606592": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606593": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -21003,7 +21018,7 @@
       },
       "2606305": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       }
      }
@@ -21178,15 +21193,15 @@
     },
     "booking": {
      "movie_cd": "20265062",
-     "rank": 28,
-     "rate": 0.5,
-     "presale_audience": 907,
-     "presale_sales": 9344220,
+     "rank": 27,
+     "rate": 0.4,
+     "presale_audience": 909,
+     "presale_sales": 9323720,
      "total_audience": 160065,
      "total_sales": 1687528600,
      "open_dt": "2026-10-08",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "boxoffice": {
      "date": "2026-10-31",
@@ -21378,15 +21393,15 @@
     },
     "booking": {
      "movie_cd": "20267589",
-     "rank": 84,
+     "rank": 81,
      "rate": 0.1,
-     "presale_audience": 109,
-     "presale_sales": 1058700,
+     "presale_audience": 113,
+     "presale_sales": 1101500,
      "total_audience": 126,
      "total_sales": 1134000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20267589",
@@ -21486,22 +21501,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -21517,8 +21532,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -21592,7 +21607,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/24998_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 7.4,
+     "booking_rate": 7.58,
      "genre": "미스터리",
      "kobis_open_dt": "2026-11-04",
      "runs": [
@@ -21621,14 +21636,14 @@
     "booking": {
      "movie_cd": "20259894",
      "rank": 5,
-     "rate": 5.9,
-     "presale_audience": 11872,
-     "presale_sales": 134267670,
+     "rate": 5.8,
+     "presale_audience": 11766,
+     "presale_sales": 132834870,
      "total_audience": 166802,
      "total_sales": 1681873910,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20259894",
@@ -21896,7 +21911,7 @@
     },
     "booking": {
      "movie_cd": "20268146",
-     "rank": 172,
+     "rank": 175,
      "rate": 0.0,
      "presale_audience": 20,
      "presale_sales": 120000,
@@ -21904,7 +21919,7 @@
      "total_sales": 1417000,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "release_history": {
      "kobis_cd": "20268146",
@@ -22083,13 +22098,13 @@
      "movie_cd": "20078992",
      "rank": 65,
      "rate": 0.1,
-     "presale_audience": 164,
-     "presale_sales": 1640900,
+     "presale_audience": 168,
+     "presale_sales": 1671900,
      "total_audience": 6139,
      "total_sales": 60434200,
      "open_dt": "2026-10-14",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "cgv": {
      "movie_no": "30001589",
@@ -22280,32 +22295,32 @@
      "filings": {
       "2606268": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606269": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606270": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606271": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606272": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606273": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606633": {
@@ -22632,7 +22647,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25065_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.64,
+     "booking_rate": 0.67,
      "genre": "스릴러",
      "kobis_open_dt": "2026-11-11",
      "runs": [
@@ -22662,13 +22677,13 @@
      "movie_cd": "20266589",
      "rank": 9,
      "rate": 3.1,
-     "presale_audience": 6275,
-     "presale_sales": 52040300,
+     "presale_audience": 6355,
+     "presale_sales": 52820700,
      "total_audience": 3849,
      "total_sales": 35252000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266589",
@@ -22751,7 +22766,7 @@
       },
       "2606301": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -22805,22 +22820,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -22837,8 +22852,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -22916,12 +22931,12 @@
       },
       "2606460": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606462": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606472": {
@@ -23876,14 +23891,14 @@
     "booking": {
      "movie_cd": "20247221",
      "rank": 4,
-     "rate": 7.3,
-     "presale_audience": 14649,
-     "presale_sales": 138128700,
+     "rate": 8.5,
+     "presale_audience": 17161,
+     "presale_sales": 158333200,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "2026-11-18",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis": {
      "movie_cd": "20247221",
@@ -23917,7 +23932,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25121_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 17.5,
+     "booking_rate": 17.45,
      "genre": "미스터리",
      "kobis_open_dt": "2026-11-18",
      "runs": [
@@ -23951,8 +23966,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad"
     ]
@@ -23970,22 +23985,22 @@
      "schedule": "2026-11-18"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-18",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -24258,7 +24273,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202609/24754_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 5.72,
+     "booking_rate": 5.74,
      "genre": "스릴러",
      "kobis_open_dt": "2026-11-11",
      "runs": [
@@ -24288,13 +24303,13 @@
      "movie_cd": "20264957",
      "rank": 7,
      "rate": 5.2,
-     "presale_audience": 10477,
-     "presale_sales": 85980950,
+     "presale_audience": 10595,
+     "presale_sales": 87173850,
      "total_audience": 1924,
      "total_sales": 20986700,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20264957",
@@ -24400,22 +24415,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -24432,8 +24447,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -24526,7 +24541,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25131_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.14,
+     "booking_rate": 0.13,
      "genre": "애니메이션",
      "kobis_open_dt": "2026-11-06",
      "runs": [
@@ -24554,15 +24569,15 @@
     },
     "booking": {
      "movie_cd": "20264481",
-     "rank": 44,
+     "rank": 45,
      "rate": 0.2,
-     "presale_audience": 371,
-     "presale_sales": 3093550,
+     "presale_audience": 348,
+     "presale_sales": 2868350,
      "total_audience": 31447,
      "total_sales": 294758010,
      "open_dt": "2026-11-06",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20264481",
@@ -24765,13 +24780,13 @@
      "movie_cd": "20181200",
      "rank": 33,
      "rate": 0.4,
-     "presale_audience": 757,
-     "presale_sales": 8066700,
+     "presale_audience": 741,
+     "presale_sales": 7868700,
      "total_audience": 27725,
      "total_sales": 256455169,
      "open_dt": "2019-03-14",
      "rerelease_dt": "2026-10-21",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20181200",
@@ -24990,13 +25005,13 @@
      "movie_cd": "20267697",
      "rank": 10,
      "rate": 2.9,
-     "presale_audience": 5838,
-     "presale_sales": 57188100,
+     "presale_audience": 5826,
+     "presale_sales": 56844500,
      "total_audience": 108164,
      "total_sales": 1094701300,
      "open_dt": "2026-11-05",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "release_history": {
      "kobis_cd": "20267697",
@@ -25223,15 +25238,15 @@
     },
     "booking": {
      "movie_cd": "20236463",
-     "rank": 196,
+     "rank": 201,
      "rate": 0.0,
-     "presale_audience": 12,
-     "presale_sales": 93500,
+     "presale_audience": 11,
+     "presale_sales": 86500,
      "total_audience": 841,
      "total_sales": 6418500,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20236463",
@@ -25452,7 +25467,7 @@
      "filings": {
       "2605144": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -25493,15 +25508,15 @@
     },
     "booking": {
      "movie_cd": "20267846",
-     "rank": 21,
+     "rank": 22,
      "rate": 0.5,
-     "presale_audience": 1033,
-     "presale_sales": 10606300,
+     "presale_audience": 1056,
+     "presale_sales": 10815300,
      "total_audience": 204,
      "total_sales": 1632000,
      "open_dt": "2026-11-14",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -25527,22 +25542,22 @@
      "program": "2026-11-14"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-14",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -25558,8 +25573,8 @@
      "schedule",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad"
     ]
@@ -25702,7 +25717,7 @@
      "filings": {
       "2605258": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국내영화예고편"
       },
       "2605608": {
@@ -25739,7 +25754,7 @@
     },
     "booking": {
      "movie_cd": "20258787",
-     "rank": 78,
+     "rank": 76,
      "rate": 0.1,
      "presale_audience": 142,
      "presale_sales": 1278000,
@@ -25747,7 +25762,7 @@
      "total_sales": 31000,
      "open_dt": "2026-11-25",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -25772,22 +25787,22 @@
      "schedule": "2026-11-25"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-25",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -25803,8 +25818,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -25993,17 +26008,17 @@
      "filings": {
       "2606463": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606464": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606465": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "국외영화예고편"
       },
       "2606615": {
@@ -26222,7 +26237,7 @@
      "total_sales": 6540000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20264929",
@@ -26311,22 +26326,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -26343,8 +26358,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "promo"
     ]
@@ -26506,17 +26521,17 @@
       },
       "2606385": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606387": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       },
       "2606432": {
        "check_date": "1794150000000",
-       "progress": "등급분류완료",
+       "progress": "회의록작성",
        "media": "영화광고선전물"
       }
      }
@@ -26704,15 +26719,15 @@
     },
     "booking": {
      "movie_cd": "20246087",
-     "rank": 172,
+     "rank": 181,
      "rate": 0.0,
-     "presale_audience": 20,
-     "presale_sales": 187000,
+     "presale_audience": 19,
+     "presale_sales": 180000,
      "total_audience": 1168,
      "total_sales": 10351000,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20246087",
@@ -26876,15 +26891,15 @@
     },
     "booking": {
      "movie_cd": "20268151",
-     "rank": 67,
+     "rank": 66,
      "rate": 0.1,
-     "presale_audience": 160,
-     "presale_sales": 4000000,
+     "presale_audience": 167,
+     "presale_sales": 4175000,
      "total_audience": 12870,
      "total_sales": 321750000,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "release_history": {
      "kobis_cd": "20268151",
@@ -27292,15 +27307,15 @@
     },
     "booking": {
      "movie_cd": "20259725",
-     "rank": 80,
+     "rank": 78,
      "rate": 0.1,
-     "presale_audience": 124,
-     "presale_sales": 1402500,
+     "presale_audience": 131,
+     "presale_sales": 1472500,
      "total_audience": 351,
      "total_sales": 3204000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20259725",
@@ -27377,22 +27392,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -27408,8 +27423,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "promo"
     ]
@@ -27502,7 +27517,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/24869_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.35,
+     "booking_rate": 0.48,
      "genre": "코미디",
      "kobis_open_dt": "2026-10-28",
      "runs": [
@@ -27521,15 +27536,15 @@
     },
     "booking": {
      "movie_cd": "20231795",
-     "rank": 25,
+     "rank": 26,
      "rate": 0.5,
-     "presale_audience": 953,
-     "presale_sales": 7363650,
+     "presale_audience": 922,
+     "presale_sales": 7124150,
      "total_audience": 102160,
      "total_sales": 938099070,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20231795",
@@ -27829,15 +27844,15 @@
     },
     "booking": {
      "movie_cd": "20267548",
-     "rank": 31,
+     "rank": 29,
      "rate": 0.4,
-     "presale_audience": 813,
-     "presale_sales": 8991700,
+     "presale_audience": 860,
+     "presale_sales": 9524500,
      "total_audience": 637,
      "total_sales": 7036000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20267548",
@@ -27972,22 +27987,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.75,
+    "p_open": 0.7874,
+    "p_open_real": 0.748,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -28004,8 +28019,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.75,
+    "p_open": 0.7874,
+    "p_open_real": 0.748,
     "intent": [
      "ors_ad",
      "promo"
@@ -28098,15 +28113,15 @@
     },
     "booking": {
      "movie_cd": "20266189",
-     "rank": 52,
+     "rank": 51,
      "rate": 0.1,
-     "presale_audience": 241,
-     "presale_sales": 1901500,
+     "presale_audience": 243,
+     "presale_sales": 1935500,
      "total_audience": 68845,
      "total_sales": 601081530,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266189",
@@ -28376,7 +28391,7 @@
     },
     "booking": {
      "movie_cd": "20264015",
-     "rank": 243,
+     "rank": 247,
      "rate": 0.0,
      "presale_audience": 3,
      "presale_sales": 25000,
@@ -28384,7 +28399,7 @@
      "total_sales": 334278930,
      "open_dt": "2026-10-22",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20264015",
@@ -28595,7 +28610,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/25096_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.71,
+     "booking_rate": 0.7,
      "genre": "드라마",
      "kobis_open_dt": "1997-02-22",
      "runs": [
@@ -28616,15 +28631,15 @@
     },
     "booking": {
      "movie_cd": "19970084",
-     "rank": 29,
+     "rank": 28,
      "rate": 0.4,
-     "presale_audience": 842,
-     "presale_sales": 10106000,
+     "presale_audience": 876,
+     "presale_sales": 10427000,
      "total_audience": 19715,
      "total_sales": 209607620,
      "open_dt": "1997-02-22",
      "rerelease_dt": "2026-10-21",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "19970084",
@@ -28816,7 +28831,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/25050_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.11,
+     "booking_rate": 0.12,
      "genre": "공포(호러)",
      "kobis_open_dt": "2026-10-21",
      "runs": [
@@ -28835,15 +28850,15 @@
     },
     "booking": {
      "movie_cd": "20267571",
-     "rank": 53,
+     "rank": 55,
      "rate": 0.1,
-     "presale_audience": 229,
-     "presale_sales": 2451500,
+     "presale_audience": 207,
+     "presale_sales": 2240000,
      "total_audience": 124853,
      "total_sales": 1290125440,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20267571",
@@ -29123,13 +29138,13 @@
      "movie_cd": "20266805",
      "rank": 83,
      "rate": 0.1,
-     "presale_audience": 111,
-     "presale_sales": 1122800,
+     "presale_audience": 110,
+     "presale_sales": 1115800,
      "total_audience": 4540,
      "total_sales": 41160850,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266805",
@@ -29328,7 +29343,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25056_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.28,
+     "booking_rate": 0.26,
      "genre": "멜로/로맨스",
      "kobis_open_dt": "2026-11-04",
      "runs": [
@@ -29356,15 +29371,15 @@
     },
     "booking": {
      "movie_cd": "20243927",
-     "rank": 22,
+     "rank": 24,
      "rate": 0.5,
-     "presale_audience": 1000,
-     "presale_sales": 9450250,
+     "presale_audience": 992,
+     "presale_sales": 9451050,
      "total_audience": 10449,
      "total_sales": 96849000,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20243927",
@@ -29578,7 +29593,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/24867_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 2.53,
+     "booking_rate": 2.68,
      "genre": "드라마",
      "kobis_open_dt": "2026-10-28",
      "runs": [
@@ -29598,14 +29613,14 @@
     "booking": {
      "movie_cd": "20264498",
      "rank": 13,
-     "rate": 1.8,
-     "presale_audience": 3562,
-     "presale_sales": 34704820,
-     "total_audience": 379761,
-     "total_sales": 3718724930,
+     "rate": 1.7,
+     "presale_audience": 3517,
+     "presale_sales": 34160300,
+     "total_audience": 379757,
+     "total_sales": 3718689930,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20264498",
@@ -29872,15 +29887,15 @@
     },
     "booking": {
      "movie_cd": "20264775",
-     "rank": 54,
+     "rank": 60,
      "rate": 0.1,
-     "presale_audience": 224,
-     "presale_sales": 2324700,
+     "presale_audience": 192,
+     "presale_sales": 2011000,
      "total_audience": 106409,
      "total_sales": 1127956270,
      "open_dt": "2026-10-03",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20264775",
@@ -30076,7 +30091,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/24910_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.04,
+     "booking_rate": 0.03,
      "genre": "스릴러",
      "kobis_open_dt": "2026-10-21",
      "runs": [
@@ -30095,15 +30110,15 @@
     },
     "booking": {
      "movie_cd": "20250053",
-     "rank": 93,
+     "rank": 92,
      "rate": 0.0,
-     "presale_audience": 71,
-     "presale_sales": 715550,
+     "presale_audience": 79,
+     "presale_sales": 783550,
      "total_audience": 159272,
      "total_sales": 1523752220,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20250053",
@@ -30379,15 +30394,15 @@
     },
     "booking": {
      "movie_cd": "20266423",
-     "rank": 55,
+     "rank": 52,
      "rate": 0.1,
-     "presale_audience": 218,
-     "presale_sales": 2496100,
+     "presale_audience": 239,
+     "presale_sales": 2756500,
      "total_audience": 20763,
      "total_sales": 206371400,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266423",
@@ -30624,13 +30639,13 @@
      "movie_cd": "20246365",
      "rank": 38,
      "rate": 0.3,
-     "presale_audience": 595,
-     "presale_sales": 7196700,
+     "presale_audience": 594,
+     "presale_sales": 7230400,
      "total_audience": 7019,
      "total_sales": 70879500,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20246365",
@@ -30822,15 +30837,15 @@
     },
     "booking": {
      "movie_cd": "20266483",
-     "rank": 147,
+     "rank": 145,
      "rate": 0.0,
-     "presale_audience": 30,
-     "presale_sales": 232000,
+     "presale_audience": 31,
+     "presale_sales": 242000,
      "total_audience": 2533,
      "total_sales": 23593500,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266483",
@@ -31050,7 +31065,7 @@
     },
     "booking": {
      "movie_cd": "20266345",
-     "rank": 208,
+     "rank": 211,
      "rate": 0.0,
      "presale_audience": 8,
      "presale_sales": 70800,
@@ -31058,7 +31073,7 @@
      "total_sales": 5073900,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266345",
@@ -31465,15 +31480,15 @@
     },
     "booking": {
      "movie_cd": "20266848",
-     "rank": 128,
+     "rank": 130,
      "rate": 0.0,
-     "presale_audience": 44,
-     "presale_sales": 341500,
+     "presale_audience": 39,
+     "presale_sales": 288500,
      "total_audience": 1301,
      "total_sales": 11838400,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266848",
@@ -31641,15 +31656,15 @@
     },
     "booking": {
      "movie_cd": "20266267",
-     "rank": 143,
+     "rank": 145,
      "rate": 0.0,
-     "presale_audience": 32,
-     "presale_sales": 222500,
+     "presale_audience": 31,
+     "presale_sales": 211500,
      "total_audience": 11013,
      "total_sales": 106787100,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266267",
@@ -31838,15 +31853,15 @@
     },
     "booking": {
      "movie_cd": "20266262",
-     "rank": 61,
+     "rank": 62,
      "rate": 0.1,
-     "presale_audience": 185,
-     "presale_sales": 1828500,
+     "presale_audience": 184,
+     "presale_sales": 1818000,
      "total_audience": 4292,
      "total_sales": 43857700,
      "open_dt": "2026-10-29",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266262",
@@ -32053,7 +32068,7 @@
     },
     "booking": {
      "movie_cd": "20246036",
-     "rank": 102,
+     "rank": 103,
      "rate": 0.0,
      "presale_audience": 62,
      "presale_sales": 434000,
@@ -32061,7 +32076,7 @@
      "total_sales": 259915850,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20246036",
@@ -32550,7 +32565,7 @@
      "total_sales": 52442800,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -32647,7 +32662,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202609/24654_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.09,
+     "booking_rate": 0.1,
      "genre": "범죄",
      "kobis_open_dt": "2026-09-23",
      "runs": [
@@ -32666,15 +32681,15 @@
     },
     "booking": {
      "movie_cd": "20256161",
-     "rank": 47,
-     "rate": 0.2,
-     "presale_audience": 307,
-     "presale_sales": 3203150,
+     "rank": 49,
+     "rate": 0.1,
+     "presale_audience": 259,
+     "presale_sales": 2645950,
      "total_audience": 2071964,
      "total_sales": 20983085750,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20256161",
@@ -33040,7 +33055,7 @@
     },
     "booking": {
      "movie_cd": "20256308",
-     "rank": 112,
+     "rank": 114,
      "rate": 0.0,
      "presale_audience": 56,
      "presale_sales": 392000,
@@ -33048,7 +33063,7 @@
      "total_sales": 8952273200,
      "open_dt": "2026-09-16",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -33204,15 +33219,15 @@
     },
     "booking": {
      "movie_cd": "20265145",
-     "rank": 76,
+     "rank": 73,
      "rate": 0.1,
-     "presale_audience": 143,
-     "presale_sales": 1218000,
+     "presale_audience": 145,
+     "presale_sales": 1223600,
      "total_audience": 6379,
      "total_sales": 59615750,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20265145",
@@ -33411,14 +33426,14 @@
     "booking": {
      "movie_cd": "20255033",
      "rank": 19,
-     "rate": 0.8,
-     "presale_audience": 1508,
-     "presale_sales": 11008550,
+     "rate": 0.7,
+     "presale_audience": 1484,
+     "presale_sales": 10731350,
      "total_audience": 3476471,
      "total_sales": 34084202220,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20255033",
@@ -33704,7 +33719,7 @@
     },
     "booking": {
      "movie_cd": "20265965",
-     "rank": 200,
+     "rank": 202,
      "rate": 0.0,
      "presale_audience": 10,
      "presale_sales": 78000,
@@ -33712,7 +33727,7 @@
      "total_sales": 15744000,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20265965",
@@ -33892,7 +33907,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202609/24708_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 14.91,
+     "booking_rate": 14.06,
      "genre": "애니메이션",
      "kobis_open_dt": "2026-09-30",
      "runs": [
@@ -33912,14 +33927,14 @@
     "booking": {
      "movie_cd": "20261807",
      "rank": 1,
-     "rate": 14.5,
-     "presale_audience": 29120,
-     "presale_sales": 298233620,
+     "rate": 13.0,
+     "presale_audience": 26293,
+     "presale_sales": 270845920,
      "total_audience": 2788843,
      "total_sales": 28679102190,
      "open_dt": "2026-09-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20261807",
@@ -34218,7 +34233,7 @@
     },
     "booking": {
      "movie_cd": "20266080",
-     "rank": 160,
+     "rank": 165,
      "rate": 0.0,
      "presale_audience": 25,
      "presale_sales": 203000,
@@ -34226,7 +34241,7 @@
      "total_sales": 25073200,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266080",
@@ -34419,14 +34434,14 @@
     "booking": {
      "movie_cd": "20266263",
      "rank": 40,
-     "rate": 0.3,
-     "presale_audience": 514,
-     "presale_sales": 6388600,
+     "rate": 0.2,
+     "presale_audience": 505,
+     "presale_sales": 6223100,
      "total_audience": 73646,
      "total_sales": 749139810,
      "open_dt": "2026-10-14",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266263",
@@ -34633,15 +34648,15 @@
     },
     "booking": {
      "movie_cd": "20262961",
-     "rank": 88,
+     "rank": 89,
      "rate": 0.0,
-     "presale_audience": 92,
-     "presale_sales": 781500,
+     "presale_audience": 88,
+     "presale_sales": 752500,
      "total_audience": 25502,
      "total_sales": 251319870,
      "open_dt": "2026-09-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20262961",
@@ -34864,15 +34879,15 @@
     },
     "booking": {
      "movie_cd": "20266747",
-     "rank": 57,
+     "rank": 59,
      "rate": 0.1,
-     "presale_audience": 206,
-     "presale_sales": 1959550,
+     "presale_audience": 196,
+     "presale_sales": 1873950,
      "total_audience": 12133,
      "total_sales": 117249970,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266747",
@@ -35125,7 +35140,7 @@
     },
     "booking": {
      "movie_cd": "20266610",
-     "rank": 250,
+     "rank": 252,
      "rate": 0.0,
      "presale_audience": 2,
      "presale_sales": 26000,
@@ -35133,7 +35148,7 @@
      "total_sales": 821718430,
      "open_dt": "2026-10-07",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -35254,15 +35269,15 @@
     },
     "booking": {
      "movie_cd": "20244801",
-     "rank": 33,
+     "rank": 32,
      "rate": 0.4,
-     "presale_audience": 757,
-     "presale_sales": 13626000,
+     "presale_audience": 764,
+     "presale_sales": 13752000,
      "total_audience": 22312,
      "total_sales": 557752000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -35283,8 +35298,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "promo"
     ]
@@ -35298,22 +35313,22 @@
      "program": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -35375,7 +35390,7 @@
       "cgv_only",
       "rerelease"
      ],
-     "badge": "",
+     "badge": "리마스터피스",
      "runs": [
       {
        "from": "2026-11-02",
@@ -35397,13 +35412,13 @@
      "movie_cd": "20155762",
      "rank": 39,
      "rate": 0.3,
-     "presale_audience": 526,
-     "presale_sales": 6000700,
+     "presale_audience": 552,
+     "presale_sales": 6277700,
      "total_audience": 97105,
      "total_sales": 1012574100,
      "open_dt": "2015-01-28",
      "rerelease_dt": "2026-10-28",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "boxoffice": {
      "date": "2026-11-08",
@@ -35985,15 +36000,15 @@
     },
     "booking": {
      "movie_cd": "20262770",
-     "rank": 169,
+     "rank": 171,
      "rate": 0.0,
-     "presale_audience": 22,
-     "presale_sales": 185000,
+     "presale_audience": 23,
+     "presale_sales": 190000,
      "total_audience": 9056523,
      "total_sales": 93611763470,
      "open_dt": "2026-07-29",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20262770",
@@ -36297,15 +36312,15 @@
     },
     "booking": {
      "movie_cd": "20233219",
-     "rank": 43,
+     "rank": 42,
      "rate": 0.2,
-     "presale_audience": 419,
-     "presale_sales": 4995500,
+     "presale_audience": 423,
+     "presale_sales": 5046500,
      "total_audience": 4598652,
      "total_sales": 49217071390,
      "open_dt": "2026-07-15",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20233219",
@@ -36534,7 +36549,7 @@
     },
     "booking": {
      "movie_cd": "20265146",
-     "rank": 121,
+     "rank": 122,
      "rate": 0.0,
      "presale_audience": 47,
      "presale_sales": 507200,
@@ -36542,7 +36557,7 @@
      "total_sales": 10538176040,
      "open_dt": "2026-09-02",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -36647,7 +36662,7 @@
     },
     "booking": {
      "movie_cd": "20249080",
-     "rank": 235,
+     "rank": 237,
      "rate": 0.0,
      "presale_audience": 4,
      "presale_sales": 37000,
@@ -36655,7 +36670,7 @@
      "total_sales": 47125400,
      "open_dt": "2026-09-02",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20249080",
@@ -36920,7 +36935,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202607/24128_503_1.jpg",
      "exclusive": false,
      "bookable": true,
-     "booking_rate": 0.63,
+     "booking_rate": 0.66,
      "genre": "액션",
      "kobis_open_dt": "2026-08-05",
      "runs": [
@@ -36941,13 +36956,13 @@
      "movie_cd": "20250654",
      "rank": 14,
      "rate": 1.6,
-     "presale_audience": 3273,
-     "presale_sales": 61585070,
+     "presale_audience": 3309,
+     "presale_sales": 62163870,
      "total_audience": 12348387,
      "total_sales": 140938388470,
      "open_dt": "2026-08-05",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20250654",
@@ -37205,15 +37220,15 @@
     },
     "booking": {
      "movie_cd": "19869056",
-     "rank": 95,
+     "rank": 94,
      "rate": 0.0,
-     "presale_audience": 70,
-     "presale_sales": 516500,
+     "presale_audience": 71,
+     "presale_sales": 529500,
      "total_audience": 44778,
      "total_sales": 194420999,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -38697,15 +38712,15 @@
     },
     "booking": {
      "movie_cd": "20257381",
-     "rank": 87,
-     "rate": 0.0,
-     "presale_audience": 99,
-     "presale_sales": 849500,
+     "rank": 84,
+     "rate": 0.1,
+     "presale_audience": 107,
+     "presale_sales": 908500,
      "total_audience": 275,
      "total_sales": 3378000,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20257381",
@@ -38806,22 +38821,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -38837,8 +38852,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "ors_ad",
      "promo"
@@ -38936,15 +38951,15 @@
     },
     "booking": {
      "movie_cd": "20256583",
-     "rank": 62,
+     "rank": 61,
      "rate": 0.1,
-     "presale_audience": 184,
-     "presale_sales": 2038000,
+     "presale_audience": 187,
+     "presale_sales": 2071000,
      "total_audience": 1198,
      "total_sales": 13932200,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20256583",
@@ -39365,15 +39380,15 @@
     },
     "booking": {
      "movie_cd": "20249184",
-     "rank": 138,
+     "rank": 140,
      "rate": 0.0,
-     "presale_audience": 36,
-     "presale_sales": 306000,
+     "presale_audience": 34,
+     "presale_sales": 284000,
      "total_audience": 1813,
      "total_sales": 16242400,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20249184",
@@ -39560,15 +39575,15 @@
     },
     "booking": {
      "movie_cd": "20240146",
-     "rank": 84,
+     "rank": 85,
      "rate": 0.1,
-     "presale_audience": 109,
-     "presale_sales": 1221000,
+     "presale_audience": 104,
+     "presale_sales": 1171000,
      "total_audience": 3624,
      "total_sales": 36208200,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20240146",
@@ -39824,7 +39839,7 @@
     },
     "booking": {
      "movie_cd": "20236720",
-     "rank": 250,
+     "rank": 252,
      "rate": 0.0,
      "presale_audience": 2,
      "presale_sales": 16000,
@@ -39832,7 +39847,7 @@
      "total_sales": 0,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -39859,22 +39874,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -39891,8 +39906,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/85250c661dd3cc02.webp"
   },
@@ -39945,15 +39960,15 @@
     },
     "booking": {
      "movie_cd": "20159510",
-     "rank": 59,
+     "rank": 58,
      "rate": 0.1,
-     "presale_audience": 197,
-     "presale_sales": 2093500,
+     "presale_audience": 198,
+     "presale_sales": 2123900,
      "total_audience": 127962,
      "total_sales": 1061806500,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -40049,13 +40064,13 @@
      "movie_cd": "20150862",
      "rank": 18,
      "rate": 0.8,
-     "presale_audience": 1552,
-     "presale_sales": 17579900,
+     "presale_audience": 1606,
+     "presale_sales": 18207500,
      "total_audience": 60843,
      "total_sales": 501242420,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -40075,22 +40090,22 @@
      "program": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -40104,8 +40119,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/78c1ffd62013cd8c.webp"
   },
@@ -41201,7 +41216,7 @@
     },
     "booking": {
      "movie_cd": "20268013",
-     "rank": 71,
+     "rank": 68,
      "rate": 0.1,
      "presale_audience": 152,
      "presale_sales": 1520000,
@@ -41209,7 +41224,7 @@
      "total_sales": 0,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -41671,16 +41686,16 @@
    "stages": {
     "cgv": {
      "movie_no": "30001737",
-     "status": "now",
+     "status": "ended",
      "release_date": "2026-11-05",
      "release_month": "",
      "first_release_date": "",
      "rerelease": false,
      "grade": "12세이상관람가",
      "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001737/30001737_320.jpg",
-     "booking_rate": 0.02,
+     "booking_rate": 0,
      "booking_rank": 75,
-     "bookable": true,
+     "bookable": false,
      "formats": [],
      "labels": [],
      "badge": "",
@@ -41690,8 +41705,7 @@
        "to": "2026-11-09",
        "release_date": "2026-11-05"
       }
-     ],
-     "bookable_from": ""
+     ]
     }
    },
    "first_seen": {
@@ -43183,7 +43197,7 @@
     },
     "booking": {
      "movie_cd": "20268022",
-     "rank": 109,
+     "rank": 111,
      "rate": 0.0,
      "presale_audience": 58,
      "presale_sales": 580000,
@@ -43191,7 +43205,7 @@
      "total_sales": 870000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -43667,7 +43681,7 @@
     },
     "booking": {
      "movie_cd": "20268031",
-     "rank": 154,
+     "rank": 157,
      "rate": 0.0,
      "presale_audience": 29,
      "presale_sales": 290000,
@@ -43675,7 +43689,7 @@
      "total_sales": 90000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -43747,7 +43761,7 @@
     },
     "booking": {
      "movie_cd": "20268026",
-     "rank": 117,
+     "rank": 118,
      "rate": 0.0,
      "presale_audience": 50,
      "presale_sales": 500000,
@@ -43755,7 +43769,7 @@
      "total_sales": 670000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -44440,15 +44454,15 @@
     },
     "booking": {
      "movie_cd": "20267228",
-     "rank": 167,
+     "rank": 161,
      "rate": 0.0,
-     "presale_audience": 24,
-     "presale_sales": 480000,
+     "presale_audience": 26,
+     "presale_sales": 520000,
      "total_audience": 657,
      "total_sales": 13140000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -44769,7 +44783,7 @@
       "SCREENX"
      ],
      "labels": [],
-     "badge": "",
+     "badge": "리마스터피스",
      "runs": [
       {
        "from": "2026-11-02",
@@ -44786,15 +44800,15 @@
     },
     "booking": {
      "movie_cd": "20256757",
-     "rank": 32,
+     "rank": 34,
      "rate": 0.4,
-     "presale_audience": 790,
-     "presale_sales": 9439000,
+     "presale_audience": 723,
+     "presale_sales": 8467000,
      "total_audience": 3464574,
      "total_sales": 36445810100,
      "open_dt": "2025-09-24",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "boxoffice": {
      "date": "2026-11-08",
@@ -45399,13 +45413,13 @@
      "movie_cd": "19998544",
      "rank": 23,
      "rate": 0.5,
-     "presale_audience": 999,
-     "presale_sales": 9409000,
+     "presale_audience": 1008,
+     "presale_sales": 9496000,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "2026-11-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -45425,22 +45439,22 @@
      "schedule": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.778,
+    "p_open": 0.7874,
+    "p_open_real": 0.775,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -45454,8 +45468,8 @@
      "booking",
      "schedule"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.778,
+    "p_open": 0.7874,
+    "p_open_real": 0.775,
     "intent": [
      "promo"
     ]
@@ -45526,7 +45540,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/25075_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 0.3,
+     "booking_rate": 0.26,
      "genre": "애니메이션",
      "kobis_open_dt": "2026-10-28",
      "runs": [
@@ -45545,15 +45559,15 @@
     },
     "booking": {
      "movie_cd": "20267804",
-     "rank": 81,
+     "rank": 80,
      "rate": 0.1,
      "presale_audience": 122,
-     "presale_sales": 825000,
+     "presale_sales": 849000,
      "total_audience": 10538,
      "total_sales": 85477450,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20267804",
@@ -46017,7 +46031,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25030_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 10.72,
+     "booking_rate": 10.92,
      "genre": "애니메이션",
      "kobis_open_dt": "2026-11-04",
      "runs": [
@@ -46047,13 +46061,13 @@
      "movie_cd": "20267412",
      "rank": 11,
      "rate": 2.7,
-     "presale_audience": 5396,
-     "presale_sales": 58559350,
+     "presale_audience": 5549,
+     "presale_sales": 60171750,
      "total_audience": 43319,
      "total_sales": 494773450,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20267412",
@@ -47528,15 +47542,15 @@
     },
     "booking": {
      "movie_cd": "20176664",
-     "rank": 101,
+     "rank": 100,
      "rate": 0.0,
-     "presale_audience": 63,
-     "presale_sales": 455500,
+     "presale_audience": 64,
+     "presale_sales": 462500,
      "total_audience": 2904,
      "total_sales": 29616000,
      "open_dt": "2026-10-14",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -47647,7 +47661,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/25018_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 2.05,
+     "booking_rate": 1.98,
      "genre": "멜로/로맨스",
      "kobis_open_dt": "2026-10-28",
      "runs": [
@@ -47666,15 +47680,15 @@
     },
     "booking": {
      "movie_cd": "20266764",
-     "rank": 24,
+     "rank": 25,
      "rate": 0.5,
-     "presale_audience": 968,
-     "presale_sales": 6835600,
+     "presale_audience": 963,
+     "presale_sales": 6755100,
      "total_audience": 30051,
      "total_sales": 288153000,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266764",
@@ -49086,15 +49100,15 @@
     },
     "booking": {
      "movie_cd": "20266898",
-     "rank": 243,
+     "rank": 237,
      "rate": 0.0,
-     "presale_audience": 3,
-     "presale_sales": 29750,
+     "presale_audience": 4,
+     "presale_sales": 43750,
      "total_audience": 5144,
      "total_sales": 43442400,
      "open_dt": "2026-10-14",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20266898",
@@ -49972,15 +49986,15 @@
     },
     "booking": {
      "movie_cd": "20261695",
-     "rank": 36,
+     "rank": 37,
      "rate": 0.3,
-     "presale_audience": 675,
-     "presale_sales": 3808800,
+     "presale_audience": 656,
+     "presale_sales": 3744800,
      "total_audience": 7293,
      "total_sales": 57459900,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20261695",
@@ -50719,7 +50733,7 @@
     },
     "booking": {
      "movie_cd": "20244563",
-     "rank": 203,
+     "rank": 206,
      "rate": 0.0,
      "presale_audience": 9,
      "presale_sales": 64000,
@@ -50727,7 +50741,7 @@
      "total_sales": 2589000,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20244563",
@@ -51658,7 +51672,7 @@
     },
     "booking": {
      "movie_cd": "19890269",
-     "rank": 208,
+     "rank": 211,
      "rate": 0.0,
      "presale_audience": 8,
      "presale_sales": 56000,
@@ -51666,7 +51680,7 @@
      "total_sales": 21275900,
      "open_dt": "1989-09-30",
      "rerelease_dt": "2026-10-09",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -51748,7 +51762,7 @@
     },
     "booking": {
      "movie_cd": "20265570",
-     "rank": 154,
+     "rank": 157,
      "rate": 0.0,
      "presale_audience": 29,
      "presale_sales": 328000,
@@ -51756,7 +51770,7 @@
      "total_sales": 0,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -51911,7 +51925,7 @@
     },
     "booking": {
      "movie_cd": "20258732",
-     "rank": 208,
+     "rank": 211,
      "rate": 0.0,
      "presale_audience": 8,
      "presale_sales": 96000,
@@ -51919,7 +51933,7 @@
      "total_sales": 204000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -52103,7 +52117,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202610/24735_503_1.jpg",
      "exclusive": true,
      "bookable": false,
-     "booking_rate": 4.77,
+     "booking_rate": 4.75,
      "genre": "공포(호러)",
      "kobis_open_dt": "2026-11-18",
      "runs": [
@@ -52165,7 +52179,7 @@
     },
     "booking": {
      "movie_cd": "20265410",
-     "rank": 15,
+     "rank": 16,
      "rate": 1.3,
      "presale_audience": 2588,
      "presale_sales": 18116000,
@@ -52173,7 +52187,7 @@
      "total_sales": 0,
      "open_dt": "2026-11-18",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -52197,22 +52211,22 @@
      "program": "2026-11-18"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-18",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -52228,8 +52242,8 @@
      "schedule",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "intent": [
      "promo"
     ]
@@ -52609,7 +52623,7 @@
     },
     "booking": {
      "movie_cd": "20166082",
-     "rank": 185,
+     "rank": 187,
      "rate": 0.0,
      "presale_audience": 16,
      "presale_sales": 192000,
@@ -52617,7 +52631,7 @@
      "total_sales": 32172100,
      "open_dt": "2026-09-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -53528,7 +53542,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202611/25023_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 0.36,
+     "booking_rate": 0.35,
      "genre": "스릴러",
      "kobis_open_dt": "2026-11-04",
      "runs": [
@@ -53558,13 +53572,13 @@
      "movie_cd": "20265833",
      "rank": 64,
      "rate": 0.1,
-     "presale_audience": 166,
-     "presale_sales": 1757400,
+     "presale_audience": 169,
+     "presale_sales": 1797600,
      "total_audience": 4462,
      "total_sales": 42039750,
      "open_dt": "2026-11-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20265833",
@@ -54070,7 +54084,7 @@
     },
     "booking": {
      "movie_cd": "20266766",
-     "rank": 203,
+     "rank": 206,
      "rate": 0.0,
      "presale_audience": 9,
      "presale_sales": 142560,
@@ -54078,7 +54092,7 @@
      "total_sales": 2168477200,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -54207,7 +54221,7 @@
     },
     "booking": {
      "movie_cd": "20258982",
-     "rank": 208,
+     "rank": 211,
      "rate": 0.0,
      "presale_audience": 8,
      "presale_sales": 56000,
@@ -54215,7 +54229,7 @@
      "total_sales": 19784000,
      "open_dt": "2026-10-07",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -54948,7 +54962,7 @@
     },
     "booking": {
      "movie_cd": "20204561",
-     "rank": 243,
+     "rank": 247,
      "rate": 0.0,
      "presale_audience": 3,
      "presale_sales": 28000,
@@ -54956,7 +54970,7 @@
      "total_sales": 10649600,
      "open_dt": "2026-09-10",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20204561",
@@ -55411,15 +55425,15 @@
     },
     "booking": {
      "movie_cd": "20263870",
-     "rank": 220,
+     "rank": 219,
      "rate": 0.0,
-     "presale_audience": 6,
-     "presale_sales": 59000,
+     "presale_audience": 7,
+     "presale_sales": 69000,
      "total_audience": 222952,
      "total_sales": 2375417300,
      "open_dt": "2026-09-17",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -56149,7 +56163,7 @@
      "total_sales": 239844700,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -56783,7 +56797,7 @@
     },
     "booking": {
      "movie_cd": "20080314",
-     "rank": 258,
+     "rank": 260,
      "rate": 0.0,
      "presale_audience": 1,
      "presale_sales": 10000,
@@ -56791,7 +56805,7 @@
      "total_sales": 442065030,
      "open_dt": "2017-03-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -57266,7 +57280,7 @@
      "total_sales": 3014000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -57421,7 +57435,7 @@
     },
     "booking": {
      "movie_cd": "20265497",
-     "rank": 147,
+     "rank": 150,
      "rate": 0.0,
      "presale_audience": 30,
      "presale_sales": 330000,
@@ -57429,7 +57443,7 @@
      "total_sales": 0,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -57694,15 +57708,15 @@
     },
     "booking": {
      "movie_cd": "20265511",
-     "rank": 160,
+     "rank": 161,
      "rate": 0.0,
-     "presale_audience": 25,
-     "presale_sales": 270000,
+     "presale_audience": 26,
+     "presale_sales": 280000,
      "total_audience": 158,
      "total_sales": 1794000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -58042,7 +58056,7 @@
     },
     "booking": {
      "movie_cd": "20224597",
-     "rank": 228,
+     "rank": 230,
      "rate": 0.0,
      "presale_audience": 5,
      "presale_sales": 29000,
@@ -58050,7 +58064,7 @@
      "total_sales": 199161910,
      "open_dt": "2026-09-09",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -58277,7 +58291,7 @@
     },
     "booking": {
      "movie_cd": "20265496",
-     "rank": 203,
+     "rank": 206,
      "rate": 0.0,
      "presale_audience": 9,
      "presale_sales": 108000,
@@ -58285,7 +58299,7 @@
      "total_sales": 0,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -58646,7 +58660,7 @@
     },
     "booking": {
      "movie_cd": "20265495",
-     "rank": 82,
+     "rank": 81,
      "rate": 0.1,
      "presale_audience": 113,
      "presale_sales": 1231000,
@@ -58654,7 +58668,7 @@
      "total_sales": 1174000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -58961,15 +58975,15 @@
     },
     "booking": {
      "movie_cd": "20265510",
-     "rank": 42,
+     "rank": 43,
      "rate": 0.2,
-     "presale_audience": 426,
-     "presale_sales": 4533000,
+     "presale_audience": 421,
+     "presale_sales": 4481000,
      "total_audience": 1020,
      "total_sales": 11335000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -59641,13 +59655,13 @@
      "movie_cd": "20265423",
      "rank": 187,
      "rate": 0.0,
-     "presale_audience": 15,
-     "presale_sales": 145000,
+     "presale_audience": 16,
+     "presale_sales": 155000,
      "total_audience": 91467,
      "total_sales": 929423560,
      "open_dt": "2026-09-09",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -59922,7 +59936,7 @@
     },
     "booking": {
      "movie_cd": "20258102",
-     "rank": 177,
+     "rank": 181,
      "rate": 0.0,
      "presale_audience": 19,
      "presale_sales": 151000,
@@ -59930,7 +59944,7 @@
      "total_sales": 116577050,
      "open_dt": "2026-09-16",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -60931,18 +60945,6 @@
      "date": "2026-10-21",
      "exclusive": true,
      "source_url": "https://www.lottecinema.co.kr/NLCHS/Movie/List?flag=1"
-    },
-    "booking": {
-     "movie_cd": "20266663",
-     "rank": 258,
-     "rate": 0.0,
-     "presale_audience": 1,
-     "presale_sales": 11000,
-     "total_audience": 1370,
-     "total_sales": 11047900,
-     "open_dt": "2026-10-21",
-     "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
     }
    },
    "first_seen": {
@@ -60960,7 +60962,6 @@
     "basis": "kobis",
     "sources": {
      "kobis": "2026-10-21",
-     "booking": "2026-10-21",
      "lotte": "2026-10-21",
      "program": "2026-10-21"
     },
@@ -60982,7 +60983,6 @@
     "evidence": [
      "kobis_open",
      "lotte",
-     "booking",
      "program"
     ],
     "p_open": 1.0,
@@ -61329,7 +61329,7 @@
     },
     "booking": {
      "movie_cd": "20259626",
-     "rank": 109,
+     "rank": 111,
      "rate": 0.0,
      "presale_audience": 58,
      "presale_sales": 950280,
@@ -61337,7 +61337,7 @@
      "total_sales": 17916450780,
      "open_dt": "2026-05-13",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61416,7 +61416,7 @@
     },
     "booking": {
      "movie_cd": "20194376",
-     "rank": 106,
+     "rank": 108,
      "rate": 0.0,
      "presale_audience": 60,
      "presale_sales": 774000,
@@ -61424,7 +61424,7 @@
      "total_sales": 88921099884,
      "open_dt": "2022-06-22",
      "rerelease_dt": "2026-05-13",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61510,14 +61510,14 @@
     "booking": {
      "movie_cd": "20261694",
      "rank": 8,
-     "rate": 4.8,
-     "presale_audience": 9622,
-     "presale_sales": 328563600,
+     "rate": 4.7,
+     "presale_audience": 9616,
+     "presale_sales": 328352400,
      "total_audience": 40023,
      "total_sales": 1277031500,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61537,22 +61537,22 @@
      "program": "2026-11-13"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-13",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -61566,8 +61566,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/f99f37fadafd3079.webp"
   },
@@ -61610,15 +61610,15 @@
     },
     "booking": {
      "movie_cd": "20261782",
-     "rank": 49,
+     "rank": 47,
      "rate": 0.1,
-     "presale_audience": 259,
-     "presale_sales": 4105700,
+     "presale_audience": 268,
+     "presale_sales": 4252310,
      "total_audience": 2915019,
      "total_sales": 33060897040,
      "open_dt": "2026-03-18",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61700,7 +61700,7 @@
     },
     "booking": {
      "movie_cd": "20265587",
-     "rank": 258,
+     "rank": 260,
      "rate": 0.0,
      "presale_audience": 1,
      "presale_sales": 7800,
@@ -61708,7 +61708,7 @@
      "total_sales": 355334710,
      "open_dt": "2026-09-16",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61794,7 +61794,7 @@
     },
     "booking": {
      "movie_cd": "20264148",
-     "rank": 147,
+     "rank": 150,
      "rate": 0.0,
      "presale_audience": 30,
      "presale_sales": 284000,
@@ -61802,7 +61802,7 @@
      "total_sales": 1092268630,
      "open_dt": "2026-07-29",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61940,13 +61940,13 @@
      "movie_cd": "20070175",
      "rank": 50,
      "rate": 0.1,
-     "presale_audience": 255,
-     "presale_sales": 2575600,
+     "presale_audience": 257,
+     "presale_sales": 2608600,
      "total_audience": 10391,
      "total_sales": 70573500,
      "open_dt": "2007-05-17",
      "rerelease_dt": "2026-11-11",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -61972,22 +61972,22 @@
      "program": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -62003,8 +62003,8 @@
      "booking",
      "program"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/eca815d38d722613.webp"
   },
@@ -62142,7 +62142,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/202511/23016_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 0.38,
+     "booking_rate": 0.35,
      "genre": "SF",
      "kobis_open_dt": "2025-11-05",
      "runs": [
@@ -62166,15 +62166,15 @@
     },
     "booking": {
      "movie_cd": "20254375",
-     "rank": 68,
+     "rank": 74,
      "rate": 0.1,
-     "presale_audience": 156,
-     "presale_sales": 1614950,
+     "presale_audience": 144,
+     "presale_sales": 1507650,
      "total_audience": 422481,
      "total_sales": 4276561360,
      "open_dt": "2025-11-05",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20254375",
@@ -62305,7 +62305,7 @@
     },
     "booking": {
      "movie_cd": "20138661",
-     "rank": 140,
+     "rank": 141,
      "rate": 0.0,
      "presale_audience": 33,
      "presale_sales": 297000,
@@ -62313,7 +62313,7 @@
      "total_sales": 503483131,
      "open_dt": "2025-03-19",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20138661",
@@ -62431,7 +62431,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/201911/14449_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 5.16,
+     "booking_rate": 5.23,
      "genre": "액션",
      "kobis_open_dt": "2019-12-04",
      "runs": [
@@ -62455,15 +62455,15 @@
     },
     "booking": {
      "movie_cd": "20192401",
-     "rank": 16,
+     "rank": 15,
      "rate": 1.3,
-     "presale_audience": 2554,
-     "presale_sales": 26554800,
+     "presale_audience": 2603,
+     "presale_sales": 27087850,
      "total_audience": 1376107,
      "total_sales": 12159317464,
      "open_dt": "2019-12-04",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20192401",
@@ -62568,7 +62568,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/201905/14171_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 1.87,
+     "booking_rate": 1.88,
      "genre": "어드벤쳐",
      "kobis_open_dt": "2019-05-23",
      "runs": [
@@ -62594,15 +62594,15 @@
     },
     "booking": {
      "movie_cd": "20183867",
-     "rank": 27,
-     "rate": 0.5,
-     "presale_audience": 926,
-     "presale_sales": 9486050,
+     "rank": 31,
+     "rate": 0.4,
+     "presale_audience": 831,
+     "presale_sales": 8571700,
      "total_audience": 12800870,
      "total_sales": 109083614867,
      "open_dt": "2019-05-23",
      "rerelease_dt": "2022-09-07",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20183867",
@@ -62713,7 +62713,7 @@
      "poster": "http://cf.lottecinema.co.kr//Media/MovieFile/MovieImg/201810/13319_503_1.jpg",
      "exclusive": true,
      "bookable": true,
-     "booking_rate": 0.34,
+     "booking_rate": 0.3,
      "genre": "드라마",
      "kobis_open_dt": "2018-10-31",
      "runs": [
@@ -62740,15 +62740,15 @@
     },
     "booking": {
      "movie_cd": "20185485",
-     "rank": 70,
+     "rank": 77,
      "rate": 0.1,
-     "presale_audience": 153,
-     "presale_sales": 1587200,
+     "presale_audience": 132,
+     "presale_sales": 1390350,
      "total_audience": 9962571,
      "total_sales": 86436204285,
      "open_dt": "2020-05-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20185485",
@@ -64442,15 +64442,15 @@
     },
     "booking": {
      "movie_cd": "20258640",
-     "rank": 200,
+     "rank": 206,
      "rate": 0.0,
-     "presale_audience": 10,
-     "presale_sales": 110000,
+     "presale_audience": 9,
+     "presale_sales": 100000,
      "total_audience": 1982,
      "total_sales": 14903460,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20258640",
@@ -65017,7 +65017,7 @@
     },
     "booking": {
      "movie_cd": "20249903",
-     "rank": 147,
+     "rank": 150,
      "rate": 0.0,
      "presale_audience": 30,
      "presale_sales": 273000,
@@ -65025,7 +65025,7 @@
      "total_sales": 9362000,
      "open_dt": "2026-10-28",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "kobis_detail": {
      "kobis_cd": "20249903",
@@ -70441,13 +70441,13 @@
      "movie_cd": "20267697",
      "rank": 10,
      "rate": 2.9,
-     "presale_audience": 5838,
-     "presale_sales": 57188100,
+     "presale_audience": 5826,
+     "presale_sales": 56844500,
      "total_audience": 108164,
      "total_sales": 1094701300,
      "open_dt": "2026-11-05",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "boxoffice": {
      "date": "2026-11-08",
@@ -72307,7 +72307,7 @@
     },
     "booking": {
      "movie_cd": "20267989",
-     "rank": 235,
+     "rank": 237,
      "rate": 0.0,
      "presale_audience": 4,
      "presale_sales": 132000,
@@ -72315,7 +72315,7 @@
      "total_sales": 699000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -73818,15 +73818,15 @@
     },
     "booking": {
      "movie_cd": "20267571",
-     "rank": 53,
+     "rank": 55,
      "rate": 0.1,
-     "presale_audience": 229,
-     "presale_sales": 2451500,
+     "presale_audience": 207,
+     "presale_sales": 2240000,
      "total_audience": 124853,
      "total_sales": 1290125440,
      "open_dt": "2026-10-21",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     },
     "boxoffice": {
      "date": "2026-11-03",
@@ -75347,14 +75347,14 @@
     "booking": {
      "movie_cd": "20266263",
      "rank": 40,
-     "rate": 0.3,
-     "presale_audience": 514,
-     "presale_sales": 6388600,
+     "rate": 0.2,
+     "presale_audience": 505,
+     "presale_sales": 6223100,
      "total_audience": 73646,
      "total_sales": 749139810,
      "open_dt": "2026-10-14",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -76312,7 +76312,7 @@
     },
     "booking": {
      "movie_cd": "20243684",
-     "rank": 258,
+     "rank": 260,
      "rate": 0.0,
      "presale_audience": 1,
      "presale_sales": 7000,
@@ -76320,7 +76320,7 @@
      "total_sales": 7375000,
      "open_dt": "2026-09-30",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -76442,7 +76442,7 @@
     },
     "booking": {
      "movie_cd": "20256308",
-     "rank": 112,
+     "rank": 114,
      "rate": 0.0,
      "presale_audience": 56,
      "presale_sales": 392000,
@@ -76450,7 +76450,7 @@
      "total_sales": 8952273200,
      "open_dt": "2026-09-16",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -76948,7 +76948,7 @@
     },
     "booking": {
      "movie_cd": "20266766",
-     "rank": 203,
+     "rank": 206,
      "rate": 0.0,
      "presale_audience": 9,
      "presale_sales": 142560,
@@ -76956,7 +76956,7 @@
      "total_sales": 2168477200,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -77715,7 +77715,7 @@
      "total_sales": 316132050,
      "open_dt": "2026-09-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -78079,7 +78079,7 @@
     },
     "booking": {
      "movie_cd": "20266766",
-     "rank": 203,
+     "rank": 206,
      "rate": 0.0,
      "presale_audience": 9,
      "presale_sales": 142560,
@@ -78087,7 +78087,7 @@
      "total_sales": 2168477200,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -78185,7 +78185,7 @@
     },
     "booking": {
      "movie_cd": "20266766",
-     "rank": 203,
+     "rank": 206,
      "rate": 0.0,
      "presale_audience": 9,
      "presale_sales": 142560,
@@ -78193,7 +78193,7 @@
      "total_sales": 2168477200,
      "open_dt": "2026-09-23",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -80047,15 +80047,15 @@
     },
     "booking": {
      "movie_cd": "20265765",
-     "rank": 113,
+     "rank": 130,
      "rate": 0.0,
-     "presale_audience": 53,
-     "presale_sales": 606000,
+     "presale_audience": 39,
+     "presale_sales": 465000,
      "total_audience": 0,
      "total_sales": 0,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -85504,15 +85504,15 @@
     },
     "booking": {
      "movie_cd": "19990050",
-     "rank": 51,
+     "rank": 53,
      "rate": 0.1,
-     "presale_audience": 248,
-     "presale_sales": 2484000,
+     "presale_audience": 218,
+     "presale_sales": 2184000,
      "total_audience": 12796,
      "total_sales": 116836000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -86029,7 +86029,7 @@
     },
     "booking": {
      "movie_cd": "20263530",
-     "rank": 208,
+     "rank": 211,
      "rate": 0.0,
      "presale_audience": 8,
      "presale_sales": 56000,
@@ -86037,7 +86037,7 @@
      "total_sales": 1466070780,
      "open_dt": "2026-07-01",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -86176,7 +86176,7 @@
     },
     "booking": {
      "movie_cd": "20176947",
-     "rank": 258,
+     "rank": 260,
      "rate": 0.0,
      "presale_audience": 1,
      "presale_sales": 8000,
@@ -86184,7 +86184,7 @@
      "total_sales": 2137853329,
      "open_dt": "2021-02-11",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -86268,15 +86268,15 @@
     },
     "booking": {
      "movie_cd": "19970048",
-     "rank": 45,
+     "rank": 44,
      "rate": 0.2,
-     "presale_audience": 361,
-     "presale_sales": 3610000,
+     "presale_audience": 360,
+     "presale_sales": 3600000,
      "total_audience": 378,
      "total_sales": 2739000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -86294,22 +86294,22 @@
      "megabox": "2026-11-11"
     },
     "commitment": {
-     "q": 0.7898,
+     "q": 0.7874,
      "r": {
-      "3": 0.9929,
-      "week": 0.9929,
-      "month": 0.9929
+      "3": 0.9928,
+      "week": 0.9928,
+      "month": 0.9928
      },
-     "n": 96,
+     "n": 95,
      "provisional": true
     },
-    "p_open": 0.7898,
-    "p_open_real": 0.79,
+    "p_open": 0.7874,
+    "p_open_real": 0.787,
     "signal_state": "bookable",
     "display": {
      "tier": "estimate",
      "text_date": "2026-11-11",
-     "p_open": 0.7898,
+     "p_open": 0.7874,
      "basis_state": "bookable",
      "validated": false,
      "target": "any",
@@ -86322,8 +86322,8 @@
      "megabox",
      "booking"
     ],
-    "p_open": 0.7898,
-    "p_open_real": 0.79
+    "p_open": 0.7874,
+    "p_open_real": 0.787
    },
    "poster": "data/posters/5286592352fce368.webp"
   },
@@ -86644,15 +86644,15 @@
     },
     "booking": {
      "movie_cd": "20040776",
-     "rank": 121,
+     "rank": 105,
      "rate": 0.0,
-     "presale_audience": 47,
-     "presale_sales": 467200,
+     "presale_audience": 61,
+     "presale_sales": 619000,
      "total_audience": 825814,
      "total_sales": 5335473320,
      "open_dt": "2005-01-14",
      "rerelease_dt": "2026-10-28",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -86805,15 +86805,15 @@
     },
     "booking": {
      "movie_cd": "20020226",
-     "rank": 65,
+     "rank": 72,
      "rate": 0.1,
-     "presale_audience": 164,
-     "presale_sales": 1640000,
+     "presale_audience": 151,
+     "presale_sales": 1510000,
      "total_audience": 1828,
      "total_sales": 17606000,
      "open_dt": "",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -86888,7 +86888,7 @@
     },
     "booking": {
      "movie_cd": "20173202",
-     "rank": 243,
+     "rank": 247,
      "rate": 0.0,
      "presale_audience": 3,
      "presale_sales": 30000,
@@ -86896,7 +86896,7 @@
      "total_sales": 4751700098,
      "open_dt": "2018-05-17",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
@@ -87158,7 +87158,7 @@
     },
     "booking": {
      "movie_cd": "20233757",
-     "rank": 92,
+     "rank": 93,
      "rate": 0.0,
      "presale_audience": 72,
      "presale_sales": 864000,
@@ -87166,7 +87166,7 @@
      "total_sales": 42091200,
      "open_dt": "2026-08-19",
      "rerelease_dt": "",
-     "as_of": "2026-11-09 13:20"
+     "as_of": "2026-11-09 14:25"
     }
    },
    "first_seen": {
