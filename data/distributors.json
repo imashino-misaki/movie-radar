@@ -2018,7 +2018,7 @@
    "counts": {
     "active": 5,
     "total": 7,
-    "distributor": 5,
+    "distributor": 6,
     "applicant": 3,
     "showing": 2,
     "scheduled": 2,
@@ -2044,7 +2044,8 @@
      "id": "ab9d5333552aa",
      "status": "scheduled",
      "roles": [
-      "applicant"
+      "applicant",
+      "distributor"
      ]
     },
     {
@@ -3954,6 +3955,39 @@
    ]
   },
   {
+   "id": "c20254262",
+   "name": "(주)에무필름즈",
+   "spellings": [],
+   "kobis_codes": [
+    "20254262"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 1,
+    "applicant": 2,
+    "showing": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "r2595207",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "aadff13d839da",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n엶엔터테인먼트",
    "name": "(주)엶엔터테인먼트",
    "spellings": [],
@@ -5040,31 +5074,6 @@
    ]
   },
   {
-   "id": "c20254262",
-   "name": "(주)에무필름즈",
-   "spellings": [],
-   "kobis_codes": [
-    "20254262"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2595207",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20230124",
    "name": "(주)에스비엠엔이",
    "spellings": [
@@ -5402,6 +5411,30 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20100419",
+   "name": "데이지엔터테인먼트 Daisy Entertainment",
+   "spellings": [],
+   "kobis_codes": [
+    "20100419"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "ab9d5333552aa",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -6197,12 +6230,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2600734",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
@@ -6385,12 +6418,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2600734",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
