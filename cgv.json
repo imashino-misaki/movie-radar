@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-10T12:22:57Z",
+ "fetched_at": "2026-11-10T13:26:03Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 95,
-  "now": 47,
+  "chart": 93,
+  "now": 45,
   "upcoming": 76,
   "icecon": 16,
   "arthouse": 35,
@@ -1237,34 +1237,6 @@
    "badge": ""
   },
   {
-   "movie_no": "78674",
-   "title": "헤이트풀8",
-   "status": "now",
-   "release_date": "2020-07-16",
-   "release_month": "",
-   "first_release_date": "2016-01-07",
-   "rerelease": true,
-   "grade": "청소년관람불가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000078/78674/78674_320.jpg",
-   "booking_rate": 0.07,
-   "booking_rank": 47,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "cgv_only"
-   ],
-   "labels": [
-    "cgv_only",
-    "rerelease"
-   ],
-   "badge": ""
-  },
-  {
    "movie_no": "30001703",
    "title": "후광",
    "status": "upcoming",
@@ -1849,30 +1821,6 @@
    "labels": [
     "arthouse"
    ],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001732",
-   "title": "[SIPFF2026] 네가 그리울 거야",
-   "status": "now",
-   "release_date": "2026-11-05",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "15세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001732/30001732_320.jpg",
-   "booking_rate": 0.01,
-   "booking_rank": 73,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now"
-   ],
-   "labels": [],
    "badge": ""
   },
   {
@@ -3181,6 +3129,32 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "78674",
+   "title": "헤이트풀8",
+   "status": "now",
+   "release_date": "2020-07-16",
+   "release_month": "",
+   "first_release_date": "2016-01-07",
+   "rerelease": true,
+   "grade": "청소년관람불가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000078/78674/78674_320.jpg",
+   "booking_rate": 0.07,
+   "booking_rank": 47,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "cgv_only"
+   ],
+   "labels": [
+    "cgv_only",
+    "rerelease"
+   ],
    "badge": ""
   }
  ]
