@@ -880,8 +880,8 @@
     "total": 16,
     "distributor": 13,
     "applicant": 10,
-    "showing": 5,
-    "scheduled": 2,
+    "showing": 4,
+    "scheduled": 3,
     "rated": 1,
     "intake": 1,
     "announced": 3,
@@ -911,14 +911,6 @@
      ]
     },
     {
-     "id": "r2598196",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
      "id": "r2601417",
      "status": "showing",
      "roles": [
@@ -937,6 +929,14 @@
      "id": "l25189",
      "status": "scheduled",
      "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2598196",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     },
@@ -1853,6 +1853,70 @@
    ]
   },
   {
+   "id": "c20141088",
+   "name": "와이드 릴리즈(주) Wide Release",
+   "spellings": [
+    "와이드 릴리즈(주)",
+    "와이드릴리즈(주)"
+   ],
+   "kobis_codes": [
+    "20141088"
+   ],
+   "counts": {
+    "active": 6,
+    "total": 6,
+    "distributor": 5,
+    "applicant": 1,
+    "showing": 2,
+    "scheduled": 3,
+    "rated": 1
+   },
+   "films": [
+    {
+     "id": "r2588709",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592157",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592154",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2601836",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602102",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2595068",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20063188",
    "name": "씨제이씨지브이(주)",
    "spellings": [
@@ -2273,63 +2337,6 @@
      "roles": [
       "applicant",
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20141088",
-   "name": "와이드 릴리즈(주) Wide Release",
-   "spellings": [
-    "와이드 릴리즈(주)",
-    "와이드릴리즈(주)"
-   ],
-   "kobis_codes": [
-    "20141088"
-   ],
-   "counts": {
-    "active": 5,
-    "total": 5,
-    "distributor": 4,
-    "applicant": 1,
-    "showing": 3,
-    "scheduled": 1,
-    "rated": 1
-   },
-   "films": [
-    {
-     "id": "r2588709",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2592154",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2592157",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602102",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2595068",
-     "status": "rated",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -2813,20 +2820,21 @@
     "total": 4,
     "distributor": 0,
     "applicant": 4,
-    "showing": 2,
+    "showing": 1,
+    "scheduled": 1,
     "announced": 2
    },
    "films": [
     {
-     "id": "r2592154",
+     "id": "r2592157",
      "status": "showing",
      "roles": [
       "applicant"
      ]
     },
     {
-     "id": "r2592157",
-     "status": "showing",
+     "id": "r2592154",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -3047,7 +3055,8 @@
     "total": 3,
     "distributor": 2,
     "applicant": 3,
-    "showing": 3
+    "showing": 2,
+    "scheduled": 1
    },
    "films": [
     {
@@ -3067,7 +3076,7 @@
     },
     {
      "id": "r2602731",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -4778,12 +4787,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "showing": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2601426",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "distributor"
      ]
@@ -6579,12 +6588,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "showing": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2601426",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
