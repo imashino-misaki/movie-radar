@@ -2224,7 +2224,7 @@
     "applicant": 4,
     "showing": 2,
     "scheduled": 2,
-    "intake": 1,
+    "rated": 1,
     "released": 1
    },
    "films": [
@@ -2260,7 +2260,7 @@
     },
     {
      "id": "r2602719",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -2411,64 +2411,6 @@
    ]
   },
   {
-   "id": "c20111582",
-   "name": "(주)엣나인필름",
-   "spellings": [
-    "(주)엣나인필름 Atnine Film Co., Ltd."
-   ],
-   "kobis_codes": [
-    "20111582"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 5,
-    "distributor": 5,
-    "applicant": 2,
-    "showing": 2,
-    "announced": 2,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2587867",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600117",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20257089",
-     "status": "announced",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20265366",
-     "status": "announced",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20252744",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n스토리제이",
    "name": "(주)스토리제이",
    "spellings": [],
@@ -2527,7 +2469,7 @@
     "applicant": 1,
     "showing": 2,
     "scheduled": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
@@ -2553,7 +2495,7 @@
     },
     {
      "id": "r2603852",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -2856,6 +2798,111 @@
    ]
   },
   {
+   "id": "c20111582",
+   "name": "(주)엣나인필름",
+   "spellings": [
+    "(주)엣나인필름 Atnine Film Co., Ltd."
+   ],
+   "kobis_codes": [
+    "20111582"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 5,
+    "distributor": 5,
+    "applicant": 2,
+    "showing": 1,
+    "announced": 2,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2600117",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20257089",
+     "status": "announced",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20265366",
+     "status": "announced",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20252744",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2587867",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20158370",
+   "name": "(주)디스테이션",
+   "spellings": [],
+   "kobis_codes": [
+    "20158370"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 4,
+    "distributor": 4,
+    "applicant": 0,
+    "showing": 2,
+    "scheduled": 1,
+    "dormant": 1
+   },
+   "films": [
+    {
+     "id": "l24973",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2593016",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20268768",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20182563",
+     "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20228883",
    "name": "(주)엠디에스스피어",
    "spellings": [
@@ -3132,10 +3179,17 @@
     "total": 3,
     "distributor": 0,
     "applicant": 3,
-    "scheduled": 1,
-    "announced": 2
+    "scheduled": 2,
+    "announced": 1
    },
    "films": [
+    {
+     "id": "aac4e839b7ac6",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
     {
      "id": "acdd5484d69cc",
      "status": "scheduled",
@@ -3145,13 +3199,6 @@
     },
     {
      "id": "a76b183862737",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "aac4e839b7ac6",
      "status": "announced",
      "roles": [
       "applicant"
@@ -3253,7 +3300,7 @@
     "applicant": 3,
     "showing": 1,
     "scheduled": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
@@ -3274,7 +3321,7 @@
     },
     {
      "id": "r2604239",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -3485,45 +3532,6 @@
    ]
   },
   {
-   "id": "c20158370",
-   "name": "(주)디스테이션",
-   "spellings": [],
-   "kobis_codes": [
-    "20158370"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 3,
-    "distributor": 3,
-    "applicant": 0,
-    "showing": 2,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "l24973",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2593016",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20182563",
-     "status": "dormant",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20100123",
    "name": "(주)싸이더스",
    "spellings": [
@@ -3637,47 +3645,6 @@
     },
     {
      "id": "r2588845",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20191941",
-   "name": "워터홀컴퍼니(주) WATERHOLE COMPANY",
-   "spellings": [
-    "워터홀컴퍼니(주)"
-   ],
-   "kobis_codes": [
-    "20191941"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 3,
-    "distributor": 3,
-    "applicant": 0,
-    "showing": 2,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2586813",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2596408",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2589103",
      "status": "released",
      "roles": [
       "distributor"
@@ -4040,6 +4007,40 @@
    ]
   },
   {
+   "id": "c20188741",
+   "name": "(주)트리플픽쳐스",
+   "spellings": [
+    "(주)트리플픽쳐스 Triple Pictures Inc."
+   ],
+   "kobis_codes": [
+    "20188741"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 0,
+    "showing": 1,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2588787",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2598386",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n대원미디어",
    "name": "대원미디어(주)",
    "spellings": [],
@@ -4061,35 +4062,6 @@
     },
     {
      "id": "r2596294",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n메가박스중앙플러스엠",
-   "name": "메가박스중앙(주)플러스엠",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 0,
-    "applicant": 2,
-    "showing": 2
-   },
-   "films": [
-    {
-     "id": "r2586813",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2596408",
      "status": "showing",
      "roles": [
       "applicant"
@@ -4342,6 +4314,47 @@
    ]
   },
   {
+   "id": "c20191941",
+   "name": "워터홀컴퍼니(주) WATERHOLE COMPANY",
+   "spellings": [
+    "워터홀컴퍼니(주)"
+   ],
+   "kobis_codes": [
+    "20191941"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 3,
+    "distributor": 3,
+    "applicant": 0,
+    "showing": 1,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2596408",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2586813",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2589103",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c2019821",
    "name": "유한회사 스튜디오 획",
    "spellings": [],
@@ -4496,6 +4509,36 @@
    ]
   },
   {
+   "id": "n메가박스중앙플러스엠",
+   "name": "메가박스중앙(주)플러스엠",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 2,
+    "distributor": 0,
+    "applicant": 2,
+    "showing": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2596408",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2586813",
+     "status": "released",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n위드라이언픽쳐스",
    "name": "위드 라이언 픽쳐스",
    "spellings": [],
@@ -4600,12 +4643,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
      "id": "r2603906",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4622,12 +4665,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
      "id": "r2604420",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4737,12 +4780,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "rated": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2598386",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -4761,12 +4804,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2602017",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
@@ -5252,32 +5295,6 @@
     {
      "id": "r2597919",
      "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20188741",
-   "name": "(주)트리플픽쳐스",
-   "spellings": [
-    "(주)트리플픽쳐스 Triple Pictures Inc."
-   ],
-   "kobis_codes": [
-    "20188741"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2588787",
-     "status": "showing",
      "roles": [
       "distributor"
      ]
@@ -5949,6 +5966,28 @@
    ]
   },
   {
+   "id": "n엘엠비아르떼스페이스",
+   "name": "엘엠비아르떼스페이스",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "rated": 1
+   },
+   "films": [
+    {
+     "id": "r2570111",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20242548",
    "name": "엘티띵크 주식회사",
    "spellings": [
@@ -6159,6 +6198,30 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20266662",
+   "name": "위너리즘 Winnerism",
+   "spellings": [],
+   "kobis_codes": [
+    "20266662"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2594476",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -6764,12 +6827,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "r2602017",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
