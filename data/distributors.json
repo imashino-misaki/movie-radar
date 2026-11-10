@@ -1932,12 +1932,20 @@
     "total": 7,
     "distributor": 6,
     "applicant": 3,
-    "showing": 2,
-    "scheduled": 2,
+    "showing": 3,
+    "scheduled": 1,
     "rated": 1,
     "dormant": 2
    },
    "films": [
+    {
+     "id": "ab9d5333552aa",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
     {
      "id": "l22284",
      "status": "showing",
@@ -1949,14 +1957,6 @@
      "id": "r2597986",
      "status": "showing",
      "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "ab9d5333552aa",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     },
@@ -3110,8 +3110,7 @@
     "total": 3,
     "distributor": 2,
     "applicant": 3,
-    "showing": 2,
-    "scheduled": 1
+    "showing": 3
    },
    "films": [
     {
@@ -3131,7 +3130,7 @@
     },
     {
      "id": "r2602731",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant",
       "distributor"
@@ -5434,12 +5433,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "scheduled": 1
+    "showing": 1
    },
    "films": [
     {
      "id": "ab9d5333552aa",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
