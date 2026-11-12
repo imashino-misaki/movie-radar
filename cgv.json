@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-12T09:13:48Z",
+ "fetched_at": "2026-11-12T10:14:43Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 91,
-  "now": 68,
+  "chart": 90,
+  "now": 67,
   "upcoming": 52,
   "icecon": 16,
   "arthouse": 35,
@@ -1060,34 +1060,6 @@
    ],
    "labels": [
     "arthouse"
-   ],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001602",
-   "title": "(라이브뷰잉)HOSHIMACHI SUISEI ARENA TOUR 2026 「Once Upon a Stellar」Live Viewing",
-   "status": "now",
-   "release_date": "2026-11-12",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "전체관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001602/30001602_320.jpg",
-   "booking_rate": 0.12,
-   "booking_rank": 39,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "icecon"
-   ],
-   "labels": [
-    "icecon",
-    "cgv_only"
    ],
    "badge": ""
   },
@@ -3086,6 +3058,32 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "30001602",
+   "title": "(라이브뷰잉)HOSHIMACHI SUISEI ARENA TOUR 2026 「Once Upon a Stellar」Live Viewing",
+   "status": "now",
+   "release_date": "2026-11-12",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "전체관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001602/30001602_320.jpg",
+   "booking_rate": 0.12,
+   "booking_rank": 39,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "icecon"
+   ],
+   "labels": [
+    "icecon",
+    "cgv_only"
+   ],
    "badge": ""
   }
  ]
