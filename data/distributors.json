@@ -1034,7 +1034,8 @@
     "applicant": 6,
     "showing": 5,
     "scheduled": 2,
-    "intake": 3,
+    "rated": 2,
+    "intake": 1,
     "announced": 1
    },
    "films": [
@@ -1091,14 +1092,14 @@
     },
     {
      "id": "r2603267",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
     },
     {
      "id": "r2603284",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -2424,6 +2425,71 @@
    ]
   },
   {
+   "id": "c20158370",
+   "name": "(주)디스테이션",
+   "spellings": [
+    "디스테이션"
+   ],
+   "kobis_codes": [
+    "20158370"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 6,
+    "distributor": 5,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 2,
+    "announced": 1,
+    "released": 1,
+    "dormant": 1
+   },
+   "films": [
+    {
+     "id": "r2593016",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20268768",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2604420",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "p4250d27c44c9",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "l24973",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20182563",
+     "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20188381",
    "name": "필름다빈",
    "spellings": [
@@ -3473,54 +3539,6 @@
     {
      "id": "r2590342",
      "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20158370",
-   "name": "(주)디스테이션",
-   "spellings": [],
-   "kobis_codes": [
-    "20158370"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 4,
-    "distributor": 4,
-    "applicant": 0,
-    "showing": 1,
-    "scheduled": 1,
-    "released": 1,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "r2593016",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268768",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "l24973",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20182563",
-     "status": "dormant",
      "roles": [
       "distributor"
      ]
@@ -4820,23 +4838,28 @@
    ]
   },
   {
-   "id": "n그란",
+   "id": "c20157768",
    "name": "(주)그란",
-   "spellings": [],
-   "kobis_codes": [],
+   "spellings": [
+    "(주)그란 Gran"
+   ],
+   "kobis_codes": [
+    "20157768"
+   ],
    "counts": {
     "active": 1,
     "total": 1,
-    "distributor": 0,
+    "distributor": 1,
     "applicant": 1,
-    "rated": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2604420",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
-      "applicant"
+      "applicant",
+      "distributor"
      ]
     }
    ]
@@ -5682,33 +5705,6 @@
    ]
   },
   {
-   "id": "c20217183",
-   "name": "마름모필름",
-   "spellings": [
-    "마름모필름 Mareummo Film"
-   ],
-   "kobis_codes": [
-    "20217183"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2586443",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20122505",
    "name": "메가박스중앙(주)",
    "spellings": [
@@ -6079,30 +6075,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20062485",
-   "name": "씨에스픽쳐스 CS PICTURES",
-   "spellings": [],
-   "kobis_codes": [
-    "20062485"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2586443",
-     "status": "showing",
-     "roles": [
       "distributor"
      ]
     }
@@ -8092,6 +8064,33 @@
    ]
   },
   {
+   "id": "c20217183",
+   "name": "마름모필름",
+   "spellings": [
+    "마름모필름 Mareummo Film"
+   ],
+   "kobis_codes": [
+    "20217183"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2586443",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20136995",
    "name": "부산대학교 문화콘텐츠개발원",
    "spellings": [
@@ -8139,6 +8138,30 @@
      "status": "released",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20062485",
+   "name": "씨에스픽쳐스 CS PICTURES",
+   "spellings": [],
+   "kobis_codes": [
+    "20062485"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2586443",
+     "status": "released",
+     "roles": [
       "distributor"
      ]
     }
