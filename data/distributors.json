@@ -3249,12 +3249,13 @@
     "total": 3,
     "distributor": 0,
     "applicant": 3,
-    "rated": 3
+    "scheduled": 1,
+    "rated": 2
    },
    "films": [
     {
      "id": "r2587866",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -3616,7 +3617,7 @@
     "distributor": 2,
     "applicant": 1,
     "showing": 1,
-    "scheduled": 1,
+    "rated": 1,
     "released": 1
    },
    "films": [
@@ -3629,7 +3630,7 @@
     },
     {
      "id": "r2598040",
-     "status": "scheduled",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -6071,33 +6072,6 @@
    ]
   },
   {
-   "id": "c20141348",
-   "name": "써티세븐스디그리 주식회사",
-   "spellings": [
-    "써티세븐스디그리(주) 37th degree Co.,Ltd."
-   ],
-   "kobis_codes": [
-    "20141348"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2593967",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20062485",
    "name": "씨에스픽쳐스 CS PICTURES",
    "spellings": [],
@@ -8125,6 +8099,33 @@
      "id": "k20134361",
      "status": "dormant",
      "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20141348",
+   "name": "써티세븐스디그리 주식회사",
+   "spellings": [
+    "써티세븐스디그리(주) 37th degree Co.,Ltd."
+   ],
+   "kobis_codes": [
+    "20141348"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2593967",
+     "status": "released",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     }
