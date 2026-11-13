@@ -742,15 +742,15 @@
     "20230987"
    ],
    "counts": {
-    "active": 14,
-    "total": 18,
+    "active": 15,
+    "total": 19,
     "distributor": 14,
-    "applicant": 12,
+    "applicant": 13,
     "showing": 5,
     "scheduled": 3,
     "rated": 1,
     "intake": 1,
-    "announced": 4,
+    "announced": 5,
     "released": 4
    },
    "films": [
@@ -854,6 +854,13 @@
      "status": "announced",
      "roles": [
       "distributor"
+     ]
+    },
+    {
+     "id": "pa750e94b8fa1",
+     "status": "announced",
+     "roles": [
+      "applicant"
      ]
     },
     {
@@ -1042,15 +1049,15 @@
     "20110854"
    ],
    "counts": {
-    "active": 11,
-    "total": 11,
+    "active": 12,
+    "total": 12,
     "distributor": 7,
-    "applicant": 6,
+    "applicant": 7,
     "showing": 5,
     "scheduled": 2,
     "rated": 2,
     "intake": 1,
-    "announced": 1
+    "announced": 2
    },
    "films": [
     {
@@ -1121,6 +1128,13 @@
     {
      "id": "r2605583",
      "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "p6d2275bbe054",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -2675,55 +2689,6 @@
    ]
   },
   {
-   "id": "c20123217",
-   "name": "(주)시네마달",
-   "spellings": [
-    "(주)시네마달 Cinema DAL"
-   ],
-   "kobis_codes": [
-    "20123217"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 4,
-    "distributor": 3,
-    "applicant": 1,
-    "showing": 2,
-    "scheduled": 1,
-    "rated": 1
-   },
-   "films": [
-    {
-     "id": "k20256583",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590201",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20265720",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2603852",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20139757",
    "name": "(주)엔케이컨텐츠",
    "spellings": [],
@@ -3026,6 +2991,56 @@
      "status": "released",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20123217",
+   "name": "(주)시네마달",
+   "spellings": [
+    "(주)시네마달 Cinema DAL"
+   ],
+   "kobis_codes": [
+    "20123217"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 4,
+    "distributor": 3,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 1,
+    "rated": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20256583",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20265720",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2603852",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2590201",
+     "status": "released",
+     "roles": [
       "distributor"
      ]
     }
@@ -3969,35 +3984,6 @@
    ]
   },
   {
-   "id": "n대경토탈",
-   "name": "(주)대경토탈",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 0,
-    "applicant": 2,
-    "announced": 2
-   },
-   "films": [
-    {
-     "id": "a0ed58db00155",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "aa5c1d01554f9",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20229581",
    "name": "(주)레드아이스 엔터테인먼트",
    "spellings": [],
@@ -4898,6 +4884,28 @@
      "roles": [
       "applicant",
       "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n대경토탈",
+   "name": "(주)대경토탈",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "aa5c1d01554f9",
+     "status": "announced",
+     "roles": [
+      "applicant"
      ]
     }
    ]
@@ -6036,33 +6044,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20188342",
-   "name": "쌍마픽처스",
-   "spellings": [
-    "쌍마픽처스 Shangma Pictures"
-   ],
-   "kobis_codes": [
-    "20188342"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2590201",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     }
    ]
@@ -8154,6 +8135,33 @@
      "id": "k20134361",
      "status": "dormant",
      "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20188342",
+   "name": "쌍마픽처스",
+   "spellings": [
+    "쌍마픽처스 Shangma Pictures"
+   ],
+   "kobis_codes": [
+    "20188342"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2590201",
+     "status": "released",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     }
