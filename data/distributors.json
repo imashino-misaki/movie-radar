@@ -445,8 +445,8 @@
     "distributor": 5,
     "applicant": 17,
     "showing": 3,
-    "scheduled": 10,
-    "rated": 5,
+    "scheduled": 11,
+    "rated": 4,
     "released": 1,
     "dormant": 1
    },
@@ -530,6 +530,13 @@
      ]
     },
     {
+     "id": "r2591693",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
      "id": "r2592880",
      "status": "scheduled",
      "roles": [
@@ -552,13 +559,6 @@
     },
     {
      "id": "r2588123",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2591693",
      "status": "rated",
      "roles": [
       "applicant"
@@ -4162,13 +4162,13 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "showing": 1,
+    "scheduled": 1,
     "announced": 1
    },
    "films": [
     {
      "id": "a4da88345b11e",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -6405,6 +6405,28 @@
     {
      "id": "r2603341",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n웹스프레드",
+   "name": "웹스프레드(주)",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "a55d93626be62",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
