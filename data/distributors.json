@@ -1049,13 +1049,13 @@
     "20110854"
    ],
    "counts": {
-    "active": 12,
-    "total": 12,
+    "active": 11,
+    "total": 11,
     "distributor": 7,
     "applicant": 7,
     "showing": 5,
     "scheduled": 3,
-    "rated": 2,
+    "rated": 1,
     "intake": 1,
     "announced": 1
    },
@@ -1105,13 +1105,6 @@
      ]
     },
     {
-     "id": "k20268441",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
      "id": "p7a6634049dcb",
      "status": "scheduled",
      "roles": [
@@ -1120,9 +1113,10 @@
     },
     {
      "id": "r2603267",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
-      "applicant"
+      "applicant",
+      "distributor"
      ]
     },
     {
@@ -2996,105 +2990,6 @@
    ]
   },
   {
-   "id": "c20123217",
-   "name": "(주)시네마달",
-   "spellings": [
-    "(주)시네마달 Cinema DAL"
-   ],
-   "kobis_codes": [
-    "20123217"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 4,
-    "distributor": 3,
-    "applicant": 1,
-    "showing": 1,
-    "scheduled": 1,
-    "rated": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "k20256583",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20265720",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2603852",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2590201",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20228883",
-   "name": "(주)엠디에스스피어",
-   "spellings": [
-    "(주)엠디에스스피어 MDSsphere CO.,LTD."
-   ],
-   "kobis_codes": [
-    "20228883"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 4,
-    "distributor": 3,
-    "applicant": 1,
-    "showing": 1,
-    "scheduled": 2,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2602697",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268363",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2603067",
-     "status": "scheduled",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2589913",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20157108",
    "name": "(주)영화사 안다미로",
    "spellings": [
@@ -3624,6 +3519,49 @@
    ]
   },
   {
+   "id": "c20123217",
+   "name": "(주)시네마달",
+   "spellings": [
+    "(주)시네마달 Cinema DAL"
+   ],
+   "kobis_codes": [
+    "20123217"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 3,
+    "distributor": 3,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20256583",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2603852",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590201",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20100123",
    "name": "(주)싸이더스",
    "spellings": [
@@ -3658,6 +3596,49 @@
     {
      "id": "k20158829",
      "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20228883",
+   "name": "(주)엠디에스스피어",
+   "spellings": [
+    "(주)엠디에스스피어 MDSsphere CO.,LTD."
+   ],
+   "kobis_codes": [
+    "20228883"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 3,
+    "distributor": 3,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2602697",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2603067",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2589913",
+     "status": "released",
      "roles": [
       "distributor"
      ]
@@ -4756,6 +4737,38 @@
    ]
   },
   {
+   "id": "c20242681",
+   "name": "재단법인 명필름문화재단",
+   "spellings": [],
+   "kobis_codes": [
+    "20242681"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 0,
+    "showing": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2600734",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20244181",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n이큐티와이",
    "name": "주식회사 이큐티와이",
    "spellings": [],
@@ -4938,6 +4951,30 @@
      "status": "intake",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20254707",
+   "name": "(주)로드쇼플러스 ROADSHOWPLUS",
+   "spellings": [],
+   "kobis_codes": [
+    "20254707"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "showing": 1
+   },
+   "films": [
+    {
+     "id": "k20249903",
+     "status": "showing",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -6567,30 +6604,6 @@
    ]
   },
   {
-   "id": "c20242681",
-   "name": "재단법인 명필름문화재단",
-   "spellings": [],
-   "kobis_codes": [
-    "20242681"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2600734",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n정적필름",
    "name": "정적필름",
    "spellings": [],
@@ -6608,6 +6621,30 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20267161",
+   "name": "주식회사 달과6펜스 moonn6pence Inc.",
+   "spellings": [],
+   "kobis_codes": [
+    "20267161"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "showing": 1
+   },
+   "films": [
+    {
+     "id": "k20249903",
+     "status": "showing",
+     "roles": [
+      "distributor"
      ]
     }
    ]
