@@ -1549,7 +1549,8 @@
     "total": 12,
     "distributor": 10,
     "applicant": 10,
-    "showing": 4,
+    "showing": 3,
+    "scheduled": 1,
     "rated": 2,
     "released": 6
    },
@@ -1558,14 +1559,6 @@
      "id": "k20263001",
      "status": "showing",
      "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2597710",
-     "status": "showing",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     },
@@ -1579,6 +1572,14 @@
     {
      "id": "r2600773",
      "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597710",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -2126,70 +2127,6 @@
    ]
   },
   {
-   "id": "c20188721",
-   "name": "(주)삼백상회",
-   "spellings": [
-    "(주)삼백상회 300 & Co."
-   ],
-   "kobis_codes": [
-    "20188721"
-   ],
-   "counts": {
-    "active": 5,
-    "total": 6,
-    "distributor": 6,
-    "applicant": 1,
-    "showing": 2,
-    "scheduled": 3,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2584231",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2597894",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2599040",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602296",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602727",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2588845",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20142968",
    "name": "(주)콘텐츠판다",
    "spellings": [
@@ -2593,6 +2530,70 @@
     {
      "id": "k20182563",
      "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20188721",
+   "name": "(주)삼백상회",
+   "spellings": [
+    "(주)삼백상회 300 & Co."
+   ],
+   "kobis_codes": [
+    "20188721"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 6,
+    "distributor": 6,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 3,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2597894",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2599040",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602296",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602727",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2584231",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2588845",
+     "status": "released",
      "roles": [
       "distributor"
      ]
@@ -3677,46 +3678,6 @@
    ]
   },
   {
-   "id": "c20141403",
-   "name": "(주)제이에이와이이엔터테인먼트",
-   "spellings": [],
-   "kobis_codes": [
-    "20141403"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "rated": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2584231",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2598040",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2590956",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20228845",
    "name": "(주)키다리스튜디오",
    "spellings": [],
@@ -4416,7 +4377,8 @@
     "total": 2,
     "distributor": 2,
     "applicant": 1,
-    "showing": 2
+    "showing": 1,
+    "scheduled": 1
    },
    "films": [
     {
@@ -4428,7 +4390,7 @@
     },
     {
      "id": "r2597564",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -4618,6 +4580,45 @@
     {
      "id": "k20158829",
      "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20141403",
+   "name": "(주)제이에이와이이엔터테인먼트",
+   "spellings": [],
+   "kobis_codes": [
+    "20141403"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 1,
+    "rated": 1,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2598040",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2584231",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590956",
+     "status": "released",
      "roles": [
       "distributor"
      ]
@@ -5224,28 +5225,6 @@
      "status": "showing",
      "roles": [
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n블루라벨픽쳐스",
-   "name": "(주)블루라벨픽쳐스",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 0,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2584231",
-     "status": "showing",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -8059,6 +8038,28 @@
      "status": "released",
      "roles": [
       "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n블루라벨픽쳐스",
+   "name": "(주)블루라벨픽쳐스",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2584231",
+     "status": "released",
+     "roles": [
+      "applicant"
      ]
     }
    ]
