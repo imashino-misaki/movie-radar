@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-16T00:55:54Z",
+ "fetched_at": "2026-11-16T01:59:16Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,11 +8,11 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 89,
-  "now": 66,
+  "chart": 87,
+  "now": 64,
   "upcoming": 47,
   "icecon": 9,
-  "arthouse": 35,
+  "arthouse": 36,
   "cgv_only": 13
  },
  "movies": [
@@ -2204,34 +2204,6 @@
    "badge": ""
   },
   {
-   "movie_no": "83567",
-   "title": "미션",
-   "status": "now",
-   "release_date": "2026-10-28",
-   "release_month": "",
-   "first_release_date": "2020-07-16",
-   "rerelease": true,
-   "grade": "12세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000083/83567/83567_320.jpg",
-   "booking_rate": 0.0,
-   "booking_rank": 75,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "arthouse"
-   ],
-   "labels": [
-    "arthouse",
-    "rerelease"
-   ],
-   "badge": ""
-  },
-  {
    "movie_no": "30001451",
    "title": "부활 그 사랑",
    "status": "now",
@@ -2301,33 +2273,6 @@
     "now"
    ],
    "labels": [],
-   "badge": ""
-  },
-  {
-   "movie_no": "30001748",
-   "title": "인생세탁소",
-   "status": "now",
-   "release_date": "2026-11-04",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "15세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001748/30001748_320.jpg",
-   "booking_rate": 0.0,
-   "booking_rank": 83,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "arthouse"
-   ],
-   "labels": [
-    "arthouse"
-   ],
    "badge": ""
   },
   {
@@ -2642,9 +2587,12 @@
    "formats": [],
    "format_codes": [],
    "lists": [
-    "upcoming"
+    "upcoming",
+    "arthouse"
    ],
-   "labels": [],
+   "labels": [
+    "arthouse"
+   ],
    "badge": ""
   },
   {
@@ -2900,6 +2848,57 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "83567",
+   "title": "미션",
+   "status": "now",
+   "release_date": "2026-10-28",
+   "release_month": "",
+   "first_release_date": "2020-07-16",
+   "rerelease": true,
+   "grade": "12세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000083/83567/83567_320.jpg",
+   "booking_rate": 0.0,
+   "booking_rank": 75,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "arthouse"
+   ],
+   "labels": [
+    "arthouse",
+    "rerelease"
+   ],
+   "badge": ""
+  },
+  {
+   "movie_no": "30001748",
+   "title": "인생세탁소",
+   "status": "now",
+   "release_date": "2026-11-04",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "15세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001748/30001748_320.jpg",
+   "booking_rate": 0.0,
+   "booking_rank": 83,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "arthouse"
+   ],
+   "labels": [
+    "arthouse"
+   ],
    "badge": ""
   }
  ]
