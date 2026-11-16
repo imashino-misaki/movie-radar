@@ -1477,7 +1477,8 @@
     "distributor": 6,
     "applicant": 3,
     "showing": 4,
-    "scheduled": 3
+    "scheduled": 2,
+    "announced": 1
    },
    "films": [
     {
@@ -1518,17 +1519,17 @@
      ]
     },
     {
-     "id": "p2813a8c71120",
-     "status": "scheduled",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
      "id": "r2602659",
      "status": "scheduled",
      "roles": [
       "distributor"
+     ]
+    },
+    {
+     "id": "p2813a8c71120",
+     "status": "announced",
+     "roles": [
+      "applicant"
      ]
     }
    ]
@@ -4275,41 +4276,6 @@
    ]
   },
   {
-   "id": "c20265983",
-   "name": "라이트하우스",
-   "spellings": [
-    "라이트하우스 Lighthouse"
-   ],
-   "kobis_codes": [
-    "20265983"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "scheduled": 1
-   },
-   "films": [
-    {
-     "id": "r2592291",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268306",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n메가박스중앙플러스엠",
    "name": "메가박스중앙(주)플러스엠",
    "spellings": [],
@@ -4772,6 +4738,41 @@
      "id": "k20191248",
      "status": "dormant",
      "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20265983",
+   "name": "라이트하우스",
+   "spellings": [
+    "라이트하우스 Lighthouse"
+   ],
+   "kobis_codes": [
+    "20265983"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 1,
+    "scheduled": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20268306",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592291",
+     "status": "released",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     }
