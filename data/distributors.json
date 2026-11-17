@@ -928,15 +928,15 @@
     "20161801"
    ],
    "counts": {
-    "active": 14,
+    "active": 13,
     "total": 16,
     "distributor": 15,
     "applicant": 8,
-    "showing": 7,
+    "showing": 6,
     "scheduled": 5,
     "intake": 1,
     "announced": 1,
-    "released": 2
+    "released": 3
    },
    "films": [
     {
@@ -964,14 +964,6 @@
      "id": "l23016",
      "status": "showing",
      "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590863",
-     "status": "showing",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     },
@@ -1052,6 +1044,14 @@
     },
     {
      "id": "r2589455",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590863",
      "status": "released",
      "roles": [
       "applicant",
@@ -2473,6 +2473,82 @@
    ]
   },
   {
+   "id": "c20188381",
+   "name": "필름다빈",
+   "spellings": [
+    "필름다빈 FILM DABIN"
+   ],
+   "kobis_codes": [
+    "20188381"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 7,
+    "distributor": 5,
+    "applicant": 7,
+    "showing": 1,
+    "scheduled": 1,
+    "intake": 2,
+    "released": 3
+   },
+   "films": [
+    {
+     "id": "r2599288",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600379",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2606041",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2607670",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2587973",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590850",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590891",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20158370",
    "name": "(주)디스테이션",
    "spellings": [
@@ -2704,6 +2780,56 @@
     {
      "id": "pc752b85d1024",
      "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20137515",
+   "name": "(주)애니플러스",
+   "spellings": [
+    "(주)애니플러스 ANIPLUS"
+   ],
+   "kobis_codes": [
+    "20137515"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 4,
+    "distributor": 2,
+    "applicant": 4,
+    "showing": 3,
+    "intake": 1
+   },
+   "films": [
+    {
+     "id": "p877cf3811f6a",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2598758",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602731",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2607900",
+     "status": "intake",
      "roles": [
       "applicant"
      ]
@@ -2965,75 +3091,6 @@
    ]
   },
   {
-   "id": "c20188381",
-   "name": "필름다빈",
-   "spellings": [
-    "필름다빈 FILM DABIN"
-   ],
-   "kobis_codes": [
-    "20188381"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 6,
-    "distributor": 5,
-    "applicant": 6,
-    "showing": 1,
-    "scheduled": 1,
-    "intake": 1,
-    "released": 3
-   },
-   "films": [
-    {
-     "id": "r2599288",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600379",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2606041",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2587973",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590850",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590891",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20243105",
    "name": "㈜스튜디오오르카",
    "spellings": [
@@ -3180,48 +3237,6 @@
     {
      "id": "r2601123",
      "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20137515",
-   "name": "(주)애니플러스",
-   "spellings": [
-    "(주)애니플러스 ANIPLUS"
-   ],
-   "kobis_codes": [
-    "20137515"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 3,
-    "showing": 3
-   },
-   "films": [
-    {
-     "id": "p877cf3811f6a",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2598758",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602731",
-     "status": "showing",
      "roles": [
       "applicant",
       "distributor"
@@ -3924,6 +3939,36 @@
     {
      "id": "r2601859",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n타이거시네마",
+   "name": "(주) 타이거시네마",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 0,
+    "applicant": 2,
+    "rated": 1,
+    "intake": 1
+   },
+   "films": [
+    {
+     "id": "r2603906",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2608200",
+     "status": "intake",
      "roles": [
       "applicant"
      ]
@@ -4961,13 +5006,13 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "intake": 1,
+    "scheduled": 1,
     "released": 1
    },
    "films": [
     {
      "id": "r2605606",
-     "status": "intake",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -5012,28 +5057,6 @@
      "status": "released",
      "roles": [
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n타이거시네마",
-   "name": "(주) 타이거시네마",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 0,
-    "applicant": 1,
-    "rated": 1
-   },
-   "films": [
-    {
-     "id": "r2603906",
-     "status": "rated",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -6211,6 +6234,28 @@
    ]
   },
   {
+   "id": "n씨제이이엔엠스튜디오스용필름지점",
+   "name": "씨제이이엔엠스튜디오스(주)용필름지점",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "intake": 1
+   },
+   "films": [
+    {
+     "id": "r2605317",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n안테나스튜디오",
    "name": "안테나스튜디오",
    "spellings": [],
@@ -7163,6 +7208,28 @@
     {
      "id": "r2593246",
      "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n위드에이스튜디오",
+   "name": "주식회사 위드에이스튜디오",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2607643",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
