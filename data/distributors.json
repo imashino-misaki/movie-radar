@@ -461,24 +461,17 @@
     "20122956"
    ],
    "counts": {
-    "active": 18,
+    "active": 17,
     "total": 20,
     "distributor": 5,
     "applicant": 17,
-    "showing": 4,
+    "showing": 3,
     "scheduled": 9,
     "rated": 5,
-    "released": 1,
+    "released": 2,
     "dormant": 1
    },
    "films": [
-    {
-     "id": "k20258640",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
     {
      "id": "p8fc611a3e1bf",
      "status": "showing",
@@ -597,6 +590,13 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    },
+    {
+     "id": "k20258640",
+     "status": "released",
+     "roles": [
+      "distributor"
      ]
     },
     {
@@ -928,15 +928,15 @@
     "20161801"
    ],
    "counts": {
-    "active": 13,
+    "active": 12,
     "total": 16,
     "distributor": 15,
     "applicant": 8,
-    "showing": 7,
+    "showing": 6,
     "scheduled": 4,
     "intake": 1,
     "announced": 1,
-    "released": 3
+    "released": 4
    },
    "films": [
     {
@@ -976,14 +976,6 @@
     },
     {
      "id": "r2593323",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2594271",
      "status": "showing",
      "roles": [
       "applicant",
@@ -1057,6 +1049,14 @@
       "applicant",
       "distributor"
      ]
+    },
+    {
+     "id": "r2594271",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
     }
    ]
   },
@@ -1074,8 +1074,8 @@
     "total": 12,
     "distributor": 8,
     "applicant": 7,
-    "showing": 6,
-    "scheduled": 3,
+    "showing": 5,
+    "scheduled": 4,
     "rated": 2,
     "announced": 1
    },
@@ -1118,14 +1118,6 @@
      ]
     },
     {
-     "id": "r2603267",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
      "id": "k20267901",
      "status": "scheduled",
      "roles": [
@@ -1144,6 +1136,14 @@
      "status": "scheduled",
      "roles": [
       "applicant"
+     ]
+    },
+    {
+     "id": "r2603267",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
      ]
     },
     {
@@ -1731,79 +1731,6 @@
    ]
   },
   {
-   "id": "c20173221",
-   "name": "소니픽쳐스엔터테인먼트코리아주식회사극장배급지점",
-   "spellings": [
-    "소니픽쳐스엔터테인먼트코리아주식회사극장배급지점 Sony Pictures Releasing International"
-   ],
-   "kobis_codes": [
-    "20173221"
-   ],
-   "counts": {
-    "active": 6,
-    "total": 7,
-    "distributor": 7,
-    "applicant": 3,
-    "showing": 3,
-    "scheduled": 3,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "mad46c99a3618",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2589860",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2595396",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20265939",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20267587",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268451",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2585267",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20100285",
    "name": "판씨네마(주)",
    "spellings": [
@@ -2003,7 +1930,8 @@
     "total": 7,
     "distributor": 6,
     "applicant": 3,
-    "showing": 4,
+    "showing": 3,
+    "scheduled": 1,
     "rated": 1,
     "dormant": 2
    },
@@ -2032,7 +1960,7 @@
     },
     {
      "id": "r2601737",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -2056,6 +1984,79 @@
      "id": "k20126955",
      "status": "dormant",
      "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20173221",
+   "name": "소니픽쳐스엔터테인먼트코리아주식회사극장배급지점",
+   "spellings": [
+    "소니픽쳐스엔터테인먼트코리아주식회사극장배급지점 Sony Pictures Releasing International"
+   ],
+   "kobis_codes": [
+    "20173221"
+   ],
+   "counts": {
+    "active": 5,
+    "total": 7,
+    "distributor": 7,
+    "applicant": 3,
+    "showing": 2,
+    "scheduled": 3,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "mad46c99a3618",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2589860",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20265939",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20267587",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20268451",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2585267",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2595396",
+     "status": "released",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     }
@@ -2283,8 +2284,8 @@
     "total": 6,
     "distributor": 5,
     "applicant": 1,
-    "showing": 2,
-    "scheduled": 2,
+    "showing": 1,
+    "scheduled": 3,
     "rated": 1,
     "released": 1
    },
@@ -2298,7 +2299,7 @@
     },
     {
      "id": "r2592157",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "distributor"
      ]
@@ -2945,7 +2946,8 @@
     "total": 4,
     "distributor": 0,
     "applicant": 4,
-    "showing": 2,
+    "showing": 1,
+    "scheduled": 1,
     "announced": 2
    },
    "films": [
@@ -2958,7 +2960,7 @@
     },
     {
      "id": "r2592157",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -4468,7 +4470,8 @@
     "total": 2,
     "distributor": 2,
     "applicant": 1,
-    "showing": 2
+    "showing": 1,
+    "scheduled": 1
    },
    "films": [
     {
@@ -4480,7 +4483,7 @@
     },
     {
      "id": "r2597564",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -4632,7 +4635,7 @@
      ]
     },
     {
-     "id": "c30001947",
+     "id": "m6fabea0eadce",
      "status": "scheduled",
      "roles": [
       "distributor"
