@@ -20,8 +20,8 @@
     "total": 61,
     "distributor": 0,
     "applicant": 61,
-    "rated": 54,
-    "intake": 7
+    "rated": 56,
+    "intake": 5
    },
    "films": [
     {
@@ -403,6 +403,20 @@
      ]
     },
     {
+     "id": "r2605503",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605506",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
      "id": "r2605493",
      "status": "intake",
      "roles": [
@@ -411,20 +425,6 @@
     },
     {
      "id": "r2605500",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2605503",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2605506",
      "status": "intake",
      "roles": [
       "applicant"
@@ -932,13 +932,20 @@
     "total": 16,
     "distributor": 15,
     "applicant": 8,
-    "showing": 6,
-    "scheduled": 5,
+    "showing": 7,
+    "scheduled": 4,
     "intake": 1,
     "announced": 1,
     "released": 3
    },
    "films": [
+    {
+     "id": "k20264608",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "l13319",
      "status": "showing",
@@ -993,13 +1000,6 @@
     },
     {
      "id": "k20264576",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20264608",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -1076,8 +1076,7 @@
     "applicant": 7,
     "showing": 5,
     "scheduled": 4,
-    "rated": 1,
-    "intake": 1,
+    "rated": 2,
     "announced": 1
    },
    "films": [
@@ -1156,7 +1155,7 @@
     },
     {
      "id": "r2605583",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -1660,8 +1659,8 @@
     "distributor": 0,
     "applicant": 9,
     "scheduled": 1,
-    "rated": 3,
-    "intake": 2,
+    "rated": 4,
+    "intake": 1,
     "released": 3
    },
    "films": [
@@ -1695,7 +1694,7 @@
     },
     {
      "id": "r2605382",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -1878,71 +1877,6 @@
    ]
   },
   {
-   "id": "c20100036",
-   "name": "(주)인디스토리",
-   "spellings": [
-    "㈜인디스토리 INDIESTORY Inc.",
-    "㈜인디스토리"
-   ],
-   "kobis_codes": [
-    "20100036"
-   ],
-   "counts": {
-    "active": 6,
-    "total": 6,
-    "distributor": 3,
-    "applicant": 5,
-    "showing": 3,
-    "announced": 3
-   },
-   "films": [
-    {
-     "id": "k20249184",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586478",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602018",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "a146e13e82888",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "a68213968fb21",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "aa3ad9bacd066",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20100634",
    "name": "(주)누리픽쳐스",
    "spellings": [
@@ -2068,8 +2002,7 @@
     "total": 7,
     "distributor": 6,
     "applicant": 3,
-    "showing": 3,
-    "scheduled": 1,
+    "showing": 4,
     "rated": 1,
     "dormant": 2
    },
@@ -2098,7 +2031,7 @@
     },
     {
      "id": "r2601737",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant",
       "distributor"
@@ -2195,6 +2128,72 @@
     },
     {
      "id": "r2590891",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20100036",
+   "name": "(주)인디스토리",
+   "spellings": [
+    "㈜인디스토리 INDIESTORY Inc.",
+    "㈜인디스토리"
+   ],
+   "kobis_codes": [
+    "20100036"
+   ],
+   "counts": {
+    "active": 5,
+    "total": 6,
+    "distributor": 3,
+    "applicant": 5,
+    "showing": 2,
+    "announced": 3,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20249184",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602018",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "a146e13e82888",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "a68213968fb21",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "aa3ad9bacd066",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2586478",
      "status": "released",
      "roles": [
       "applicant",
@@ -2397,65 +2396,6 @@
      "roles": [
       "applicant",
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20100631",
-   "name": "(주)영화사진진",
-   "spellings": [
-    "(주)영화사 진진 JINJIN Pictures",
-    "(주)영화사 진진"
-   ],
-   "kobis_codes": [
-    "20100631"
-   ],
-   "counts": {
-    "active": 5,
-    "total": 5,
-    "distributor": 3,
-    "applicant": 4,
-    "showing": 3,
-    "rated": 1,
-    "intake": 1
-   },
-   "films": [
-    {
-     "id": "l24696",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586027",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2592799",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586389",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2607431",
-     "status": "intake",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -2744,6 +2684,66 @@
    ]
   },
   {
+   "id": "c20100631",
+   "name": "(주)영화사진진",
+   "spellings": [
+    "(주)영화사 진진 JINJIN Pictures",
+    "(주)영화사 진진"
+   ],
+   "kobis_codes": [
+    "20100631"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 5,
+    "distributor": 3,
+    "applicant": 4,
+    "showing": 2,
+    "rated": 1,
+    "intake": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2586027",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592799",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2586389",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2607431",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "l24696",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n스토리제이",
    "name": "(주)스토리제이",
    "spellings": [],
@@ -2850,8 +2850,7 @@
     "applicant": 4,
     "showing": 1,
     "scheduled": 1,
-    "rated": 1,
-    "intake": 1
+    "rated": 2
    },
    "films": [
     {
@@ -2878,7 +2877,7 @@
     },
     {
      "id": "r2605101",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -3749,6 +3748,47 @@
    ]
   },
   {
+   "id": "c20191941",
+   "name": "워터홀컴퍼니(주) WATERHOLE COMPANY",
+   "spellings": [
+    "워터홀컴퍼니(주)"
+   ],
+   "kobis_codes": [
+    "20191941"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 3,
+    "distributor": 3,
+    "applicant": 0,
+    "showing": 2,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2586813",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2596408",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2589103",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20192681",
    "name": "일미디어",
    "spellings": [
@@ -3985,13 +4025,13 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "intake": 1,
+    "rated": 1,
     "announced": 1
    },
    "films": [
     {
      "id": "r2605671",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4170,13 +4210,12 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "scheduled": 1,
-    "announced": 1
+    "announced": 2
    },
    "films": [
     {
      "id": "a4da88345b11e",
-     "status": "scheduled",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -4279,6 +4318,35 @@
     },
     {
      "id": "r2596294",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n메가박스중앙플러스엠",
+   "name": "메가박스중앙(주)플러스엠",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 0,
+    "applicant": 2,
+    "showing": 2
+   },
+   "films": [
+    {
+     "id": "r2586813",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2596408",
      "status": "showing",
      "roles": [
       "applicant"
@@ -4539,6 +4607,38 @@
    ]
   },
   {
+   "id": "c20061718",
+   "name": "찬란 Challan Film",
+   "spellings": [],
+   "kobis_codes": [
+    "20061718"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 0,
+    "showing": 1,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2588102",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "c30001947",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20204721",
    "name": "씨지브이 아이스콘 CGV ICECON",
    "spellings": [
@@ -4667,47 +4767,6 @@
     },
     {
      "id": "r2590956",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20191941",
-   "name": "워터홀컴퍼니(주) WATERHOLE COMPANY",
-   "spellings": [
-    "워터홀컴퍼니(주)"
-   ],
-   "kobis_codes": [
-    "20191941"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 3,
-    "distributor": 3,
-    "applicant": 0,
-    "showing": 1,
-    "released": 2
-   },
-   "films": [
-    {
-     "id": "r2596408",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586813",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2589103",
      "status": "released",
      "roles": [
       "distributor"
@@ -4900,36 +4959,6 @@
      "roles": [
       "applicant",
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n메가박스중앙플러스엠",
-   "name": "메가박스중앙(주)플러스엠",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 1,
-    "total": 2,
-    "distributor": 0,
-    "applicant": 2,
-    "showing": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2596408",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2586813",
-     "status": "released",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -5821,12 +5850,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "rated": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2586592",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -6060,6 +6089,32 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20267521",
+   "name": "스튜디오 사이드바이사이드",
+   "spellings": [
+    "스튜디오 사이드바이사이드 STUDIO SIDE BY SIDE"
+   ],
+   "kobis_codes": [
+    "20267521"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2586592",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -7469,30 +7524,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20061718",
-   "name": "찬란 Challan Film",
-   "spellings": [],
-   "kobis_codes": [
-    "20061718"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2588102",
-     "status": "showing",
-     "roles": [
       "distributor"
      ]
     }
