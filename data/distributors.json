@@ -1074,8 +1074,8 @@
     "total": 12,
     "distributor": 8,
     "applicant": 7,
-    "showing": 5,
-    "scheduled": 4,
+    "showing": 6,
+    "scheduled": 3,
     "rated": 2,
     "announced": 1
    },
@@ -1118,6 +1118,14 @@
      ]
     },
     {
+     "id": "r2603267",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
      "id": "k20267901",
      "status": "scheduled",
      "roles": [
@@ -1136,14 +1144,6 @@
      "status": "scheduled",
      "roles": [
       "applicant"
-     ]
-    },
-    {
-     "id": "r2603267",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     },
     {
@@ -5938,28 +5938,6 @@
    ]
   },
   {
-   "id": "n무빙모먼츠스튜디오",
-   "name": "무빙모먼츠 스튜디오",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 0,
-    "applicant": 1,
-    "announced": 1
-   },
-   "films": [
-    {
-     "id": "a1008c3f1d4a7",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n무호흡필름apneafilm",
    "name": "무호흡필름(Apnea film)",
    "spellings": [],
@@ -6560,30 +6538,6 @@
      "status": "intake",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20101102",
-   "name": "오드 AUD",
-   "spellings": [],
-   "kobis_codes": [
-    "20101102"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "k20240146",
-     "status": "showing",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -8510,6 +8464,30 @@
     {
      "id": "k20136927",
      "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20101102",
+   "name": "오드 AUD",
+   "spellings": [],
+   "kobis_codes": [
+    "20101102"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20240146",
+     "status": "released",
      "roles": [
       "distributor"
      ]
