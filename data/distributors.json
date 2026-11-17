@@ -768,10 +768,10 @@
     "distributor": 14,
     "applicant": 13,
     "showing": 6,
-    "scheduled": 2,
+    "scheduled": 3,
     "rated": 1,
     "intake": 1,
-    "announced": 5,
+    "announced": 4,
     "released": 4
    },
    "films": [
@@ -828,6 +828,13 @@
      ]
     },
     {
+     "id": "k20266300",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
      "id": "p001372078594",
      "status": "scheduled",
      "roles": [
@@ -865,13 +872,6 @@
     },
     {
      "id": "k20215830",
-     "status": "announced",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20266300",
      "status": "announced",
      "roles": [
       "distributor"
@@ -2128,6 +2128,82 @@
    ]
   },
   {
+   "id": "c20188381",
+   "name": "필름다빈",
+   "spellings": [
+    "필름다빈 FILM DABIN"
+   ],
+   "kobis_codes": [
+    "20188381"
+   ],
+   "counts": {
+    "active": 5,
+    "total": 7,
+    "distributor": 5,
+    "applicant": 7,
+    "showing": 2,
+    "scheduled": 1,
+    "intake": 2,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2587973",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2599288",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600379",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2606041",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2607670",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2590850",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590891",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20142968",
    "name": "(주)콘텐츠판다",
    "spellings": [
@@ -2468,82 +2544,6 @@
      "status": "released",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20188381",
-   "name": "필름다빈",
-   "spellings": [
-    "필름다빈 FILM DABIN"
-   ],
-   "kobis_codes": [
-    "20188381"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 7,
-    "distributor": 5,
-    "applicant": 7,
-    "showing": 1,
-    "scheduled": 1,
-    "intake": 2,
-    "released": 3
-   },
-   "films": [
-    {
-     "id": "r2599288",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600379",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2606041",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2607670",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2587973",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590850",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590891",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     }
    ]
