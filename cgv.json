@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-17T12:00:19Z",
+ "fetched_at": "2026-11-17T13:01:59Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 164,
-  "now": 60,
+  "chart": 162,
+  "now": 58,
   "upcoming": 140,
   "icecon": 11,
   "arthouse": 29,
@@ -1452,33 +1452,6 @@
    "badge": ""
   },
   {
-   "movie_no": "30001439",
-   "title": "백룸-익스텐디드 컷",
-   "status": "now",
-   "release_date": "2026-08-19",
-   "release_month": "",
-   "first_release_date": "",
-   "rerelease": false,
-   "grade": "15세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001439/30001439_320.jpg",
-   "booking_rate": 0.02,
-   "booking_rank": 60,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "cgv_only"
-   ],
-   "labels": [
-    "cgv_only"
-   ],
-   "badge": ""
-  },
-  {
    "movie_no": "30001440",
    "title": "수능, 출제의 비밀",
    "status": "now",
@@ -1959,38 +1932,6 @@
     "upcoming"
    ],
    "labels": [],
-   "badge": ""
-  },
-  {
-   "movie_no": "88809",
-   "title": "하이라이트- 라이츠 고 온, 어게인 인 시네마",
-   "status": "now",
-   "release_date": "2026-11-11",
-   "release_month": "",
-   "first_release_date": "2024-10-16",
-   "rerelease": true,
-   "grade": "전체관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000088/88809/88809_320.jpg",
-   "booking_rate": 0.01,
-   "booking_rank": 65,
-   "bookable": true,
-   "formats": [
-    "4DX"
-   ],
-   "format_codes": [
-    "03",
-    "05"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "icecon"
-   ],
-   "labels": [
-    "icecon",
-    "cgv_only",
-    "rerelease"
-   ],
    "badge": ""
   },
   {
@@ -4939,6 +4880,61 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "88809",
+   "title": "하이라이트- 라이츠 고 온, 어게인 인 시네마",
+   "status": "now",
+   "release_date": "2026-11-11",
+   "release_month": "",
+   "first_release_date": "2024-10-16",
+   "rerelease": true,
+   "grade": "전체관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000088/88809/88809_320.jpg",
+   "booking_rate": 0.01,
+   "booking_rank": 65,
+   "bookable": false,
+   "formats": [
+    "4DX"
+   ],
+   "format_codes": [
+    "03",
+    "05"
+   ],
+   "lists": [
+    "icecon"
+   ],
+   "labels": [
+    "icecon",
+    "cgv_only",
+    "rerelease"
+   ],
+   "badge": ""
+  },
+  {
+   "movie_no": "30001439",
+   "title": "백룸-익스텐디드 컷",
+   "status": "now",
+   "release_date": "2026-08-19",
+   "release_month": "",
+   "first_release_date": "",
+   "rerelease": false,
+   "grade": "15세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/030001/30001439/30001439_320.jpg",
+   "booking_rate": 0.02,
+   "booking_rank": 60,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "cgv_only"
+   ],
+   "labels": [
+    "cgv_only"
+   ],
    "badge": ""
   }
  ]
