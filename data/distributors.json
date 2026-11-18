@@ -20,8 +20,8 @@
     "total": 64,
     "distributor": 0,
     "applicant": 64,
-    "rated": 56,
-    "intake": 8
+    "rated": 58,
+    "intake": 6
    },
    "films": [
     {
@@ -403,6 +403,20 @@
      ]
     },
     {
+     "id": "r2605493",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605500",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
      "id": "r2605503",
      "status": "rated",
      "roles": [
@@ -412,20 +426,6 @@
     {
      "id": "r2605506",
      "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2605493",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2605500",
-     "status": "intake",
      "roles": [
       "applicant"
      ]
@@ -1607,8 +1607,7 @@
     "distributor": 0,
     "applicant": 9,
     "scheduled": 1,
-    "rated": 4,
-    "intake": 1,
+    "rated": 5,
     "released": 3
    },
    "films": [
@@ -1649,7 +1648,7 @@
     },
     {
      "id": "r2605861",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -2075,6 +2074,83 @@
     },
     {
      "id": "r2595396",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20188381",
+   "name": "필름다빈",
+   "spellings": [
+    "필름다빈 FILM DABIN"
+   ],
+   "kobis_codes": [
+    "20188381"
+   ],
+   "counts": {
+    "active": 5,
+    "total": 7,
+    "distributor": 5,
+    "applicant": 7,
+    "showing": 2,
+    "scheduled": 1,
+    "rated": 1,
+    "intake": 1,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2590891",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2599288",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600379",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2606041",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2607670",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2587973",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2590850",
      "status": "released",
      "roles": [
       "applicant",
@@ -2555,82 +2631,6 @@
      "status": "released",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20188381",
-   "name": "필름다빈",
-   "spellings": [
-    "필름다빈 FILM DABIN"
-   ],
-   "kobis_codes": [
-    "20188381"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 7,
-    "distributor": 5,
-    "applicant": 7,
-    "showing": 1,
-    "scheduled": 1,
-    "intake": 2,
-    "released": 3
-   },
-   "films": [
-    {
-     "id": "r2599288",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600379",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2606041",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2607670",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2587973",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590850",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2590891",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     }
    ]
@@ -6080,12 +6080,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
      "id": "r2605885",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
