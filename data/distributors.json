@@ -949,15 +949,15 @@
     "20161801"
    ],
    "counts": {
-    "active": 13,
+    "active": 12,
     "total": 16,
     "distributor": 15,
     "applicant": 8,
-    "showing": 7,
+    "showing": 6,
     "scheduled": 4,
     "intake": 1,
     "announced": 1,
-    "released": 3
+    "released": 4
    },
    "films": [
     {
@@ -997,14 +997,6 @@
     },
     {
      "id": "r2593323",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2594271",
      "status": "showing",
      "roles": [
       "applicant",
@@ -1078,6 +1070,14 @@
       "applicant",
       "distributor"
      ]
+    },
+    {
+     "id": "r2594271",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
     }
    ]
   },
@@ -1095,8 +1095,8 @@
     "total": 12,
     "distributor": 8,
     "applicant": 7,
-    "showing": 6,
-    "scheduled": 3,
+    "showing": 5,
+    "scheduled": 4,
     "rated": 2,
     "announced": 1
    },
@@ -1139,14 +1139,6 @@
      ]
     },
     {
-     "id": "r2603267",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
      "id": "k20267901",
      "status": "scheduled",
      "roles": [
@@ -1165,6 +1157,14 @@
      "status": "scheduled",
      "roles": [
       "applicant"
+     ]
+    },
+    {
+     "id": "r2603267",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
      ]
     },
     {
@@ -3001,54 +3001,6 @@
    ]
   },
   {
-   "id": "c20141469",
-   "name": "메가박스중앙(주) 플러스엠 엔터테인먼트 Plus M Entertainment",
-   "spellings": [
-    "메가박스중앙(주) 플러스엠 엔터테인먼트"
-   ],
-   "kobis_codes": [
-    "20141469"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 4,
-    "distributor": 4,
-    "applicant": 0,
-    "showing": 2,
-    "announced": 2
-   },
-   "films": [
-    {
-     "id": "m72d7c6f77efe",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2595960",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20256880",
-     "status": "announced",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20261740",
-     "status": "announced",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n히스토리필름",
    "name": "주식회사히스토리필름",
    "spellings": [],
@@ -3321,6 +3273,55 @@
      "status": "released",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20141469",
+   "name": "메가박스중앙(주) 플러스엠 엔터테인먼트 Plus M Entertainment",
+   "spellings": [
+    "메가박스중앙(주) 플러스엠 엔터테인먼트"
+   ],
+   "kobis_codes": [
+    "20141469"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 4,
+    "distributor": 4,
+    "applicant": 0,
+    "showing": 1,
+    "announced": 2,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2595960",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20256880",
+     "status": "announced",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20261740",
+     "status": "announced",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "m72d7c6f77efe",
+     "status": "released",
+     "roles": [
       "distributor"
      ]
     }
@@ -4585,7 +4586,8 @@
     "total": 2,
     "distributor": 2,
     "applicant": 1,
-    "showing": 2
+    "showing": 1,
+    "scheduled": 1
    },
    "films": [
     {
@@ -4597,7 +4599,7 @@
     },
     {
      "id": "r2597564",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -4991,13 +4993,13 @@
     "total": 2,
     "distributor": 2,
     "applicant": 1,
-    "showing": 1,
+    "scheduled": 1,
     "dormant": 1
    },
    "films": [
     {
      "id": "r2600445",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -5154,13 +5156,13 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "showing": 1,
+    "scheduled": 1,
     "released": 1
    },
    "films": [
     {
      "id": "r2605606",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
