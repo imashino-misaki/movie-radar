@@ -1123,8 +1123,8 @@
     "total": 12,
     "distributor": 8,
     "applicant": 7,
-    "showing": 7,
-    "scheduled": 2,
+    "showing": 6,
+    "scheduled": 3,
     "rated": 2,
     "announced": 1
    },
@@ -1174,14 +1174,6 @@
      ]
     },
     {
-     "id": "r2603267",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
      "id": "k20267901",
      "status": "scheduled",
      "roles": [
@@ -1192,6 +1184,14 @@
      "id": "k20268860",
      "status": "scheduled",
      "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2603267",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     },
@@ -5197,13 +5197,13 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "showing": 1,
+    "scheduled": 1,
     "released": 1
    },
    "films": [
     {
      "id": "r2605606",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -5213,41 +5213,6 @@
      "status": "released",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20242261",
-   "name": "주식회사 킨스튜디오",
-   "spellings": [
-    "주식회사 킨스튜디오 KIN Studio Co., Ltd."
-   ],
-   "kobis_codes": [
-    "20242261"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2600955",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2594563",
-     "status": "released",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -6062,12 +6027,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "showing": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2605606",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "distributor"
      ]
@@ -8302,6 +8267,40 @@
      "id": "k20124012",
      "status": "dormant",
      "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20242261",
+   "name": "주식회사 킨스튜디오",
+   "spellings": [
+    "주식회사 킨스튜디오 KIN Studio Co., Ltd."
+   ],
+   "kobis_codes": [
+    "20242261"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 1,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2594563",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600955",
+     "status": "released",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     }
