@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "last_run_utc": "2026-11-19T05:34:21+00:00",
+ "last_run_utc": "2026-11-19T06:29:45+00:00",
  "manual_lists": {
   "active": false,
   "blocked_names": 0,
@@ -10,9 +10,9 @@
   "records_removed": 0
  },
  "counts": {
-  "films": 827,
+  "films": 830,
   "with_intake": 89,
-  "with_rating": 361,
+  "with_rating": 371,
   "with_kobis": 198,
   "with_megabox": 215,
   "with_lotte": 121,
@@ -23,11 +23,11 @@
   "with_past_rating": 151,
   "rerelease_candidates": 28,
   "chain_rereleases": 60,
-  "seen_this_run": 606,
+  "seen_this_run": 609,
   "format_groups": 7,
   "format_variants": 11,
   "format_ambiguous": 0,
-  "distributors": 236,
+  "distributors": 237,
   "tags": {
    "anime": 40,
    "chain_cgv": 20,
@@ -39,20 +39,20 @@
    "rerelease": 81,
    "sports": 7
   },
-  "intake_rows": 115,
-  "intake_published": 41,
-  "intake_withheld": 74,
-  "rating_rows": 312,
-  "rating_published": 297,
+  "intake_rows": 88,
+  "intake_published": 34,
+  "intake_withheld": 54,
+  "rating_rows": 322,
+  "rating_published": 307,
   "rating_withheld_restricted": 15,
-  "adult_rating_rows": 557,
+  "adult_rating_rows": 574,
   "archive_removed": 0,
   "join_by_rcv": 0,
   "join_by_title": 0,
   "intake_by_chain": 0,
   "masked_applicants": 9,
-  "applicants_known": 334,
-  "applicants_trusted": 346,
+  "applicants_known": 336,
+  "applicants_trusted": 347,
   "applicants_adult_only": 28,
   "applicants_mixed": 7
  },
@@ -73,34 +73,34 @@
  "sources": {
   "ors_intake": {
    "status": "ok",
-   "seconds": 3.8,
+   "seconds": 3.5,
    "requests": 2,
    "tabs": {
     "MV_DOM": {
-     "rows": 37
+     "rows": 31
     },
     "MV_FOR": {
-     "rows": 78
+     "rows": 57
     }
    },
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kmrb_rating": {
    "status": "ok",
-   "seconds": 21.7,
+   "seconds": 21.9,
    "requests": 14,
    "window": "3months",
    "general_pages": 4,
-   "general_declared": 312,
-   "general_rows": 312,
+   "general_declared": 322,
+   "general_rows": 322,
    "all_pages": 9,
-   "all_declared": 869,
-   "all_rows": 869,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "all_declared": 896,
+   "all_rows": 896,
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kmrb_promo": {
    "status": "ok",
-   "seconds": 8.6,
+   "seconds": 11.2,
    "requests": 7,
    "window_days": 7,
    "trailer_rows": 140,
@@ -113,11 +113,11 @@
    "promo_only": 7,
    "promo_rerelease": 15,
    "promo_old_unmatched": 0,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "ors_ad": {
    "status": "ok",
-   "seconds": 5.0,
+   "seconds": 4.9,
    "requests": 3,
    "tabs": {
     "MVTRAIL": {
@@ -129,27 +129,27 @@
      "received": 18
     },
     "MVADVTM": {
-     "rows": 163,
+     "rows": 168,
      "received": 125
     }
    },
-   "ors_ad_rows": 255,
-   "ors_ad_matched_rows": 167,
-   "ors_ad_records": 53,
+   "ors_ad_rows": 260,
+   "ors_ad_matched_rows": 171,
+   "ors_ad_records": 54,
    "ors_ad_unmatched_titles": 67,
    "ors_ad_created": 0,
    "ors_ad_not_created": {
-    "masked": 7,
+    "masked": 8,
     "adult_applicant": 57,
     "tab": 24
    },
    "ors_ad_folded": 0,
    "ors_ad_removed": 0,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "megabox_program": {
    "status": "ok",
-   "seconds": 2.1,
+   "seconds": 2.0,
    "requests": 3,
    "megabox_tab_rows": 7,
    "megabox_lineups": [
@@ -164,11 +164,11 @@
    "program_matched": 39,
    "program_unmatched": 0,
    "with_program": 76,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis": {
    "status": "ok",
-   "seconds": 23.9,
+   "seconds": 31.6,
    "requests": 20,
    "calls": 20,
    "call_cap": 300,
@@ -185,25 +185,25 @@
    "kobis_pending_info": 0,
    "kobis_adult_removed": 0,
    "kobis_only_deferred": 0,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "megabox": {
    "status": "ok",
-   "seconds": 3.0,
+   "seconds": 1.8,
    "requests": 1,
    "rows": 119,
    "total_reported": 119,
-   "now": 90,
-   "upcoming": 29,
+   "now": 91,
+   "upcoming": 28,
    "megabox_groups": 119,
    "megabox_matched": 81,
    "megabox_only": 38,
-   "megabox_ended": 1,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "megabox_ended": 0,
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "lotte": {
    "status": "ok",
-   "seconds": 2.3,
+   "seconds": 2.6,
    "requests": 2,
    "rows": 86,
    "now": 53,
@@ -213,7 +213,7 @@
    "lotte_matched_kobis_cd": 63,
    "lotte_only": 6,
    "lotte_ended": 0,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "cgv": {
    "status": "ok",
@@ -223,26 +223,26 @@
    "dropped_fields": 0,
    "now": 61,
    "upcoming": 136,
-   "fetched_at": "2026-11-19T05:33:51Z",
-   "age_minutes": 1,
+   "fetched_at": "2026-11-19T06:29:25Z",
+   "age_minutes": 0,
    "stale_after_minutes": 132,
    "stale": false,
    "cgv_matched": 96,
    "cgv_only": 101,
-   "cgv_ended": 1,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "cgv_ended": 0,
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kmrb_lookup": {
    "status": "ok",
-   "seconds": 7.2,
-   "requests": 8,
+   "seconds": 4.4,
+   "requests": 6,
    "wanted": 414,
-   "searched": 7,
+   "searched": 5,
    "reused_promo": 0,
    "errors": 5,
    "pending": 5,
    "past_rating": 151,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis_web": {
    "status": "ok",
@@ -258,23 +258,23 @@
    "with_rereleases": 15,
    "with_detail": 307,
    "dormant": 35,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "posters": {
    "status": "ok",
-   "seconds": 2.9,
-   "requests": 3,
+   "seconds": 0.0,
+   "requests": 0,
    "with_poster": 569,
-   "fetched": 3,
+   "fetched": 0,
    "errors": 0,
    "removed": 0,
    "files": 553,
    "bytes": 27349944,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis_schedule": {
    "status": "ok",
-   "seconds": 22.2,
+   "seconds": 19.9,
    "requests": 13,
    "months": {
     "2026-11": 59,
@@ -292,47 +292,47 @@
    },
    "with_schedule": 102,
    "schedule_unmatched": 8,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis_companies": {
    "status": "ok",
-   "seconds": 1.3,
-   "requests": 1,
-   "names": 65,
-   "looked_up": 1,
+   "seconds": 0.0,
+   "requests": 0,
+   "names": 62,
+   "looked_up": 0,
    "errors": 0,
-   "found": 59,
-   "verified": 56,
-   "trusted": 56,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "found": 56,
+   "verified": 54,
+   "trusted": 54,
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kmrb_reps": {
    "status": "ok",
    "seconds": 3.1,
    "requests": 1,
-   "applicants": 175,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "applicants": 178,
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis_booking": {
    "status": "ok",
-   "seconds": 4.1,
+   "seconds": 3.3,
    "requests": 2,
-   "rows": 365,
-   "as_of": "2026-11-19 14:35",
+   "rows": 366,
+   "as_of": "2026-11-19 15:31",
    "undated": 201,
-   "with_booking": 190,
+   "with_booking": 189,
    "booking_by_title": 73,
-   "booking_unmatched": 180,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "booking_unmatched": 182,
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis_upcoming": {
    "status": "ok",
-   "seconds": 38.9,
+   "seconds": 35.9,
    "requests": 27,
    "개봉예정": 171,
    "개봉준비": 86,
    "not_adult_genre": 253,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   },
   "kobis_boxoffice": {
    "status": "ok",
@@ -347,40 +347,40 @@
    "with_boxoffice": 28,
    "latest_day": "2026-11-18",
    "top10_unmatched": 0,
-   "last_ok_utc": "2026-11-19T05:34:21+00:00"
+   "last_ok_utc": "2026-11-19T06:29:45+00:00"
   }
  },
- "requests": 107,
+ "requests": 101,
  "release_model": {
-  "rows": 10377,
+  "rows": 10387,
   "rows_opened": 5739,
   "rows_real": 5138,
   "rows_token": 561,
   "rows_segment": {
-   "short": 2364,
+   "short": 2368,
    "format_of_open": 10,
    "vod_applicant": 176
   },
-  "rows_scheduled": 35,
-  "rows_added": 0,
+  "rows_scheduled": 37,
+  "rows_added": 10,
   "openings_added": 0,
   "records": {
    "booking": 12,
    "chain": 248,
    "kobis": 233,
-   "model": 228,
+   "model": 231,
    "schedule": 16
   },
   "records_by_state_tier": {
    "ad_filing/estimate": 19,
    "bookable/estimate": 48,
    "day_announced/estimate": 104,
-   "filed/estimate": 49,
+   "filed/estimate": 46,
    "month_announced/estimate": 18,
    "opened/confirmed": 337,
    "passed_unverified/estimate": 2,
    "promo_after_rating/estimate": 34,
-   "rating_only/estimate": 126
+   "rating_only/estimate": 132
   },
   "half_life_days": 365,
   "features": [
@@ -430,29 +430,29 @@
   },
   "commitments": {
    "bookable": {
-    "n": 91,
-    "opened": 81,
+    "n": 90,
+    "opened": 80,
     "hits": {
-     "3": 81,
-     "week": 81,
-     "month": 81
+     "3": 80,
+     "week": 80,
+     "month": 80
     },
     "films": {
-     "n": 85,
-     "opened": 75.0,
+     "n": 84,
+     "opened": 74.0,
      "hits": {
-      "3": 75.0,
-      "week": 75.0,
-      "month": 75.0
+      "3": 74.0,
+      "week": 74.0,
+      "month": 74.0
      }
     },
     "history_n": 0,
-    "snapshot_n": 91,
-    "q": 0.8779,
+    "snapshot_n": 90,
+    "q": 0.8765,
     "r": {
-     "3": 0.9934,
-     "week": 0.9934,
-     "month": 0.9934
+     "3": 0.9933,
+     "week": 0.9933,
+     "month": 0.9933
     },
     "provisional": true
    },
@@ -544,22 +544,22 @@
     "tier_given_open": "confirmed"
    },
    "bookable": {
-    "n": 85,
+    "n": 84,
     "rate": {
-     "3": 0.882,
-     "week": 0.882,
-     "month": 0.882
+     "3": 0.881,
+     "week": 0.881,
+     "month": 0.881
     },
     "lower": {
-     "3": 0.797,
-     "week": 0.797,
-     "month": 0.797
+     "3": 0.795,
+     "week": 0.795,
+     "month": 0.795
     },
     "tier": "estimate",
     "basis": "announced vs KOBIS opening",
     "provisional": true,
     "conditional": {
-     "n": 75.0,
+     "n": 74.0,
      "rate": {
       "3": 1.0,
       "week": 1.0,
@@ -572,7 +572,7 @@
      }
     },
     "tier_given_open": "confirmed",
-    "n_announcements": 91
+    "n_announcements": 90
    },
    "day_announced": {
     "n": 181,
@@ -761,44 +761,44 @@
    "sigma_log": 0.603,
    "beta": {
     "format": -0.177,
-    "promo": -0.277,
-    "restricted": -0.012,
-    "foreign": 0.034,
+    "promo": -0.278,
+    "restricted": -0.011,
+    "foreign": 0.033,
     "promo_n": -0.284,
-    "concert": -0.045
+    "concert": -0.046
    },
    "gamma": {
     "format": -0.389,
-    "promo": -0.648,
-    "restricted": -0.685,
-    "foreign": 1.113,
-    "promo_n": 1.717,
-    "concert": 0.578
+    "promo": -0.647,
+    "restricted": -0.683,
+    "foreign": 1.109,
+    "promo_n": 1.715,
+    "concert": 0.575
    },
-   "companies": 1045,
+   "companies": 1046,
    "em_iterations": 13,
    "company_prior_location": {
-    "intercept": 4.402,
+    "intercept": 4.401,
     "ratings_per_year": -0.107,
-    "promo": -0.417,
+    "promo": -0.415,
     "short": 0.0,
-    "restricted": 0.196,
-    "foreign": 0.017,
-    "format": 0.297
+    "restricted": 0.189,
+    "foreign": 0.019,
+    "format": 0.29
    },
    "company_prior_logit": {
-    "intercept": 0.197,
-    "ratings_per_year": 0.031,
-    "promo": 0.445,
+    "intercept": 0.196,
+    "ratings_per_year": 0.034,
+    "promo": 0.448,
     "short": 0.0,
-    "restricted": 0.155,
-    "foreign": -0.802,
-    "format": 6.723
+    "restricted": 0.141,
+    "foreign": -0.799,
+    "format": 6.732
    },
-   "tau2_location": 0.1822,
-   "tau2_logit": 1.033,
-   "icc": 0.334,
-   "k_rows": 3.9,
+   "tau2_location": 0.1813,
+   "tau2_logit": 1.027,
+   "icc": 0.333,
+   "k_rows": 4.0,
    "companies_established": 267
   },
   "real_model": {
@@ -813,46 +813,46 @@
    ],
    "sigma_log": 0.594,
    "beta": {
-    "format": -0.192,
-    "promo": -0.341,
-    "restricted": -0.035,
-    "rule_adult": 0.154,
+    "format": -0.193,
+    "promo": -0.342,
+    "restricted": -0.034,
+    "rule_adult": 0.155,
     "promo_n": -0.264,
-    "app_batch": 0.051,
+    "app_batch": 0.05,
     "concert": -0.088
    },
    "gamma": {
     "format": 0.632,
-    "promo": -0.862,
-    "restricted": -0.917,
+    "promo": -0.861,
+    "restricted": -0.916,
     "rule_adult": -0.843,
-    "promo_n": 1.816,
-    "app_batch": -0.882,
-    "concert": 0.694
+    "promo_n": 1.815,
+    "app_batch": -0.883,
+    "concert": 0.692
    },
-   "companies": 1045,
+   "companies": 1046,
    "em_iterations": 12,
    "company_prior_location": {
-    "intercept": 4.376,
-    "ratings_per_year": -0.104,
-    "promo": -0.36,
+    "intercept": 4.375,
+    "ratings_per_year": -0.103,
+    "promo": -0.358,
     "short": 0.0,
-    "restricted": 0.239,
+    "restricted": 0.231,
     "foreign": 0.058,
-    "format": 0.041
+    "format": 0.035
    },
    "company_prior_logit": {
-    "intercept": 0.351,
-    "ratings_per_year": 0.002,
-    "promo": 0.541,
+    "intercept": 0.349,
+    "ratings_per_year": 0.004,
+    "promo": 0.542,
     "short": 0.0,
-    "restricted": -0.334,
-    "foreign": 0.216,
-    "format": 8.063
+    "restricted": -0.344,
+    "foreign": 0.214,
+    "format": 8.074
    },
-   "tau2_location": 0.1716,
-   "tau2_logit": 1.1139,
-   "icc": 0.327,
+   "tau2_location": 0.1706,
+   "tau2_logit": 1.1085,
+   "icc": 0.326,
    "k_rows": 3.9,
    "companies_established": 267
   },
@@ -887,13 +887,13 @@
     "observed_open_rate": null
    }
   },
-  "new_company_feature_film_p_open": 0.542,
+  "new_company_feature_film_p_open": 0.541,
   "receipt_to_rating": {
-   "n": 46,
+   "n": 53,
    "median_days": 11
   },
   "promo_to_rating": {
-   "n": 209,
+   "n": 212,
    "median_days": 3
   },
   "backtest": {
@@ -5459,14 +5459,14 @@
      "tier": "estimate"
     },
     "bookable": {
-     "n": 91,
-     "opened": 81,
-     "n_films": 85,
-     "brier": 0.1038,
+     "n": 90,
+     "opened": 80,
+     "n_films": 84,
+     "brier": 0.1049,
      "hit_rate": {
-      "3": 0.89,
-      "week": 0.89,
-      "month": 0.89
+      "3": 0.889,
+      "week": 0.889,
+      "month": 0.889
      },
      "tier": "estimate",
      "provisional": true
@@ -9097,7 +9097,7 @@
  "theatrical": {
   "counts": {
    "confirmed": 571,
-   "candidate": 165,
+   "candidate": 168,
    "unlikely": 86,
    "token": 0,
    "ad_only": 5
@@ -9114,10 +9114,10 @@
   "screening_measures": 5377
  },
  "signals": {
-  "new_signals": 11,
-  "changes": 19,
-  "absent": 0,
-  "records": 861,
-  "runs": 399
+  "new_signals": 10,
+  "changes": 4,
+  "absent": 1,
+  "records": 864,
+  "runs": 400
  }
 }
