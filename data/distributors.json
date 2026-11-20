@@ -1126,22 +1126,16 @@
     "20110854"
    ],
    "counts": {
-    "active": 12,
-    "total": 12,
+    "active": 13,
+    "total": 13,
     "distributor": 8,
-    "applicant": 7,
-    "showing": 8,
+    "applicant": 8,
+    "showing": 7,
     "scheduled": 2,
-    "rated": 2
+    "rated": 2,
+    "announced": 2
    },
    "films": [
-    {
-     "id": "p6d2275bbe054",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
     {
      "id": "p7a6634049dcb",
      "status": "showing",
@@ -1218,6 +1212,20 @@
     {
      "id": "r2605583",
      "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "p6d2275bbe054",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "p904766242989",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -5654,6 +5662,32 @@
    ]
   },
   {
+   "id": "c20266401",
+   "name": "(주)스튜디오더제이",
+   "spellings": [
+    "스튜디오더제이 StudioTheJ"
+   ],
+   "kobis_codes": [
+    "20266401"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "showing": 1
+   },
+   "films": [
+    {
+     "id": "r2597617",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20154728",
    "name": "(주)씨엠닉스",
    "spellings": [
@@ -6364,32 +6398,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20266401",
-   "name": "스튜디오더제이",
-   "spellings": [
-    "스튜디오더제이 StudioTheJ"
-   ],
-   "kobis_codes": [
-    "20266401"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2597617",
-     "status": "showing",
-     "roles": [
-      "distributor"
      ]
     }
    ]
