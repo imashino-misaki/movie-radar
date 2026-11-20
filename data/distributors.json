@@ -979,12 +979,12 @@
    "counts": {
     "active": 13,
     "total": 17,
-    "distributor": 15,
-    "applicant": 9,
+    "distributor": 16,
+    "applicant": 8,
     "showing": 6,
-    "scheduled": 4,
+    "scheduled": 5,
     "intake": 1,
-    "announced": 2,
+    "announced": 1,
     "released": 4
    },
    "films": [
@@ -1054,6 +1054,13 @@
      ]
     },
     {
+     "id": "k20269046",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
      "id": "r2604022",
      "status": "scheduled",
      "roles": [
@@ -1064,13 +1071,6 @@
     {
      "id": "r2606236",
      "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "a790bdab0c9e0",
-     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -1311,6 +1311,129 @@
    ]
   },
   {
+   "id": "c20218581",
+   "name": "주식회사 키노라이츠",
+   "spellings": [
+    "(주)키노라이츠 Kinolights",
+    "(주)키노라이츠"
+   ],
+   "kobis_codes": [
+    "20218581"
+   ],
+   "counts": {
+    "active": 7,
+    "total": 13,
+    "distributor": 10,
+    "applicant": 11,
+    "showing": 2,
+    "scheduled": 2,
+    "rated": 2,
+    "intake": 1,
+    "released": 6
+   },
+   "films": [
+    {
+     "id": "r2599978",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600773",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20263001",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597710",
+     "status": "scheduled",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2591375",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2603401",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2609127",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2585976",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2586894",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2587019",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2587020",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2587568",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2591021",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20203082",
    "name": "씨제이포디플렉스 주식회사 (CJ 4DPLEX Co. , Ltd.)",
    "spellings": [
@@ -1518,121 +1641,6 @@
      "id": "k20156706",
      "status": "dormant",
      "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20218581",
-   "name": "주식회사 키노라이츠",
-   "spellings": [
-    "(주)키노라이츠 Kinolights",
-    "(주)키노라이츠"
-   ],
-   "kobis_codes": [
-    "20218581"
-   ],
-   "counts": {
-    "active": 6,
-    "total": 12,
-    "distributor": 10,
-    "applicant": 10,
-    "showing": 2,
-    "scheduled": 2,
-    "rated": 2,
-    "released": 6
-   },
-   "films": [
-    {
-     "id": "r2599978",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600773",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20263001",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2597710",
-     "status": "scheduled",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2591375",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2603401",
-     "status": "rated",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2585976",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586894",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2587019",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2587020",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2587568",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2591021",
-     "status": "released",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     }
