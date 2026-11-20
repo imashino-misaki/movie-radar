@@ -977,14 +977,14 @@
     "20161801"
    ],
    "counts": {
-    "active": 12,
-    "total": 16,
+    "active": 13,
+    "total": 17,
     "distributor": 15,
-    "applicant": 8,
+    "applicant": 9,
     "showing": 6,
     "scheduled": 4,
     "intake": 1,
-    "announced": 1,
+    "announced": 2,
     "released": 4
    },
    "films": [
@@ -1064,6 +1064,13 @@
     {
      "id": "r2606236",
      "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "a790bdab0c9e0",
+     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -6513,12 +6520,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "rated": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2606040",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
