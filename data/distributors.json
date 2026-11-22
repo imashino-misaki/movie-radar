@@ -510,24 +510,17 @@
     "20122956"
    ],
    "counts": {
-    "active": 18,
+    "active": 17,
     "total": 20,
     "distributor": 5,
     "applicant": 17,
-    "showing": 4,
-    "scheduled": 9,
-    "rated": 5,
-    "released": 1,
+    "showing": 3,
+    "scheduled": 8,
+    "rated": 6,
+    "released": 2,
     "dormant": 1
    },
    "films": [
-    {
-     "id": "k20258640",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
     {
      "id": "p8fc611a3e1bf",
      "status": "showing",
@@ -593,13 +586,6 @@
      ]
     },
     {
-     "id": "r2591693",
-     "status": "scheduled",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
      "id": "r2592880",
      "status": "scheduled",
      "roles": [
@@ -635,6 +621,13 @@
      ]
     },
     {
+     "id": "r2591693",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
      "id": "r2596055",
      "status": "rated",
      "roles": [
@@ -646,6 +639,13 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    },
+    {
+     "id": "k20258640",
+     "status": "released",
+     "roles": [
+      "distributor"
      ]
     },
     {
@@ -1325,13 +1325,20 @@
     "total": 13,
     "distributor": 10,
     "applicant": 11,
-    "showing": 2,
-    "scheduled": 2,
+    "showing": 3,
+    "scheduled": 1,
     "rated": 2,
     "intake": 1,
     "released": 6
    },
    "films": [
+    {
+     "id": "k20263001",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2599978",
      "status": "showing",
@@ -1344,13 +1351,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20263001",
-     "status": "scheduled",
-     "roles": [
       "distributor"
      ]
     },
@@ -3899,49 +3899,6 @@
    ]
   },
   {
-   "id": "c20192681",
-   "name": "일미디어",
-   "spellings": [
-    "일미디어 IL MEDIA"
-   ],
-   "kobis_codes": [
-    "20192681"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 3,
-    "showing": 2,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "r2592898",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2606082",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2588393",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20230102",
    "name": "주식회사 무암",
    "spellings": [
@@ -4564,18 +4521,19 @@
     "total": 2,
     "distributor": 2,
     "applicant": 0,
-    "scheduled": 2
+    "showing": 1,
+    "scheduled": 1
    },
    "films": [
     {
-     "id": "k20267708",
-     "status": "scheduled",
+     "id": "r2595597",
+     "status": "showing",
      "roles": [
       "distributor"
      ]
     },
     {
-     "id": "r2595597",
+     "id": "k20267708",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -4815,13 +4773,13 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "scheduled": 1,
+    "showing": 1,
     "rated": 1
    },
    "films": [
     {
      "id": "r2595597",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant"
      ]
@@ -5036,6 +4994,49 @@
     },
     {
      "id": "r2593797",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20192681",
+   "name": "일미디어",
+   "spellings": [
+    "일미디어 IL MEDIA"
+   ],
+   "kobis_codes": [
+    "20192681"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 3,
+    "showing": 1,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2606082",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2588393",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592898",
      "status": "released",
      "roles": [
       "applicant",
@@ -6480,33 +6481,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20141348",
-   "name": "써티세븐스디그리 주식회사",
-   "spellings": [
-    "써티세븐스디그리(주) 37th degree Co.,Ltd."
-   ],
-   "kobis_codes": [
-    "20141348"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2593967",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     }
    ]
@@ -8641,6 +8615,33 @@
    "films": [
     {
      "id": "r2590201",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20141348",
+   "name": "써티세븐스디그리 주식회사",
+   "spellings": [
+    "써티세븐스디그리(주) 37th degree Co.,Ltd."
+   ],
+   "kobis_codes": [
+    "20141348"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2593967",
      "status": "released",
      "roles": [
       "applicant",
