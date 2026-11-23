@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "fetched_at": "2026-11-23T12:02:21Z",
+ "fetched_at": "2026-11-23T12:59:25Z",
  "interval_minutes": 60,
  "jitter": 0.1,
  "source": {
@@ -8,8 +8,8 @@
   "api": "https://api.cgv.co.kr/met/dsp/scrDsp/searchScrDspCpotDtl?coCd=A420&unitCpotRelNo=1"
  },
  "lists": {
-  "chart": 175,
-  "now": 60,
+  "chart": 174,
+  "now": 59,
   "upcoming": 153,
   "icecon": 8,
   "arthouse": 37,
@@ -4246,34 +4246,6 @@
    "badge": ""
   },
   {
-   "movie_no": "81666",
-   "title": "아사코",
-   "status": "now",
-   "release_date": "2026-10-21",
-   "release_month": "",
-   "first_release_date": "2019-03-01",
-   "rerelease": true,
-   "grade": "12세이상관람가",
-   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000081/81666/81666_320.jpg",
-   "booking_rate": 0.0,
-   "booking_rank": 153,
-   "bookable": true,
-   "formats": [],
-   "format_codes": [
-    "01"
-   ],
-   "lists": [
-    "chart",
-    "now",
-    "arthouse"
-   ],
-   "labels": [
-    "arthouse",
-    "rerelease"
-   ],
-   "badge": ""
-  },
-  {
    "movie_no": "30001957",
    "title": "어머니의 가계부",
    "status": "upcoming",
@@ -5265,6 +5237,32 @@
     "upcoming"
    ],
    "labels": [],
+   "badge": ""
+  },
+  {
+   "movie_no": "81666",
+   "title": "아사코",
+   "status": "now",
+   "release_date": "2026-10-21",
+   "release_month": "",
+   "first_release_date": "2019-03-01",
+   "rerelease": true,
+   "grade": "12세이상관람가",
+   "poster": "https://cdn.cgv.co.kr/cgvpomsfilm/Movie/Thumbnail/Poster/000081/81666/81666_320.jpg",
+   "booking_rate": 0.0,
+   "booking_rank": 153,
+   "bookable": false,
+   "formats": [],
+   "format_codes": [
+    "01"
+   ],
+   "lists": [
+    "arthouse"
+   ],
+   "labels": [
+    "arthouse",
+    "rerelease"
+   ],
    "badge": ""
   }
  ]
