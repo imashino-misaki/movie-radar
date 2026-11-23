@@ -2123,20 +2123,13 @@
     "total": 12,
     "distributor": 9,
     "applicant": 7,
-    "showing": 2,
-    "scheduled": 1,
+    "showing": 1,
+    "scheduled": 2,
     "announced": 2,
     "released": 3,
     "dormant": 4
    },
    "films": [
-    {
-     "id": "r2597956",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
     {
      "id": "r2603692",
      "status": "showing",
@@ -2151,6 +2144,13 @@
      "roles": [
       "applicant",
       "distributor"
+     ]
+    },
+    {
+     "id": "r2597956",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
      ]
     },
     {
@@ -2536,21 +2536,14 @@
     "total": 6,
     "distributor": 5,
     "applicant": 1,
-    "showing": 2,
-    "scheduled": 2,
+    "showing": 1,
+    "scheduled": 3,
     "rated": 1,
     "released": 1
    },
    "films": [
     {
      "id": "r2592154",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602102",
      "status": "showing",
      "roles": [
       "distributor"
@@ -2565,6 +2558,13 @@
     },
     {
      "id": "r2601836",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602102",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -3068,23 +3068,23 @@
     "total": 4,
     "distributor": 2,
     "applicant": 3,
-    "showing": 2,
-    "scheduled": 1,
+    "showing": 1,
+    "scheduled": 2,
     "announced": 1
    },
    "films": [
-    {
-     "id": "r2597956",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
     {
      "id": "r2599978",
      "status": "showing",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597956",
+     "status": "scheduled",
+     "roles": [
       "distributor"
      ]
     },
@@ -3449,16 +3449,10 @@
     "total": 3,
     "distributor": 3,
     "applicant": 2,
-    "showing": 3
+    "showing": 2,
+    "scheduled": 1
    },
    "films": [
-    {
-     "id": "r2597956",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
     {
      "id": "r2600772",
      "status": "showing",
@@ -3472,6 +3466,13 @@
      "status": "showing",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2597956",
+     "status": "scheduled",
+     "roles": [
       "distributor"
      ]
     }
@@ -3637,6 +3638,45 @@
    ]
   },
   {
+   "id": "c20061718",
+   "name": "찬란 Challan Film",
+   "spellings": [],
+   "kobis_codes": [
+    "20061718"
+   ],
+   "counts": {
+    "active": 3,
+    "total": 3,
+    "distributor": 3,
+    "applicant": 0,
+    "showing": 1,
+    "scheduled": 2
+   },
+   "films": [
+    {
+     "id": "r2588102",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20268588",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2604376",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20243105",
    "name": "㈜스튜디오오르카",
    "spellings": [
@@ -3783,14 +3823,14 @@
     "total": 3,
     "distributor": 0,
     "applicant": 3,
-    "showing": 1,
+    "scheduled": 1,
     "announced": 1,
     "released": 1
    },
    "films": [
     {
      "id": "r2602102",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -4840,38 +4880,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20061718",
-   "name": "찬란 Challan Film",
-   "spellings": [],
-   "kobis_codes": [
-    "20061718"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 0,
-    "showing": 1,
-    "scheduled": 1
-   },
-   "films": [
-    {
-     "id": "r2588102",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2604376",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -6207,12 +6215,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "showing": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2602102",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "distributor"
      ]
@@ -6535,6 +6543,32 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20110687",
+   "name": "씨네큐브 광화문",
+   "spellings": [
+    "씨네큐브 광화문 cinecube"
+   ],
+   "kobis_codes": [
+    "20110687"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "k20268588",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
      ]
     }
    ]
