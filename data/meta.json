@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "last_run_utc": "2026-11-24T05:42:07+00:00",
+ "last_run_utc": "2026-11-24T06:42:22+00:00",
  "manual_lists": {
   "active": false,
   "blocked_names": 0,
@@ -10,24 +10,24 @@
   "records_removed": 0
  },
  "counts": {
-  "films": 868,
+  "films": 871,
   "with_intake": 98,
-  "with_rating": 371,
+  "with_rating": 375,
   "with_kobis": 208,
   "with_megabox": 227,
   "with_lotte": 125,
   "with_cgv": 341,
-  "with_promo": 289,
-  "with_ors_ad": 166,
+  "with_promo": 290,
+  "with_ors_ad": 167,
   "with_program": 79,
   "with_past_rating": 168,
   "rerelease_candidates": 29,
   "chain_rereleases": 64,
-  "seen_this_run": 613,
+  "seen_this_run": 616,
   "format_groups": 7,
   "format_variants": 11,
   "format_ambiguous": 0,
-  "distributors": 244,
+  "distributors": 245,
   "tags": {
    "anime": 41,
    "chain_cgv": 21,
@@ -39,13 +39,13 @@
    "rerelease": 84,
    "sports": 7
   },
-  "intake_rows": 113,
-  "intake_published": 43,
-  "intake_withheld": 70,
-  "rating_rows": 307,
-  "rating_published": 294,
-  "rating_withheld_restricted": 13,
-  "adult_rating_rows": 559,
+  "intake_rows": 92,
+  "intake_published": 40,
+  "intake_withheld": 52,
+  "rating_rows": 312,
+  "rating_published": 298,
+  "rating_withheld_restricted": 14,
+  "adult_rating_rows": 575,
   "archive_removed": 0,
   "join_by_rcv": 0,
   "join_by_title": 0,
@@ -53,8 +53,8 @@
   "masked_applicants": 9,
   "applicants_known": 336,
   "applicants_trusted": 348,
-  "applicants_adult_only": 28,
-  "applicants_mixed": 7
+  "applicants_adult_only": 27,
+  "applicants_mixed": 8
  },
  "applicant_store": {
   "backfill": {
@@ -73,34 +73,34 @@
  "sources": {
   "ors_intake": {
    "status": "ok",
-   "seconds": 4.6,
+   "seconds": 4.2,
    "requests": 2,
    "tabs": {
     "MV_DOM": {
-     "rows": 41
+     "rows": 38
     },
     "MV_FOR": {
-     "rows": 72
+     "rows": 54
     }
    },
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kmrb_rating": {
    "status": "ok",
-   "seconds": 23.4,
+   "seconds": 21.1,
    "requests": 14,
    "window": "3months",
    "general_pages": 4,
-   "general_declared": 307,
-   "general_rows": 307,
+   "general_declared": 312,
+   "general_rows": 312,
    "all_pages": 9,
-   "all_declared": 866,
-   "all_rows": 866,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "all_declared": 887,
+   "all_rows": 887,
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kmrb_promo": {
    "status": "ok",
-   "seconds": 11.1,
+   "seconds": 9.3,
    "requests": 7,
    "window_days": 7,
    "trailer_rows": 138,
@@ -113,43 +113,43 @@
    "promo_only": 6,
    "promo_rerelease": 8,
    "promo_old_unmatched": 0,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "ors_ad": {
    "status": "ok",
-   "seconds": 4.7,
+   "seconds": 4.8,
    "requests": 3,
    "tabs": {
     "MVTRAIL": {
-     "rows": 55,
+     "rows": 56,
      "received": 38
     },
     "MVAD": {
-     "rows": 20,
+     "rows": 21,
      "received": 12
     },
     "MVADVTM": {
-     "rows": 102,
+     "rows": 111,
      "received": 72
     }
    },
-   "ors_ad_rows": 177,
-   "ors_ad_matched_rows": 104,
-   "ors_ad_records": 36,
-   "ors_ad_unmatched_titles": 50,
-   "ors_ad_created": 0,
+   "ors_ad_rows": 188,
+   "ors_ad_matched_rows": 113,
+   "ors_ad_records": 39,
+   "ors_ad_unmatched_titles": 51,
+   "ors_ad_created": 1,
    "ors_ad_not_created": {
     "masked": 1,
     "adult_applicant": 52,
-    "tab": 20
+    "tab": 21
    },
    "ors_ad_folded": 0,
    "ors_ad_removed": 0,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "megabox_program": {
    "status": "ok",
-   "seconds": 2.1,
+   "seconds": 2.0,
    "requests": 3,
    "megabox_tab_rows": 8,
    "megabox_lineups": [
@@ -164,11 +164,11 @@
    "program_matched": 40,
    "program_unmatched": 0,
    "with_program": 79,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis": {
    "status": "ok",
-   "seconds": 26.7,
+   "seconds": 21.9,
    "requests": 20,
    "calls": 20,
    "call_cap": 300,
@@ -185,11 +185,11 @@
    "kobis_pending_info": 0,
    "kobis_adult_removed": 0,
    "kobis_only_deferred": 0,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "megabox": {
    "status": "ok",
-   "seconds": 2.3,
+   "seconds": 2.4,
    "requests": 1,
    "rows": 122,
    "total_reported": 122,
@@ -199,11 +199,11 @@
    "megabox_matched": 81,
    "megabox_only": 40,
    "megabox_ended": 0,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "lotte": {
    "status": "ok",
-   "seconds": 2.5,
+   "seconds": 2.2,
    "requests": 2,
    "rows": 87,
    "now": 51,
@@ -213,7 +213,7 @@
    "lotte_matched_kobis_cd": 66,
    "lotte_only": 6,
    "lotte_ended": 0,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "cgv": {
    "status": "ok",
@@ -223,26 +223,26 @@
    "dropped_fields": 0,
    "now": 58,
    "upcoming": 155,
-   "fetched_at": "2026-11-24T05:41:47Z",
-   "age_minutes": 0,
+   "fetched_at": "2026-11-24T06:41:51Z",
+   "age_minutes": 1,
    "stale_after_minutes": 132,
    "stale": false,
    "cgv_matched": 109,
    "cgv_only": 104,
-   "cgv_ended": 1,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "cgv_ended": 0,
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kmrb_lookup": {
    "status": "ok",
-   "seconds": 7.3,
-   "requests": 8,
+   "seconds": 4.3,
+   "requests": 6,
    "wanted": 442,
-   "searched": 7,
+   "searched": 5,
    "reused_promo": 0,
    "errors": 5,
    "pending": 5,
    "past_rating": 168,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis_web": {
    "status": "ok",
@@ -258,23 +258,23 @@
    "with_rereleases": 15,
    "with_detail": 316,
    "dormant": 35,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "posters": {
    "status": "ok",
-   "seconds": 5.1,
-   "requests": 3,
+   "seconds": 0.0,
+   "requests": 0,
    "with_poster": 604,
-   "fetched": 3,
+   "fetched": 0,
    "errors": 0,
    "removed": 0,
    "files": 588,
    "bytes": 29181734,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis_schedule": {
    "status": "ok",
-   "seconds": 23.4,
+   "seconds": 19.3,
    "requests": 13,
    "months": {
     "2026-11": 59,
@@ -292,7 +292,7 @@
    },
    "with_schedule": 111,
    "schedule_unmatched": 5,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis_companies": {
    "status": "ok",
@@ -304,35 +304,35 @@
    "found": 58,
    "verified": 56,
    "trusted": 56,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kmrb_reps": {
    "status": "ok",
-   "seconds": 3.2,
+   "seconds": 2.7,
    "requests": 1,
    "applicants": 175,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis_booking": {
    "status": "ok",
-   "seconds": 3.9,
+   "seconds": 3.1,
    "requests": 2,
-   "rows": 344,
-   "as_of": "2026-11-24 14:43",
+   "rows": 341,
+   "as_of": "2026-11-24 15:43",
    "undated": 158,
-   "with_booking": 189,
-   "booking_by_title": 63,
+   "with_booking": 186,
+   "booking_by_title": 61,
    "booking_unmatched": 159,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis_upcoming": {
    "status": "ok",
-   "seconds": 41.2,
+   "seconds": 35.9,
    "requests": 28,
    "개봉예정": 184,
    "개봉준비": 86,
    "not_adult_genre": 259,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   },
   "kobis_boxoffice": {
    "status": "ok",
@@ -347,12 +347,12 @@
    "with_boxoffice": 24,
    "latest_day": "2026-11-23",
    "top10_unmatched": 0,
-   "last_ok_utc": "2026-11-24T05:42:07+00:00"
+   "last_ok_utc": "2026-11-24T06:42:22+00:00"
   }
  },
- "requests": 107,
+ "requests": 102,
  "release_model": {
-  "rows": 10387,
+  "rows": 10391,
   "rows_opened": 5739,
   "rows_real": 5138,
   "rows_token": 561,
@@ -361,18 +361,18 @@
    "format_of_open": 10,
    "vod_applicant": 176
   },
-  "rows_scheduled": 39,
-  "rows_added": 0,
+  "rows_scheduled": 41,
+  "rows_added": 4,
   "openings_added": 0,
   "records": {
-   "booking": 15,
-   "chain": 269,
+   "booking": 14,
+   "chain": 270,
    "kobis": 236,
-   "model": 238,
+   "model": 241,
    "schedule": 22
   },
   "records_by_state_tier": {
-   "ad_filing/estimate": 14,
+   "ad_filing/estimate": 15,
    "bookable/estimate": 65,
    "day_announced/estimate": 97,
    "filed/estimate": 58,
@@ -380,7 +380,7 @@
    "opened/confirmed": 354,
    "passed_unverified/estimate": 2,
    "promo_after_rating/estimate": 37,
-   "rating_only/estimate": 129
+   "rating_only/estimate": 131
   },
   "half_life_days": 365,
   "features": [
@@ -430,29 +430,29 @@
   },
   "commitments": {
    "bookable": {
-    "n": 85,
-    "opened": 75,
+    "n": 83,
+    "opened": 74,
     "hits": {
-     "3": 75,
-     "week": 75,
-     "month": 75
+     "3": 74,
+     "week": 74,
+     "month": 74
     },
     "films": {
-     "n": 79,
-     "opened": 69.0,
+     "n": 77,
+     "opened": 68.0,
      "hits": {
-      "3": 69.0,
-      "week": 69.0,
-      "month": 69.0
+      "3": 68.0,
+      "week": 68.0,
+      "month": 68.0
      }
     },
     "history_n": 0,
-    "snapshot_n": 85,
-    "q": 0.8688,
+    "snapshot_n": 83,
+    "q": 0.8782,
     "r": {
-     "3": 0.9929,
-     "week": 0.9929,
-     "month": 0.9929
+     "3": 0.9928,
+     "week": 0.9928,
+     "month": 0.9928
     },
     "provisional": true
    },
@@ -544,22 +544,22 @@
     "tier_given_open": "confirmed"
    },
    "bookable": {
-    "n": 79,
+    "n": 77,
     "rate": {
-     "3": 0.873,
-     "week": 0.873,
-     "month": 0.873
+     "3": 0.883,
+     "week": 0.883,
+     "month": 0.883
     },
     "lower": {
-     "3": 0.782,
-     "week": 0.782,
-     "month": 0.782
+     "3": 0.793,
+     "week": 0.793,
+     "month": 0.793
     },
     "tier": "estimate",
     "basis": "announced vs KOBIS opening",
     "provisional": true,
     "conditional": {
-     "n": 69.0,
+     "n": 68.0,
      "rate": {
       "3": 1.0,
       "week": 1.0,
@@ -572,7 +572,7 @@
      }
     },
     "tier_given_open": "confirmed",
-    "n_announcements": 85
+    "n_announcements": 83
    },
    "day_announced": {
     "n": 196,
@@ -762,44 +762,44 @@
    "beta": {
     "format": -0.184,
     "promo": -0.277,
-    "restricted": -0.012,
-    "foreign": 0.032,
+    "restricted": -0.011,
+    "foreign": 0.034,
     "promo_n": -0.283,
     "concert": -0.049
    },
    "gamma": {
-    "format": -0.424,
-    "promo": -0.647,
-    "restricted": -0.676,
-    "foreign": 1.106,
-    "promo_n": 1.708,
+    "format": -0.425,
+    "promo": -0.648,
+    "restricted": -0.679,
+    "foreign": 1.102,
+    "promo_n": 1.709,
     "concert": 0.588
    },
    "companies": 1046,
    "em_iterations": 13,
    "company_prior_location": {
     "intercept": 4.403,
-    "ratings_per_year": -0.108,
-    "promo": -0.416,
+    "ratings_per_year": -0.11,
+    "promo": -0.414,
     "short": 0.0,
-    "restricted": 0.191,
+    "restricted": 0.181,
     "foreign": 0.022,
-    "format": 0.307
+    "format": 0.325
    },
    "company_prior_logit": {
-    "intercept": 0.193,
-    "ratings_per_year": 0.032,
-    "promo": 0.448,
+    "intercept": 0.192,
+    "ratings_per_year": 0.034,
+    "promo": 0.446,
     "short": 0.0,
-    "restricted": 0.139,
-    "foreign": -0.795,
-    "format": 6.68
+    "restricted": 0.148,
+    "foreign": -0.792,
+    "format": 6.72
    },
-   "tau2_location": 0.1811,
-   "tau2_logit": 1.0197,
+   "tau2_location": 0.181,
+   "tau2_logit": 1.023,
    "icc": 0.332,
    "k_rows": 4.0,
-   "companies_established": 267
+   "companies_established": 268
   },
   "real_model": {
    "features": [
@@ -813,48 +813,48 @@
    ],
    "sigma_log": 0.594,
    "beta": {
-    "format": -0.193,
+    "format": -0.192,
     "promo": -0.342,
-    "restricted": -0.034,
-    "rule_adult": 0.154,
+    "restricted": -0.033,
+    "rule_adult": 0.155,
     "promo_n": -0.264,
-    "app_batch": 0.05,
+    "app_batch": 0.051,
     "concert": -0.088
    },
    "gamma": {
-    "format": 0.63,
-    "promo": -0.861,
-    "restricted": -0.917,
-    "rule_adult": -0.843,
+    "format": 0.629,
+    "promo": -0.86,
+    "restricted": -0.924,
+    "rule_adult": -0.846,
     "promo_n": 1.815,
-    "app_batch": -0.883,
-    "concert": 0.692
+    "app_batch": -0.885,
+    "concert": 0.691
    },
    "companies": 1046,
-   "em_iterations": 12,
+   "em_iterations": 13,
    "company_prior_location": {
-    "intercept": 4.375,
-    "ratings_per_year": -0.103,
-    "promo": -0.358,
+    "intercept": 4.376,
+    "ratings_per_year": -0.105,
+    "promo": -0.357,
     "short": 0.0,
-    "restricted": 0.231,
-    "foreign": 0.058,
-    "format": 0.035
+    "restricted": 0.223,
+    "foreign": 0.06,
+    "format": 0.046
    },
    "company_prior_logit": {
-    "intercept": 0.349,
-    "ratings_per_year": 0.004,
-    "promo": 0.542,
+    "intercept": 0.348,
+    "ratings_per_year": 0.009,
+    "promo": 0.534,
     "short": 0.0,
-    "restricted": -0.343,
-    "foreign": 0.214,
-    "format": 8.047
+    "restricted": -0.315,
+    "foreign": 0.211,
+    "format": 8.078
    },
-   "tau2_location": 0.1707,
-   "tau2_logit": 1.1082,
+   "tau2_location": 0.1706,
+   "tau2_logit": 1.1088,
    "icc": 0.326,
    "k_rows": 3.9,
-   "companies_established": 267
+   "companies_established": 268
   },
   "weekday_shares": [
    0.008,
@@ -889,12 +889,12 @@
   },
   "new_company_feature_film_p_open": 0.541,
   "receipt_to_rating": {
-   "n": 53,
+   "n": 55,
    "median_days": 11
   },
   "promo_to_rating": {
-   "n": 214,
-   "median_days": 3
+   "n": 217,
+   "median_days": 4
   },
   "backtest": {
    "n_test": 1766,
@@ -5459,14 +5459,14 @@
      "tier": "estimate"
     },
     "bookable": {
-     "n": 85,
-     "opened": 75,
-     "n_films": 79,
-     "brier": 0.1106,
+     "n": 83,
+     "opened": 74,
+     "n_films": 77,
+     "brier": 0.1032,
      "hit_rate": {
-      "3": 0.882,
-      "week": 0.882,
-      "month": 0.882
+      "3": 0.892,
+      "week": 0.892,
+      "month": 0.892
      },
      "tier": "estimate",
      "provisional": true
@@ -5508,7 +5508,7 @@
   "backtest_real": {
    "n_test": 1758,
    "n_test_opened": 1347,
-   "maturity_days": 303,
+   "maturity_days": 301,
    "maturity_quantile": 0.95,
    "tune_from": "2021-12-29",
    "test_from": "2023-12-04",
@@ -5615,46 +5615,46 @@
      "mean_p": 0.956,
      "observed": 0.97,
      "brier": 0.0304,
-     "log_score": 0.1601
+     "log_score": 0.16
     },
     "censored_log_score": 3.2292,
     "integrated_brier": 0.14,
-    "p_open_303d": {
+    "p_open_301d": {
      "all": {
       "n": 1758,
       "mean_p": 0.723,
       "observed": 0.734,
       "brier": 0.1409,
-      "log_score": 0.4413,
+      "log_score": 0.4412,
       "deciles": [
        {
         "p": 0.292,
-        "observed": 0.219,
+        "observed": 0.225,
         "n": 175
        },
        {
         "p": 0.536,
-        "observed": 0.472,
+        "observed": 0.46,
         "n": 176
        },
        {
-        "p": 0.6,
-        "observed": 0.647,
+        "p": 0.599,
+        "observed": 0.653,
         "n": 176
        },
        {
-        "p": 0.668,
-        "observed": 0.669,
+        "p": 0.667,
+        "observed": 0.67,
         "n": 176
        },
        {
         "p": 0.735,
-        "observed": 0.782,
+        "observed": 0.787,
         "n": 176
        },
        {
         "p": 0.8,
-        "observed": 0.885,
+        "observed": 0.879,
         "n": 175
        },
        {
@@ -5692,13 +5692,13 @@
         "n": 134
        },
        {
-        "p": 0.518,
-        "observed": 0.421,
+        "p": 0.517,
+        "observed": 0.414,
         "n": 135
        },
        {
         "p": 0.629,
-        "observed": 0.672,
+        "observed": 0.679,
         "n": 135
        },
        {
@@ -5740,34 +5740,34 @@
      },
      "new_or_small": {
       "n": 409,
-      "mean_p": 0.699,
+      "mean_p": 0.698,
       "observed": 0.714,
       "brier": 0.1764,
-      "log_score": 0.516,
+      "log_score": 0.5159,
       "deciles": [
        {
-        "p": 0.434,
+        "p": 0.433,
         "observed": 0.452,
         "n": 40
        },
        {
-        "p": 0.56,
+        "p": 0.559,
         "observed": 0.575,
         "n": 41
        },
        {
-        "p": 0.572,
-        "observed": 0.61,
+        "p": 0.571,
+        "observed": 0.531,
         "n": 41
        },
        {
-        "p": 0.591,
-        "observed": 0.57,
+        "p": 0.59,
+        "observed": 0.625,
         "n": 41
        },
        {
         "p": 0.624,
-        "observed": 0.586,
+        "observed": 0.611,
         "n": 41
        },
        {
@@ -6295,46 +6295,46 @@
      "mean_p": 0.963,
      "observed": 0.941,
      "brier": 0.0542,
-     "log_score": 0.2171
+     "log_score": 0.217
     },
     "censored_log_score": 3.319,
     "integrated_brier": 0.163,
-    "p_open_303d": {
+    "p_open_301d": {
      "all": {
       "n": 1758,
       "mean_p": 0.726,
       "observed": 0.734,
       "brier": 0.1654,
-      "log_score": 0.4977,
+      "log_score": 0.4976,
       "deciles": [
        {
         "p": 0.344,
-        "observed": 0.401,
+        "observed": 0.395,
         "n": 175
        },
        {
         "p": 0.567,
-        "observed": 0.592,
+        "observed": 0.639,
         "n": 176
        },
        {
-        "p": 0.674,
-        "observed": 0.651,
+        "p": 0.673,
+        "observed": 0.611,
         "n": 176
        },
        {
         "p": 0.681,
-        "observed": 0.648,
+        "observed": 0.644,
         "n": 176
        },
        {
-        "p": 0.689,
-        "observed": 0.606,
+        "p": 0.688,
+        "observed": 0.592,
         "n": 176
        },
        {
-        "p": 0.725,
-        "observed": 0.839,
+        "p": 0.724,
+        "observed": 0.857,
         "n": 175
        },
        {
@@ -6364,36 +6364,36 @@
       "mean_p": 0.726,
       "observed": 0.734,
       "brier": 0.1654,
-      "log_score": 0.4977,
+      "log_score": 0.4976,
       "deciles": [
        {
         "p": 0.344,
-        "observed": 0.401,
+        "observed": 0.395,
         "n": 175
        },
        {
         "p": 0.567,
-        "observed": 0.592,
+        "observed": 0.639,
         "n": 176
        },
        {
-        "p": 0.674,
-        "observed": 0.651,
+        "p": 0.673,
+        "observed": 0.611,
         "n": 176
        },
        {
         "p": 0.681,
-        "observed": 0.648,
+        "observed": 0.644,
         "n": 176
        },
        {
-        "p": 0.689,
-        "observed": 0.606,
+        "p": 0.688,
+        "observed": 0.592,
         "n": 176
        },
        {
-        "p": 0.725,
-        "observed": 0.839,
+        "p": 0.724,
+        "observed": 0.857,
         "n": 175
        },
        {
@@ -6809,42 +6809,42 @@
      "raw": -3.2292,
      "recalibrated": -3.2292
     },
-    "p_open_303d": {
+    "p_open_301d": {
      "raw": {
       "n": 1758,
       "mean_p": 0.723,
       "observed": 0.734,
       "brier": 0.1409,
-      "log_score": 0.4413,
+      "log_score": 0.4412,
       "deciles": [
        {
         "p": 0.292,
-        "observed": 0.219,
+        "observed": 0.225,
         "n": 175
        },
        {
         "p": 0.536,
-        "observed": 0.472,
+        "observed": 0.46,
         "n": 176
        },
        {
-        "p": 0.6,
-        "observed": 0.647,
+        "p": 0.599,
+        "observed": 0.653,
         "n": 176
        },
        {
-        "p": 0.668,
-        "observed": 0.669,
+        "p": 0.667,
+        "observed": 0.67,
         "n": 176
        },
        {
         "p": 0.735,
-        "observed": 0.782,
+        "observed": 0.787,
         "n": 176
        },
        {
         "p": 0.8,
-        "observed": 0.885,
+        "observed": 0.879,
         "n": 175
        },
        {
@@ -6875,10 +6875,10 @@
      "30": {
       "raw": {
        "n": 1083,
-       "mean_p": 0.611,
+       "mean_p": 0.61,
        "observed": 0.604,
        "brier": 0.1936,
-       "log_score": 0.5783,
+       "log_score": 0.5782,
        "deciles": [
         {
          "p": 0.207,
@@ -6891,13 +6891,13 @@
          "n": 108
         },
         {
-         "p": 0.527,
-         "observed": 0.427,
+         "p": 0.526,
+         "observed": 0.436,
          "n": 108
         },
         {
          "p": 0.563,
-         "observed": 0.553,
+         "observed": 0.544,
          "n": 109
         },
         {
@@ -6907,12 +6907,12 @@
         },
         {
          "p": 0.648,
-         "observed": 0.715,
+         "observed": 0.724,
          "n": 108
         },
         {
-         "p": 0.696,
-         "observed": 0.694,
+         "p": 0.695,
+         "observed": 0.685,
          "n": 109
         },
         {
@@ -6936,11 +6936,11 @@
      },
      "60": {
       "raw": {
-       "n": 631,
-       "mean_p": 0.433,
-       "observed": 0.37,
-       "brier": 0.2233,
-       "log_score": 0.6464,
+       "n": 635,
+       "mean_p": 0.435,
+       "observed": 0.373,
+       "brier": 0.2229,
+       "log_score": 0.6454,
        "deciles": [
         {
          "p": 0.099,
@@ -6948,47 +6948,47 @@
          "n": 63
         },
         {
-         "p": 0.212,
-         "observed": 0.194,
+         "p": 0.213,
+         "observed": 0.19,
+         "n": 64
+        },
+        {
+         "p": 0.307,
+         "observed": 0.282,
          "n": 63
         },
         {
-         "p": 0.305,
-         "observed": 0.266,
+         "p": 0.388,
+         "observed": 0.469,
+         "n": 64
+        },
+        {
+         "p": 0.452,
+         "observed": 0.369,
          "n": 63
         },
         {
-         "p": 0.386,
-         "observed": 0.476,
-         "n": 63
+         "p": 0.479,
+         "observed": 0.307,
+         "n": 64
         },
         {
-         "p": 0.45,
-         "observed": 0.385,
-         "n": 63
-        },
-        {
-         "p": 0.478,
-         "observed": 0.296,
-         "n": 63
-        },
-        {
-         "p": 0.502,
+         "p": 0.503,
          "observed": 0.456,
          "n": 63
         },
         {
-         "p": 0.546,
-         "observed": 0.516,
+         "p": 0.548,
+         "observed": 0.508,
+         "n": 64
+        },
+        {
+         "p": 0.608,
+         "observed": 0.528,
          "n": 63
         },
         {
-         "p": 0.605,
-         "observed": 0.496,
-         "n": 63
-        },
-        {
-         "p": 0.744,
+         "p": 0.746,
          "observed": 0.531,
          "n": 64
         }
@@ -7040,12 +7040,12 @@
          "n": 52
         },
         {
-         "p": 0.412,
+         "p": 0.411,
          "observed": 0.442,
          "n": 52
         },
         {
-         "p": 0.473,
+         "p": 0.472,
          "observed": 0.353,
          "n": 52
         },
@@ -7107,18 +7107,18 @@
      }
     },
     "band_0.9_1.0": {
-     "n": 614,
-     "mean_p": 0.948,
-     "observed": 0.98,
-     "brier": 0.0202,
-     "log_score": 0.1084
+     "n": 598,
+     "mean_p": 0.949,
+     "observed": 0.984,
+     "brier": 0.0175,
+     "log_score": 0.1
     },
     "censored_log_score": 3.1868,
     "integrated_brier": 0.1199,
-    "p_open_303d": {
+    "p_open_301d": {
      "all": {
       "n": 1758,
-      "mean_p": 0.698,
+      "mean_p": 0.697,
       "observed": 0.734,
       "brier": 0.1096,
       "log_score": 0.3549,
@@ -7130,16 +7130,16 @@
        },
        {
         "p": 0.354,
-        "observed": 0.343,
+        "observed": 0.349,
         "n": 176
        },
        {
-        "p": 0.479,
-        "observed": 0.602,
+        "p": 0.478,
+        "observed": 0.597,
         "n": 176
        },
        {
-        "p": 0.685,
+        "p": 0.684,
         "observed": 0.739,
         "n": 176
        },
@@ -7150,7 +7150,7 @@
        },
        {
         "p": 0.854,
-        "observed": 0.982,
+        "observed": 0.983,
         "n": 175
        },
        {
@@ -7164,7 +7164,7 @@
         "n": 176
        },
        {
-        "p": 0.959,
+        "p": 0.96,
         "observed": 0.991,
         "n": 176
        },
@@ -7193,13 +7193,13 @@
         "n": 149
        },
        {
-        "p": 0.683,
-        "observed": 0.727,
+        "p": 0.682,
+        "observed": 0.72,
         "n": 149
        },
        {
-        "p": 0.78,
-        "observed": 0.768,
+        "p": 0.779,
+        "observed": 0.774,
         "n": 149
        },
        {
@@ -7209,12 +7209,12 @@
        },
        {
         "p": 0.888,
-        "observed": 0.959,
+        "observed": 0.952,
         "n": 149
        },
        {
-        "p": 0.913,
-        "observed": 0.95,
+        "p": 0.912,
+        "observed": 0.957,
         "n": 149
        },
        {
@@ -7247,33 +7247,33 @@
         "n": 26
        },
        {
-        "p": 0.34,
-        "observed": 0.113,
+        "p": 0.341,
+        "observed": 0.111,
         "n": 27
        },
        {
-        "p": 0.378,
-        "observed": 0.365,
+        "p": 0.377,
+        "observed": 0.3,
         "n": 27
        },
        {
-        "p": 0.378,
-        "observed": 0.231,
+        "p": 0.377,
+        "observed": 0.192,
         "n": 26
        },
        {
-        "p": 0.378,
-        "observed": 0.481,
+        "p": 0.377,
+        "observed": 0.528,
         "n": 27
        },
        {
         "p": 0.38,
-        "observed": 0.412,
+        "observed": 0.509,
         "n": 27
        },
        {
         "p": 0.397,
-        "observed": 0.5,
+        "observed": 0.462,
         "n": 26
        },
        {
@@ -7806,7 +7806,7 @@
       },
       "censored_log_score": 2.9364,
       "integrated_brier": 0.1244,
-      "p_open_303d": {
+      "p_open_301d": {
        "all": {
         "n": 1362,
         "mean_p": 0.777,
@@ -7826,12 +7826,12 @@
          },
          {
           "p": 0.725,
-          "observed": 0.731,
+          "observed": 0.739,
           "n": 136
          },
          {
           "p": 0.765,
-          "observed": 0.859,
+          "observed": 0.851,
           "n": 136
          },
          {
@@ -8416,13 +8416,13 @@
       },
       "censored_log_score": 3.3247,
       "integrated_brier": 0.1764,
-      "p_open_303d": {
+      "p_open_301d": {
        "all": {
         "n": 1362,
-        "mean_p": 0.635,
+        "mean_p": 0.634,
         "observed": 0.784,
         "brier": 0.1619,
-        "log_score": 0.5795,
+        "log_score": 0.5796,
         "deciles": [
          {
           "p": 0.07,
@@ -8446,12 +8446,12 @@
          },
          {
           "p": 0.669,
-          "observed": 0.824,
+          "observed": 0.809,
           "n": 137
          },
          {
           "p": 0.74,
-          "observed": 0.896,
+          "observed": 0.911,
           "n": 136
          },
          {
@@ -8481,7 +8481,7 @@
         "mean_p": 0.641,
         "observed": 0.77,
         "brier": 0.1508,
-        "log_score": 0.5612,
+        "log_score": 0.5613,
         "deciles": [
          {
           "p": 0.062,
@@ -8539,8 +8539,8 @@
         "n": 285,
         "mean_p": 0.611,
         "observed": 0.835,
-        "brier": 0.2026,
-        "log_score": 0.6466,
+        "brier": 0.2027,
+        "log_score": 0.6469,
         "deciles": [
          {
           "p": 0.112,
@@ -8558,13 +8558,13 @@
           "n": 28
          },
          {
-          "p": 0.559,
-          "observed": 0.786,
+          "p": 0.558,
+          "observed": 0.821,
           "n": 29
          },
          {
           "p": 0.58,
-          "observed": 0.821,
+          "observed": 0.786,
           "n": 28
          },
          {
@@ -9007,7 +9007,7 @@
      }
     },
     "short": {
-     "n": 1046,
+     "n": 1055,
      "opened": 3,
      "rate": 0.0033,
      "test": {
@@ -9032,12 +9032,12 @@
     }
    },
    "population": {
-    "p_open_303d": {
+    "p_open_301d": {
      "n": 2308,
      "mean_p": 0.545,
      "observed": 0.552,
      "brier": 0.1061,
-     "log_score": 0.333,
+     "log_score": 0.3329,
      "deciles": [
       {
        "p": 0.002,
@@ -9055,18 +9055,18 @@
        "n": 231
       },
       {
-       "p": 0.526,
-       "observed": 0.472,
+       "p": 0.525,
+       "observed": 0.458,
        "n": 231
       },
       {
        "p": 0.617,
-       "observed": 0.627,
+       "observed": 0.641,
        "n": 231
       },
       {
-       "p": 0.71,
-       "observed": 0.735,
+       "p": 0.709,
+       "observed": 0.731,
        "n": 230
       },
       {
@@ -9076,7 +9076,7 @@
       },
       {
        "p": 0.864,
-       "observed": 0.877,
+       "observed": 0.881,
        "n": 231
       },
       {
@@ -9097,12 +9097,12 @@
  "theatrical": {
   "counts": {
    "confirmed": 602,
-   "candidate": 171,
+   "candidate": 173,
    "unlikely": 90,
    "token": 0,
-   "ad_only": 5
+   "ad_only": 6
   },
-  "candidates_with_intent": 80,
+  "candidates_with_intent": 81,
   "applicants_unlikely": 10,
   "rule": {
    "min_ratings": 20,
@@ -9114,10 +9114,10 @@
   "screening_measures": 5377
  },
  "signals": {
-  "new_signals": 2,
-  "changes": 2,
-  "absent": 2,
-  "records": 909,
-  "runs": 504
+  "new_signals": 6,
+  "changes": 6,
+  "absent": 3,
+  "records": 912,
+  "runs": 505
  }
 }
