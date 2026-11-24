@@ -1367,14 +1367,20 @@
     "total": 11,
     "distributor": 10,
     "applicant": 7,
-    "showing": 5,
-    "scheduled": 1,
+    "showing": 6,
     "intake": 1,
     "announced": 1,
     "released": 2,
     "dormant": 1
    },
    "films": [
+    {
+     "id": "k20262701",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2589128",
      "status": "showing",
@@ -1411,13 +1417,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20262701",
-     "status": "scheduled",
-     "roles": [
       "distributor"
      ]
     },
@@ -7296,6 +7295,28 @@
      "roles": [
       "applicant",
       "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n드림쇼디지털필름웍스",
+   "name": "주식회사 드림쇼디지털필름웍스",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "a6fd0f6082b18",
+     "status": "announced",
+     "roles": [
+      "applicant"
      ]
     }
    ]
