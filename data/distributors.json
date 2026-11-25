@@ -1353,9 +1353,8 @@
     "distributor": 15,
     "applicant": 8,
     "showing": 2,
-    "scheduled": 4,
+    "scheduled": 5,
     "intake": 1,
-    "announced": 1,
     "released": 8
    },
    "films": [
@@ -1391,6 +1390,13 @@
      ]
     },
     {
+     "id": "k20266183",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
      "id": "k20268524",
      "status": "scheduled",
      "roles": [
@@ -1409,13 +1415,6 @@
      "status": "intake",
      "roles": [
       "applicant"
-     ]
-    },
-    {
-     "id": "k20266183",
-     "status": "announced",
-     "roles": [
-      "distributor"
      ]
     },
     {
@@ -4624,18 +4623,19 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "announced": 2
+    "scheduled": 1,
+    "announced": 1
    },
    "films": [
     {
-     "id": "a76da61a58023",
-     "status": "announced",
+     "id": "ab5fbf93a4b1d",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
     },
     {
-     "id": "ab5fbf93a4b1d",
+     "id": "a76da61a58023",
      "status": "announced",
      "roles": [
       "applicant"
@@ -4814,7 +4814,7 @@
     "distributor": 1,
     "applicant": 2,
     "showing": 1,
-    "rated": 1
+    "scheduled": 1
    },
    "films": [
     {
@@ -4827,7 +4827,7 @@
     },
     {
      "id": "r2603014",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -6915,30 +6915,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20101102",
-   "name": "오드 AUD",
-   "spellings": [],
-   "kobis_codes": [
-    "20101102"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "k20240146",
-     "status": "showing",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -9079,6 +9055,30 @@
     {
      "id": "k20136927",
      "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20101102",
+   "name": "오드 AUD",
+   "spellings": [],
+   "kobis_codes": [
+    "20101102"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20240146",
+     "status": "released",
      "roles": [
       "distributor"
      ]
