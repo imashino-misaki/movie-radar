@@ -1240,8 +1240,8 @@
     "total": 13,
     "distributor": 12,
     "applicant": 7,
-    "showing": 8,
-    "scheduled": 1,
+    "showing": 7,
+    "scheduled": 2,
     "intake": 1,
     "released": 2,
     "dormant": 1
@@ -1249,13 +1249,6 @@
    "films": [
     {
      "id": "k20262701",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "m36897171ac42",
      "status": "showing",
      "roles": [
       "distributor"
@@ -1309,6 +1302,13 @@
     },
     {
      "id": "k20269088",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "m36897171ac42",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -2241,8 +2241,8 @@
     "total": 6,
     "distributor": 5,
     "applicant": 1,
-    "showing": 3,
-    "scheduled": 2,
+    "showing": 2,
+    "scheduled": 3,
     "rated": 1
    },
    "films": [
@@ -2261,13 +2261,6 @@
      ]
     },
     {
-     "id": "r2602102",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
      "id": "r2592157",
      "status": "scheduled",
      "roles": [
@@ -2276,6 +2269,13 @@
     },
     {
      "id": "r2601836",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602102",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -2304,13 +2304,20 @@
     "total": 12,
     "distributor": 9,
     "applicant": 7,
-    "showing": 1,
-    "scheduled": 2,
+    "showing": 2,
+    "scheduled": 1,
     "announced": 2,
     "released": 3,
     "dormant": 4
    },
    "films": [
+    {
+     "id": "r2597956",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
     {
      "id": "r2603692",
      "status": "showing",
@@ -2325,13 +2332,6 @@
      "roles": [
       "applicant",
       "distributor"
-     ]
-    },
-    {
-     "id": "r2597956",
-     "status": "scheduled",
-     "roles": [
-      "applicant"
      ]
     },
     {
@@ -3176,23 +3176,23 @@
     "total": 4,
     "distributor": 2,
     "applicant": 3,
-    "showing": 1,
-    "scheduled": 2,
+    "showing": 2,
+    "scheduled": 1,
     "announced": 1
    },
    "films": [
+    {
+     "id": "r2597956",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2599978",
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2597956",
-     "status": "scheduled",
-     "roles": [
       "distributor"
      ]
     },
@@ -3616,10 +3616,16 @@
     "total": 3,
     "distributor": 3,
     "applicant": 2,
-    "showing": 2,
-    "scheduled": 1
+    "showing": 3
    },
    "films": [
+    {
+     "id": "r2597956",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "r2600772",
      "status": "showing",
@@ -3635,13 +3641,6 @@
       "applicant",
       "distributor"
      ]
-    },
-    {
-     "id": "r2597956",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
     }
    ]
   },
@@ -3655,7 +3654,8 @@
     "total": 3,
     "distributor": 0,
     "applicant": 3,
-    "showing": 2,
+    "showing": 1,
+    "scheduled": 1,
     "announced": 1
    },
    "films": [
@@ -3668,7 +3668,7 @@
     },
     {
      "id": "r2602102",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -4856,7 +4856,8 @@
     "total": 2,
     "distributor": 1,
     "applicant": 2,
-    "showing": 2
+    "showing": 1,
+    "scheduled": 1
    },
    "films": [
     {
@@ -4869,7 +4870,7 @@
     },
     {
      "id": "r2603014",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -4888,7 +4889,8 @@
     "total": 2,
     "distributor": 2,
     "applicant": 1,
-    "showing": 2
+    "showing": 1,
+    "scheduled": 1
    },
    "films": [
     {
@@ -4900,7 +4902,7 @@
     },
     {
      "id": "r2597564",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
@@ -6333,12 +6335,12 @@
     "total": 1,
     "distributor": 1,
     "applicant": 0,
-    "showing": 1
+    "scheduled": 1
    },
    "films": [
     {
      "id": "r2602102",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "distributor"
      ]
