@@ -538,12 +538,12 @@
     "20122956"
    ],
    "counts": {
-    "active": 17,
-    "total": 20,
+    "active": 18,
+    "total": 21,
     "distributor": 5,
-    "applicant": 17,
+    "applicant": 18,
     "showing": 3,
-    "scheduled": 8,
+    "scheduled": 9,
     "rated": 6,
     "released": 2,
     "dormant": 1
@@ -567,6 +567,13 @@
     {
      "id": "r2597539",
      "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "pca2aa8e66c99",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -1027,14 +1034,13 @@
     "20110854"
    ],
    "counts": {
-    "active": 12,
+    "active": 13,
     "total": 13,
     "distributor": 9,
     "applicant": 7,
-    "showing": 7,
+    "showing": 8,
     "scheduled": 3,
-    "rated": 2,
-    "released": 1
+    "rated": 2
    },
    "films": [
     {
@@ -1053,6 +1059,13 @@
     },
     {
      "id": "r2588118",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2589448",
      "status": "showing",
      "roles": [
       "distributor"
@@ -1122,13 +1135,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    },
-    {
-     "id": "r2589448",
-     "status": "released",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -1861,6 +1867,94 @@
    ]
   },
   {
+   "id": "c20229461",
+   "name": "(주)바이포엠스튜디오 BY4MSTUDIO",
+   "spellings": [
+    "(주)바이포엠스튜디오",
+    "주식회사 바이포엠스튜디오"
+   ],
+   "kobis_codes": [
+    "20229461"
+   ],
+   "counts": {
+    "active": 7,
+    "total": 9,
+    "distributor": 8,
+    "applicant": 3,
+    "showing": 3,
+    "scheduled": 3,
+    "announced": 1,
+    "released": 2
+   },
+   "films": [
+    {
+     "id": "r2596523",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2600523",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2602659",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20240822",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "m1605bd1bca07",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "pca2aa8e66c99",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "p2813a8c71120",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2583762",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2586558",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20142968",
    "name": "(주)콘텐츠판다",
    "spellings": [
@@ -2088,87 +2182,6 @@
      "status": "released",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20229461",
-   "name": "(주)바이포엠스튜디오 BY4MSTUDIO",
-   "spellings": [
-    "(주)바이포엠스튜디오",
-    "주식회사 바이포엠스튜디오"
-   ],
-   "kobis_codes": [
-    "20229461"
-   ],
-   "counts": {
-    "active": 6,
-    "total": 8,
-    "distributor": 7,
-    "applicant": 3,
-    "showing": 3,
-    "scheduled": 2,
-    "announced": 1,
-    "released": 2
-   },
-   "films": [
-    {
-     "id": "r2596523",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600523",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2602659",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20240822",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "m1605bd1bca07",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "p2813a8c71120",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "r2583762",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2586558",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
      ]
     }
    ]
@@ -3638,6 +3651,42 @@
    ]
   },
   {
+   "id": "n대경토탈",
+   "name": "(주)대경토탈",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 3,
+    "total": 3,
+    "distributor": 0,
+    "applicant": 3,
+    "announced": 3
+   },
+   "films": [
+    {
+     "id": "a5676b5b6dd14",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "aa5b3f999810d",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "af0f042973ff9",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20265156",
    "name": "(주)모비데이즈",
    "spellings": [
@@ -4378,35 +4427,6 @@
    ]
   },
   {
-   "id": "n대경토탈",
-   "name": "(주)대경토탈",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 0,
-    "applicant": 2,
-    "announced": 2
-   },
-   "films": [
-    {
-     "id": "aa5b3f999810d",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "af0f042973ff9",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n드림팩트엔터테인먼트",
    "name": "(주)드림팩트엔터테인먼트",
    "spellings": [],
@@ -5063,6 +5083,37 @@
    ]
   },
   {
+   "id": "c20157293",
+   "name": "홀리가든",
+   "spellings": [],
+   "kobis_codes": [
+    "20157293"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 0,
+    "scheduled": 2
+   },
+   "films": [
+    {
+     "id": "m1605bd1bca07",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "pca2aa8e66c99",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20204721",
    "name": "씨지브이 아이스콘 CGV ICECON",
    "spellings": [
@@ -5111,6 +5162,48 @@
     {
      "id": "r2598346",
      "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20100123",
+   "name": "(주)싸이더스",
+   "spellings": [
+    "(주)싸이더스 Sidus Corporation"
+   ],
+   "kobis_codes": [
+    "20100123"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 1,
+    "showing": 1,
+    "released": 1,
+    "dormant": 1
+   },
+   "films": [
+    {
+     "id": "r2589448",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "m3738806a349e",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20158829",
+     "status": "dormant",
      "roles": [
       "distributor"
      ]
@@ -8573,30 +8666,6 @@
    ]
   },
   {
-   "id": "c20157293",
-   "name": "홀리가든",
-   "spellings": [],
-   "kobis_codes": [
-    "20157293"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "scheduled": 1
-   },
-   "films": [
-    {
-     "id": "m1605bd1bca07",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20172421",
    "name": "(주)영화사 그램",
    "spellings": [
@@ -8734,47 +8803,6 @@
     },
     {
      "id": "k20136938",
-     "status": "dormant",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20100123",
-   "name": "(주)싸이더스",
-   "spellings": [
-    "(주)싸이더스 Sidus Corporation"
-   ],
-   "kobis_codes": [
-    "20100123"
-   ],
-   "counts": {
-    "active": 0,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 1,
-    "released": 2,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "m3738806a349e",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2589448",
-     "status": "released",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "k20158829",
      "status": "dormant",
      "roles": [
       "distributor"
