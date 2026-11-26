@@ -20,8 +20,8 @@
     "total": 72,
     "distributor": 0,
     "applicant": 72,
-    "rated": 61,
-    "intake": 11
+    "rated": 64,
+    "intake": 8
    },
    "films": [
     {
@@ -452,28 +452,28 @@
      ]
     },
     {
-     "id": "r2607383",
-     "status": "intake",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
      "id": "r2607992",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
     },
     {
      "id": "r2608001",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
     },
     {
      "id": "r2608007",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2607383",
      "status": "intake",
      "roles": [
       "applicant"
@@ -1256,7 +1256,7 @@
     "applicant": 7,
     "showing": 8,
     "scheduled": 1,
-    "intake": 1,
+    "rated": 1,
     "released": 2,
     "dormant": 1
    },
@@ -1330,7 +1330,7 @@
     },
     {
      "id": "r2605626",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -2324,11 +2324,10 @@
    "counts": {
     "active": 5,
     "total": 12,
-    "distributor": 9,
-    "applicant": 7,
+    "distributor": 10,
+    "applicant": 6,
     "showing": 2,
-    "scheduled": 1,
-    "intake": 1,
+    "scheduled": 2,
     "announced": 1,
     "released": 3,
     "dormant": 4
@@ -2350,18 +2349,18 @@
      ]
     },
     {
+     "id": "k20269261",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
      "id": "r2591434",
      "status": "scheduled",
      "roles": [
       "applicant",
       "distributor"
-     ]
-    },
-    {
-     "id": "pb31230564959",
-     "status": "intake",
-     "roles": [
-      "applicant"
      ]
     },
     {
@@ -3124,8 +3123,7 @@
     "distributor": 1,
     "applicant": 5,
     "showing": 2,
-    "rated": 1,
-    "intake": 1,
+    "rated": 2,
     "released": 1
    },
    "films": [
@@ -3152,7 +3150,7 @@
     },
     {
      "id": "r2608538",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -3225,8 +3223,7 @@
     "distributor": 2,
     "applicant": 4,
     "showing": 2,
-    "rated": 1,
-    "intake": 1
+    "rated": 2
    },
    "films": [
     {
@@ -3254,7 +3251,7 @@
     },
     {
      "id": "r2607900",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4330,8 +4327,7 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "rated": 1,
-    "intake": 1
+    "rated": 2
    },
    "films": [
     {
@@ -4343,7 +4339,7 @@
     },
     {
      "id": "r2608200",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -4924,8 +4920,7 @@
     "total": 2,
     "distributor": 2,
     "applicant": 1,
-    "showing": 1,
-    "scheduled": 1
+    "showing": 2
    },
    "films": [
     {
@@ -4937,7 +4932,7 @@
     },
     {
      "id": "r2597564",
-     "status": "scheduled",
+     "status": "showing",
      "roles": [
       "applicant",
       "distributor"
@@ -5514,6 +5509,41 @@
      "status": "released",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20242261",
+   "name": "주식회사 킨스튜디오",
+   "spellings": [
+    "주식회사 킨스튜디오 KIN Studio Co., Ltd."
+   ],
+   "kobis_codes": [
+    "20242261"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 1,
+    "showing": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2600955",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2594563",
+     "status": "released",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -6255,12 +6285,12 @@
     "total": 1,
     "distributor": 0,
     "applicant": 1,
-    "intake": 1
+    "rated": 1
    },
    "films": [
     {
      "id": "r2608433",
-     "status": "intake",
+     "status": "rated",
      "roles": [
       "applicant"
      ]
@@ -6915,6 +6945,32 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20266681",
+   "name": "씨지브이 픽처스",
+   "spellings": [
+    "씨지브이 픽처스 CGV PICTURES"
+   ],
+   "kobis_codes": [
+    "20266681"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "k20269261",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -8854,40 +8910,6 @@
      "id": "k20124012",
      "status": "dormant",
      "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20242261",
-   "name": "주식회사 킨스튜디오",
-   "spellings": [
-    "주식회사 킨스튜디오 KIN Studio Co., Ltd."
-   ],
-   "kobis_codes": [
-    "20242261"
-   ],
-   "counts": {
-    "active": 0,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 1,
-    "released": 2
-   },
-   "films": [
-    {
-     "id": "r2594563",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2600955",
-     "status": "released",
-     "roles": [
-      "applicant",
       "distributor"
      ]
     }
