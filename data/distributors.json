@@ -2425,7 +2425,7 @@
     "distributor": 6,
     "applicant": 4,
     "showing": 3,
-    "rated": 1,
+    "scheduled": 1,
     "intake": 1,
     "released": 1,
     "dormant": 2
@@ -2456,7 +2456,7 @@
     },
     {
      "id": "r2592393",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -2492,64 +2492,69 @@
    ]
   },
   {
-   "id": "c20139757",
-   "name": "(주)엔케이컨텐츠",
+   "id": "c20158370",
+   "name": "(주)디스테이션",
    "spellings": [],
    "kobis_codes": [
-    "20139757"
+    "20158370"
    ],
    "counts": {
     "active": 5,
-    "total": 6,
-    "distributor": 1,
-    "applicant": 6,
+    "total": 7,
+    "distributor": 7,
+    "applicant": 0,
     "showing": 2,
-    "rated": 1,
-    "intake": 1,
-    "announced": 1,
-    "released": 1
+    "scheduled": 3,
+    "released": 1,
+    "dormant": 1
    },
    "films": [
-    {
-     "id": "r2588199",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
     {
      "id": "r2593016",
      "status": "showing",
      "roles": [
-      "applicant"
+      "distributor"
      ]
     },
     {
-     "id": "r2605101",
-     "status": "rated",
+     "id": "r2604420",
+     "status": "showing",
      "roles": [
-      "applicant"
+      "distributor"
      ]
     },
     {
-     "id": "r2608538",
-     "status": "intake",
+     "id": "k20264916",
+     "status": "scheduled",
      "roles": [
-      "applicant"
+      "distributor"
      ]
     },
     {
-     "id": "a417130a5e53f",
-     "status": "announced",
+     "id": "k20268338",
+     "status": "scheduled",
      "roles": [
-      "applicant"
+      "distributor"
      ]
     },
     {
-     "id": "r2601671",
+     "id": "k20268768",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "l24973",
      "status": "released",
      "roles": [
-      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20182563",
+     "status": "dormant",
+     "roles": [
       "distributor"
      ]
     }
@@ -2747,6 +2752,63 @@
    ]
   },
   {
+   "id": "c20123058",
+   "name": "그린나래미디어(주)",
+   "spellings": [
+    "그린나래미디어(주) GREEN NARAE MEDIA"
+   ],
+   "kobis_codes": [
+    "20123058"
+   ],
+   "counts": {
+    "active": 5,
+    "total": 5,
+    "distributor": 3,
+    "applicant": 3,
+    "showing": 2,
+    "scheduled": 2,
+    "announced": 1
+   },
+   "films": [
+    {
+     "id": "r2597956",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2599978",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20245776",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2605632",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "a7f860b7f68e0",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20173221",
    "name": "소니픽쳐스엔터테인먼트코리아주식회사극장배급지점",
    "spellings": [
@@ -2903,68 +2965,6 @@
    ]
   },
   {
-   "id": "c20158370",
-   "name": "(주)디스테이션",
-   "spellings": [],
-   "kobis_codes": [
-    "20158370"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 6,
-    "distributor": 6,
-    "applicant": 0,
-    "showing": 2,
-    "scheduled": 2,
-    "released": 1,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "r2593016",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2604420",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268338",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20268768",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "l24973",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20182563",
-     "status": "dormant",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20188721",
    "name": "(주)삼백상회",
    "spellings": [
@@ -3086,6 +3086,62 @@
     },
     {
      "id": "r2587867",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20139757",
+   "name": "(주)엔케이컨텐츠",
+   "spellings": [],
+   "kobis_codes": [
+    "20139757"
+   ],
+   "counts": {
+    "active": 4,
+    "total": 5,
+    "distributor": 1,
+    "applicant": 5,
+    "showing": 2,
+    "rated": 1,
+    "intake": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2588199",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2593016",
+     "status": "showing",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2605101",
+     "status": "rated",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2608538",
+     "status": "intake",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2601671",
      "status": "released",
      "roles": [
       "applicant",
@@ -3225,56 +3281,6 @@
     {
      "id": "acdd5484d69cc",
      "status": "scheduled",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20123058",
-   "name": "그린나래미디어(주)",
-   "spellings": [
-    "그린나래미디어(주) GREEN NARAE MEDIA"
-   ],
-   "kobis_codes": [
-    "20123058"
-   ],
-   "counts": {
-    "active": 4,
-    "total": 4,
-    "distributor": 2,
-    "applicant": 3,
-    "showing": 2,
-    "scheduled": 1,
-    "announced": 1
-   },
-   "films": [
-    {
-     "id": "r2597956",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2599978",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2605632",
-     "status": "scheduled",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "a7f860b7f68e0",
-     "status": "announced",
      "roles": [
       "applicant"
      ]
@@ -4496,7 +4502,7 @@
     "distributor": 1,
     "applicant": 2,
     "showing": 1,
-    "rated": 1
+    "scheduled": 1
    },
    "films": [
     {
@@ -4509,7 +4515,7 @@
     },
     {
      "id": "aadff13d839da",
-     "status": "rated",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -5934,6 +5940,30 @@
      "status": "showing",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20254863",
+   "name": "(주)오싹엔터테인먼트",
+   "spellings": [],
+   "kobis_codes": [
+    "20254863"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2592393",
+     "status": "scheduled",
+     "roles": [
       "distributor"
      ]
     }
