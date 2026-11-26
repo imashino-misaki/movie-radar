@@ -538,17 +538,24 @@
     "20122956"
    ],
    "counts": {
-    "active": 18,
+    "active": 19,
     "total": 21,
     "distributor": 5,
     "applicant": 18,
-    "showing": 3,
+    "showing": 4,
     "scheduled": 9,
     "rated": 6,
-    "released": 2,
+    "released": 1,
     "dormant": 1
    },
    "films": [
+    {
+     "id": "k20258640",
+     "status": "showing",
+     "roles": [
+      "distributor"
+     ]
+    },
     {
      "id": "p8fc611a3e1bf",
      "status": "showing",
@@ -674,13 +681,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    },
-    {
-     "id": "k20258640",
-     "status": "released",
-     "roles": [
-      "distributor"
      ]
     },
     {
@@ -4930,6 +4930,41 @@
    ]
   },
   {
+   "id": "c20168613",
+   "name": "엠엔엠인터내셔널(주)",
+   "spellings": [
+    "엠엔엠인터내셔널(주) M&M International Inc."
+   ],
+   "kobis_codes": [
+    "20168613"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 1,
+    "showing": 1,
+    "scheduled": 1
+   },
+   "films": [
+    {
+     "id": "r2592353",
+     "status": "showing",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    },
+    {
+     "id": "k20265201",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20230781",
    "name": "영화로운 형제",
    "spellings": [],
@@ -5472,41 +5507,6 @@
     },
     {
      "id": "r2592270",
-     "status": "released",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20168613",
-   "name": "엠엔엠인터내셔널(주)",
-   "spellings": [
-    "엠엔엠인터내셔널(주) M&M International Inc."
-   ],
-   "kobis_codes": [
-    "20168613"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 1,
-    "scheduled": 1,
-    "released": 1
-   },
-   "films": [
-    {
-     "id": "k20265201",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2592353",
      "status": "released",
      "roles": [
       "applicant",
