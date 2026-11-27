@@ -1034,13 +1034,14 @@
     "20110854"
    ],
    "counts": {
-    "active": 13,
+    "active": 12,
     "total": 13,
     "distributor": 9,
     "applicant": 7,
-    "showing": 8,
+    "showing": 7,
     "scheduled": 3,
-    "rated": 2
+    "rated": 2,
+    "released": 1
    },
    "films": [
     {
@@ -1059,13 +1060,6 @@
     },
     {
      "id": "r2588118",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2589448",
      "status": "showing",
      "roles": [
       "distributor"
@@ -1135,6 +1129,13 @@
      "status": "rated",
      "roles": [
       "applicant"
+     ]
+    },
+    {
+     "id": "r2589448",
+     "status": "released",
+     "roles": [
+      "distributor"
      ]
     }
    ]
@@ -5282,48 +5283,6 @@
    ]
   },
   {
-   "id": "c20100123",
-   "name": "(주)싸이더스",
-   "spellings": [
-    "(주)싸이더스 Sidus Corporation"
-   ],
-   "kobis_codes": [
-    "20100123"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "released": 1,
-    "dormant": 1
-   },
-   "films": [
-    {
-     "id": "r2589448",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
-    {
-     "id": "m3738806a349e",
-     "status": "released",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20158829",
-     "status": "dormant",
-     "roles": [
-      "distributor"
-     ]
-    }
-   ]
-  },
-  {
    "id": "c20141403",
    "name": "(주)제이에이와이이엔터테인먼트",
    "spellings": [],
@@ -8859,6 +8818,47 @@
     },
     {
      "id": "k20136938",
+     "status": "dormant",
+     "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20100123",
+   "name": "(주)싸이더스",
+   "spellings": [
+    "(주)싸이더스 Sidus Corporation"
+   ],
+   "kobis_codes": [
+    "20100123"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 1,
+    "released": 2,
+    "dormant": 1
+   },
+   "films": [
+    {
+     "id": "m3738806a349e",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2589448",
+     "status": "released",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "k20158829",
      "status": "dormant",
      "roles": [
       "distributor"
