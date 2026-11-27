@@ -538,14 +538,14 @@
     "20122956"
    ],
    "counts": {
-    "active": 18,
+    "active": 17,
     "total": 21,
     "distributor": 5,
     "applicant": 18,
-    "showing": 3,
+    "showing": 2,
     "scheduled": 7,
     "rated": 8,
-    "released": 2,
+    "released": 3,
     "dormant": 1
    },
    "films": [
@@ -554,13 +554,6 @@
      "status": "showing",
      "roles": [
       "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2594677",
-     "status": "showing",
-     "roles": [
       "distributor"
      ]
     },
@@ -678,6 +671,13 @@
     },
     {
      "id": "k20258640",
+     "status": "released",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2594677",
      "status": "released",
      "roles": [
       "distributor"
@@ -2058,20 +2058,13 @@
     "total": 7,
     "distributor": 6,
     "applicant": 1,
-    "showing": 3,
-    "scheduled": 3,
+    "showing": 2,
+    "scheduled": 4,
     "rated": 1
    },
    "films": [
     {
      "id": "r2588709",
-     "status": "showing",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "r2592154",
      "status": "showing",
      "roles": [
       "distributor"
@@ -2086,6 +2079,13 @@
     },
     {
      "id": "accef71b1b7e9",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592154",
      "status": "scheduled",
      "roles": [
       "distributor"
@@ -3450,17 +3450,9 @@
     "total": 4,
     "distributor": 0,
     "applicant": 4,
-    "showing": 1,
-    "scheduled": 3
+    "scheduled": 4
    },
    "films": [
-    {
-     "id": "r2592154",
-     "status": "showing",
-     "roles": [
-      "applicant"
-     ]
-    },
     {
      "id": "p0b3360e66509",
      "status": "scheduled",
@@ -3470,6 +3462,13 @@
     },
     {
      "id": "p0be8313a482c",
+     "status": "scheduled",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2592154",
      "status": "scheduled",
      "roles": [
       "applicant"
@@ -3934,49 +3933,6 @@
    ]
   },
   {
-   "id": "c20063009",
-   "name": "(주)티캐스트",
-   "spellings": [
-    "(주)티캐스트 TCast"
-   ],
-   "kobis_codes": [
-    "20063009"
-   ],
-   "counts": {
-    "active": 3,
-    "total": 3,
-    "distributor": 2,
-    "applicant": 2,
-    "showing": 1,
-    "scheduled": 1,
-    "announced": 1
-   },
-   "films": [
-    {
-     "id": "r2590831",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20266767",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
-     ]
-    },
-    {
-     "id": "a3757b6223a81",
-     "status": "announced",
-     "roles": [
-      "applicant"
-     ]
-    }
-   ]
-  },
-  {
    "id": "n미디어나무",
    "name": "미디어나무주식회사",
    "spellings": [],
@@ -4250,6 +4206,49 @@
      "id": "r2588845",
      "status": "released",
      "roles": [
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20063009",
+   "name": "(주)티캐스트",
+   "spellings": [
+    "(주)티캐스트 TCast"
+   ],
+   "kobis_codes": [
+    "20063009"
+   ],
+   "counts": {
+    "active": 2,
+    "total": 3,
+    "distributor": 2,
+    "applicant": 2,
+    "scheduled": 1,
+    "announced": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20266767",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "a3757b6223a81",
+     "status": "announced",
+     "roles": [
+      "applicant"
+     ]
+    },
+    {
+     "id": "r2590831",
+     "status": "released",
+     "roles": [
+      "applicant",
       "distributor"
      ]
     }
@@ -4798,13 +4797,12 @@
     "total": 2,
     "distributor": 0,
     "applicant": 2,
-    "showing": 1,
-    "scheduled": 1
+    "scheduled": 2
    },
    "films": [
     {
      "id": "a76da61a58023",
-     "status": "showing",
+     "status": "scheduled",
      "roles": [
       "applicant"
      ]
@@ -5004,41 +5002,6 @@
      "status": "showing",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20168613",
-   "name": "엠엔엠인터내셔널(주)",
-   "spellings": [
-    "엠엔엠인터내셔널(주) M&M International Inc."
-   ],
-   "kobis_codes": [
-    "20168613"
-   ],
-   "counts": {
-    "active": 2,
-    "total": 2,
-    "distributor": 2,
-    "applicant": 1,
-    "showing": 1,
-    "scheduled": 1
-   },
-   "films": [
-    {
-     "id": "r2592353",
-     "status": "showing",
-     "roles": [
-      "applicant",
-      "distributor"
-     ]
-    },
-    {
-     "id": "k20265201",
-     "status": "scheduled",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -5554,6 +5517,41 @@
    ]
   },
   {
+   "id": "c20168613",
+   "name": "엠엔엠인터내셔널(주)",
+   "spellings": [
+    "엠엔엠인터내셔널(주) M&M International Inc."
+   ],
+   "kobis_codes": [
+    "20168613"
+   ],
+   "counts": {
+    "active": 1,
+    "total": 2,
+    "distributor": 2,
+    "applicant": 1,
+    "scheduled": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "k20265201",
+     "status": "scheduled",
+     "roles": [
+      "distributor"
+     ]
+    },
+    {
+     "id": "r2592353",
+     "status": "released",
+     "roles": [
+      "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
    "id": "n위드라이언픽쳐스",
    "name": "위드 라이언 픽쳐스",
    "spellings": [],
@@ -6031,28 +6029,6 @@
      "status": "scheduled",
      "roles": [
       "distributor"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n에스피오엔터테인먼트코리아",
-   "name": "(주)에스피오엔터테인먼트코리아",
-   "spellings": [],
-   "kobis_codes": [],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 0,
-    "applicant": 1,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2594677",
-     "status": "showing",
-     "roles": [
-      "applicant"
      ]
     }
    ]
@@ -6649,30 +6625,6 @@
      "status": "rated",
      "roles": [
       "applicant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "c20100048",
-   "name": "미디어소프트",
-   "spellings": [],
-   "kobis_codes": [
-    "20100048"
-   ],
-   "counts": {
-    "active": 1,
-    "total": 1,
-    "distributor": 1,
-    "applicant": 0,
-    "showing": 1
-   },
-   "films": [
-    {
-     "id": "r2594677",
-     "status": "showing",
-     "roles": [
-      "distributor"
      ]
     }
    ]
@@ -9119,6 +9071,28 @@
    ]
   },
   {
+   "id": "n에스피오엔터테인먼트코리아",
+   "name": "(주)에스피오엔터테인먼트코리아",
+   "spellings": [],
+   "kobis_codes": [],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 0,
+    "applicant": 1,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2594677",
+     "status": "released",
+     "roles": [
+      "applicant"
+     ]
+    }
+   ]
+  },
+  {
    "id": "c20174341",
    "name": "(주)영화맞춤제작소 영화공장",
    "spellings": [
@@ -9258,6 +9232,30 @@
      "status": "released",
      "roles": [
       "applicant",
+      "distributor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c20100048",
+   "name": "미디어소프트",
+   "spellings": [],
+   "kobis_codes": [
+    "20100048"
+   ],
+   "counts": {
+    "active": 0,
+    "total": 1,
+    "distributor": 1,
+    "applicant": 0,
+    "released": 1
+   },
+   "films": [
+    {
+     "id": "r2594677",
+     "status": "released",
+     "roles": [
       "distributor"
      ]
     }
